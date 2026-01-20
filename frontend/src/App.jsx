@@ -1,12 +1,17 @@
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "./context/ThemeContext";
+import { Home } from "./pages/Home";
 
 function App() {
-
   return (
-    <>
-      <h1 className="text-3xl font-bold underline">This is the home page</h1>
-    </>
-  )
+    <ThemeProvider defaultTheme="system" storageKey="sitm-ui-theme">
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
+  );
 }
 
-export default App
+export default App;
