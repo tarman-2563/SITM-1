@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "../common/Button";
 
+import heroVideo from "../../assets/hero-bg.mp4";
+
 export function Hero() {
   return (
     <div className="relative h-screen w-full overflow-hidden flex items-center justify-center -mt-20">
@@ -15,7 +17,7 @@ export function Hero() {
           poster="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
         >
           <source
-            src="https://youtu.be/OY3wSni8t8g"
+            src={heroVideo}
             type="video/mp4"
           />
           Your browser does not support the video tag.
