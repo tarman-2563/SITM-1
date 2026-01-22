@@ -31,18 +31,47 @@ export function Placements() {
             <h3 className="text-2xl font-bold font-serif text-center mb-10 text-sitm-navy dark:text-white">Our Proud Recruiters</h3>
             
             {/* Infinite Scroll Marquee */}
+            {/* Infinite Scroll Marquee */}
             <div className="relative flex overflow-x-hidden group">
-                <div className="animate-marquee whitespace-nowrap flex items-center gap-12">
+                <div className="animate-marquee whitespace-nowrap flex items-center gap-8">
                     {/* First Set */}
-                    {["TATA Consultancy Services", "Wipro", "Infosys", "Capgemini", "HDFC Bank", "Amazon", "Tech Mahindra", "Cognizant", "Accenture", "IBM", "Microsoft", "Google", "Deloitte"].map((company, i) => (
-                        <div key={i} className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-100 dark:border-slate-700 min-w-[200px]">
-                            <span className="text-xl font-bold text-gray-500 hover:text-sitm-maroon dark:hover:text-sitm-gold transition-colors">{company}</span>
+                    {[
+                        { name: "TATA Consultancy Services", color: "text-[#3577BB]" }, // Official Tata Blue
+                        { name: "Wipro", color: "text-[#000000]" }, // Often stylized in black or the colorful sunflower (using bold black for text)
+                        { name: "Infosys", color: "text-[#007CC3]" }, // Infosys Blue
+                        { name: "Capgemini", color: "text-[#0070AD]" }, // Capgemini Blue
+                        { name: "HDFC Bank", color: "text-[#004C8F]" }, // HDFC Blue
+                        { name: "Amazon", color: "text-[#232F3E]" }, // Amazon Squid Ink (Dark Blue) - more readable than orange on white
+                        { name: "Tech Mahindra", color: "text-[#E51A2C]" }, // TechM Red
+                        { name: "Cognizant", color: "text-[#0033A0]" }, // Cognizant Blue
+                        { name: "Accenture", color: "text-[#A100FF]" }, // Accenture Purple
+                        { name: "IBM", color: "text-[#052FAD]" }, // IBM Blue
+                        { name: "Microsoft", color: "text-[#00A4EF]" }, // Microsoft Blue (common for text representation)
+                        { name: "Google", color: "text-[#4285F4]" }, // Google Blue
+                        { name: "Deloitte", color: "text-[#86BC25]" } // Deloitte Green
+                    ].map((company, i) => (
+                        <div key={i} className="inline-flex items-center justify-center px-8 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-[240px] hover:scale-105 transition-transform duration-300">
+                            <span className={`text-2xl font-black ${company.color} transition-colors`}>{company.name}</span>
                         </div>
                     ))}
                     {/* Duplicate Set for Seamless Loop */}
-                    {["TATA Consultancy Services", "Wipro", "Infosys", "Capgemini", "HDFC Bank", "Amazon", "Tech Mahindra", "Cognizant", "Accenture", "IBM", "Microsoft", "Google", "Deloitte"].map((company, i) => (
-                        <div key={`dup-${i}`} className="inline-flex items-center justify-center px-8 py-4 bg-white dark:bg-slate-800 rounded-lg shadow-sm border border-gray-100 dark:border-slate-700 min-w-[200px]">
-                            <span className="text-xl font-bold text-gray-500 hover:text-sitm-maroon dark:hover:text-sitm-gold transition-colors">{company}</span>
+                   {[
+                        { name: "TATA Consultancy Services", color: "text-[#3577BB]" }, 
+                        { name: "Wipro", color: "text-[#000000]" }, 
+                        { name: "Infosys", color: "text-[#007CC3]" }, 
+                        { name: "Capgemini", color: "text-[#0070AD]" }, 
+                        { name: "HDFC Bank", color: "text-[#004C8F]" }, 
+                        { name: "Amazon", color: "text-[#232F3E]" }, 
+                        { name: "Tech Mahindra", color: "text-[#E51A2C]" }, 
+                        { name: "Cognizant", color: "text-[#0033A0]" }, 
+                        { name: "Accenture", color: "text-[#A100FF]" }, 
+                        { name: "IBM", color: "text-[#052FAD]" }, 
+                        { name: "Microsoft", color: "text-[#00A4EF]" }, 
+                        { name: "Google", color: "text-[#4285F4]" }, 
+                        { name: "Deloitte", color: "text-[#86BC25]" }
+                    ].map((company, i) => (
+                        <div key={`dup-${i}`} className="inline-flex items-center justify-center px-8 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-[240px] hover:scale-105 transition-transform duration-300">
+                            <span className={`text-2xl font-black ${company.color} transition-colors`}>{company.name}</span>
                         </div>
                     ))}
                 </div>
