@@ -1,5 +1,6 @@
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "../common/Button";
+import logo from "../../assets/logo.jpeg";
 
 export function Footer() {
   return (
@@ -11,9 +12,7 @@ export function Footer() {
           {/* Brand Column */}
           <div className="space-y-6">
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 bg-sitm-maroon rounded-lg flex items-center justify-center text-white font-serif font-bold text-2xl">
-                S
-              </div>
+              <img src={logo} alt="SITM Logo" className="h-14 w-auto rounded-lg" />
               <div className="flex flex-col">
                 <span className="text-2xl font-bold font-serif leading-none">SITM</span>
                 <span className="text-[0.6rem] tracking-wider uppercase text-gray-400">Excellence in Education</span>

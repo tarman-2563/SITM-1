@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Button } from "../common/Button";
 import { ThemeToggle } from "./ThemeToggle";
+import logo from "../../assets/logo.jpeg";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -53,9 +54,7 @@ export function Navbar() {
       >
         <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 bg-sitm-maroon rounded-lg flex items-center justify-center text-white font-serif font-bold text-xl group-hover:bg-sitm-gold transition-colors">
-              S
-            </div>
+            <img src={logo} alt="SITM Logo" className="h-12 w-auto object-contain rounded-md" />
             <div className="flex flex-col">
               <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-maroon dark:text-white" : "text-white")}>
                 SITM
