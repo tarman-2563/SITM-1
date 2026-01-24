@@ -23,7 +23,7 @@ export function Hero() {
         </video>
         {/* Overlay */}
         <div className="absolute inset-0 bg-sitm-navy/60 dark:bg-black/70 mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-t from-sitm-navy via-transparent to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-linear-to-t from-sitm-navy via-transparent to-transparent opacity-90" />
       </div>
 
       {/* Content */}
@@ -44,7 +44,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4 }}
         >
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight">
-            Shape Your <span className="text-transparent bg-clip-text bg-gradient-to-r from-sitm-gold to-yellow-200">Career</span> <br />
+            Shape Your <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-gold to-yellow-200">Career</span> <br />
             With Excellence
           </h1>
         </motion.div>

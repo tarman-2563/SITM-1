@@ -29,7 +29,7 @@ export function Navbar() {
 
   return (
     <>
-      <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
+      {/* <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
         <div className="flex gap-4">
           <span className="flex items-center gap-1">
             <Phone size={14} className="text-sitm-gold" /> +91 98765 43210
@@ -42,7 +42,7 @@ export function Navbar() {
            <a href="#" className="hover:text-sitm-gold transition-colors">Alumni</a>
            <a href="#" className="hover:text-sitm-gold transition-colors">Careers</a>
         </div>
-      </div>
+      </div> */}
 
       <nav
         className={cn(
@@ -60,7 +60,7 @@ export function Navbar() {
                 SITM
               </span>
               <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-gray-600 dark:text-gray-400" : "text-gray-200")}>
-                Excellence in Education
+                Scholars Institute of <br></br>Technology & Management
               </span>
             </div>
           </Link>
