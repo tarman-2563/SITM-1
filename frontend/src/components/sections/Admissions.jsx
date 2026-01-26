@@ -4,7 +4,6 @@ import { CheckCircle, Download } from "lucide-react";
 export function Admissions() {
   return (
     <section id="admissions" className="py-20 bg-sitm-navy text-white relative overflow-hidden">
-      {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">

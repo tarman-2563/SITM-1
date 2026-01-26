@@ -30,7 +30,7 @@ export function Navbar() {
 
   return (
     <>
-      {/* <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
+      <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
         <div className="flex gap-4">
           <span className="flex items-center gap-1">
             <Phone size={14} className="text-sitm-gold" /> +91 98765 43210
@@ -43,7 +43,7 @@ export function Navbar() {
            <a href="#" className="hover:text-sitm-gold transition-colors">Alumni</a>
            <a href="#" className="hover:text-sitm-gold transition-colors">Careers</a>
         </div>
-      </div> */}
+      </div>
 
       <nav
         className={cn(
@@ -57,11 +57,11 @@ export function Navbar() {
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logo} alt="SITM Logo" className="h-12 w-auto object-contain rounded-md" />
             <div className="flex flex-col">
-              <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-maroon dark:text-white" : "text-white")}>
+              <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-maroon dark:text-white" : "text-sitm-navy dark:text-white")}>
                 SITM
               </span>
-              <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-gray-600 dark:text-gray-400" : "text-gray-200")}>
-                Scholars Institute of <br></br>Technology & Management
+              <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-gray-600 dark:text-gray-400" : "text-sitm-navy/80 dark:text-white/80")}>
+                Excellence in Education
               </span>
             </div>
           </Link>
@@ -74,15 +74,15 @@ export function Navbar() {
                 href={link.href}
                 className={cn(
                   "text-sm font-medium hover:text-sitm-gold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-sitm-gold after:transition-all hover:after:w-full",
-                   isScrolled ? "text-gray-800 dark:text-gray-200" : "text-white"
+                   isScrolled ? "text-gray-800 dark:text-gray-200" : "text-sitm-navy dark:text-white"
                 )}
               >
                 {link.name}
               </a>
             ))}
-            <ThemeToggle className={isScrolled ? "text-gray-700 dark:text-gray-200" : "text-white hover:bg-white/20 hover:text-white"} />
+            <ThemeToggle className={isScrolled ? "text-gray-700 dark:text-gray-200" : "text-sitm-navy dark:text-white hover:bg-sitm-navy/10"} />
             <a href="#admissions">
-                <Button size="sm" variant={isScrolled ? "primary" : "secondary"}>
+                <Button size="sm" variant={isScrolled ? "primary" : "primary"}>
                 Apply Now
                 </Button>
             </a>
@@ -90,10 +90,10 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4 md:hidden">
-            <ThemeToggle className={isScrolled ? "text-gray-700 dark:text-gray-200" : "text-white hover:bg-white/20 hover:text-white"} />
+            <ThemeToggle className={isScrolled ? "text-gray-700 dark:text-gray-200" : "text-sitm-navy dark:text-white hover:bg-sitm-navy/10"} />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn("p-2", isScrolled ? "text-gray-800 dark:text-white" : "text-white")}
+              className={cn("p-2", isScrolled ? "text-gray-800 dark:text-white" : "text-sitm-navy dark:text-white")}
             >
               {isMobileMenuOpen ? <X /> : <Menu />}
             </button>

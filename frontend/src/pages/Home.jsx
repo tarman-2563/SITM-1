@@ -9,6 +9,7 @@ import { Contact } from "../components/sections/Contact";
 import { Campus } from "../components/sections/Campus";
 import { Footer } from "../components/layout/Footer";
 import { Reveal } from "../components/common/Reveal";
+import { Gallery } from "../components/sections/Gallery";
 
 export function Home() {
   return (
@@ -31,6 +32,9 @@ export function Home() {
       </Reveal>
       <Reveal width="100%">
         <Admissions />
+      </Reveal>
+      <Reveal width="100%">
+        <Gallery />
       </Reveal>
       <Reveal width="100%">
         <Placements />
