@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ArrowUpRight, TrendingUp, Users, Cpu, Building, Code, Briefcase } from "lucide-react";
 
 export function Programs() {
@@ -122,7 +123,7 @@ function Card({ program, index, topOffset, total }) {
 
                     <div className="flex items-center gap-6 mb-8">
                         <span className="text-6xl md:text-7xl font-serif font-bold text-sitm-maroon dark:text-sitm-gold opacity-90">
-                            0{index + 1}
+                            {index + 1}
                         </span>
                         <div className="w-16 h-16 rounded-full bg-sitm-maroon/5 flex items-center justify-center text-sitm-maroon dark:text-sitm-gold border border-sitm-maroon/20">
                             {program.icon}
@@ -155,9 +156,9 @@ function Card({ program, index, topOffset, total }) {
                      <h4 className="text-white text-xl font-bold mb-2">Ready to Apply?</h4>
                      <p className="text-gray-400 text-sm mb-8">View the detailed syllabus and curriculum structure.</p>
                      
-                     <a href="#" className="px-8 py-3 bg-sitm-gold text-sitm-navy font-bold rounded-full hover:bg-white transition-colors duration-300 uppercase tracking-widest text-sm">
+                     <Link to="/programs" className="px-8 py-3 bg-sitm-gold text-sitm-navy font-bold rounded-full hover:bg-white transition-colors duration-300 uppercase tracking-widest text-sm">
                         View Syllabus
-                     </a>
+                     </Link>
                 </div>
             </motion.div>
         </div>

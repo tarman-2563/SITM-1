@@ -19,12 +19,13 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Programs", href: "#programs" },
-    { name: "Campus", href: "#campus" },
-    { name: "Admissions", href: "#admissions" },
-    { name: "Placement", href: "#placement" },
-    { name: "Contact", href: "#contact" },
+    { name: "Awards", href: "/#awards" },
+    { name: "About", href: "/#about" },
+    { name: "Programs", href: "/#programs" },
+    { name: "Campus", href: "/#campus" },
+    { name: "Admissions", href: "/#admissions" },
+    { name: "Placement", href: "/#placement" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
