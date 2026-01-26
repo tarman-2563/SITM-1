@@ -5,7 +5,7 @@ export function PageHeader({ title, subtitle, className }) {
   return (
     <div className={cn("relative pt-40 pb-16 px-4 bg-sitm-navy text-white text-center overflow-hidden -mt-20", className)}>
        <div className="absolute inset-0 z-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2086&auto=format&fit=crop')] bg-cover bg-center"></div>
-       <div className="absolute inset-0 z-0 bg-gradient-to-b from-sitm-navy/80 to-sitm-navy"></div>
+       <div className="absolute inset-0 z-0 bg-linear-to-b from-sitm-navy/80 to-sitm-navy"></div>
        
        <div className="relative z-10 container mx-auto">
         <motion.h1 
