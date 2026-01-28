@@ -24,6 +24,7 @@ export function Navbar() {
     { name: "Programs", href: "/#programs" },
     { name: "Campus", href: "/#campus" },
     { name: "Admissions", href: "/#admissions" },
+    { name: "Gallery", href: "/#gallery" },
     { name: "Placement", href: "/#placement" },
     { name: "Contact", href: "/#contact" },
   ];
