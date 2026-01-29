@@ -10,6 +10,7 @@ import { Campus } from "../components/sections/Campus";
 import { Footer } from "../components/layout/Footer";
 import { Reveal } from "../components/common/Reveal";
 import { Gallery } from "../components/sections/Gallery";
+import { WhySITM } from "../components/sections/WhySITM";
 
 export function Home() {
   return (
@@ -19,7 +20,7 @@ export function Home() {
         <Hero />
       </Reveal>
       <Reveal width="100%">
-        <Awards />
+        <WhySITM />
       </Reveal>
       <Reveal width="100%">
         <About />
@@ -34,10 +35,13 @@ export function Home() {
         <Admissions />
       </Reveal>
       <Reveal width="100%">
-        <Gallery />
+        <Placements />
       </Reveal>
       <Reveal width="100%">
-        <Placements />
+        <Awards />
+      </Reveal>
+      <Reveal width="100%">
+        <Gallery />
       </Reveal>
       <Reveal width="100%">
         <Contact />

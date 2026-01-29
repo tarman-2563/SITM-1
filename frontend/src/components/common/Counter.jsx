@@ -45,9 +45,30 @@ export const Counter = ({ from = 0, to, duration = 2, suffix = "", className }) 
   return (
     <motion.span
       ref={ref}
-      className={`inline-block ${className}`}
-      animate={isCounting ? { scale: 1.2, color: "#800020" } : { scale: 1, color: "inherit" }}
-      transition={{ duration: 0.3 }}
+      className={`inline-block font-black font-serif ${className}`}
+      style={{
+        background: "linear-gradient(to right, #800020, #D4AF37)",
+        WebkitBackgroundClip: "text",
+        WebkitTextFillColor: "transparent",
+        backgroundClip: "text",
+        filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))"
+      }}
+      animate={isCounting ? { 
+        scale: [1, 1.3, 1],
+        filter: [
+            "drop-shadow(0 4px 6px rgba(0,0,0,0.1))",
+            "drop-shadow(0 0 20px rgba(212, 175, 55, 0.6))",
+            "drop-shadow(0 4px 6px rgba(0,0,0,0.1))"
+        ]
+      } : { 
+        scale: 1,
+        filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.1))"
+      }}
+      transition={{ 
+        duration: 1, 
+        repeat: isCounting ? Infinity : 0,
+        ease: "easeInOut"
+      }}
     />
   );
 };

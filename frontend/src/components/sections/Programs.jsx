@@ -12,7 +12,7 @@ export function Programs() {
             desc: "Focuses on AI, ML, Data Science, and Software Development. Our labs are equipped with high-performance computing clusters.",
             intake: 60,
             duration: "4 Years",
-            color: "bg-blue-50 dark:bg-slate-900",
+            color: "var(--color-sitm-navy)",
             icon: <Cpu />
         },
         {
@@ -20,7 +20,7 @@ export function Programs() {
             desc: "Covers VLSI, IOT, Embedded Systems, and Telecommunication. Partners with leading telecom giants for internships.",
             intake: 60,
             duration: "4 Years",
-            color: "bg-purple-50 dark:bg-slate-900",
+            color: "var(--color-sitm-maroon)",
             icon: <Users />
         },
         {
@@ -28,7 +28,7 @@ export function Programs() {
             desc: "Deals with Robotics, Autos, Thermodynamics, and Manufacturing. Includes workshops on CNC and 3D Printing.",
             intake: 60,
             duration: "4 Years",
-            color: "bg-orange-50 dark:bg-slate-900",
+            color: "var(--color-sitm-navy)",
             icon: <Briefcase />
         },
         {
@@ -36,7 +36,7 @@ export function Programs() {
             desc: "Studies Structural Engineering, Geotech, and Infrastructure Development. Field visits to major construction projects.",
             intake: 60,
             duration: "4 Years",
-            color: "bg-emerald-50 dark:bg-slate-900",
+            color: "var(--color-sitm-maroon)",
             icon: <Building />
         },
         {
@@ -44,7 +44,7 @@ export function Programs() {
             desc: "A foundational course in computer applications, software development, and modern programming languages.",
             intake: 40,
             duration: "3 Years",
-            color: "bg-indigo-50 dark:bg-slate-900",
+            color: "var(--color-sitm-navy)",
             icon: <Code />
         },
         {
@@ -52,19 +52,19 @@ export function Programs() {
             desc: "Developing future managers with skills in finance, marketing, and human resource management.",
             intake: 40,
             duration: "3 Years",
-            color: "bg-pink-50 dark:bg-slate-900",
+            color: "var(--color-sitm-gold)",
             icon: <TrendingUp />
         }
     ];
 
     return (
         <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative">
-            {/* AI Background Pattern - Only visual background, no styling changes */}
-            <div className="absolute inset-0 opacity-3 dark:opacity-5 pointer-events-none">
-                <div className="absolute top-10 left-10 w-32 h-32 bg-blue-200 dark:bg-blue-800 rounded-full blur-3xl"></div>
-                <div className="absolute top-40 right-20 w-24 h-24 bg-purple-200 dark:bg-purple-800 rounded-full blur-2xl"></div>
-                <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-cyan-200 dark:bg-cyan-800 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-pink-200 dark:bg-pink-800 rounded-full blur-2xl"></div>
+            {/* AI Background Pattern - 60/20/12/8 Refined */}
+            <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.1] pointer-events-none">
+                <div className="absolute top-10 left-10 w-32 h-32 bg-sitm-navy/10 rounded-full blur-3xl"></div>
+                <div className="absolute top-40 right-20 w-24 h-24 bg-sitm-maroon/10 rounded-full blur-2xl"></div>
+                <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-sitm-navy/5 rounded-full blur-3xl"></div>
+                <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-sitm-gold/10 rounded-full blur-2xl"></div>
             </div>
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
@@ -133,7 +133,7 @@ function Card({ program, index, topOffset, total }) {
                         <span className="text-6xl md:text-7xl font-serif font-bold text-sitm-maroon dark:text-sitm-gold opacity-90">
                             {index + 1}
                         </span>
-                        <div className="w-16 h-16 rounded-full bg-sitm-maroon/5 flex items-center justify-center text-sitm-maroon dark:text-sitm-gold border border-sitm-maroon/20">
+                        <div className="w-16 h-16 rounded-full bg-sitm-navy/5 flex items-center justify-center text-sitm-navy dark:text-sitm-gold border border-sitm-navy/10">
                             {program.icon}
                         </div>
                     </div>

@@ -4,12 +4,12 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-sitm-maroon: #800020;
-    --color-sitm-maroon-light: #a31538;
-    --color-sitm-gold: #FFD700;
-    --color-sitm-gold-light: #ffe44d;
-    --color-sitm-navy: #001f3f;
-    --color-sitm-navy-light: #003366;
+    --color-sitm-navy: #002366;
+    --color-sitm-navy-light: #003399;
+    --color-sitm-maroon: #A01D22;
+    --color-sitm-maroon-light: #C0262D;
+    --color-sitm-gold: #D4AF37;
+    --color-sitm-gold-light: #F1D36E;
 
     --font-sans: "Inter", system-ui, sans-serif;
     --font-serif: "Playfair Display", serif;

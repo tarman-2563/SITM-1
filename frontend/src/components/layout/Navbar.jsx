@@ -50,7 +50,7 @@ export function Navbar() {
         className={cn(
           "sticky top-0 z-40 w-full transition-all duration-300 border-b border-transparent",
           isScrolled
-            ? "bg-white/80 dark:bg-slate-950/80 backdrop-blur-md shadow-md border-gray-200 dark:border-slate-800 py-2"
+            ? "bg-white/30 dark:bg-slate-950/30 backdrop-blur-lg shadow-md border-gray-200/30 dark:border-slate-800/30 py-2"
             : "bg-transparent py-4"
         )}
       >
@@ -58,10 +58,10 @@ export function Navbar() {
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logo} alt="SITM Logo" className="h-12 w-auto object-contain rounded-md" />
             <div className="flex flex-col">
-              <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-maroon dark:text-white" : "text-sitm-navy dark:text-white")}>
+              <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-navy dark:text-white" : "text-sitm-navy dark:text-white")}>
                 SITM
               </span>
-              <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-gray-600 dark:text-gray-400" : "text-sitm-navy/80 dark:text-white/80")}>
+              <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-sitm-maroon dark:text-sitm-gold" : "text-sitm-maroon dark:text-sitm-gold font-bold")}>
                 Excellence in Education
               </span>
             </div>
@@ -74,8 +74,8 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium hover:text-sitm-gold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-sitm-gold after:transition-all hover:after:w-full",
-                   isScrolled ? "text-gray-800 dark:text-gray-200" : "text-sitm-navy dark:text-white"
+                  "text-sm font-semibold hover:text-sitm-maroon dark:hover:text-sitm-gold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-sitm-maroon dark:after:bg-sitm-gold after:transition-all hover:after:w-full",
+                   isScrolled ? "text-sitm-navy dark:text-gray-200" : "text-sitm-navy dark:text-white"
                 )}
               >
                 {link.name}
@@ -108,7 +108,7 @@ export function Navbar() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-gray-800 dark:text-gray-200 font-medium py-2 border-b border-gray-100 dark:border-slate-800 last:border-0 hover:text-sitm-maroon dark:hover:text-sitm-gold"
+                className="text-sitm-navy dark:text-gray-200 font-semibold py-2 border-b border-gray-100 dark:border-slate-800 last:border-0 hover:text-sitm-maroon dark:hover:text-sitm-gold"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {link.name}

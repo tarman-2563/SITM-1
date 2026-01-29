@@ -144,7 +144,7 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-16 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+    <section id="gallery" className="py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
       <div className="mx-auto px-5 max-w-7xl">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">

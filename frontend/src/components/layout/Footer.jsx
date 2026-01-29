@@ -18,12 +18,12 @@ export function Footer() {
                 <span className="text-[0.6rem] tracking-wider uppercase text-gray-400">Excellence in Education</span>
               </div>
             </div>
-            <p className="text-gray-400 leading-relaxed">
+            <p className="text-gray-300 leading-relaxed">
               Empowering students with knowledge, skills, and values to become global leaders in technology and management.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Instagram, Linkedin, Youtube].map((Icon, i) => (
-                <a key={i} href="#" className="w-10 h-10 rounded-full bg-sitm-navy-light flex items-center justify-center hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 transform hover:-translate-y-1">
+                <a key={i} href="#" className="w-10 h-10 rounded-full bg-sitm-navy-light/40 border border-sitm-navy-light flex items-center justify-center hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 transform hover:-translate-y-1">
                   <Icon size={18} />
                 </a>
               ))}

@@ -8,42 +8,42 @@ export function Awards() {
       desc: "Recognizing outstanding engineering talent. Multiple SITM students have been recipients of this prestigious national scholarship.",
       year: "2024-25",
       icon: <Award className="w-6 h-6" />,
-      color: "bg-blue-500"
+      color: "bg-sitm-maroon"
     },
     {
       title: "Smart India Hackathon",
       desc: "SITM-IQAC successfully organized and participated in the national-level innovation competition recognized by the Ministry of Education.",
       year: "2023",
       icon: <Users className="w-6 h-6" />,
-      color: "bg-purple-500"
+      color: "bg-sitm-navy"
     },
     {
       title: "NAAC Accredited",
       desc: "Recognized for maintaining high quality standards in education, infrastructure, and student support services.",
       year: "Since 2016",
       icon: <Star className="w-6 h-6" />,
-      color: "bg-yellow-500"
+      color: "bg-sitm-gold"
     },
     {
       title: "Inter-College Cricket",
       desc: "Champions of the Regional Inter-College Cricket Tournament season 4, showcasing sporting excellence alongside academics.",
       year: "2024",
       icon: <Trophy className="w-6 h-6" />,
-      color: "bg-green-500"
+      color: "bg-sitm-maroon"
     },
     {
       title: "Tata Imagination Challenge",
       desc: "Active participation and recognition in one of India's largest student-industry collaborative challenges.",
       year: "2024",
       icon: <BookOpen className="w-6 h-6" />,
-      color: "bg-indigo-500"
+      color: "bg-sitm-navy"
     },
     {
       title: "Academic Excellence",
       desc: "Zubeen Garg Memorial Gold Medal awarded to branch toppers for exceptional academic performance.",
       year: "Annual",
       icon: <Medal className="w-6 h-6" />,
-      color: "bg-red-500"
+      color: "bg-sitm-maroon"
     }
   ];
 
