@@ -103,14 +103,51 @@ export function WhySITM() {
   const activeData = comparisonData.find((item) => item.id === activeTab);
 
   return (
-    <section className="py-24 bg-gray-50 dark:bg-slate-950 overflow-hidden">
-      <div className="container mx-auto px-4">
+    <section className="relative py-24 bg-slate-900 overflow-hidden">
+      {/* Background Graphics - Random Rope-like Flow */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <svg
+          className="absolute w-full h-full opacity-80"
+          preserveAspectRatio="none"
+          viewBox="0 0 1200 800"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <motion.path
+            d="M-100,200 C150,50 350,500 600,250 C850,0 1050,450 1300,150"
+            stroke="url(#rope-gradient)"
+            strokeWidth="50"
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 1 }}
+            transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+          />
+          <motion.path
+            d="M-100,600 C200,800 450,150 700,550 C950,950 1100,400 1300,700"
+            stroke="url(#rope-gradient)"
+            strokeWidth="40"
+            strokeLinecap="round"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: 0.8 }}
+            transition={{ duration: 5, delay: 1, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
+          />
+          <defs>
+            <linearGradient id="rope-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
+              <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
+              <stop offset="100%" stopColor="#f59e0b" /> {/* Amber */}
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div className="container relative z-10 mx-auto px-4">
         <div className="text-center mb-16">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-serif font-bold text-sitm-navy dark:text-white mb-4"
+            className="text-3xl md:text-4xl font-serif font-bold text-white mb-4"
           >
             Beyond the Degree: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">Are you ready</span> for the Real World?
           </motion.h2>
