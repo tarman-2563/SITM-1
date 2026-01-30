@@ -103,11 +103,11 @@ export function WhySITM() {
   const activeData = comparisonData.find((item) => item.id === activeTab);
 
   return (
-    <section className="relative py-24 bg-slate-900 overflow-hidden">
+    <section className="relative py-24 bg-white dark:bg-slate-950 overflow-hidden">
       {/* Background Graphics - Random Rope-like Flow */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <svg
-          className="absolute w-full h-full opacity-80"
+          className="absolute w-full h-full opacity-60 transition-opacity"
           preserveAspectRatio="none"
           viewBox="0 0 1200 800"
           fill="none"
@@ -147,7 +147,7 @@ export function WhySITM() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-serif font-bold text-white mb-4"
+            className="text-3xl md:text-4xl font-serif font-bold text-sitm-maroon mb-4"
           >
             Beyond the Degree: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">Are you ready</span> for the Real World?
           </motion.h2>

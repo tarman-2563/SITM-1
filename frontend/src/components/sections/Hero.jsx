@@ -34,7 +34,38 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             <h1 className="text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-left">
-              North East India's first college focused on <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">practical learning</span>, industry exposure, and real-world skills.
+              North East India's first college focused on{" "}
+              <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
+                  practical learning
+                </span>
+                <svg
+                  className="absolute inset-0 w-[210%] h-[220%] -left-[55%] -top-[60%] pointer-events-none z-0"
+                  viewBox="0 0 200 60"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <motion.path
+                    d="M1,30 C1,10 199,10 199,30 C199,50 1,50 12,32"
+                    stroke="#facc15"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.8 }}
+                    transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
+                  />
+                  <motion.path
+                    d="M12,28 C18,8 199,12 199,32 C199,52 12,48 22,35"
+                    stroke="#facc15"
+                    strokeWidth="0.8"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.6 }}
+                    transition={{ duration: 1.8, delay: 1.2, ease: "easeInOut" }}
+                  />
+                </svg>
+              </span>
+              , industry exposure, and real-world skills.
             </h1>
           </motion.div>
 
