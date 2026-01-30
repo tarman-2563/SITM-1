@@ -102,8 +102,8 @@ export function Placements() {
         </div>
 
         {/* Layer 4: Subtle Navy Glows */}
-        <div className="absolute top-1/4 -left-20 w-[600px] h-[600px] bg-sitm-navy/5 rounded-full blur-[150px]"></div>
-        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-sitm-maroon/5 rounded-full blur-[150px]"></div>
+        <div className="absolute top-1/4 -left-20 w-150 h-150 bg-sitm-navy/5 rounded-full blur-[150px]"></div>
+        <div className="absolute bottom-1/4 -right-20 w-125 h-125 bg-sitm-maroon/5 rounded-full blur-[150px]"></div>
       </div>
 
       <div className="container relative mx-auto px-4 z-10">
@@ -161,20 +161,20 @@ export function Placements() {
                         { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
                         { name: "IBM", color: "text-[#052FAD]", logo: "ibm.com" },
                     ].map((company, i) => (
-                        <div key={`r1-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-[380px] hover:scale-105 transition-transform duration-300">
-                             <div className="w-20 h-20 flex-shrink-0 bg-white rounded-xl p-3 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
+                        <div key={`r1-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                             <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
                                     alt={company.name} 
                                     className="w-full h-full object-contain"
                                 />
                              </div>
-                            <span className={`text-2xl font-black ${company.color} transition-colors whitespace-nowrap`}>{company.name}</span>
+                            <span className={`text-1xl font-black ${company.color} transition-colors whitespace-nowrap`}>{company.name}</span>
                         </div>
                     ))}
                 </div>
-                <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
             </div>
 
             {/* Infinite Scroll Marquee - Row 2 (Reverse) */}
@@ -203,8 +203,8 @@ export function Placements() {
                         { name: "Mahindra", color: "text-[#E31837]", logo: "mahindra.com" },
                         { name: "JCB", color: "text-[#FDB913]", logo: "jcb.com" },
                     ].map((company, i) => (
-                        <div key={`r2-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-[380px] hover:scale-105 transition-transform duration-300">
-                             <div className="w-20 h-20 flex-shrink-0 bg-white rounded-xl p-3 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
+                        <div key={`r2-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                             <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
                                     alt={company.name} 
@@ -215,8 +215,8 @@ export function Placements() {
                         </div>
                     ))}
                 </div>
-                 <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
             </div>
 
             {/* Infinite Scroll Marquee - Row 3 */}
@@ -245,8 +245,8 @@ export function Placements() {
                         { name: "Indian Oil", color: "text-[#F47920]", logo: "iocl.com" },
                         { name: "Quality Austria", color: "text-[#E30613]", logo: "qualityaustria.com" },
                     ].map((company, i) => (
-                        <div key={`r3-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-[380px] hover:scale-105 transition-transform duration-300">
-                             <div className="w-20 h-20 flex-shrink-0 bg-white rounded-xl p-3 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
+                        <div key={`r3-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                             <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
                                     alt={company.name} 
@@ -257,11 +257,12 @@ export function Placements() {
                         </div>
                     ))}
                 </div>
-                 <div className="absolute top-0 left-0 w-20 h-full bg-gradient-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-gradient-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
             </div>
         </div>
       </div>
     </section>
   );
 }
+
