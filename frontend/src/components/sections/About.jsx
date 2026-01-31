@@ -43,7 +43,13 @@ export function About() {
       </div>
       <div className="container mx-auto px-4 relative z-10">
         <div className="flex flex-col md:flex-row items-center gap-16">
-          <div className="w-full md:w-1/2 relative group">
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full md:w-1/2 relative group"
+          >
             <div className="absolute -inset-4 bg-gradient-to-r from-sitm-maroon to-sitm-gold rounded-2xl opacity-20 group-hover:opacity-30 blur-lg transition duration-500"></div>
             <img 
               src="https://sitmguwahati.ac.in/assets/Campus-Badc-v75.jpeg" 
@@ -101,9 +107,15 @@ export function About() {
                     </span>
                 </motion.div>
             </motion.div>
-          </div>
+          </motion.div>
           
-          <div className="w-full md:w-1/2">
+          <motion.div 
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full md:w-1/2"
+          >
             <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-1 bg-sitm-gold"></div>
                 <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic font-bold text-xl">About Us</span>
@@ -135,7 +147,7 @@ export function About() {
                     Read Chairmans Message
                 </button>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

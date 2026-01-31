@@ -139,6 +139,30 @@ export function Programs() {
         document.body.style.overflow = 'unset';
     };
 
+    const containerVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                staggerChildren: 0.2
+            }
+        }
+    };
+
+    const itemVariants = {
+        hidden: { 
+            opacity: 0, 
+            y: 100 
+        },
+        visible: { 
+            opacity: 1, 
+            y: 0,
+            transition: {
+                duration: 0.8,
+                ease: "easeOut"
+            }
+        }
+    };
+
     return (
         <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative overflow-hidden min-h-[700px]">
             {/* Ambient Background Glows */}
@@ -149,36 +173,36 @@ export function Programs() {
             </div>
 
             <div className="container mx-auto px-4 max-w-7xl relative z-10">
-                <div className="text-center mb-16">
-                    <motion.span 
-                        initial={{ opacity: 0, y: 10 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                <motion.div 
+                    initial={{ y: -100, opacity: 0 }}
+                    whileInView={{ y: 0, opacity: 1 }}
+                    viewport={{ once: false }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-16"
+                >
+                    <span 
                         className="text-sitm-maroon dark:text-sitm-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block"
                     >
                         Academic Excellence
-                    </motion.span>
+                    </span>
                     <h2 className="text-5xl md:text-6xl font-bold text-sitm-navy dark:text-white mt-2 mb-6 font-serif tracking-tight">
                         Our Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">Programs</span>
                     </h2>
                     <div className="w-24 h-1.5 bg-gradient-to-r from-sitm-maroon to-sitm-gold mx-auto rounded-full"></div>
-                </div>
+                </motion.div>
 
                 {/* School Grid View */}
                 <motion.div 
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    variants={containerVariants}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false, amount: 0.1 }}
                     className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
                 >
                     {schools.map((school, idx) => (
                         <motion.button
                             key={school.id}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
+                            variants={itemVariants}
                             onClick={() => handleSchoolClick(school)}
                             className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/10"
                         >
