@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { cn } from "../../lib/utils";
 import { Button } from "../common/Button";
 import { ThemeToggle } from "./ThemeToggle";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/Sitmnewlogo.jpeg";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -31,7 +31,7 @@ export function Navbar() {
 
   return (
     <>
-      <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
+      {/* <div className="bg-sitm-navy text-white py-2 px-4 text-xs md:text-sm hidden md:flex justify-between items-center z-50 relative">
         <div className="flex gap-4">
           <span className="flex items-center gap-1">
             <Phone size={14} className="text-sitm-gold" /> +91 98765 43210
@@ -44,7 +44,73 @@ export function Navbar() {
            <a href="#" className="hover:text-sitm-gold transition-colors">Alumni</a>
            <a href="#" className="hover:text-sitm-gold transition-colors">Careers</a>
         </div>
-      </div>
+      </div> */}
+      <div className="bg-yellow-950 text-white py-2 overflow-hidden relative">
+  <div className="flex whitespace-nowrap animate-marquee gap-12 items-center">
+    
+    {/* AICTE */}
+    <div className="flex items-center gap-2">
+      <img src="/logos/Aictelogo.png" alt="AICTE" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Approved by AICTE, New Delhi
+      </span>
+    </div>
+
+    {/* GU */}
+    <div className="flex items-center gap-2">
+      <img src="/logos/gulogo.jpg" alt="Guwahati University" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Affiliated to Guwahati University
+      </span>
+    </div>
+
+    {/* ASTU */}
+    <div className="flex items-center gap-2">
+      <img src="/logos/Astulogo.png" alt="ASTU" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Affiliated to Assam Science and Technology University (ASTU)
+      </span>
+    </div>
+
+    {/* Duplicate content for smooth loop */}
+    <div className="flex items-center gap-2">
+      <img src="/logos/Aictelogo.png" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Approved by AICTE, New Delhi
+      </span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <img src="/logos/gulogo.jpg" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Affiliated to Guwahati University
+      </span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <img src="/logos/Astulogo.png" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Affiliated to Assam Science and Technology University (ASTU)
+      </span>
+    </div>
+    
+    <div className="flex items-center gap-2">
+      <img src="/logos/Aictelogo.png" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Approved by AICTE, New Delhi
+      </span>
+    </div>
+
+    <div className="flex items-center gap-2">
+      <img src="/logos/gulogo.jpg" className="h-5 w-auto" />
+      <span className="text-xs md:text-sm">
+        Affiliated to Guwahati University
+      </span>
+    </div>
+
+  </div>
+</div>
+
 
       <nav
         className={cn(

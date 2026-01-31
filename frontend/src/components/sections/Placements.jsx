@@ -116,7 +116,7 @@ export function Placements() {
         <div className="grid md:grid-cols-4 gap-6 mb-20">
             {[
                 { label: "Highest Package", value: <Counter from={1} to={12} duration={3} suffix=" LPA" />, icon: TrendingUp },
-                { label: "Partner Companies", value: "150+", icon: Building2 },
+                { label: "Partner Companies", value: "1500+", icon: Building2 },
                 { label: "Students Placed", value: "95%", icon: Users },
                 { label: "Industry Awards", value: "25+", icon: Award },
             ].map((stat, i) => (

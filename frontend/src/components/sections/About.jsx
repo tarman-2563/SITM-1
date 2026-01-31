@@ -89,7 +89,7 @@ export function About() {
                         WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                       }}
                     >
-                      15+
+                      26+
                     </span>
                     <span 
                       className="text-[14px] font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-200 to-amber-400 uppercase tracking-[0.18em] leading-tight block drop-shadow-[0_6px_10px_rgba(0,0,0,0.4)]"
