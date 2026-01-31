@@ -152,13 +152,13 @@ export function Programs() {
     const itemVariantsLeft = {
         hidden: { 
             opacity: 0, 
-            x: -100 
+            x: -150 
         },
         visible: { 
             opacity: 1, 
             x: 0,
             transition: {
-                duration: 0.8,
+                duration: 0.6,
                 ease: "easeOut"
             }
         }
@@ -167,13 +167,13 @@ export function Programs() {
     const itemVariantsRight = {
         hidden: { 
             opacity: 0, 
-            x: 100 
+            x: 150 
         },
         visible: { 
             opacity: 1, 
             x: 0,
             transition: {
-                duration: 0.8,
+                duration: 0.6,
                 ease: "easeOut"
             }
         }

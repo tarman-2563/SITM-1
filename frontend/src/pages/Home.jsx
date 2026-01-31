@@ -25,9 +25,7 @@ export function Home() {
       <Reveal width="100%">
         <About />
       </Reveal>
-      <Reveal width="100%" overflow="visible">
-        <Programs />
-      </Reveal>
+      <Programs />
       <Reveal width="100%">
         <Campus />
       </Reveal>
