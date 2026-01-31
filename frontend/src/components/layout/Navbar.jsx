@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X, Phone, MapPin } from "lucide-react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { Button } from "../common/Button";
 import { ThemeToggle } from "./ThemeToggle";
@@ -45,7 +46,7 @@ export function Navbar() {
            <a href="#" className="hover:text-sitm-gold transition-colors">Careers</a>
         </div>
       </div> */}
-      <div className="bg-yellow-950 text-white py-2 overflow-hidden relative">
+      <div className="bg-sitm-gold/90 dark:bg-sitm-gold/80 backdrop-blur-md text-white py-2 overflow-hidden relative border-b border-sitm-gold/20">
   <div className="flex whitespace-nowrap animate-marquee gap-12 items-center">
     
     {/* AICTE */}
@@ -114,13 +115,35 @@ export function Navbar() {
 
       <nav
         className={cn(
-          "sticky top-0 z-40 w-full transition-all duration-300 border-b border-transparent",
+          "sticky top-0 z-40 w-full transition-all duration-300 border-b overflow-hidden",
           isScrolled
-            ? "bg-white/30 dark:bg-slate-950/30 backdrop-blur-lg shadow-md border-gray-200/30 dark:border-slate-800/30 py-2"
-            : "bg-transparent py-4"
+            ? "bg-white/10 dark:bg-black/20 backdrop-blur-xl shadow-2xl border-white/20 dark:border-white/10 py-2"
+            : "bg-white/5 dark:bg-black/10 backdrop-blur-md border-white/10 dark:border-white/5 py-4"
         )}
       >
-        <div className="container mx-auto px-4 md:px-6 flex justify-between items-center">
+        {/* Animated Background Blobs - Dark Mode Only */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-0 dark:opacity-100 transition-opacity duration-500">
+          <motion.div 
+            animate={{ 
+              x: [0, -100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[10%] -right-[10%] w-[50%] h-[50%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+          />
+          <motion.div 
+            animate={{ 
+              x: [0, 80, 0],
+              y: [0, -100, 0],
+              scale: [1.2, 1, 1.2]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute -bottom-[10%] left-[5%] w-[60%] h-[60%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+          />
+        </div>
+
+        <div className="container relative z-10 mx-auto px-4 md:px-6 flex justify-between items-center">
           <Link to="/" className="flex items-center gap-2 group">
             <img src={logo} alt="SITM Logo" className="h-12 w-auto object-contain rounded-md" />
             <div className="flex flex-col">

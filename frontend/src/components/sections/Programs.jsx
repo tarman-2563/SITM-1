@@ -18,7 +18,8 @@ import {
     BarChart3,
     GraduationCap,
     Users,
-    X
+    X,
+    Rocket
 } from "lucide-react";
 
 export function Programs() {
@@ -31,8 +32,8 @@ export function Programs() {
         {
             id: "engineering",
             name: "School of Engineering",
-            icon: <Wrench className="w-10 h-10" />,
-            color: "from-sitm-navy to-sitm-navy", // Solid Navy
+            icon: <Rocket className="w-10 h-10" />,
+            color: "from-sitm-gold to-sitm-gold", // Was Navy
             programs: [
                 {
                     title: "Mechanical Engineering",
@@ -75,7 +76,7 @@ export function Programs() {
             id: "business",
             name: "School of Business Administration",
             icon: <TrendingUp className="w-10 h-10" />,
-            color: "from-sitm-gold to-sitm-gold", // Solid Gold
+            color: "from-white to-gray-200", // Was Gold
             programs: [
                 {
                     title: "Bachelor of Business Administration",
@@ -90,7 +91,7 @@ export function Programs() {
             id: "computer",
             name: "School of Computer Applications",
             icon: <Code className="w-10 h-10" />,
-            color: "from-sitm-navy to-sitm-navy", // Solid Navy
+            color: "from-sitm-gold to-sitm-gold", // Was Navy
             programs: [
                 {
                     title: "Bachelor of Computer Applications",
@@ -105,7 +106,7 @@ export function Programs() {
             id: "data-science",
             name: "School of Applied Data Science",
             icon: <Database className="w-10 h-10" />,
-            color: "from-sitm-gold to-sitm-gold", // Solid Gold
+            color: "from-white to-gray-200", // Was Gold
             programs: [
                 {
                     title: "Data Science",
@@ -181,11 +182,43 @@ export function Programs() {
 
     return (
         <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative overflow-hidden min-h-[700px]">
-            {/* Ambient Background Glows */}
-            <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"></div>
-                <div className="absolute top-1/2 -right-24 w-80 h-80 bg-orange-500/10 rounded-full blur-[100px]"></div>
-                <div className="absolute -bottom-24 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]"></div>
+             {/* Animated Background - Gradient Blobs */}
+            <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-500">
+                {/* Subtle Geometric Dot Pattern */}
+                <div 
+                  className="absolute inset-0 opacity-[0.1]"
+                  style={{ 
+                    backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+                    backgroundSize: "30px 30px"
+                  }}
+                ></div>
+
+                <motion.div 
+                  animate={{ 
+                    x: [0, 100, 0],
+                    y: [0, 80, 0],
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                  className="absolute -top-[10%] left-[20%] w-[50%] h-[50%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+                />
+                <motion.div 
+                  animate={{ 
+                    x: [0, -80, 0],
+                    y: [0, 100, 0],
+                    scale: [1.2, 1, 1.2]
+                  }}
+                  transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+                  className="absolute top-[30%] -right-[15%] w-[60%] h-[60%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+                />
+                <motion.div 
+                  animate={{ 
+                    x: [0, 120, 0],
+                    y: [0, -80, 0]
+                  }}
+                  transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+                  className="absolute -bottom-[20%] right-[30%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+                />
             </div>
 
             <div className="container mx-auto px-4 max-w-7xl relative z-10">
@@ -220,27 +253,27 @@ export function Programs() {
                             key={school.id}
                             variants={idx < 2 ? itemVariantsLeft : itemVariantsRight}
                             onClick={() => handleSchoolClick(school)}
-                            className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/10"
+                            className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/20"
                         >
                             <div className={`absolute inset-0 bg-gradient-to-br ${school.color} transition-all duration-700 group-hover:scale-110`}></div>
-                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                            <div className="absolute inset-0 bg-white/5 group-hover:bg-transparent transition-colors duration-500"></div>
                             <div className="absolute top-0 right-0 p-8">
-                                <div className="text-white/10 group-hover:text-white/20 transition-colors duration-500">
+                                <div className="text-sitm-navy/10 group-hover:text-sitm-navy/20 transition-colors duration-500">
                                     <GraduationCap className="w-32 h-32 rotate-[-15deg] group-hover:rotate-0 transition-transform duration-700" />
                                 </div>
                             </div>
                             
-                            <div className="relative h-full p-10 flex flex-col justify-end text-white z-20">
-                                <div className="mb-8 p-5 rounded-[1.5rem] bg-white/15 backdrop-blur-xl border border-white/20 w-fit group-hover:scale-110 group-hover:bg-white group-hover:text-indigo-900 transition-all duration-500 shadow-xl">
+                            <div className="relative h-full p-10 flex flex-col justify-end text-sitm-navy z-20">
+                                <div className="mb-8 p-5 rounded-[1.5rem] bg-white/40 backdrop-blur-xl border border-white/40 w-fit group-hover:scale-110 group-hover:bg-white group-hover:text-sitm-maroon transition-all duration-500 shadow-xl">
                                     {school.icon}
                                 </div>
                                 <h3 className="text-3xl font-bold font-serif mb-3 leading-[1.1] tracking-tight">
                                     {school.name}
                                 </h3>
-                                <p className="text-white/80 text-sm mb-8 line-clamp-2 max-w-[200px] font-medium">
+                                <p className="text-sitm-navy/80 text-sm mb-8 line-clamp-2 max-w-[200px] font-medium">
                                     Excellence in {school.programs.length} specialized industry-ready programs.
                                 </p>
-                                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] bg-white/10 w-fit px-6 py-3 rounded-full backdrop-blur-md border border-white/10 group-hover:bg-white group-hover:text-sitm-navy transition-all duration-300">
+                                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] bg-sitm-navy/5 w-fit px-6 py-3 rounded-full backdrop-blur-md border border-sitm-navy/5 group-hover:bg-sitm-navy group-hover:text-white transition-all duration-300">
                                     Open Programs <ArrowUpRight className="w-4 h-4" />
                                 </div>
                             </div>
