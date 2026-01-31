@@ -1,5 +1,6 @@
 const express=require("express");
 const connectDB = require("./config/db");
+const leadsRouter = require("./routes/leads.routes");
 const dotenv=require("dotenv").config();
 
 const app=express();
@@ -9,9 +10,11 @@ app.use(express.json());
 
 connectDB();
 
-app.get("api/health",(req,res)=>{
+app.get("/api/health",(req,res)=>{
     res.status(200).json({message:"Server is up and running"});
 })
+
+app.use("/api/leads",leadsRouter);
 
 app.use((err,req,res,next)=>{
     console.log("Global error:",err);
@@ -19,5 +22,5 @@ app.use((err,req,res,next)=>{
 })
 
 app.listen(PORT,()=>{
-    console.log("Server is running on port ");
+    console.log(`Server is running on port ${PORT}`);
 })
