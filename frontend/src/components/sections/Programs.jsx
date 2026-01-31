@@ -148,14 +148,29 @@ export function Programs() {
         }
     };
 
-    const itemVariants = {
+    const itemVariantsLeft = {
         hidden: { 
             opacity: 0, 
-            y: 100 
+            x: -100 
         },
         visible: { 
             opacity: 1, 
-            y: 0,
+            x: 0,
+            transition: {
+                duration: 0.8,
+                ease: "easeOut"
+            }
+        }
+    };
+
+    const itemVariantsRight = {
+        hidden: { 
+            opacity: 0, 
+            x: 100 
+        },
+        visible: { 
+            opacity: 1, 
+            x: 0,
             transition: {
                 duration: 0.8,
                 ease: "easeOut"
@@ -202,7 +217,7 @@ export function Programs() {
                     {schools.map((school, idx) => (
                         <motion.button
                             key={school.id}
-                            variants={itemVariants}
+                            variants={idx < 2 ? itemVariantsLeft : itemVariantsRight}
                             onClick={() => handleSchoolClick(school)}
                             className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/10"
                         >

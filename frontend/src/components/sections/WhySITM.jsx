@@ -142,11 +142,12 @@ export function WhySITM() {
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 px-4">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
             className="text-3xl md:text-4xl font-serif font-bold text-sitm-maroon mb-4"
           >
             Beyond the Degree: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">Are you ready</span> for the Real World?
@@ -155,7 +156,13 @@ export function WhySITM() {
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Navigation Sidebar */}
-          <div className="w-full lg:w-1/3 space-y-3">
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-1/3 space-y-3"
+          >
             {comparisonData.map((item) => (
               <button
                 key={item.id}
@@ -177,10 +184,16 @@ export function WhySITM() {
                 </div>
               </button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Stacking Comparison Cards */}
-          <div className="w-full lg:w-2/3 relative h-[500px] md:h-[450px]">
+          <motion.div 
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-2/3 relative h-[500px] md:h-[450px]"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -238,7 +251,7 @@ export function WhySITM() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
