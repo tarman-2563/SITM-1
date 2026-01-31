@@ -106,7 +106,7 @@ export function About() {
           <div className="w-full md:w-1/2">
             <div className="flex items-center gap-4 mb-6">
                 <div className="w-12 h-1 bg-sitm-gold"></div>
-                <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic text-xl">About Us</span>
+                <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic font-bold text-xl">About Us</span>
             </div>
             
             <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mb-8 font-serif leading-tight">

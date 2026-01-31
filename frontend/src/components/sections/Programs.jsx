@@ -69,12 +69,8 @@ export function Programs() {
 
             <div className="container mx-auto px-4 max-w-6xl relative z-10">
                 <div className="text-center mb-24">
-                    <span className="text-sitm-gold font-serif italic text-lg dark:text-sitm-gold">Academic Excellence</span>
                     <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">Our Programs</h2>
                     <div className="w-24 h-1 bg-sitm-maroon mx-auto"></div>
-                    <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                        Each program is designed to build a strong foundation for your future career.
-                    </p>
                 </div>
 
                 {/* Sticky Card Stack Container */}

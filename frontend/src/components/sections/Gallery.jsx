@@ -147,14 +147,31 @@ export function Gallery() {
     <section id="gallery" className="py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
       <div className="mx-auto px-5 max-w-7xl">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">
-            Campus Gallery
+          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-8 font-serif relative inline-block">
+            Photo Gallery
+            <svg
+              className="absolute -bottom-6 left-0 w-[110%] -left-[5%] h-6 pointer-events-none"
+              viewBox="0 0 240 30"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
+                  <stop offset="20%" stopColor="#4ade80" /> {/* Green */}
+                  <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
+                  <stop offset="100%" stopColor="#fb923c" /> {/* Orange */}
+                </linearGradient>
+              </defs>
+              <path
+                d="M5,15 L15,25 L28,5 C40,5 50,25 70,25 C90,25 100,5 130,5 C160,5 175,25 205,25 Q225,25 235,15"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </h2>
-          <div className="w-24 h-1 bg-sitm-maroon mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore the vibrant life at SITM through our comprehensive gallery showcasing academic excellence,
-            campus facilities, student achievements, and memorable moments.
-          </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
