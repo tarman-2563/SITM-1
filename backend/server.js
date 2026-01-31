@@ -1,6 +1,6 @@
 const express=require("express");
 const connectDB = require("./config/db");
-const leadsRouter = require("./routes/leads.routes");
+const leadsRouter = require("./routes/leadRoutes");
 const dotenv=require("dotenv").config();
 
 const app=express();

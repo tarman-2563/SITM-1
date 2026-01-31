@@ -1,5 +1,5 @@
 const {validationResult} = require("express-validator");
-const { createLeadService } = require("../services/leads.service");
+const { createLeadService, getLeadByIdService } = require("../services/leadService");
 
 const createLead=async(req,res)=>{
     try{
@@ -27,6 +27,29 @@ const createLead=async(req,res)=>{
     }
 }
 
+const getLeadById=async(req,res)=>{
+    try{
+        const lead=await getLeadByIdService(req.params.id);
+        if(!lead){
+            return res.status(404).json({status:"error",message:"Lead not found"});
+        }
+        const responseData={
+            id:lead._id,
+            firstName:lead.firstName,
+            lastName:lead.lastName,
+            email:lead.email,
+            phone:lead.phone,
+            program:lead.program,
+            status:lead.leadStatus
+        }
+        res.status(200).json({status:"success",data:responseData});
+    }
+    catch(err){
+        res.status(500).json({status:"error",message:err.message});
+    }
+}
+
 module.exports={
-    createLead
+    createLead,
+    getLeadById
 }

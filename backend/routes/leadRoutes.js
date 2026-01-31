@@ -1,6 +1,6 @@
 const express=require("express");
 const {body} = require("express-validator");
-const {createLead} = require("../controllers/leads.controller");
+const {createLead,getLeadById} = require("../controllers/leadController");
 
 const leadsRouter=express.Router();
 
@@ -11,5 +11,7 @@ leadsRouter.post("/",[
     body("phone").matches(/^\+?[1-9]\d{1,14}$/).withMessage("Valid phone number is required"),
     body("program").isIn(["CSE","ECE","ME","CE","BCA","BBA"]).withMessage("Program must be one of the predefined options")
 ],createLead)
+
+leadsRouter.get("/:id",getLeadById);
 
 module.exports=leadsRouter;
