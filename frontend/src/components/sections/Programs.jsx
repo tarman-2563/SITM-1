@@ -1,170 +1,341 @@
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowUpRight, TrendingUp, Users, Cpu, Building, Code, Briefcase } from "lucide-react";
+import { 
+    ArrowUpRight, 
+    Cpu, 
+    Building, 
+    Code, 
+    Briefcase, 
+    Wrench, 
+    Database, 
+    TrendingUp, 
+    ChevronLeft,
+    Lightbulb,
+    Layers,
+    Terminal,
+    BarChart3,
+    GraduationCap,
+    Users,
+    X
+} from "lucide-react";
 
 export function Programs() {
+    const [selectedSchool, setSelectedSchool] = useState(null);
+    const [currentProgramIndex, setCurrentProgramIndex] = useState(0);
     const containerRef = useRef(null);
 
-    const programs = [
+    const schools = [
+        // ... (schools data remains the same)
         {
-            title: "Computer Science & Engineering",
-            desc: "Focuses on AI, ML, Data Science, and Software Development. Our labs are equipped with high-performance computing clusters.",
-            intake: 60,
-            duration: "4 Years",
-            color: "var(--color-sitm-navy)",
-            icon: <Cpu />
+            id: "engineering",
+            name: "School of Engineering",
+            icon: <Wrench className="w-10 h-10" />,
+            color: "from-sitm-navy to-sitm-navy", // Solid Navy
+            programs: [
+                {
+                    title: "Mechanical Engineering",
+                    desc: "Focuses on Robotics, Autos, Thermodynamics, and Advanced Manufacturing. Includes workshops on CNC and 3D Printing.",
+                    intake: 60,
+                    duration: "4 Years",
+                    icon: <Layers />
+                },
+                {
+                    title: "Civil Engineering",
+                    desc: "Studies Structural Engineering, Geotechnical Engineering, and Infrastructure Development. Field visits to major projects.",
+                    intake: 60,
+                    duration: "4 Years",
+                    icon: <Building />
+                },
+                {
+                    title: "Electrical and Electronics Engineering (EEE)",
+                    desc: "Covers power systems, electrical machines, and control systems with modern lab facilities and industry exposure.",
+                    intake: 60,
+                    duration: "4 Years",
+                    icon: <Lightbulb />
+                },
+                {
+                    title: "Computer Science Engineering (CSE)",
+                    desc: "Specialization in AI, ML, Data Science, and Software Development. Labs equipped with high-performance clusters.",
+                    intake: 60,
+                    duration: "4 Years",
+                    icon: <Cpu />
+                },
+                {
+                    title: "Electronics and Communication Engineering (ECE)",
+                    desc: "Focuses on VLSI, IOT, Embedded Systems, and Telecommunication. Partners with leading tech giants.",
+                    intake: 60,
+                    duration: "4 Years",
+                    icon: <Terminal />
+                }
+            ]
         },
         {
-            title: "Electronics & Communication",
-            desc: "Covers VLSI, IOT, Embedded Systems, and Telecommunication. Partners with leading telecom giants for internships.",
-            intake: 60,
-            duration: "4 Years",
-            color: "var(--color-sitm-maroon)",
-            icon: <Users />
+            id: "business",
+            name: "School of Business Administration",
+            icon: <TrendingUp className="w-10 h-10" />,
+            color: "from-sitm-gold to-sitm-gold", // Solid Gold
+            programs: [
+                {
+                    title: "Bachelor of Business Administration",
+                    desc: "Developing future business leaders with expertise in finance, marketing, and human resource management.",
+                    intake: 40,
+                    duration: "3 Years",
+                    icon: <Briefcase />
+                }
+            ]
         },
         {
-            title: "Mechanical Engineering",
-            desc: "Deals with Robotics, Autos, Thermodynamics, and Manufacturing. Includes workshops on CNC and 3D Printing.",
-            intake: 60,
-            duration: "4 Years",
-            color: "var(--color-sitm-navy)",
-            icon: <Briefcase />
+            id: "computer",
+            name: "School of Computer Applications",
+            icon: <Code className="w-10 h-10" />,
+            color: "from-sitm-navy to-sitm-navy", // Solid Navy
+            programs: [
+                {
+                    title: "Bachelor of Computer Applications",
+                    desc: "A comprehensive course in software development, modern programming, and digital systems management.",
+                    intake: 40,
+                    duration: "3 Years",
+                    icon: <Terminal />
+                }
+            ]
         },
         {
-            title: "Civil Engineering",
-            desc: "Studies Structural Engineering, Geotech, and Infrastructure Development. Field visits to major construction projects.",
-            intake: 60,
-            duration: "4 Years",
-            color: "var(--color-sitm-maroon)",
-            icon: <Building />
-        },
-        {
-            title: "Bachelor of Computer Application",
-            desc: "A foundational course in computer applications, software development, and modern programming languages.",
-            intake: 40,
-            duration: "3 Years",
-            color: "var(--color-sitm-navy)",
-            icon: <Code />
-        },
-        {
-            title: "Business Administration (BBA)",
-            desc: "Developing future managers with skills in finance, marketing, and human resource management.",
-            intake: 40,
-            duration: "3 Years",
-            color: "var(--color-sitm-gold)",
-            icon: <TrendingUp />
+            id: "data-science",
+            name: "School of Applied Data Science",
+            icon: <Database className="w-10 h-10" />,
+            color: "from-sitm-gold to-sitm-gold", // Solid Gold
+            programs: [
+                {
+                    title: "Data Science",
+                    desc: "Deep dive into statistical modeling, big data analytics, and machine learning to drive data-led decision making.",
+                    intake: 40,
+                    duration: "3 Years",
+                    icon: <BarChart3 />
+                }
+            ]
         }
     ];
 
+    const nextProgram = () => {
+        if (!selectedSchool || currentProgramIndex >= selectedSchool.programs.length - 1) return;
+        setCurrentProgramIndex((prev) => prev + 1);
+    };
+
+    const prevProgram = () => {
+        if (!selectedSchool || currentProgramIndex <= 0) return;
+        setCurrentProgramIndex((prev) => prev - 1);
+    };
+
+    const handleSchoolClick = (school) => {
+        setSelectedSchool(school);
+        setCurrentProgramIndex(0);
+        // Prevent body scroll when modal is open
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+        setSelectedSchool(null);
+        document.body.style.overflow = 'unset';
+    };
+
     return (
-        <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative">
-            {/* AI Background Pattern - 60/20/12/8 Refined */}
-            <div className="absolute inset-0 opacity-[0.05] dark:opacity-[0.1] pointer-events-none">
-                <div className="absolute top-10 left-10 w-32 h-32 bg-sitm-navy/10 rounded-full blur-3xl"></div>
-                <div className="absolute top-40 right-20 w-24 h-24 bg-sitm-maroon/10 rounded-full blur-2xl"></div>
-                <div className="absolute bottom-20 left-1/4 w-40 h-40 bg-sitm-navy/5 rounded-full blur-3xl"></div>
-                <div className="absolute bottom-40 right-1/3 w-28 h-28 bg-sitm-gold/10 rounded-full blur-2xl"></div>
+        <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative overflow-hidden min-h-[700px]">
+            {/* Ambient Background Glows */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden">
+                <div className="absolute -top-24 -left-24 w-96 h-96 bg-blue-500/10 rounded-full blur-[120px]"></div>
+                <div className="absolute top-1/2 -right-24 w-80 h-80 bg-orange-500/10 rounded-full blur-[100px]"></div>
+                <div className="absolute -bottom-24 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-[120px]"></div>
             </div>
 
-            <div className="container mx-auto px-4 max-w-6xl relative z-10">
-                <div className="text-center mb-24">
-                    <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">Our Programs</h2>
-                    <div className="w-24 h-1 bg-sitm-maroon mx-auto"></div>
+            <div className="container mx-auto px-4 max-w-7xl relative z-10">
+                <div className="text-center mb-16">
+                    <motion.span 
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        className="text-sitm-maroon dark:text-sitm-gold font-bold tracking-[0.2em] uppercase text-sm mb-4 block"
+                    >
+                        Academic Excellence
+                    </motion.span>
+                    <h2 className="text-5xl md:text-6xl font-bold text-sitm-navy dark:text-white mt-2 mb-6 font-serif tracking-tight">
+                        Our Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">Programs</span>
+                    </h2>
+                    <div className="w-24 h-1.5 bg-gradient-to-r from-sitm-maroon to-sitm-gold mx-auto rounded-full"></div>
                 </div>
 
-                {/* Sticky Card Stack Container */}
-                <div ref={containerRef} className="flex flex-col gap-10 pb-20">
-                    {programs.map((program, index) => {
-                        // Calculate sticky top position so they stack nicely with a small offset
-                        const topOffset = 100 + (index * 20);
+                {/* School Grid View */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
+                    className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
+                >
+                    {schools.map((school, idx) => (
+                        <motion.button
+                            key={school.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: idx * 0.1 }}
+                            onClick={() => handleSchoolClick(school)}
+                            className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/10"
+                        >
+                            <div className={`absolute inset-0 bg-gradient-to-br ${school.color} transition-all duration-700 group-hover:scale-110`}></div>
+                            <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-500"></div>
+                            <div className="absolute top-0 right-0 p-8">
+                                <div className="text-white/10 group-hover:text-white/20 transition-colors duration-500">
+                                    <GraduationCap className="w-32 h-32 rotate-[-15deg] group-hover:rotate-0 transition-transform duration-700" />
+                                </div>
+                            </div>
+                            
+                            <div className="relative h-full p-10 flex flex-col justify-end text-white z-20">
+                                <div className="mb-8 p-5 rounded-[1.5rem] bg-white/15 backdrop-blur-xl border border-white/20 w-fit group-hover:scale-110 group-hover:bg-white group-hover:text-indigo-900 transition-all duration-500 shadow-xl">
+                                    {school.icon}
+                                </div>
+                                <h3 className="text-3xl font-bold font-serif mb-3 leading-[1.1] tracking-tight">
+                                    {school.name}
+                                </h3>
+                                <p className="text-white/80 text-sm mb-8 line-clamp-2 max-w-[200px] font-medium">
+                                    Excellence in {school.programs.length} specialized industry-ready programs.
+                                </p>
+                                <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] bg-white/10 w-fit px-6 py-3 rounded-full backdrop-blur-md border border-white/10 group-hover:bg-white group-hover:text-sitm-navy transition-all duration-300">
+                                    Open Programs <ArrowUpRight className="w-4 h-4" />
+                                </div>
+                            </div>
+                        </motion.button>
+                    ))}
+                </motion.div>
 
-                        return (
-                            <Card
-                                key={index}
-                                program={program}
-                                index={index}
-                                topOffset={topOffset}
-                                total={programs.length}
-                            />
-                        );
-                    })}
-                </div>
+                {/* Modal Carousel View */}
+                <AnimatePresence>
+                    {selectedSchool && (
+                        <motion.div 
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 overflow-hidden bg-black/80 backdrop-blur-md"
+                        >
+                            <button 
+                                onClick={closeModal}
+                                className="absolute top-24 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-[110] border border-white/10 shadow-xl group"
+                            >
+                                <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
+                            </button>
+
+                            {/* Carousel Content Container */}
+                            <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+                                {/* Navigation Arrows */}
+                                <AnimatePresence>
+                                    {currentProgramIndex > 0 && (
+                                        <motion.button 
+                                            initial={{ opacity: 0, x: 20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: 20 }}
+                                            onClick={(e) => { e.stopPropagation(); prevProgram(); }}
+                                            className="absolute left-0 md:-left-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                        >
+                                            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </motion.button>
+                                    )}
+                                </AnimatePresence>
+
+                                <AnimatePresence>
+                                    {currentProgramIndex < selectedSchool.programs.length - 1 && (
+                                        <motion.button 
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -20 }}
+                                            onClick={(e) => { e.stopPropagation(); nextProgram(); }}
+                                            className="absolute right-0 md:-right-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                        >
+                                            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </motion.button>
+                                    )}
+                                </AnimatePresence>
+
+                                {/* The Program Card Component */}
+                                <div className="w-full relative h-[600px] md:h-[550px]">
+                                    <AnimatePresence mode="wait">
+                                        <motion.div
+                                            key={`${selectedSchool.id}-${currentProgramIndex}`}
+                                            initial={{ opacity: 0, x: 100 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            exit={{ opacity: 0, x: -100 }}
+                                            transition={{ duration: 0.4, ease: "easeInOut" }}
+                                            className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/10"
+                                        >
+                                            {/* Left Area - Content */}
+                                            <div className="flex-1 p-10 md:p-16 flex flex-col relative">
+                                                <div className="flex items-start gap-6 mb-10">
+                                                    <div className="w-16 h-16 rounded-2xl bg-gray-50 dark:bg-white/5 flex items-center justify-center text-sitm-navy dark:text-sitm-gold border border-gray-100 dark:border-white/10">
+                                                        {selectedSchool.programs[currentProgramIndex].icon}
+                                                    </div>
+                                                    <div className="flex flex-col">
+                                                        <span className="text-xs font-black text-sitm-maroon uppercase tracking-[0.2em] mb-1">
+                                                            {selectedSchool.name}
+                                                        </span>
+                                                        <span className="text-2xl font-serif font-bold text-sitm-navy dark:text-white/80">
+                                                            Prog. {currentProgramIndex + 1}
+                                                        </span>
+                                                    </div>
+                                                </div>
+
+                                                <h3 className="text-4xl md:text-5xl font-serif font-bold text-sitm-navy dark:text-white mb-8 leading-tight tracking-tight">
+                                                    {selectedSchool.programs[currentProgramIndex].title}
+                                                </h3>
+
+                                                <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed mb-auto max-w-3xl">
+                                                    {selectedSchool.programs[currentProgramIndex].desc}
+                                                </p>
+
+                                                <div className="flex flex-wrap items-center gap-4 mt-12">
+                                                    <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
+                                                        <GraduationCap className="w-5 h-5 text-sitm-maroon" />
+                                                        {selectedSchool.programs[currentProgramIndex].duration}
+                                                    </div>
+                                                    <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
+                                                        <Users className="w-5 h-5 text-sitm-maroon" />
+                                                        Seats: {selectedSchool.programs[currentProgramIndex].intake}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Right Sidebar Area (Navy Box) */}
+                                            <div className="md:w-[320px] bg-sitm-navy dark:bg-black p-12 flex flex-col items-center justify-center text-center relative overflow-hidden border-l border-white/5">
+                                                <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                                                    <div className="absolute top-10 right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                                                </div>
+                                                
+                                                <div className="relative z-10 w-full">
+                                                    <div className="w-20 h-20 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center mb-10 mx-auto group hover:bg-sitm-gold transition-all duration-500 transform hover:scale-110">
+                                                        <ArrowUpRight className="w-10 h-10 text-sitm-gold group-hover:text-sitm-navy" />
+                                                    </div>
+                                                    <h4 className="text-white text-2xl font-bold mb-4 uppercase tracking-wider">Start Your Journey</h4>
+                                                    <p className="text-gray-400 text-sm mb-12 leading-relaxed">Download detailed curriculum & career path info.</p>
+
+                                                    <Link to="/programs" onClick={closeModal} className="w-[120%] -ml-[10%] py-5 bg-sitm-gold text-sitm-navy font-black rounded-2xl hover:bg-white transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.4)] block">
+                                                        Syllabus 
+                                                    </Link>
+                                                </div>
+
+                                                <div className="mt-12 text-white/30 text-xs font-bold uppercase tracking-widest">
+                                                    {currentProgramIndex + 1} / {selectedSchool.programs.length}
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    </AnimatePresence>
+                                </div>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
             </div>
         </section>
-    );
-}
-
-function Card({ program, index, topOffset, total }) {
-    return (
-        <div
-            className="sticky top-0 h-[500px] w-full max-w-5xl mx-auto"
-            style={{
-                top: `${topOffset}px`,
-                marginBottom: `${50}px`, // Spacing between cards when scrolling
-                zIndex: index
-            }}
-        >
-            <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-                viewport={{ once: true }}
-                className={`
-                    relative h-full w-full 
-                    bg-white dark:bg-slate-900 
-                    rounded-3xl shadow-2xl shadow-sitm-navy/10 
-                    border border-gray-100 dark:border-slate-800
-                    overflow-hidden
-                    flex flex-col md:flex-row
-                `}
-            >
-                {/* Left Side: Number & Info */}
-                <div className="flex-1 p-8 md:p-12 flex flex-col justify-center relative">
-                    <div className="absolute top-6 left-6 text-[8rem] md:text-[12rem] font-bold text-gray-50 dark:text-slate-800/50 -z-10 select-none font-serif leading-none">
-                        0{index + 1}
-                    </div>
-
-                    <div className="flex items-center gap-6 mb-8">
-                        <span className="text-6xl md:text-7xl font-serif font-bold text-sitm-maroon dark:text-sitm-gold opacity-90">
-                            {index + 1}
-                        </span>
-                        <div className="w-16 h-16 rounded-full bg-sitm-navy/5 flex items-center justify-center text-sitm-navy dark:text-sitm-gold border border-sitm-navy/10">
-                            {program.icon}
-                        </div>
-                    </div>
-
-                    <h3 className="text-3xl md:text-5xl font-serif font-bold text-sitm-navy dark:text-white mb-6 leading-tight">
-                        {program.title}
-                    </h3>
-
-                    <p className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed mb-8 max-w-lg">
-                        {program.desc}
-                    </p>
-
-                    <div className="flex flex-wrap items-center gap-4">
-                        <span className="px-5 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-sitm-navy dark:text-gray-300 text-sm font-bold uppercase tracking-wider">
-                            {program.duration}
-                        </span>
-                        <span className="px-5 py-2 rounded-lg bg-gray-100 dark:bg-slate-800 text-sitm-navy dark:text-gray-300 text-sm font-bold uppercase tracking-wider">
-                            Intake: {program.intake}
-                        </span>
-                    </div>
-                </div>
-
-                {/* Right Side: Visual / CTA */}
-                <div className="w-full md:w-1/3 bg-sitm-navy dark:bg-slate-950 p-8 flex flex-col items-center justify-center text-center border-l border-gray-100 dark:border-slate-800">
-                    <div className="mb-6 p-4 rounded-full bg-white/5 backdrop-blur-sm border border-white/10">
-                        <ArrowUpRight className="w-12 h-12 text-sitm-gold" />
-                    </div>
-                    <h4 className="text-white text-xl font-bold mb-2">Ready to Apply?</h4>
-                    <p className="text-gray-400 text-sm mb-8">View the detailed syllabus and curriculum structure.</p>
-
-                    <Link to="/programs" className="px-8 py-3 bg-sitm-gold text-sitm-navy font-bold rounded-full hover:bg-white transition-colors duration-300 uppercase tracking-widest text-sm">
-                        View Syllabus
-                    </Link>
-                </div>
-            </motion.div>
-        </div>
     );
 }
