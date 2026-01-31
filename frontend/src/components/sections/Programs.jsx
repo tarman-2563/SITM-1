@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import { 
@@ -248,132 +249,135 @@ export function Programs() {
                 </motion.div>
 
                 {/* Modal Carousel View */}
-                <AnimatePresence>
-                    {selectedSchool && (
-                        <motion.div 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                            className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 overflow-hidden bg-black/80 backdrop-blur-md"
-                        >
-                            <button 
-                                onClick={closeModal}
-                                className="absolute top-24 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-[110] border border-white/10 shadow-xl group"
+                {createPortal(
+                    <AnimatePresence>
+                        {selectedSchool && (
+                            <motion.div 
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 overflow-hidden bg-black/80 backdrop-blur-md"
                             >
-                                <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
-                            </button>
+                                <button 
+                                    onClick={closeModal}
+                                    className="absolute top-24 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-[110] border border-white/10 shadow-xl group"
+                                >
+                                    <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
+                                </button>
 
-                            {/* Carousel Content Container */}
-                            <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
-                                {/* Navigation Arrows */}
-                                <AnimatePresence>
-                                    {currentProgramIndex > 0 && (
-                                        <motion.button 
-                                            initial={{ opacity: 0, x: 20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: 20 }}
-                                            onClick={(e) => { e.stopPropagation(); prevProgram(); }}
-                                            className="absolute left-0 md:-left-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
-                                        >
-                                            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" />
-                                            </svg>
-                                        </motion.button>
-                                    )}
-                                </AnimatePresence>
-
-                                <AnimatePresence>
-                                    {currentProgramIndex < selectedSchool.programs.length - 1 && (
-                                        <motion.button 
-                                            initial={{ opacity: 0, x: -20 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -20 }}
-                                            onClick={(e) => { e.stopPropagation(); nextProgram(); }}
-                                            className="absolute right-0 md:-right-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
-                                        >
-                                            <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" />
-                                            </svg>
-                                        </motion.button>
-                                    )}
-                                </AnimatePresence>
-
-                                {/* The Program Card Component */}
-                                <div className="w-full relative h-[600px] md:h-[550px]">
-                                    <AnimatePresence mode="wait">
-                                        <motion.div
-                                            key={`${selectedSchool.id}-${currentProgramIndex}`}
-                                            initial={{ opacity: 0, x: 100 }}
-                                            animate={{ opacity: 1, x: 0 }}
-                                            exit={{ opacity: 0, x: -100 }}
-                                            transition={{ duration: 0.4, ease: "easeInOut" }}
-                                            className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/10"
-                                        >
-                                            {/* Left Area - Content */}
-                                            <div className="flex-1 p-10 md:p-16 flex flex-col relative">
-                                                <div className="flex items-start gap-6 mb-10">
-                                                    <div className="w-16 h-16 rounded-2xl bg-gray-50 dark:bg-white/5 flex items-center justify-center text-sitm-navy dark:text-sitm-gold border border-gray-100 dark:border-white/10">
-                                                        {selectedSchool.programs[currentProgramIndex].icon}
-                                                    </div>
-                                                    <div className="flex flex-col">
-                                                        <span className="text-xs font-black text-sitm-maroon uppercase tracking-[0.2em] mb-1">
-                                                            {selectedSchool.name}
-                                                        </span>
-                                                        <span className="text-2xl font-serif font-bold text-sitm-navy dark:text-white/80">
-                                                            Prog. {currentProgramIndex + 1}
-                                                        </span>
-                                                    </div>
-                                                </div>
-
-                                                <h3 className="text-4xl md:text-5xl font-serif font-bold text-sitm-navy dark:text-white mb-8 leading-tight tracking-tight">
-                                                    {selectedSchool.programs[currentProgramIndex].title}
-                                                </h3>
-
-                                                <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed mb-auto max-w-3xl">
-                                                    {selectedSchool.programs[currentProgramIndex].desc}
-                                                </p>
-
-                                                <div className="flex flex-wrap items-center gap-4 mt-12">
-                                                    <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
-                                                        <GraduationCap className="w-5 h-5 text-sitm-maroon" />
-                                                        {selectedSchool.programs[currentProgramIndex].duration}
-                                                    </div>
-                                                    <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
-                                                        <Users className="w-5 h-5 text-sitm-maroon" />
-                                                        Seats: {selectedSchool.programs[currentProgramIndex].intake}
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            {/* Right Sidebar Area (Navy Box) */}
-                                            <div className="md:w-[320px] bg-sitm-navy dark:bg-black p-12 flex flex-col items-center justify-center text-center relative overflow-hidden border-l border-white/5">
-                                                <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
-                                                    <div className="absolute top-10 right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
-                                                </div>
-                                                
-                                                <div className="relative z-10 w-full">
-                                                    <div className="w-20 h-20 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center mb-10 mx-auto group hover:bg-sitm-gold transition-all duration-500 transform hover:scale-110">
-                                                        <ArrowUpRight className="w-10 h-10 text-sitm-gold group-hover:text-sitm-navy" />
-                                                    </div>
-                                                    <h4 className="text-white text-2xl font-bold mb-4 uppercase tracking-wider">Start Your Journey</h4>
-                                                    <p className="text-gray-400 text-sm mb-12 leading-relaxed">Download detailed curriculum & career path info.</p>
-
-                                                    <Link to="/programs" onClick={closeModal} className="w-[120%] -ml-[10%] py-5 bg-sitm-gold text-sitm-navy font-black rounded-2xl hover:bg-white transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.4)] block">
-                                                        Syllabus 
-                                                    </Link>
-                                                </div>
-
-                                                <div className="mt-12 text-white/30 text-xs font-bold uppercase tracking-widest">
-                                                    {currentProgramIndex + 1} / {selectedSchool.programs.length}
-                                                </div>
-                                            </div>
-                                        </motion.div>
+                                {/* Carousel Content Container */}
+                                <div className="relative w-full max-w-6xl h-full flex items-center justify-center">
+                                    {/* Navigation Arrows */}
+                                    <AnimatePresence>
+                                        {currentProgramIndex > 0 && (
+                                            <motion.button 
+                                                initial={{ opacity: 0, x: 20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                exit={{ opacity: 0, x: 20 }}
+                                                onClick={(e) => { e.stopPropagation(); prevProgram(); }}
+                                                className="absolute left-0 md:-left-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                            >
+                                                <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" />
+                                                </svg>
+                                            </motion.button>
+                                        )}
                                     </AnimatePresence>
+
+                                    <AnimatePresence>
+                                        {currentProgramIndex < selectedSchool.programs.length - 1 && (
+                                            <motion.button 
+                                                initial={{ opacity: 0, x: -20 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                exit={{ opacity: 0, x: -20 }}
+                                                onClick={(e) => { e.stopPropagation(); nextProgram(); }}
+                                                className="absolute right-0 md:-right-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                            >
+                                                <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" />
+                                                </svg>
+                                            </motion.button>
+                                        )}
+                                    </AnimatePresence>
+
+                                    {/* The Program Card Component */}
+                                    <div className="w-full relative h-[600px] md:h-[550px]">
+                                        <AnimatePresence mode="wait">
+                                            <motion.div
+                                                key={`${selectedSchool.id}-${currentProgramIndex}`}
+                                                initial={{ opacity: 0, x: 100 }}
+                                                animate={{ opacity: 1, x: 0 }}
+                                                exit={{ opacity: 0, x: -100 }}
+                                                transition={{ duration: 0.4, ease: "easeInOut" }}
+                                                className="absolute inset-0 bg-white dark:bg-slate-900 rounded-[3rem] shadow-2xl overflow-hidden flex flex-col md:flex-row border border-white/10"
+                                            >
+                                                {/* Left Area - Content */}
+                                                <div className="flex-1 p-10 md:p-16 flex flex-col relative">
+                                                    <div className="flex items-start gap-6 mb-10">
+                                                        <div className="w-16 h-16 rounded-2xl bg-gray-50 dark:bg-white/5 flex items-center justify-center text-sitm-navy dark:text-sitm-gold border border-gray-100 dark:border-white/10">
+                                                            {selectedSchool.programs[currentProgramIndex].icon}
+                                                        </div>
+                                                        <div className="flex flex-col">
+                                                            <span className="text-xs font-black text-sitm-maroon uppercase tracking-[0.2em] mb-1">
+                                                                {selectedSchool.name}
+                                                            </span>
+                                                            <span className="text-2xl font-serif font-bold text-sitm-navy dark:text-white/80">
+                                                                Prog. {currentProgramIndex + 1}
+                                                            </span>
+                                                        </div>
+                                                    </div>
+
+                                                    <h3 className="text-4xl md:text-5xl font-serif font-bold text-sitm-navy dark:text-white mb-8 leading-tight tracking-tight">
+                                                        {selectedSchool.programs[currentProgramIndex].title}
+                                                    </h3>
+
+                                                    <p className="text-gray-600 dark:text-gray-400 text-xl leading-relaxed mb-auto max-w-3xl">
+                                                        {selectedSchool.programs[currentProgramIndex].desc}
+                                                    </p>
+
+                                                    <div className="flex flex-wrap items-center gap-4 mt-12">
+                                                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
+                                                            <GraduationCap className="w-5 h-5 text-sitm-maroon" />
+                                                            {selectedSchool.programs[currentProgramIndex].duration}
+                                                        </div>
+                                                        <div className="flex items-center gap-3 px-6 py-3 rounded-full bg-gray-50 dark:bg-white/5 text-sitm-navy dark:text-gray-300 text-base font-bold border border-gray-100 dark:border-white/10">
+                                                            <Users className="w-5 h-5 text-sitm-maroon" />
+                                                            Seats: {selectedSchool.programs[currentProgramIndex].intake}
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                {/* Right Sidebar Area (Navy Box) */}
+                                                <div className="md:w-[320px] bg-sitm-navy dark:bg-black p-12 flex flex-col items-center justify-center text-center relative overflow-hidden border-l border-white/5">
+                                                    <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none">
+                                                        <div className="absolute top-10 right-10 w-40 h-40 bg-white rounded-full blur-3xl"></div>
+                                                    </div>
+                                                    
+                                                    <div className="relative z-10 w-full">
+                                                        <div className="w-20 h-20 rounded-full bg-white/5 backdrop-blur-md border border-white/10 flex items-center justify-center mb-10 mx-auto group hover:bg-sitm-gold transition-all duration-500 transform hover:scale-110">
+                                                            <ArrowUpRight className="w-10 h-10 text-sitm-gold group-hover:text-sitm-navy" />
+                                                        </div>
+                                                        <h4 className="text-white text-2xl font-bold mb-4 uppercase tracking-wider">Start Your Journey</h4>
+                                                        <p className="text-gray-400 text-sm mb-12 leading-relaxed">Download detailed curriculum & career path info.</p>
+
+                                                        <Link to="/programs" onClick={closeModal} className="w-[120%] -ml-[10%] py-5 bg-sitm-gold text-sitm-navy font-black rounded-2xl hover:bg-white transition-all duration-300 uppercase tracking-widest text-sm shadow-[0_0_30px_rgba(212,175,55,0.4)] block">
+                                                            Syllabus 
+                                                        </Link>
+                                                    </div>
+
+                                                    <div className="mt-12 text-white/30 text-xs font-bold uppercase tracking-widest">
+                                                        {currentProgramIndex + 1} / {selectedSchool.programs.length}
+                                                    </div>
+                                                </div>
+                                            </motion.div>
+                                        </AnimatePresence>
+                                    </div>
                                 </div>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                            </motion.div>
+                        )}
+                    </AnimatePresence>,
+                    document.body
+                )}
             </div>
         </section>
     );
