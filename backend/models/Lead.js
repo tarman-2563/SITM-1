@@ -29,7 +29,27 @@ const leadSchema=new mongoose.Schema({
         type:String,
         required:[true,"Program of interest is required"],
         enum:["CSE","ECE","ME","CE","BCA","BBA"]
-    }
+    },
+    leadStatus:{
+        type:String,
+        enum:["captured","contacted","application_started","application_completed","converted","lost"],
+        default:"captured"
+    },
+    lastActivity:{
+        type:Date,
+        default:Date.now
+    },
+    activities:[{
+        type:{
+            type:String,
+            enum:['form_submitted', 'email_opened', 'email_clicked', 'application_started', 'application_completed', 'contacted']
+        },
+        timestamp:{
+            type:Date,
+            default:Date.now
+       },
+       details:String
+    }]
 },{
     timestamps:true
 })
@@ -40,5 +60,15 @@ leadSchema.index({phone:1});
 leadSchema.virtual("fullName").get(function(){
     return `${this.firstName} ${this.lastName}`;
 })
+
+leadSchema.methods.addActivity=function(type,details=""){
+    this.activities.push({
+        type,
+        details,
+        timestamp:Date.now()
+    });
+    this.lastActivity=Date.now();
+    return this.save();
+}
 
 module.exports=mongoose.model("Lead",leadSchema);
