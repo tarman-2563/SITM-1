@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { Button } from "../common/Button";
 import { ThemeToggle } from "./ThemeToggle";
-import logo from "../../assets/Sitmnewlogo.jpeg";
+import logo from "../../assets/logo_new-removebg-preview.png";
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -115,13 +115,13 @@ export function Navbar() {
 
       <nav
         className={cn(
-          "sticky top-0 z-40 w-full transition-all duration-300 border-b overflow-hidden",
+          "sticky top-0 z-40 w-full transition-all duration-300 border-b",
           isScrolled
-            ? "bg-white/10 dark:bg-black/20 backdrop-blur-xl shadow-2xl border-white/20 dark:border-white/10 py-2"
-            : "bg-white/5 dark:bg-black/10 backdrop-blur-md border-white/10 dark:border-white/5 py-4"
+            ? "bg-white/10 dark:bg-black/20 backdrop-blur-xl shadow-2xl border-white/20 dark:border-white/10 py-0"
+            : "bg-white/5 dark:bg-black/10 backdrop-blur-md border-white/10 dark:border-white/5 py-1"
         )}
       >
-        {/* Animated Background Blobs - Dark Mode Only */}
+        {/* Animated Background Blobs - Dark Mode Only - Wrapped in overflow hidden container to keep blobs contained */}
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-0 dark:opacity-100 transition-opacity duration-500">
           <motion.div 
             animate={{ 
@@ -144,16 +144,17 @@ export function Navbar() {
         </div>
 
         <div className="container relative z-10 mx-auto px-4 md:px-6 flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-2 group">
-            <img src={logo} alt="SITM Logo" className="h-12 w-auto object-contain rounded-md" />
-            <div className="flex flex-col">
-              <span className={cn("text-xl font-bold font-serif leading-none", isScrolled ? "text-sitm-navy dark:text-white" : "text-sitm-navy dark:text-white")}>
-                SITM
-              </span>
-              <span className={cn("text-[0.6rem] tracking-wider uppercase", isScrolled ? "text-sitm-maroon dark:text-sitm-gold" : "text-sitm-maroon dark:text-sitm-gold font-bold")}>
-                Excellence in Education
-              </span>
-            </div>
+          <Link to="/" className="flex items-center gap-1 group">
+            <img 
+              src={logo} 
+              alt="SITM Logo" 
+              // Using block to ensure line-height doesn't add space
+              className="h-16 md:h-20 w-auto object-contain block transition-transform duration-300 group-hover:scale-105" 
+            />
+            
+            <span className={cn("text-3xl font-bold font-serif leading-none mt-1", isScrolled ? "text-sitm-navy dark:text-white" : "text-sitm-navy dark:text-white")}>
+              SITM
+            </span>
           </Link>
 
           {/* Desktop Nav */}
