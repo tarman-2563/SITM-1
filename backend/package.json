@@ -5,17 +5,30 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "prod": "NODE_ENV=production node server.js",
+    "pm2:start": "pm2 start ecosystem.config.js --env production",
+    "pm2:stop": "pm2 stop sitm-backend",
+    "pm2:restart": "pm2 restart sitm-backend",
+    "pm2:delete": "pm2 delete sitm-backend",
+    "pm2:logs": "pm2 logs sitm-backend",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate:jwt": "node scripts/generateJwtSecret.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1",
+    "express": "^4.19.2",
+    "express-mongo-sanitize": "^2.2.0",
+    "express-rate-limit": "^8.2.1",
+    "express-timeout-handler": "^2.2.2",
     "express-validator": "^7.3.1",
+    "helmet": "^8.1.0",
+    "hpp": "^0.2.3",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.5",
+    "morgan": "^1.10.1",
     "nodemailer": "^7.0.13"
   },
   "devDependencies": {

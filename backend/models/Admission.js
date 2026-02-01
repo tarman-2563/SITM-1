@@ -169,19 +169,18 @@ const admissionSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-admissionSchema.pre("save", function (next) {
+admissionSchema.pre("save", function () {
   if (!this.applicationId) {
     const year = new Date().getFullYear();
     const random = Math.floor(Math.random() * 10000)
       .toString()
       .padStart(4, "0");
+
     this.applicationId = `SITM${year}${random}`;
   }
-  next();
 });
 
-admissionSchema.index({ email: 1 });
-admissionSchema.index({ applicationId: 1 });
+
 admissionSchema.index({ status: 1 });
 admissionSchema.index({ program: 1 });
 

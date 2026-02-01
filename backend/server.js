@@ -1,61 +1,227 @@
-const express=require("express");
+const express = require("express");
 const cors = require("cors");
+const helmet = require("helmet");
+const rateLimit = require("express-rate-limit");
+const mongoSanitize = require("express-mongo-sanitize");
+const hpp = require("hpp");
+const compression = require("compression");
+const morgan = require("morgan");
+const timeout = require('express-timeout-handler');
+require("dotenv").config();
 const connectDB = require("./config/db");
+const validateEnv = require("./config/validateEnv");
 const { verifyEmailConfig } = require("./utils/email");
+const requestId = require("./middlewares/requestId");
+const maintenance = require("./middlewares/maintenance");
 const leadsRouter = require("./routes/leadRoutes");
 const authRouter = require("./routes/authRoutes");
 const admissionRouter = require("./routes/admissionRoutes");
-const dotenv=require("dotenv").config();
 
-const app=express();
-const PORT=process.env.PORT || 5000;
+const app = express();
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-    origin: ["http://localhost:5173"],
-    credentials: true
+app.use(requestId);
+app.use(maintenance);
+
+app.use(helmet({
+  crossOriginEmbedderPolicy: false,
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+}));
+app.use(mongoSanitize());
+app.use(hpp());
+
+app.use(timeout.handler({
+  timeout: 30000,
+  onTimeout: function(req, res) {
+    res.status(503).json({
+      status: 'error',
+      message: 'Request timeout'
+    });
+  }
 }));
 
-app.use(express.json());
+const generalLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+  message: {
+    status: "error",
+    message: "Too many requests from this IP, please try again later."
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
 
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 5,
+  message: {
+    status: "error",
+    message: "Too many authentication attempts, please try again later."
+  },
+  standardHeaders: true,
+  legacyHeaders: false,
+});
+
+app.use("/api/v1/", generalLimiter);
+app.use("/api/v1/auth/login", authLimiter);
+app.use("/api/v1/auth/forgot-password", authLimiter);
+
+app.use(compression());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+} else {
+  app.use(morgan('dev'));
+}
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : ["http://localhost:5173"],
+  credentials: true
+}));
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+validateEnv();
 connectDB();
-
 verifyEmailConfig();
 
-app.get("/api/health",(req,res)=>{
-    res.status(200).json({message:"Server is up and running"});
-})
+app.get("/health", async (req, res) => {
+  try {
+    const mongoose = require('mongoose');
+    const dbStatus = mongoose.connection.readyState === 1 ? 'connected' : 'disconnected';
+    
+    res.json({
+      status: "OK",
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      database: dbStatus,
+      memory: process.memoryUsage(),
+      version: process.version
+    });
+  } catch (error) {
+    res.status(503).json({
+      status: "ERROR",
+      message: error.message
+    });
+  }
+});
 
-app.get("/api/test-email", async (req,res)=>{
+app.get("/", (req, res) => {
+  res.json({
+    name: "SITM Backend API",
+    version: "1.0.0",
+    description: "Scholars Institute of Technology & Management Backend API",
+    endpoints: {
+      health: "/health",
+      api: "/api/v1",
+      documentation: "/"
+    },
+    status: "running"
+  });
+});
+
+app.use("/api/v1/leads", leadsRouter);
+app.use("/api/v1/auth", authRouter);
+app.use("/api/v1/admission", admissionRouter);
+
+if (process.env.NODE_ENV !== 'production') {
+  app.get("/api/test-email", async (req, res) => {
     try {
-        const { sendEmail } = require("./utils/email");
-        await sendEmail({
-            to: process.env.ADMIN_EMAIL,
-            subject: "Test Email from SITM Backend",
-            html: "<h1>Test Email</h1><p>If you receive this, email configuration is working!</p>"
-        });
-        res.status(200).json({message:"Test email sent successfully"});
+      const { sendEmail } = require("./utils/email");
+      await sendEmail({
+        to: process.env.ADMIN_EMAIL,
+        subject: "Test Email from SITM Backend",
+        html: "<h1>Test Email</h1><p>If you receive this, email configuration is working!</p>"
+      });
+      res.status(200).json({ message: "Test email sent successfully" });
     } catch (error) {
-        console.error("Test email failed:", error);
-        res.status(500).json({
-            message:"Test email failed", 
-            error: error.message,
-            details: {
-                code: error.code,
-                response: error.response
-            }
-        });
+      console.error("Test email failed:", error);
+      res.status(500).json({
+        message: "Test email failed",
+        error: error.message
+      });
     }
-})
+  });
+}
 
-app.use("/api/leads",leadsRouter);
-app.use("/api/auth",authRouter);
-app.use("/api/admission",admissionRouter);
+app.use((req, res) => {
+  res.status(404).json({
+    status: 'error',
+    message: `Route ${req.originalUrl} not found`
+  });
+});
 
-app.use((err,req,res,next)=>{
-    console.log("Global error:",err);
-    res.status(500).json({message:"Internal Server Error"})
-})
+app.use((err, req, res, next) => {
+  let error = { ...err };
+  error.message = err.message;
 
-app.listen(PORT,()=>{
-    console.log(`Server is running on port ${PORT}`);
-})
+  if (process.env.NODE_ENV !== 'production') {
+    console.error("Global error:", err);
+  }
+
+  if (err.name === 'CastError') {
+    error = { message: 'Resource not found', statusCode: 404 };
+  }
+
+  if (err.code === 11000) {
+    error = { message: 'Duplicate field value entered', statusCode: 400 };
+  }
+
+  if (err.name === 'ValidationError') {
+    const message = Object.values(err.errors).map(val => val.message);
+    error = { message, statusCode: 400 };
+  }
+
+  if (err.name === 'JsonWebTokenError') {
+    error = { message: 'Invalid token', statusCode: 401 };
+  }
+
+  if (err.name === 'TokenExpiredError') {
+    error = { message: 'Token expired', statusCode: 401 };
+  }
+
+  res.status(error.statusCode || 500).json({
+    status: 'error',
+    message: error.message || 'Internal Server Error'
+  });
+});
+
+const server = app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT} in ${process.env.NODE_ENV || 'development'} mode`);
+});
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM received. Shutting down gracefully...');
+  server.close(() => {
+    console.log('Process terminated');
+    process.exit(0);
+  });
+});
+
+process.on('SIGINT', () => {
+  console.log('SIGINT received. Shutting down gracefully...');
+  server.close(() => {
+    console.log('Process terminated');
+    process.exit(0);
+  });
+});
+
+process.on('unhandledRejection', (err) => {
+  console.error('Unhandled Promise Rejection:', err);
+  server.close(() => {
+    process.exit(1);
+  });
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  process.exit(1);
+});

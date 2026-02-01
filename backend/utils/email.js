@@ -1,4 +1,5 @@
 const nodemailer = require("nodemailer");
+const logger = require("./logger");
 
 let cachedTransporter;
 
@@ -141,11 +142,11 @@ const verifyEmailConfig = async () => {
   try {
     const transporter = createTransporter();
     await transporter.verify();
-    console.log("Email configuration verified");
+    logger.info("Email configuration verified");
     return true;
   } 
   catch (err) {
-    console.error("Email configuration failed:", err.message);
+    logger.error("Email configuration failed", { error: err.message });
     return false;
   }
 }
