@@ -144,8 +144,47 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
-      <div className="mx-auto px-5 max-w-7xl">
+    <section id="gallery" className="relative overflow-hidden py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+      {/* Background Aurora/Glow Graphics - Distinct from About Section */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Subtle Geometric Dot Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.1]"
+          style={{ 
+            backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+            backgroundSize: "30px 30px"
+          }}
+        ></div>
+
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 70, 0],
+            y: [0, 100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] -left-[15%] w-[60%] h-[60%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] right-[20%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
+      </div>
+
+      <div className="mx-auto px-5 max-w-7xl relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-8 font-serif relative inline-block">
             Photo Gallery
