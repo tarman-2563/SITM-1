@@ -209,13 +209,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-userSchema.index({ email: 1 });
-userSchema.index({ role: 1 });
-userSchema.index({ userType: 1 });
-userSchema.index({ "academic.rollNumber": 1 });
-userSchema.index({ "staff.employeeId": 1 });
-userSchema.index({ isActive: 1 });
-userSchema.index({ activationToken: 1 });
 
 userSchema.virtual("fullName").get(function () {
   return `${this.firstName} ${this.lastName}`;

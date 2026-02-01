@@ -1,5 +1,5 @@
 const express = require("express");
-const { body } = require("express-validator");
+const { body, param } = require("express-validator");
 const { protect, authorize } = require("../middlewares/auth");
 const {login,getActivationInfo,activateAccount,getProfile,updateProfile,changePassword,forgotPassword,resetPassword,logout,getAdmins,createAdmin,updateAdmin,deleteAdmin} = require("../controllers/authController");
 
@@ -72,8 +72,16 @@ authRouter.post(
   createAdmin
 );
 
-authRouter.put("/admin/users/:id", protect, authorize("super_admin"), updateAdmin);
+authRouter.put("/admin/users/:id", [
+  param("id").isMongoId().withMessage("Valid user ID is required"),
+  body("name").optional().trim().isLength({ min: 1 }).withMessage("Name cannot be empty"),
+  body("email").optional().isEmail().withMessage("Valid email is required"),
+  body("role").optional().isIn(["admin", "super_admin"]).withMessage("Role must be admin or super_admin"),
+  body("department").optional().isIn(["admissions", "academics", "placements", "general", "it"]).withMessage("Invalid department")
+], protect, authorize("super_admin"), updateAdmin);
 
-authRouter.delete("/admin/users/:id", protect, authorize("super_admin"), deleteAdmin);
+authRouter.delete("/admin/users/:id", [
+  param("id").isMongoId().withMessage("Valid user ID is required")
+], protect, authorize("super_admin"), deleteAdmin);
 
 module.exports = authRouter;

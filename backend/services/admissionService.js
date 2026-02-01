@@ -3,10 +3,12 @@ const Lead = require("../models/Lead");
 const User = require("../models/User");
 const { emailService } = require("./emailService");
 const crypto = require("crypto");
+const logger = require("../utils/logger");
 
 const completeApplication = async (applicationData, req) => {
+  logger.debug("Processing application completion", { leadId: applicationData.leadId });
+  
   const lead = await Lead.findById(applicationData.leadId);
-
   if (!lead) {
     throw new Error("Lead not found");
   }
@@ -14,9 +16,18 @@ const completeApplication = async (applicationData, req) => {
   const existingApplication = await Admission.findOne({
     $or: [{ email: lead.email }, { leadId: applicationData.leadId }]
   });
-
   if (existingApplication) {
     throw new Error("Application already exists for this email");
+  }
+
+  if (!applicationData.personalInfo) {
+    throw new Error("Personal information is required");
+  }
+  if (!applicationData.academicInfo || !applicationData.academicInfo.previousEducation) {
+    throw new Error("Academic information is required");
+  }
+  if (!applicationData.familyInfo || !applicationData.familyInfo.father) {
+    throw new Error("Family information is required");
   }
 
   const admissionData = {
@@ -40,7 +51,7 @@ const completeApplication = async (applicationData, req) => {
     guardianName: applicationData.familyInfo.father.name,
     guardianPhone: applicationData.familyInfo.father.phone,
     guardianOccupation: applicationData.familyInfo.father.occupation,
-    guardianEmail: applicationData.familyInfo.father.email,
+    guardianEmail: applicationData.familyInfo.father.email || null,
     familyInfo: applicationData.familyInfo,
     additionalInfo: applicationData.additionalInfo,
     documents: applicationData.documents || [],
@@ -48,70 +59,20 @@ const completeApplication = async (applicationData, req) => {
     submittedAt: new Date()
   };
 
+  logger.debug("Creating admission record");
   const admission = await Admission.create(admissionData);
 
-  lead.status = "application_completed";
+  lead.leadStatus = "application_completed";
   lead.applicationId = admission._id;
   lead.convertedAt = new Date();
   await lead.addActivity("application_completed", "Full application submitted");
 
-  let userAccount = null;
-  let activationToken = null;
-  let accountCreated = false;
+  logger.info("Application completed successfully", { 
+    applicationId: admission.applicationId,
+    email: admission.email 
+  });
 
-  try {
-    activationToken = crypto.randomBytes(32).toString("hex");
-    const activationExpire = Date.now() + 24 * 60 * 60 * 1000;
-
-    userAccount = await User.create({
-      firstName: admission.firstName,
-      lastName: admission.lastName,
-      email: admission.email,
-      phone: admission.phone,
-      role: "applicant",
-      userType: "student",
-      isActive: false,
-      activationToken,
-      activationExpire,
-      applicationId: admission._id,
-      academic: {
-        program: admission.program,
-        admissionYear: new Date().getFullYear(),
-        currentStatus: "applicant"
-      },
-      profile: {
-        dateOfBirth: admission.dateOfBirth,
-        gender: admission.gender,
-        address: admission.address
-      }
-    });
-
-    admission.userId = userAccount._id;
-    await admission.save();
-    accountCreated = true;
-  } catch {}
-
-  try {
-    const activationUrl = `${req.protocol}://${req.get("host")}/activate/${activationToken}`;
-
-    if (userAccount) {
-      await emailService.sendApplicationConfirmationWithAccount(
-        admission,
-        activationUrl
-      );
-    } else {
-      await emailService.sendApplicationConfirmation(admission);
-    }
-  } catch {}
-
-  try {
-    await emailService.sendApplicationAdminNotification(
-      admission,
-      lead.score
-    );
-  } catch {}
-
-  return { admission, accountCreated };
+  return { admission, accountCreated: false };
 };
 
 const getApplicationStatus = async (applicationId) => {

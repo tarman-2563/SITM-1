@@ -245,6 +245,7 @@ const createAdmin = async (req, res) => {
 
 const updateAdmin = async (req, res) => {
   try {
+    validate(req);
     const admin = await authService.updateAdmin(req.params.id, req.body);
     res.json({
       status: 'success',
@@ -254,13 +255,15 @@ const updateAdmin = async (req, res) => {
   } catch (error) {
     res.status(error.statusCode || 500).json({
       status: 'error',
-      message: error.message
+      message: error.message,
+      errors: error.errors
     });
   }
 };
 
 const deleteAdmin = async (req, res) => {
   try {
+    validate(req);
     await authService.deleteAdmin(req.params.id);
     res.json({
       status: 'success',
@@ -269,7 +272,8 @@ const deleteAdmin = async (req, res) => {
   } catch (error) {
     res.status(error.statusCode || 500).json({
       status: 'error',
-      message: error.message
+      message: error.message,
+      errors: error.errors
     });
   }
 };
