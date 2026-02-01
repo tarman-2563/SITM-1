@@ -18,13 +18,24 @@ const createLeadService=async(leadData,req)=>{
          else{
              lead=await Lead.create(leadData);
              await lead.addActivity("form_submitted","Initial lead form submission");
+             
              try{
+                console.log("Sending confirmation email to:", lead.email);
                 await sendLeadConfirmation(lead,req);
                 await lead.addActivity("email_sent","Sent lead confirmation email");
+                console.log("Confirmation email sent successfully");
+                
+                console.log("Sending admin notification to:", process.env.ADMIN_EMAIL);
                 await sendLeadAdminNotification(lead);
+                console.log("Admin notification sent successfully");
              }
              catch(emailError){
-                console.error("Email sending failed:",emailError);
+                console.error("Email sending failed:", emailError);
+                console.error("Email error details:", {
+                    message: emailError.message,
+                    code: emailError.code,
+                    response: emailError.response
+                });
              }
              isExisting=false;
          }

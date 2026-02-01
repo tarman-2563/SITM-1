@@ -54,8 +54,6 @@ const leadSchema=new mongoose.Schema({
     timestamps:true
 })
 
-leadSchema.index({email:1});
-leadSchema.index({phone:1});
 
 leadSchema.virtual("fullName").get(function(){
     return `${this.firstName} ${this.lastName}`;
