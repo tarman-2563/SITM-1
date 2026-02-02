@@ -105,7 +105,7 @@ const admissionSchema = new mongoose.Schema(
     remarks: String,
     reviewedBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "Admin"
+      ref: "User"
     },
     reviewedAt: Date,
     userId: {
