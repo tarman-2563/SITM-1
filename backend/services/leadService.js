@@ -21,6 +21,11 @@ const createLeadService=async(leadData,req)=>{
              
              try{
                 console.log("Sending confirmation email to:", lead.email);
+                console.log("Email configuration check:");
+                console.log("- SMTP_HOST:", process.env.SMTP_HOST);
+                console.log("- SMTP_USER:", process.env.SMTP_USER);
+                console.log("- ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
+                
                 await sendLeadConfirmation(lead,req);
                 await lead.addActivity("email_sent","Sent lead confirmation email");
                 console.log("Confirmation email sent successfully");
@@ -34,8 +39,10 @@ const createLeadService=async(leadData,req)=>{
                 console.error("Email error details:", {
                     message: emailError.message,
                     code: emailError.code,
-                    response: emailError.response
+                    response: emailError.response,
+                    stack: emailError.stack
                 });
+                // Don't throw the error - lead should still be created even if email fails
              }
              isExisting=false;
          }
