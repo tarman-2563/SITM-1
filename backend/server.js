@@ -7,6 +7,7 @@ const hpp = require("hpp");
 const compression = require("compression");
 const morgan = require("morgan");
 const timeout = require('express-timeout-handler');
+const path = require("path");
 require("dotenv").config();
 const connectDB = require("./config/db");
 const validateEnv = require("./config/validateEnv");
@@ -16,6 +17,7 @@ const maintenance = require("./middlewares/maintenance");
 const leadsRouter = require("./routes/leadRoutes");
 const authRouter = require("./routes/authRoutes");
 const admissionRouter = require("./routes/admissionRoutes");
+const documentRouter = require("./routes/documentRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -131,22 +133,44 @@ app.get("/", (req, res) => {
 app.use("/api/v1/leads", leadsRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/admission", admissionRouter);
+app.use("/api/v1/documents", documentRouter);
+
+// Serve uploaded files statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 if (process.env.NODE_ENV !== 'production') {
   app.get("/api/test-email", async (req, res) => {
     try {
+      console.log("Testing email configuration...");
+      console.log("SMTP_HOST:", process.env.SMTP_HOST);
+      console.log("SMTP_PORT:", process.env.SMTP_PORT);
+      console.log("SMTP_USER:", process.env.SMTP_USER);
+      console.log("ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
+      
       const { sendEmail } = require("./utils/email");
       await sendEmail({
         to: process.env.ADMIN_EMAIL,
         subject: "Test Email from SITM Backend",
         html: "<h1>Test Email</h1><p>If you receive this, email configuration is working!</p>"
       });
-      res.status(200).json({ message: "Test email sent successfully" });
+      
+      console.log("Test email sent successfully to:", process.env.ADMIN_EMAIL);
+      res.status(200).json({ 
+        message: "Test email sent successfully",
+        to: process.env.ADMIN_EMAIL,
+        timestamp: new Date().toISOString()
+      });
     } catch (error) {
       console.error("Test email failed:", error);
+      console.error("Error details:", {
+        message: error.message,
+        code: error.code,
+        response: error.response
+      });
       res.status(500).json({
         message: "Test email failed",
-        error: error.message
+        error: error.message,
+        code: error.code
       });
     }
   });

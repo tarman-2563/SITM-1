@@ -12,10 +12,12 @@
     "pm2:delete": "pm2 delete sitm-backend",
     "pm2:logs": "pm2 logs sitm-backend",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "generate:jwt": "node scripts/generateJwtSecret.js"
+    "generate:jwt": "node scripts/generateJwtSecret.js",
+    "create-admin": "node scripts/createAdmin.js"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
+    "cloudinary": "^1.41.3",
     "compression": "^1.8.1",
     "cors": "^2.8.6",
     "dotenv": "^17.2.3",
@@ -29,6 +31,8 @@
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.1.5",
     "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "nodemailer": "^7.0.13"
   },
   "devDependencies": {

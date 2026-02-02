@@ -40,7 +40,6 @@ const completeApplication = async (applicationData, req) => {
     dateOfBirth: applicationData.personalInfo.dateOfBirth,
     gender: applicationData.personalInfo.gender,
     nationality: applicationData.personalInfo.nationality || "Indian",
-    religion: applicationData.personalInfo.religion,
     category: applicationData.personalInfo.category,
     bloodGroup: applicationData.personalInfo.bloodGroup,
     aadharNumber: applicationData.personalInfo.aadharNumber,
@@ -67,12 +66,110 @@ const completeApplication = async (applicationData, req) => {
   lead.convertedAt = new Date();
   await lead.addActivity("application_completed", "Full application submitted");
 
+  // Create user account automatically
+  let accountCreated = false;
+  let activationToken = null;
+  
+  try {
+    logger.debug("Checking if user account exists");
+    let user = await User.findOne({ email: lead.email });
+    
+    if (!user) {
+      logger.debug("Creating new user account");
+      
+      // Generate activation token
+      activationToken = crypto.randomBytes(32).toString('hex');
+      const activationExpire = Date.now() + 24 * 60 * 60 * 1000; // 24 hours
+      
+      // Create user account with minimal data first
+      const userData = {
+        firstName: lead.firstName,
+        lastName: lead.lastName,
+        email: lead.email,
+        phone: lead.phone,
+        role: 'applicant',
+        userType: 'student',
+        isActive: false, // Will be activated when password is set
+        isVerified: false,
+        activationToken: activationToken,
+        activationExpire: activationExpire,
+        applicationId: admission._id
+      };
+      
+      // Add academic info if available
+      if (lead.program) {
+        userData.academic = {
+          program: lead.program,
+          admissionYear: new Date().getFullYear(),
+          currentStatus: 'applicant'
+        };
+      }
+      
+      // Add profile info if available
+      if (applicationData.personalInfo) {
+        userData.profile = {
+          dateOfBirth: applicationData.personalInfo.dateOfBirth,
+          gender: applicationData.personalInfo.gender,
+          address: applicationData.personalInfo.address
+        };
+      }
+      
+      user = await User.create(userData);
+      accountCreated = true;
+      logger.info("User account created successfully", { userId: user._id, email: user.email });
+    } else {
+      logger.debug("User account already exists, linking to application");
+      // Link existing user to this application
+      user.applicationId = admission._id;
+      await user.save();
+    }
+    
+    // Update admission with user reference
+    admission.userId = user._id;
+    await admission.save();
+    
+  } catch (userError) {
+    logger.error("User account creation failed:", {
+      error: userError.message,
+      stack: userError.stack
+    });
+    // Don't throw error - application should still be saved even if user creation fails
+  }
+
+  // Send email notifications
+  try {
+    if (accountCreated && activationToken) {
+      logger.debug("Sending application confirmation with account activation");
+      const activationUrl = `${req.protocol}://${req.get('host')}/activate/${activationToken}`;
+      await emailService.sendApplicationConfirmationWithAccount(admission, activationUrl);
+      await lead.addActivity("email_sent", "Sent application confirmation with account activation");
+      logger.info("Application confirmation with account activation sent successfully");
+    } else {
+      logger.debug("Sending standard application confirmation email");
+      await emailService.sendApplicationConfirmation(admission);
+      await lead.addActivity("email_sent", "Sent application confirmation email");
+      logger.info("Application confirmation email sent successfully");
+    }
+
+    logger.debug("Sending application admin notification");
+    await emailService.sendApplicationAdminNotification(admission);
+    logger.info("Application admin notification sent successfully");
+  } catch (emailError) {
+    logger.error("Email sending failed:", {
+      error: emailError.message,
+      code: emailError.code,
+      response: emailError.response
+    });
+    // Don't throw error - application should still be saved even if email fails
+  }
+
   logger.info("Application completed successfully", { 
     applicationId: admission.applicationId,
-    email: admission.email 
+    email: admission.email,
+    accountCreated: accountCreated
   });
 
-  return { admission, accountCreated: false };
+  return { admission, accountCreated };
 };
 
 const getApplicationStatus = async (applicationId) => {
@@ -106,7 +203,7 @@ const getAllApplications = async (page, limit, filters) => {
     .sort({ createdAt: -1 })
     .skip(skip)
     .limit(limit)
-    .populate("reviewedBy", "name email");
+    .populate("reviewedBy", "firstName lastName email");
 
   const total = await Admission.countDocuments(filter);
 
@@ -124,7 +221,7 @@ const getAllApplications = async (page, limit, filters) => {
 const getApplicationById = async (applicationId) => {
   return Admission.findById(applicationId).populate(
     "reviewedBy",
-    "name email"
+    "firstName lastName email"
   );
 };
 

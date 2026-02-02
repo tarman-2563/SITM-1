@@ -42,7 +42,7 @@ const leadSchema=new mongoose.Schema({
     activities:[{
         type:{
             type:String,
-            enum:['form_submitted', 'email_opened', 'email_clicked', 'application_started', 'application_completed', 'contacted']
+            enum:['form_submitted', 'email_opened', 'email_clicked', 'email_sent', 'application_started', 'application_completed', 'contacted']
         },
         timestamp:{
             type:Date,

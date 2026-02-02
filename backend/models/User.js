@@ -218,50 +218,75 @@ userSchema.virtual("isLocked").get(function () {
   return Boolean(this.lockUntil && this.lockUntil > Date.now());
 });
 
+// Password hashing middleware - Re-enabled with better error handling
 userSchema.pre("save", async function (next) {
-  if (!this.isModified("password")) {
-    return next();
-  }
+  try {
+    // Only hash password if it's modified and exists
+    if (!this.isModified("password") || !this.password) {
+      return next();
+    }
 
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
-  next();
+    console.log("Hashing password for user:", this.email);
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    console.log("Password hashed successfully");
+    next();
+  } catch (error) {
+    console.error("Password hashing error:", error);
+    next(error);
+  }
 });
 
+// ID generation middleware - Re-enabled with better error handling
 userSchema.pre("save", async function (next) {
-  if (
-    this.userType === "student" &&
-    this.academic.currentStatus === "active" &&
-    !this.academic.rollNumber
-  ) {
-    const year = this.academic.admissionYear || new Date().getFullYear();
-    const program = this.academic.program;
-    const count = await this.constructor.countDocuments({
-      userType: "student",
-      "academic.program": program,
-      "academic.admissionYear": year,
-      "academic.rollNumber": { $exists: true }
-    });
+  try {
+    // Generate roll number for students
+    if (
+      this.userType === "student" &&
+      this.academic?.currentStatus === "active" &&
+      !this.academic?.rollNumber
+    ) {
+      const year = this.academic.admissionYear || new Date().getFullYear();
+      const program = this.academic.program;
+      
+      if (program) {
+        const count = await this.constructor.countDocuments({
+          userType: "student",
+          "academic.program": program,
+          "academic.admissionYear": year,
+          "academic.rollNumber": { $exists: true }
+        });
 
-    this.academic.rollNumber = `${year}${program}${String(
-      count + 1
-    ).padStart(3, "0")}`;
+        this.academic.rollNumber = `${year}${program}${String(
+          count + 1
+        ).padStart(3, "0")}`;
+        console.log("Generated roll number:", this.academic.rollNumber);
+      }
+    }
+
+    // Generate employee ID for staff
+    if (this.userType === "staff" && !this.staff?.employeeId) {
+      const year = new Date().getFullYear();
+      const dept = this.staff?.department || "GEN";
+      const count = await this.constructor.countDocuments({
+        userType: "staff",
+        "staff.department": this.staff?.department
+      });
+
+      if (!this.staff) {
+        this.staff = {};
+      }
+      this.staff.employeeId = `EMP${year}${dept.toUpperCase()}${String(
+        count + 1
+      ).padStart(3, "0")}`;
+      console.log("Generated employee ID:", this.staff.employeeId);
+    }
+
+    next();
+  } catch (error) {
+    console.error("ID generation error:", error);
+    next(error);
   }
-
-  if (this.userType === "staff" && !this.staff.employeeId) {
-    const year = new Date().getFullYear();
-    const dept = this.staff.department || "GEN";
-    const count = await this.constructor.countDocuments({
-      userType: "staff",
-      "staff.department": this.staff.department
-    });
-
-    this.staff.employeeId = `EMP${year}${dept}${String(
-      count + 1
-    ).padStart(3, "0")}`;
-  }
-
-  next();
 });
 
 userSchema.methods.getSignedJwtToken = function () {
