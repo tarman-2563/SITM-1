@@ -7,7 +7,7 @@ export function Hero() {
   const { openApplyNowModal, openVirtualTourModal } = useLeadCapture();
 
   return (
-    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center -mt-30">
+    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center mt-0 md:-mt-30">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video autoPlay loop muted playsInline className="w-full h-full object-cover">
@@ -17,14 +17,14 @@ export function Hero() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 container mx-auto pl-2.5 pr-4 md:pr-8 lg:pr-16 text-white">
+      <div className="relative z-10 container mx-auto px-4 md:pl-2.5 md:pr-8 lg:pr-16 text-white pt-8 md:pt-0">
         <div className="max-w-4xl">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <h1 className="text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-left">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight text-left">
               North East India's first college focused on{" "}
               <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
@@ -64,7 +64,7 @@ export function Hero() {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <p className="text-lg md:text-xl text-gray-200 mb-10 font-bold italic text-left max-w-2xl">
+            <p className="text-base sm:text-lg md:text-xl text-gray-200 mb-6 md:mb-10 font-bold italic text-left max-w-2xl">
               Where students{" "}
               <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500">
                 learn by doing
@@ -77,19 +77,10 @@ export function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
-            className="flex flex-col md:flex-row gap-4 mb-12"
+            className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 md:mb-12"
           >
             <Button size="lg" className="shadow-sitm-navy/20" onClick={openApplyNowModal}>
               Apply for Admission
-            </Button>
-
-            <Button
-              size="lg"
-              variant="outline"
-              className="text-white border-white hover:bg-white hover:text-sitm-navy"
-              onClick={openVirtualTourModal}
-            >
-              Virtual Tour
             </Button>
           </motion.div>
         </div>
