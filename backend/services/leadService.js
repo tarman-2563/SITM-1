@@ -26,7 +26,7 @@ const createLeadService=async(leadData,req)=>{
                 console.log("- SMTP_USER:", process.env.SMTP_USER);
                 console.log("- ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
                 
-                await sendLeadConfirmation(lead,req);
+                await sendLeadConfirmation(lead, req);
                 await lead.addActivity("email_sent","Sent lead confirmation email");
                 console.log("Confirmation email sent successfully");
                 

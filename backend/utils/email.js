@@ -46,6 +46,22 @@ const templates = {
             </p>
 
             <p style="font-size:15px; color:#333;">
+              Ready to take the next step? Complete your full application now to secure your spot!
+            </p>
+
+            <!-- Application CTA Button -->
+            <div style="text-align:center; margin:30px 0;">
+              <a href="${data.applicationUrl}" 
+                 style="background:#002366; color:#ffffff; padding:16px 32px; text-decoration:none; border-radius:8px; display:inline-block; font-weight:600; font-size:16px; box-shadow:0 4px 12px rgba(0,35,102,0.3);">
+                Complete Your Application
+              </a>
+            </div>
+
+            <p style="font-size:14px; color:#666; text-align:center; margin:20px 0;">
+              This will take you through our simple multi-step application process.
+            </p>
+
+            <p style="font-size:15px; color:#333;">
               Our admissions team will review your details and contact you shortly.
             </p>
 

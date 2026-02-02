@@ -52,7 +52,10 @@ export function ReviewSubmitStep({
           Review Your Application
         </h3>
         <p className="text-gray-600 dark:text-gray-300 text-sm">
-          Please review all the information carefully before submitting your application.
+          {isAlreadySubmitted 
+            ? "Your application has been submitted successfully. You can review the details below."
+            : "Please review all the information carefully before submitting your application."
+          }
         </p>
       </div>
 

@@ -3,13 +3,24 @@ const { emailService } = require("./emailService");
 const crypto = require("crypto");
 
 const loginUser = async (email, password) => {
+  console.log("Login attempt for email:", email);
   const user = await User.findOne({ email }).select("+password");
 
   if (!user) {
+    console.log("User not found for email:", email);
     return { success: false, statusCode: 401, message: "Invalid credentials" };
   }
 
+  console.log("User found:", {
+    email: user.email,
+    role: user.role,
+    isActive: user.isActive,
+    isLocked: user.isLocked,
+    hasPassword: !!user.password
+  });
+
   if (user.isLocked) {
+    console.log("User account is locked");
     return {
       success: false,
       statusCode: 423,
@@ -18,6 +29,7 @@ const loginUser = async (email, password) => {
   }
 
   if (!user.isActive) {
+    console.log("User account is not active");
     return {
       success: false,
       statusCode: 401,
@@ -25,9 +37,12 @@ const loginUser = async (email, password) => {
     };
   }
 
+  console.log("Checking password match...");
   const isMatch = await user.matchPassword(password);
+  console.log("Password match result:", isMatch);
 
   if (!isMatch) {
+    console.log("Password does not match");
     await user.incLoginAttempts();
     return { success: false, statusCode: 401, message: "Invalid credentials" };
   }
@@ -45,6 +60,8 @@ const loginUser = async (email, password) => {
   } else if (user.role === "faculty") {
     redirectTo = "/faculty/dashboard";
   }
+
+  console.log("Login successful for user:", user.email);
 
   return {
     success: true,

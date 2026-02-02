@@ -11,6 +11,7 @@ import { Dashboard } from "./pages/Dashboard";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { ApplicationDetail } from "./pages/admin/ApplicationDetail";
+import { AdminUserManagement } from "./pages/admin/AdminUserManagement";
 
 import { FloatingChatbot } from "./components/common/FloatingChatbot";
 import { FloatingCTA } from "./components/common/FloatingCTA";
@@ -35,10 +36,12 @@ function App() {
 
             {/* User dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/student/dashboard" element={<Dashboard />} />
 
             {/* Admin routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
+            <Route path="/admin/users" element={<AdminUserManagement />} />
             <Route path="/admin/application/:id" element={<ApplicationDetail />} />
             <Route path="/admin/applications/:id" element={<ApplicationDetail />} />
           </Routes>

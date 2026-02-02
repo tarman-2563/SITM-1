@@ -7,6 +7,7 @@ import { FamilyInfoStep } from './steps/FamilyInfoStep';
 import { DocumentUploadStep } from './steps/DocumentUploadStep';
 import { ReviewSubmitStep } from './steps/ReviewSubmitStep';
 import { ApplicationSuccess } from './ApplicationSuccess';
+import { AccountActivation } from './AccountActivation';
 import { 
   CheckCircle, 
   Save,
@@ -71,6 +72,9 @@ export function ApplicationForm({
 
   const [isSaving, setIsSaving] = useState(false);
   const [submittedApplicationId, setSubmittedApplicationId] = useState(null);
+  const [showAccountActivation, setShowAccountActivation] = useState(false);
+  const [activationToken, setActivationToken] = useState(null);
+  const [accountCreated, setAccountCreated] = useState(false);
 
   // Auto-save indicator
   useEffect(() => {
@@ -81,27 +85,45 @@ export function ApplicationForm({
     }
   }, [formData, leadId]);
 
+  // Handle escape key to close modal
+  useEffect(() => {
+    const handleEscape = (event) => {
+      if (event.key === 'Escape' && !isLoading) {
+        handleClose();
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener('keydown', handleEscape);
+      return () => document.removeEventListener('keydown', handleEscape);
+    }
+  }, [isOpen, isLoading]);
+
   const handleClose = () => {
     if (!isLoading) {
       onClose();
     }
   };
 
-  // Handle application submission after family info step
+  const handleActivateAccount = (token) => {
+    setActivationToken(token);
+    setShowAccountActivation(true);
+  };
+
+  const handleActivationComplete = (userData) => {
+    // User is now logged in, redirect to dashboard
+    const redirectUrl = userData.redirectTo || '/dashboard';
+    console.log('Redirecting to:', redirectUrl); // Debug log
+    window.location.href = redirectUrl;
+  };
+
+  const handleSkipActivation = () => {
+    setShowAccountActivation(false);
+  };
+
+  // Handle moving to document upload step without submitting application
   const handleFamilyInfoNext = async () => {
-    if (!submittedApplicationId) {
-      try {
-        const response = await submitApplication();
-        if (response?.data?.applicationId) {
-          setSubmittedApplicationId(response.data.applicationId);
-        }
-        nextStep(); // Move to document upload step
-      } catch (error) {
-        console.error('Application submission failed:', error);
-      }
-    } else {
-      nextStep();
-    }
+    nextStep(); // Just move to document upload step without submitting
   };
 
   const renderStep = () => {
@@ -141,6 +163,7 @@ export function ApplicationForm({
             applicationId={submittedApplicationId}
             onNext={nextStep}
             onPrev={prevStep}
+            allowSkip={!submittedApplicationId} // Allow skipping if no application ID yet
           />
         );
       case 5:
@@ -149,11 +172,35 @@ export function ApplicationForm({
             formData={formData}
             leadData={leadData}
             applicationId={submittedApplicationId}
-            onSubmit={() => nextStep()} // Just move to success since app is already submitted
+            onSubmit={async () => {
+              if (!submittedApplicationId) {
+                // Submit application for the first time
+                try {
+                  const response = await submitApplication();
+                  console.log('Application submission response:', response); // Debug log
+                  if (response?.data?.applicationId) {
+                    setSubmittedApplicationId(response.data.applicationId);
+                    setAccountCreated(response.data.accountCreated);
+                    setActivationToken(response.data.activationToken);
+                    console.log('Account activation data:', { // Debug log
+                      accountCreated: response.data.accountCreated,
+                      activationToken: response.data.activationToken ? 'Present' : 'Missing'
+                    });
+                  }
+                  nextStep(); // Move to success
+                } catch (error) {
+                  console.error('Application submission failed:', error);
+                  throw error;
+                }
+              } else {
+                // Application already submitted, just move to success
+                nextStep();
+              }
+            }}
             onPrev={prevStep}
-            isLoading={false}
+            isLoading={isLoading}
             error={null}
-            isAlreadySubmitted={true}
+            isAlreadySubmitted={!!submittedApplicationId}
           />
         );
       default:
@@ -171,8 +218,9 @@ export function ApplicationForm({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/60 to-black/40 backdrop-blur-md"
+          className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/60 to-black/40 backdrop-blur-md cursor-pointer"
           onClick={handleClose}
+          title="Click outside to close"
         />
 
         {/* Modal - Fixed scrolling with proper flex layout */}
@@ -181,13 +229,57 @@ export function ApplicationForm({
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           className="relative w-full max-w-7xl h-[95vh] bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-200 dark:border-slate-700 mx-2 sm:mx-4 flex flex-col"
+          onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside modal
         >
           {success ? (
-            <ApplicationSuccess 
-              onClose={handleClose}
-              applicationData={formData}
-              leadData={leadData}
-            />
+            <div className="flex flex-col h-full">
+              {/* Success Header with Close Button */}
+              <div className="flex-shrink-0 bg-gradient-to-r from-green-600 via-green-700 to-green-600 dark:from-green-800 dark:via-green-700 dark:to-green-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
+                <div className="flex items-center gap-4 sm:gap-6">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl sm:text-2xl font-bold text-white">
+                      {showAccountActivation ? 'Account Setup' : 'Application Submitted Successfully!'}
+                    </h2>
+                    <p className="text-white/90 text-xs sm:text-sm">
+                      {leadData.firstName} {leadData.lastName} • {leadData.program}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={showAccountActivation ? handleSkipActivation : handleClose}
+                  className="p-2 sm:p-3 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10"
+                  title={showAccountActivation ? "Skip Account Setup" : "Close Application Form"}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+              
+              {/* Success Content */}
+              <div className="flex-1 overflow-y-auto scrollbar-thin">
+                {showAccountActivation ? (
+                  <AccountActivation
+                    activationToken={activationToken}
+                    userEmail={leadData.email}
+                    userName={`${leadData.firstName} ${leadData.lastName}`}
+                    onActivationComplete={handleActivationComplete}
+                    onSkip={handleSkipActivation}
+                  />
+                ) : (
+                  <ApplicationSuccess 
+                    onClose={handleClose}
+                    applicationData={formData}
+                    leadData={leadData}
+                    submittedApplicationId={submittedApplicationId}
+                    accountCreated={accountCreated}
+                    activationToken={activationToken}
+                    onActivateAccount={handleActivateAccount}
+                  />
+                )}
+              </div>
+            </div>
           ) : (
             <>
               {/* Header - Fixed height */}
