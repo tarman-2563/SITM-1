@@ -26,7 +26,7 @@ export function Hero() {
       </div>
 
       {/* Content - Left Aligned */}
-      <div className="relative z-10 container mx-auto pl-[10px] pr-4 md:pr-8 lg:pr-16 text-white">
+      <div className="relative z-10 container mx-auto pl-2.5 pr-4 md:pr-8 lg:pr-16 text-white">
         <div className="max-w-4xl">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -36,7 +36,7 @@ export function Hero() {
             <h1 className="text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-6 leading-tight text-left">
               North East India's first college focused on{" "}
               <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
                   practical learning
                 </span>
                 <svg
@@ -75,7 +75,7 @@ export function Hero() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             <p className="text-lg md:text-xl text-gray-200 mb-10 font-bold italic text-left max-w-2xl">
-              Where students <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">learn by doing</span>, not just studying.
+              Where students <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500">learn by doing</span>, not just studying.
             </p>
           </motion.div>
 

@@ -181,7 +181,19 @@ export function Programs() {
     };
 
     return (
-        <section id="programs" className="py-24 bg-gray-50 dark:bg-black transition-colors duration-300 relative overflow-hidden min-h-[700px]">
+        <section id="programs" className="py-24 relative 
+        transition-colors duration-300
+
+        /* Light mode */
+        bg-linear-to-b
+        from-[#7b2d2d]/20
+        via-white
+        to-[#7b2d2d]/20
+
+        /* Dark mode (unchanged) */
+        dark:bg-slate-950
+        overflow-hidden min-h-175">
+
              {/* Animated Background - Gradient Blobs */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-500">
                 {/* Subtle Geometric Dot Pattern */}
@@ -235,9 +247,9 @@ export function Programs() {
                         Academic Excellence
                     </span>
                     <h2 className="text-5xl md:text-6xl font-bold text-sitm-navy dark:text-white mt-2 mb-6 font-serif tracking-tight">
-                        Our Specialized <span className="text-transparent bg-clip-text bg-gradient-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">Programs</span>
+                        Our Specialized <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">Programs</span>
                     </h2>
-                    <div className="w-24 h-1.5 bg-gradient-to-r from-sitm-maroon to-sitm-gold mx-auto rounded-full"></div>
+                    {/* <div className="w-24 h-1.5 bg-linear-to-r from-sitm-maroon to-sitm-gold mx-auto rounded-full"></div> */}
                 </motion.div>
 
                 {/* School Grid View */}
@@ -253,9 +265,9 @@ export function Programs() {
                             key={school.id}
                             variants={idx < 2 ? itemVariantsLeft : itemVariantsRight}
                             onClick={() => handleSchoolClick(school)}
-                            className="group relative h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/20"
+                            className="group relative h-112.5 rounded-[2.5rem] overflow-hidden shadow-2xl hover:shadow-[0_20px_50px_rgba(0,0,0,0.2)] transition-all duration-500 text-left border border-white/20"
                         >
-                            <div className={`absolute inset-0 bg-gradient-to-br ${school.color} transition-all duration-700 group-hover:scale-110`}></div>
+                            <div className={`absolute inset-0 bg-linear-to-br ${school.color} transition-all duration-700 group-hover:scale-110`}></div>
                             <div className="absolute inset-0 bg-white/5 group-hover:bg-transparent transition-colors duration-500"></div>
                             <div className="absolute top-0 right-0 p-8">
                                 <div className="text-sitm-navy/10 group-hover:text-sitm-navy/20 transition-colors duration-500">
@@ -264,13 +276,13 @@ export function Programs() {
                             </div>
                             
                             <div className="relative h-full p-10 flex flex-col justify-end text-sitm-navy z-20">
-                                <div className="mb-8 p-5 rounded-[1.5rem] bg-white/40 backdrop-blur-xl border border-white/40 w-fit group-hover:scale-110 group-hover:bg-white group-hover:text-sitm-maroon transition-all duration-500 shadow-xl">
+                                <div className="mb-8 p-5 rounded-3xl bg-white/40 backdrop-blur-xl border border-white/40 w-fit group-hover:scale-110 group-hover:bg-white group-hover:text-sitm-maroon transition-all duration-500 shadow-xl">
                                     {school.icon}
                                 </div>
                                 <h3 className="text-3xl font-bold font-serif mb-3 leading-[1.1] tracking-tight">
                                     {school.name}
                                 </h3>
-                                <p className="text-sitm-navy/80 text-sm mb-8 line-clamp-2 max-w-[200px] font-medium">
+                                <p className="text-sitm-navy/80 text-sm mb-8 line-clamp-2 max-w-50 font-medium">
                                     Excellence in {school.programs.length} specialized industry-ready programs.
                                 </p>
                                 <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] bg-sitm-navy/5 w-fit px-6 py-3 rounded-full backdrop-blur-md border border-sitm-navy/5 group-hover:bg-sitm-navy group-hover:text-white transition-all duration-300">
@@ -289,11 +301,11 @@ export function Programs() {
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
-                                className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 overflow-hidden bg-black/80 backdrop-blur-md"
+                                className="fixed inset-0 z-100 flex items-center justify-center p-4 md:p-8 overflow-hidden bg-black/80 backdrop-blur-md"
                             >
                                 <button 
                                     onClick={closeModal}
-                                    className="absolute top-24 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-[110] border border-white/10 shadow-xl group"
+                                    className="absolute top-24 right-8 p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-110 border border-white/10 shadow-xl group"
                                 >
                                     <X className="w-8 h-8 group-hover:rotate-90 transition-transform duration-300" />
                                 </button>
@@ -308,7 +320,7 @@ export function Programs() {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 exit={{ opacity: 0, x: 20 }}
                                                 onClick={(e) => { e.stopPropagation(); prevProgram(); }}
-                                                className="absolute left-0 md:-left-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                                className="absolute left-0 md:-left-24 z-110 p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
                                             >
                                                 <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" />
@@ -324,7 +336,7 @@ export function Programs() {
                                                 animate={{ opacity: 1, x: 0 }}
                                                 exit={{ opacity: 0, x: -20 }}
                                                 onClick={(e) => { e.stopPropagation(); nextProgram(); }}
-                                                className="absolute right-0 md:-right-24 z-[110] p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
+                                                className="absolute right-0 md:-right-24 z-110 p-4 text-white/40 hover:text-white transition-all transform hover:scale-110 active:scale-95 group"
                                             >
                                                 <svg className="w-16 h-16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" />
@@ -334,7 +346,7 @@ export function Programs() {
                                     </AnimatePresence>
 
                                     {/* The Program Card Component */}
-                                    <div className="w-full relative h-[600px] md:h-[550px]">
+                                    <div className="w-full relative h-150 md:h-137.5">
                                         <AnimatePresence mode="wait">
                                             <motion.div
                                                 key={`${selectedSchool.id}-${currentProgramIndex}`}

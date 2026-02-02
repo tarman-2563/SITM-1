@@ -144,7 +144,7 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="relative overflow-hidden py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+    <section id="gallery" className="relative overflow-hidden py-16 bg-linear-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
       {/* Background Aurora/Glow Graphics - Distinct from About Section */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         {/* Subtle Geometric Dot Pattern */}
@@ -189,7 +189,7 @@ export function Gallery() {
           <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-8 font-serif relative inline-block">
             Photo Gallery
             <svg
-              className="absolute -bottom-6 left-0 w-[110%] -left-[5%] h-6 pointer-events-none"
+              className="absolute -bottom-6 left-0 w-[110%] h-6 pointer-events-none"
               viewBox="0 0 240 30"
               preserveAspectRatio="none"
             >
@@ -232,7 +232,7 @@ export function Gallery() {
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-xs rounded-full mb-2">
                     {image.category}
@@ -253,7 +253,7 @@ export function Gallery() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-gradient-to-br from-sitm-navy to-sitm-maroon flex items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-linear-to-br from-sitm-navy to-sitm-maroon flex items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             onClick={openGalleryOverlay}
           >
             <div className="text-center text-white">
@@ -293,7 +293,7 @@ export function Gallery() {
                 alt={selectedImage.alt}
                 className="w-full h-full object-contain rounded-lg"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                 <span className="inline-block px-3 py-1 bg-sitm-maroon text-white text-sm rounded-full mb-2">
                   {selectedImage.category}
                 </span>
@@ -346,7 +346,7 @@ export function Gallery() {
                       alt={image.alt}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-0 left-0 right-0 p-3">
                         <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-xs rounded-full mb-1">
                           {image.category}

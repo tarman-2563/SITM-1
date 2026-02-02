@@ -11,6 +11,9 @@ import { Footer } from "../components/layout/Footer";
 import { Reveal } from "../components/common/Reveal";
 import { Gallery } from "../components/sections/Gallery";
 import { WhySITM } from "../components/sections/WhySITM";
+import Mentors from "../components/sections/Mentors";
+import StartupFunding from "../components/sections/StartupFunding";
+import StudentPlaced from "../components/sections/StudentPlaced";
 
 export function Home() {
   return (
@@ -27,13 +30,22 @@ export function Home() {
       </Reveal>
       <Programs />
       <Reveal width="100%">
+        <Mentors />
+      </Reveal>
+      <Reveal width="100%">
+        <StartupFunding />
+      </Reveal>
+      <Reveal width="100%">
+        <Placements />
+      </Reveal>
+      <Reveal width="100%">
+        <StudentPlaced />
+      </Reveal>
+      <Reveal width="100%">
         <Campus />
       </Reveal>
       <Reveal width="100%">
         <Admissions />
-      </Reveal>
-      <Reveal width="100%">
-        <Placements />
       </Reveal>
       <Reveal width="100%">
         <Awards />

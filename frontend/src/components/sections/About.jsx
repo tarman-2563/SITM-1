@@ -50,29 +50,29 @@ export function About() {
             transition={{ duration: 0.8 }}
             className="w-full md:w-1/2 relative group"
           >
-            <div className="absolute -inset-4 bg-gradient-to-r from-sitm-maroon to-sitm-gold rounded-2xl opacity-20 group-hover:opacity-30 blur-lg transition duration-500"></div>
+            <div className="absolute -inset-4 bg-linear-to-r from-sitm-maroon to-sitm-gold rounded-2xl opacity-20 group-hover:opacity-30 blur-lg transition duration-500"></div>
             <img 
               src="https://sitmguwahati.ac.in/assets/Campus-Badc-v75.jpeg" 
               alt="SITM Campus" 
-              className="relative rounded-2xl shadow-2xl w-full object-cover h-[500px] border-4 border-white dark:border-slate-800 transition-transform duration-500 group-hover:scale-[1.01]" 
+              className="relative rounded-2xl shadow-2xl w-full object-cover h-125 border-4 border-white dark:border-slate-800 transition-transform duration-500 group-hover:scale-[1.01]" 
             />
             <motion.div 
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               whileHover={{ scale: 1.05 }}
-              className="absolute -bottom-10 -right-12 w-44 h-44 flex items-center justify-center hidden md:flex group/badge"
+              className="absolute -bottom-10 -right-12 w-44 h-44 flex items-center justify-center md:flex group/badge"
             >
                 {/* The Maroon Circle Backdrop (Clipped for shine) */}
-                <div className="absolute inset-0 bg-gradient-to-br from-sitm-maroon via-[#5d1014] to-black/80 rounded-full border-4 border-white dark:border-slate-800 shadow-[0_25px_50px_rgba(0,0,0,0.4),_inset_0_-8px_15px_rgba(0,0,0,0.5),_inset_0_8px_15px_rgba(255,255,255,0.2)] overflow-hidden">
+                <div className="absolute inset-0 bg-linear-to-br from-sitm-maroon via-[#5d1014] to-black/80 rounded-full border-4 border-white dark:border-slate-800 shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_-8px_15px_rgba(0,0,0,0.5),inset_0_8px_15px_rgba(255,255,255,0.2)] overflow-hidden">
                     {/* Shine Animation Overlay */}
                     <motion.div 
                       animate={{ x: ["-100%", "200%"] }}
                       transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
+                      className="absolute inset-0 bg-linear-to-r from-transparent via-white/30 to-transparent skew-x-12 pointer-events-none"
                     />
                     {/* Internal Glow for depth */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none"></div>
+                    <div className="absolute inset-0 rounded-full bg-linear-to-tr from-transparent via-white/10 to-transparent pointer-events-none"></div>
                 </div>
                 
                 {/* Oversized 3D Text (Popping OUT of the circle) */}
@@ -89,16 +89,16 @@ export function About() {
                   className="text-center relative z-20 pointer-events-none"
                 >
                     <span 
-                      className="block text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_12px_20px_rgba(0,0,0,0.5)] filter tracking-tighter"
+                      className="block text-7xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_12px_20px_rgba(0,0,0,0.5)] filter tracking-tighter"
                       style={{ 
                         transform: "perspective(1000px) translateZ(80px)",
                         WebkitTextStroke: "1px rgba(255,255,255,0.1)",
                       }}
                     >
-                      26+
+                      31+
                     </span>
                     <span 
-                      className="text-[14px] font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-200 to-amber-400 uppercase tracking-[0.18em] leading-tight block drop-shadow-[0_6px_10px_rgba(0,0,0,0.4)]"
+                      className="text-[14px] font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 uppercase tracking-[0.18em] leading-tight block drop-shadow-[0_6px_10px_rgba(0,0,0,0.4)]"
                       style={{ 
                         transform: "perspective(1000px) translateZ(50px)",
                       }}

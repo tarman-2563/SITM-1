@@ -41,18 +41,18 @@ export function Campus() {
 
     /* Light mode */
     bg-linear-to-b
-    from-[#7b2d2d]/10
+    from-[#7b2d2d]/20
     via-white
-    to-white
+    to-[#7b2d2d]/20
 
     /* Dark mode (unchanged) */
     dark:bg-slate-950">
       
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-sitm-gold font-serif italic text-2xl">
+          
 
-            <span className="relative inline-block">
+            {/* <span className="relative inline-block">
                 <span className="text-4xl bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
                   Life
                 </span>
@@ -81,8 +81,35 @@ export function Campus() {
                     transition={{ duration: 1.8, delay: 1.2, ease: "easeInOut" }}
                   />
                 </svg>
-              </span>
-             at SITM</span>
+              </span> */}
+            <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-[#facc15] mt-2 mb-2 font-serif relative inline-block">
+            Life at SITM
+            <svg
+              className="absolute -bottom-6 left-0 w-[110%] h-6 pointer-events-none"
+              viewBox="0 0 240 30"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
+                  <stop offset="20%" stopColor="#4ade80" /> {/* Green */}
+                  <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
+                  <stop offset="100%" stopColor="#fb923c" /> {/* Orange */}
+                </linearGradient>
+              </defs>
+              <path
+                d="M5,15 L15,25 L28,5 C40,5 50,25 70,25 C90,25 100,5 130,5 C160,5 175,25 205,25 Q225,25 235,15"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </h2>
+        </div>
+              
           <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4 font-serif">Campus Infrastructure</h2>
           <div className="w-24 h-1 bg-sitm-gold mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-white max-w-2xl mx-auto">
