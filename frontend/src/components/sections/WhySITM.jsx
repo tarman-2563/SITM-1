@@ -156,7 +156,91 @@ export function WhySITM() {
           </motion.h2>
         </div>
 
-        <div className="flex flex-col lg:flex-row gap-8 items-start">
+
+        {/* Mobile: Horizontal Scroll Carousel */}
+        <div className="lg:hidden">
+          {/* Navigation Tabs - Horizontal Scroll */}
+          <div className="overflow-x-auto scrollbar-hide mb-6">
+            <div className="flex gap-3 pb-2 min-w-max px-1">
+              {comparisonData.map((item) => (
+                <button
+                  key={item.id}
+                  onClick={() => setActiveTab(item.id)}
+                  className={`flex items-center gap-2 rounded-xl transition-all duration-300 text-left border overflow-hidden relative group whitespace-nowrap ${
+                    activeTab === item.id
+                      ? "bg-gradient-to-r from-sitm-gold to-white text-sitm-navy border-transparent shadow-xl py-3 px-4"
+                      : "bg-gradient-to-r from-white to-sitm-gold text-sitm-navy border-transparent hover:scale-[1.02] shadow-lg py-2 px-3"
+                  }`}
+                >
+                  <div className={`p-2 rounded-lg flex items-center justify-center ${activeTab === item.id ? "bg-black/10 text-sitm-navy" : "bg-black/5 text-sitm-navy"}`}>
+                    {item.icon}
+                  </div>
+                  <div className="relative z-10">
+                    <h4 className={`font-bold transition-all duration-300 ${activeTab === item.id ? "text-base" : "text-sm"}`}>{item.category}</h4>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Comparison Cards - Horizontal Scroll */}
+          <div className="overflow-x-auto scrollbar-hide snap-x snap-mandatory">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={activeTab}
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: -50 }}
+                transition={{ duration: 0.3 }}
+                className="flex gap-4 pb-4"
+              >
+                {/* SITM Card */}
+                <div className="min-w-[85vw] snap-center bg-sitm-gold text-sitm-navy rounded-2xl p-6 shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden border border-white/20">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-sitm-navy rounded-full flex items-center justify-center shrink-0">
+                      <Check className="text-sitm-gold" size={20} />
+                    </div>
+                    <h3 className="text-lg font-bold font-serif">{activeData.sitm.title}</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {activeData.sitm.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2">
+                        <div className="mt-1 w-4 h-4 bg-sitm-navy/10 rounded-full flex items-center justify-center shrink-0">
+                           <div className="w-1.5 h-1.5 bg-sitm-navy rounded-full" />
+                        </div>
+                        <span className="text-sm leading-tight font-medium">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Traditional Card */}
+                <div className="min-w-[85vw] snap-center bg-white dark:bg-slate-200 border-2 border-sitm-gold rounded-2xl p-6 shadow-lg">
+                   <div className="flex items-center gap-3 mb-6">
+                    <div className="w-8 h-8 bg-black/5 rounded-full flex items-center justify-center shrink-0">
+                      <X className="text-red-500" size={20} />
+                    </div>
+                    <h3 className="text-lg font-bold font-serif text-slate-900">{activeData.traditional.title}</h3>
+                  </div>
+                  <ul className="space-y-4">
+                    {activeData.traditional.features.map((feature, i) => (
+                      <li key={i} className="flex items-start gap-2 text-slate-600">
+                        <div className="mt-1 w-4 h-4 bg-black/5 rounded-full flex items-center justify-center shrink-0">
+                           <div className="w-1.5 h-1.5 bg-slate-400 rounded-full" />
+                        </div>
+                        <span className="text-sm leading-tight font-medium">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+        </div>
+
+        {/* Desktop: Sidebar Layout */}
+        <div className="hidden lg:flex flex-row gap-8 items-start">
           {/* Navigation Sidebar */}
           <motion.div 
             initial={{ x: -100, opacity: 0 }}
