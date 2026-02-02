@@ -23,7 +23,9 @@
     }
 
     body {
-        @apply antialiased font-sans text-gray-900 bg-gray-50 dark:bg-slate-950 dark:text-gray-100 transition-colors duration-300;
+        @apply antialiased font-sans text-gray-900 bg-gray-50
+               dark:bg-slate-950 dark:text-gray-100
+               transition-colors duration-300;
     }
 
     h1,
@@ -36,12 +38,62 @@
     }
 }
 
+/* ---------------- Utilities ---------------- */
+@layer utilities {
+    /* Hide scrollbar */
+    .scrollbar-hide {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+
+    .scrollbar-hide::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Thin scrollbar */
+    .scrollbar-thin {
+        scrollbar-width: thin;
+        scrollbar-color: rgb(156 163 175) transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: rgb(156 163 175);
+        border-radius: 3px;
+    }
+
+    .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(107 114 128);
+    }
+
+    /* Dark mode scrollbar */
+    .dark .scrollbar-thin {
+        scrollbar-color: rgb(75 85 99) transparent;
+    }
+
+    .dark .scrollbar-thin::-webkit-scrollbar-thumb {
+        background-color: rgb(75 85 99);
+    }
+
+    .dark .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+        background-color: rgb(107 114 128);
+    }
+}
+
+/* ---------------- Animations ---------------- */
 @keyframes fadeInUp {
     from {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -52,7 +104,6 @@
     0% {
         transform: translateX(0);
     }
-
     100% {
         transform: translateX(-50%);
     }
@@ -62,11 +113,14 @@
     animation: marquee 30s linear infinite;
 }
 
+.animate-marquee:hover {
+    animation-play-state: paused;
+}
+
 @keyframes marquee-reverse {
     0% {
         transform: translateX(-50%);
     }
-
     100% {
         transform: translateX(0);
     }
@@ -74,8 +128,4 @@
 
 .animate-marquee-reverse {
     animation: marquee-reverse 30s linear infinite;
-}
-
-.animate-marquee:hover {
-    animation-play-state: paused;
 }
