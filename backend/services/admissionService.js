@@ -138,19 +138,7 @@ const completeApplication = async (applicationData, req) => {
 
   // Send email notifications
   try {
-    if (accountCreated && activationToken) {
-      logger.debug("Sending application confirmation with account activation");
-      const activationUrl = `${req.protocol}://${req.get('host')}/activate/${activationToken}`;
-      await emailService.sendApplicationConfirmationWithAccount(admission, activationUrl);
-      await lead.addActivity("email_sent", "Sent application confirmation with account activation");
-      logger.info("Application confirmation with account activation sent successfully");
-    } else {
-      logger.debug("Sending standard application confirmation email");
-      await emailService.sendApplicationConfirmation(admission);
-      await lead.addActivity("email_sent", "Sent application confirmation email");
-      logger.info("Application confirmation email sent successfully");
-    }
-
+    // Only send admin notification - no email to user
     logger.debug("Sending application admin notification");
     await emailService.sendApplicationAdminNotification(admission);
     logger.info("Application admin notification sent successfully");
@@ -169,7 +157,11 @@ const completeApplication = async (applicationData, req) => {
     accountCreated: accountCreated
   });
 
-  return { admission, accountCreated };
+  return { 
+    admission, 
+    accountCreated, 
+    activationToken: accountCreated ? activationToken : null 
+  };
 };
 
 const getApplicationStatus = async (applicationId) => {

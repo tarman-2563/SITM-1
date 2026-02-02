@@ -5,7 +5,7 @@ import { Button } from '../../common/Button';
 import { documentService } from '../../../services/documentService';
 import { AlertCircle, CheckCircle } from 'lucide-react';
 
-export function DocumentUploadStep({ applicationId, onNext, onPrev }) {
+export function DocumentUploadStep({ applicationId, onNext, onPrev, allowSkip = false }) {
   const [documents, setDocuments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -66,16 +66,24 @@ export function DocumentUploadStep({ applicationId, onNext, onPrev }) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center py-12"
       >
-        <AlertCircle className="w-16 h-16 text-yellow-500 mx-auto mb-4" />
+        <AlertCircle className="w-16 h-16 text-blue-500 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
-          Application Not Submitted Yet
+          Document Upload (Optional)
         </h3>
         <p className="text-gray-600 dark:text-gray-300 mb-6">
-          Please complete and submit your application first before uploading documents.
+          You can upload documents now or after submitting your application. 
+          {allowSkip && " You can skip this step and upload documents later."}
         </p>
-        <Button onClick={onPrev} variant="outline">
-          Go Back to Review
-        </Button>
+        <div className="flex gap-4 justify-center">
+          <Button onClick={onPrev} variant="outline">
+            ← Previous Step
+          </Button>
+          {allowSkip && (
+            <Button onClick={onNext}>
+              Skip for Now →
+            </Button>
+          )}
+        </div>
       </motion.div>
     );
   }
@@ -177,18 +185,35 @@ export function DocumentUploadStep({ applicationId, onNext, onPrev }) {
           ← Previous Step
         </Button>
 
-        <Button
-          onClick={onNext}
-          disabled={!isAllRequiredUploaded()}
-          className="flex items-center gap-2"
-        >
-          Continue to Review →
-        </Button>
+        <div className="flex gap-3">
+          {!isAllRequiredUploaded() && allowSkip && (
+            <Button
+              variant="outline"
+              onClick={onNext}
+              className="flex items-center gap-2"
+            >
+              Skip for Now →
+            </Button>
+          )}
+          <Button
+            onClick={onNext}
+            disabled={!allowSkip && !isAllRequiredUploaded()}
+            className="flex items-center gap-2"
+          >
+            Continue to Review →
+          </Button>
+        </div>
       </div>
 
-      {!isAllRequiredUploaded() && (
+      {!allowSkip && !isAllRequiredUploaded() && (
         <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
           Please upload all required documents to continue
+        </p>
+      )}
+
+      {allowSkip && !isAllRequiredUploaded() && (
+        <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-4">
+          You can upload documents now or after submitting your application
         </p>
       )}
     </motion.div>

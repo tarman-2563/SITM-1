@@ -24,7 +24,8 @@ const completeApplication = async (req, res) => {
         applicationId: result.admission.applicationId,
         email: result.admission.email,
         program: result.admission.program,
-        accountCreated: result.accountCreated
+        accountCreated: result.accountCreated,
+        activationToken: result.activationToken
       }
     });
   } catch (error) {

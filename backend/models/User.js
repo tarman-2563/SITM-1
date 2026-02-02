@@ -218,29 +218,23 @@ userSchema.virtual("isLocked").get(function () {
   return Boolean(this.lockUntil && this.lockUntil > Date.now());
 });
 
-// Password hashing middleware - Re-enabled with better error handling
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   try {
-    // Only hash password if it's modified and exists
     if (!this.isModified("password") || !this.password) {
-      return next();
+      return;
     }
-
     console.log("Hashing password for user:", this.email);
     const salt = await bcrypt.genSalt(10);
     this.password = await bcrypt.hash(this.password, salt);
     console.log("Password hashed successfully");
-    next();
   } catch (error) {
     console.error("Password hashing error:", error);
-    next(error);
+    throw error;
   }
 });
 
-// ID generation middleware - Re-enabled with better error handling
-userSchema.pre("save", async function (next) {
+userSchema.pre("save", async function () {
   try {
-    // Generate roll number for students
     if (
       this.userType === "student" &&
       this.academic?.currentStatus === "active" &&
@@ -264,28 +258,62 @@ userSchema.pre("save", async function (next) {
       }
     }
 
-    // Generate employee ID for staff
     if (this.userType === "staff" && !this.staff?.employeeId) {
       const year = new Date().getFullYear();
       const dept = this.staff?.department || "GEN";
-      const count = await this.constructor.countDocuments({
+      
+      // Find all existing employee IDs for this department and year to get the next number
+      const existingEmployees = await this.constructor.find({
         userType: "staff",
-        "staff.department": this.staff?.department
-      });
+        "staff.department": this.staff?.department,
+        "staff.employeeId": { $regex: `^EMP${year}${dept.toUpperCase()}\\d{3}$` }
+      }, { "staff.employeeId": 1 }).sort({ "staff.employeeId": 1 });
+
+      let nextNumber = 1;
+      if (existingEmployees.length > 0) {
+        // Extract all numbers and find the next available one
+        const existingNumbers = existingEmployees.map(emp => {
+          const match = emp.staff.employeeId.match(/(\d{3})$/);
+          return match ? parseInt(match[1]) : 0;
+        }).filter(num => num > 0).sort((a, b) => a - b);
+        
+        // Find the first gap or increment from the highest
+        for (let i = 1; i <= existingNumbers.length + 1; i++) {
+          if (!existingNumbers.includes(i)) {
+            nextNumber = i;
+            break;
+          }
+        }
+        
+        // If no gaps found, use the next number after the highest
+        if (nextNumber === 1 && existingNumbers.length > 0) {
+          nextNumber = Math.max(...existingNumbers) + 1;
+        }
+      }
 
       if (!this.staff) {
         this.staff = {};
       }
-      this.staff.employeeId = `EMP${year}${dept.toUpperCase()}${String(
-        count + 1
-      ).padStart(3, "0")}`;
+      
+      // Generate employee ID with proper padding
+      this.staff.employeeId = `EMP${year}${dept.toUpperCase()}${String(nextNumber).padStart(3, "0")}`;
       console.log("Generated employee ID:", this.staff.employeeId);
+      
+      // Double-check for uniqueness before saving
+      const duplicate = await this.constructor.findOne({
+        "staff.employeeId": this.staff.employeeId
+      });
+      
+      if (duplicate) {
+        // If still duplicate, try with a random suffix
+        const randomSuffix = Math.floor(Math.random() * 900) + 100;
+        this.staff.employeeId = `EMP${year}${dept.toUpperCase()}${randomSuffix}`;
+        console.log("Conflict detected, using random ID:", this.staff.employeeId);
+      }
     }
-
-    next();
   } catch (error) {
     console.error("ID generation error:", error);
-    next(error);
+    throw error;
   }
 });
 
@@ -353,7 +381,21 @@ userSchema.methods.getPermissions = function () {
       "manage_contacts",
       "view_analytics"
     ],
-    super_admin: ["*"]
+    super_admin: [
+      "manage_students",
+      "manage_admissions",
+      "manage_contacts",
+      "manage_programs",
+      "manage_gallery",
+      "manage_placements",
+      "manage_faculty",
+      "manage_users",
+      "view_analytics",
+      "manage_fees",
+      "manage_library",
+      "manage_exams",
+      "manage_attendance"
+    ]
   };
 
   let permissions = rolePermissions[this.role] || [];
