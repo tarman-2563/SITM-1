@@ -3,7 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { LeadCaptureProvider } from "./context/LeadCaptureContext";
 
 import { Home } from "./pages/Home";
-import { Programs } from "./pages/Programs";
+import { Programs } from "./components/sections/Programs";
 import { Application } from "./pages/Application";
 import { Login } from "./pages/Login";
 import { Activate } from "./pages/Activate";

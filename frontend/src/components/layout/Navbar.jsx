@@ -20,13 +20,13 @@ export function Navbar() {
   }, []);
 
   const navLinks = [
-    { name: "Awards", href: "/#awards" },
     { name: "About", href: "/#about" },
     { name: "Programs", href: "/#programs" },
     { name: "Campus", href: "/#campus" },
     { name: "Admissions", href: "/#admissions" },
-    { name: "Gallery", href: "/#gallery" },
     { name: "Placement", href: "/#placement" },
+    { name: "Awards", href: "/#awards" },
+    { name: "Gallery", href: "/#gallery" },
     { name: "Contact", href: "/#contact" },
   ];
 
