@@ -213,7 +213,98 @@ export function Gallery() {
           </h2>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
+
+        {/* Mobile: Horizontal Scroll with 2x2 Grid */}
+        <div className="md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-4">
+          <div className="flex gap-4 px-1">
+            {/* First screen: 4 images in 2x2 grid */}
+            <div className="grid grid-cols-2 gap-3 snap-center flex-shrink-0 w-[90vw]">
+              {featuredImages.slice(0, 4).map((image, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer aspect-square"
+                  onClick={() => setSelectedImage(image)}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-2">
+                      <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-[10px] rounded-full mb-1">
+                        {image.category}
+                      </span>
+                      <p className="text-white font-semibold text-xs line-clamp-1">{image.alt}</p>
+                    </div>
+                  </div>
+                  {image.isHighlighted && (
+                    <div className="absolute top-2 right-2 bg-sitm-gold text-white px-2 py-1 rounded-full text-[10px] font-bold">
+                      Featured
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Second screen: 3 new images + View More */}
+            <div className="grid grid-cols-2 gap-3 snap-center flex-shrink-0 w-[90vw]">
+              {featuredImages.slice(4, 7).map((image, index) => (
+                <motion.div
+                  key={index + 4}
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.05 }}
+                  viewport={{ once: true }}
+                  className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer aspect-square"
+                  onClick={() => setSelectedImage(image)}
+                >
+                  <img
+                    src={image.src}
+                    alt={image.alt}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute bottom-0 left-0 right-0 p-2">
+                      <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-[10px] rounded-full mb-1">
+                        {image.category}
+                      </span>
+                      <p className="text-white font-semibold text-xs line-clamp-1">{image.alt}</p>
+                    </div>
+                  </div>
+                  {image.isHighlighted && (
+                    <div className="absolute top-2 right-2 bg-sitm-gold text-white px-2 py-1 rounded-full text-[10px] font-bold">
+                      Featured
+                    </div>
+                  )}
+                </motion.div>
+              ))}
+
+              {/* View More Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-linear-to-br from-sitm-navy to-sitm-maroon flex items-center justify-center aspect-square"
+                onClick={openGalleryOverlay}
+              >
+                <div className="text-center text-white">
+                  <Plus size={32} className="mx-auto mb-2 group-hover:rotate-90 transition-transform duration-300" />
+                  <p className="font-bold text-sm">View More</p>
+                  <p className="text-xs opacity-80">{allImages.length - 7}+ Images</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop: Grid Layout */}
+        <div className="hidden md:grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
           {featuredImages.map((image, index) => (
             <motion.div
               key={index}
