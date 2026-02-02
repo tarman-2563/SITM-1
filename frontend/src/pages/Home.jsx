@@ -14,6 +14,7 @@ import { WhySITM } from "../components/sections/WhySITM";
 import Mentors from "../components/sections/Mentors";
 import StartupFunding from "../components/sections/StartupFunding";
 import StudentPlaced from "../components/sections/StudentPlaced";
+import SITMInMedia from "../components/sections/SITMInMedia";
 
 export function Home() {
   return (
@@ -40,6 +41,9 @@ export function Home() {
       </Reveal>
       <Reveal width="100%">
         <StudentPlaced />
+      </Reveal>
+      <Reveal width="100%">
+        <SITMInMedia />
       </Reveal>
       <Reveal width="100%">
         <Campus />
