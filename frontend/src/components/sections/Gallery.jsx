@@ -144,17 +144,73 @@ export function Gallery() {
   };
 
   return (
-    <section id="gallery" className="py-16 bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
-      <div className="mx-auto px-5 max-w-7xl">
+    <section id="gallery" className="relative overflow-hidden py-16 bg-linear-to-br from-white via-gray-50 to-white dark:from-slate-900 dark:via-slate-950 dark:to-slate-900 transition-colors duration-300">
+      {/* Background Aurora/Glow Graphics - Distinct from About Section */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Subtle Geometric Dot Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.1]"
+          style={{ 
+            backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+            backgroundSize: "30px 30px"
+          }}
+        ></div>
+
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[10%] -right-[10%] w-[50%] h-[50%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 70, 0],
+            y: [0, 100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] -left-[15%] w-[60%] h-[60%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] right-[20%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
+      </div>
+
+      <div className="mx-auto px-5 max-w-7xl relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">
-            Campus Gallery
+          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-8 font-serif relative inline-block">
+            Photo Gallery
+            <svg
+              className="absolute -bottom-6 left-0 w-[110%] h-6 pointer-events-none"
+              viewBox="0 0 240 30"
+              preserveAspectRatio="none"
+            >
+              <defs>
+                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
+                  <stop offset="20%" stopColor="#4ade80" /> {/* Green */}
+                  <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
+                  <stop offset="100%" stopColor="#fb923c" /> {/* Orange */}
+                </linearGradient>
+              </defs>
+              <path
+                d="M5,15 L15,25 L28,5 C40,5 50,25 70,25 C90,25 100,5 130,5 C160,5 175,25 205,25 Q225,25 235,15"
+                fill="none"
+                stroke="url(#waveGradient)"
+                strokeWidth="5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </h2>
-          <div className="w-24 h-1 bg-sitm-maroon mx-auto mb-4"></div>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Explore the vibrant life at SITM through our comprehensive gallery showcasing academic excellence,
-            campus facilities, student achievements, and memorable moments.
-          </p>
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-[200px] md:auto-rows-[250px]">
@@ -176,7 +232,7 @@ export function Gallery() {
                 alt={image.alt}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-4">
                   <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-xs rounded-full mb-2">
                     {image.category}
@@ -197,7 +253,7 @@ export function Gallery() {
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
-            className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-gradient-to-br from-sitm-navy to-sitm-maroon flex items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+            className="relative rounded-xl overflow-hidden shadow-lg group cursor-pointer bg-linear-to-br from-sitm-navy to-sitm-maroon flex items-center justify-center transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
             onClick={openGalleryOverlay}
           >
             <div className="text-center text-white">
@@ -237,7 +293,7 @@ export function Gallery() {
                 alt={selectedImage.alt}
                 className="w-full h-full object-contain rounded-lg"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6 rounded-b-lg">
+              <div className="absolute bottom-0 left-0 right-0 bg-linear-to-t from-black/80 to-transparent p-6 rounded-b-lg">
                 <span className="inline-block px-3 py-1 bg-sitm-maroon text-white text-sm rounded-full mb-2">
                   {selectedImage.category}
                 </span>
@@ -290,7 +346,7 @@ export function Gallery() {
                       alt={image.alt}
                       className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="absolute inset-0 bg-linear-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       <div className="absolute bottom-0 left-0 right-0 p-3">
                         <span className="inline-block px-2 py-1 bg-sitm-maroon text-white text-xs rounded-full mb-1">
                           {image.category}

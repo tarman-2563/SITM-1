@@ -103,51 +103,54 @@ export function WhySITM() {
   const activeData = comparisonData.find((item) => item.id === activeTab);
 
   return (
-    <section className="relative py-24 bg-slate-900 overflow-hidden">
-      {/* Background Graphics - Random Rope-like Flow */}
-      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <svg
-          className="absolute w-full h-full opacity-80"
-          preserveAspectRatio="none"
-          viewBox="0 0 1200 800"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <motion.path
-            d="M-100,200 C150,50 350,500 600,250 C850,0 1050,450 1300,150"
-            stroke="url(#rope-gradient)"
-            strokeWidth="50"
-            strokeLinecap="round"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 1 }}
-            transition={{ duration: 4, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-          />
-          <motion.path
-            d="M-100,600 C200,800 450,150 700,550 C950,950 1100,400 1300,700"
-            stroke="url(#rope-gradient)"
-            strokeWidth="40"
-            strokeLinecap="round"
-            initial={{ pathLength: 0, opacity: 0 }}
-            animate={{ pathLength: 1, opacity: 0.8 }}
-            transition={{ duration: 5, delay: 1, ease: "easeInOut", repeat: Infinity, repeatType: "reverse" }}
-          />
-          <defs>
-            <linearGradient id="rope-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
-              <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
-              <stop offset="100%" stopColor="#f59e0b" /> {/* Amber */}
-            </linearGradient>
-          </defs>
-        </svg>
+    <section className="relative py-24 bg-white dark:bg-slate-950 overflow-hidden">
+      {/* Background Graphics - Gradient Blobs (Visible in Light & Dark Mode) */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none transition-opacity duration-500">
+        {/* Subtle Geometric Dot Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.1]"
+          style={{ 
+            backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+            backgroundSize: "30px 30px"
+          }}
+        ></div>
+
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[10%] -right-[10%] w-[50%] h-[50%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 80, 0],
+            y: [0, -100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute -bottom-[10%] left-[5%] w-[60%] h-[60%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[20%] -right-[10%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
       </div>
 
       <div className="container relative z-10 mx-auto px-4">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 px-4">
           <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-3xl md:text-4xl font-serif font-bold text-white mb-4"
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="text-3xl md:text-4xl font-serif font-bold text-sitm-navy dark:text-white mb-4"
           >
             Beyond the Degree: <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-yellow-400 to-amber-500">Are you ready</span> for the Real World?
           </motion.h2>
@@ -155,32 +158,44 @@ export function WhySITM() {
 
         <div className="flex flex-col lg:flex-row gap-8 items-start">
           {/* Navigation Sidebar */}
-          <div className="w-full lg:w-1/3 space-y-3">
+          <motion.div 
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-1/3 space-y-3"
+          >
             {comparisonData.map((item) => (
               <button
                 key={item.id}
                 onClick={() => setActiveTab(item.id)}
-                className={`w-full flex items-center gap-4 p-5 rounded-xl transition-all duration-300 text-left border overflow-hidden relative group ${
+                className={`w-full flex items-center gap-4 rounded-xl transition-all duration-300 text-left border overflow-hidden relative group ${
                   activeTab === item.id
-                    ? "bg-gradient-to-r from-sitm-maroon to-sitm-gold text-white border-transparent shadow-xl scale-105"
-                    : "bg-linear-to-r from-sitm-navy to-sitm-gold text-white border-transparent hover:scale-[1.02] shadow-lg"
+                    ? "bg-gradient-to-r from-sitm-gold to-white text-sitm-navy border-transparent shadow-xl scale-110 py-7 px-5"
+                    : "bg-gradient-to-r from-white to-sitm-gold text-sitm-navy border-transparent hover:scale-[1.02] shadow-lg p-5"
                 }`}
               >
-                <div className={`p-3 rounded-lg flex items-center justify-center ${activeTab === item.id ? "bg-white/20 text-white" : "bg-white/20 text-white"}`}>
+                <div className={`p-3 rounded-lg flex items-center justify-center ${activeTab === item.id ? "bg-black/10 text-sitm-navy" : "bg-black/5 text-sitm-navy"}`}>
                   {item.icon}
                 </div>
                 <div className="relative z-10">
-                  <h4 className="font-bold">{item.category}</h4>
-                  <p className={`text-xs ${activeTab === item.id ? "text-gray-200" : "text-gray-200"}`}>
+                  <h4 className={`font-bold transition-all duration-300 ${activeTab === item.id ? "text-xl" : "text-base"}`}>{item.category}</h4>
+                  <p className={`text-xs ${activeTab === item.id ? "text-slate-800" : "text-slate-700"}`}>
                     Evolutionary Edge
                   </p>
                 </div>
               </button>
             ))}
-          </div>
+          </motion.div>
 
           {/* Stacking Comparison Cards */}
-          <div className="w-full lg:w-2/3 relative h-[500px] md:h-[450px]">
+          <motion.div 
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8 }}
+            className="w-full lg:w-2/3 relative h-[500px] md:h-[450px]"
+          >
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeTab}
@@ -190,12 +205,12 @@ export function WhySITM() {
                 transition={{ type: "spring", damping: 20, stiffness: 100 }}
                 className="absolute inset-0 grid md:grid-cols-2 gap-4"
               >
-                {/* SITM Card (Highlighted) */}
-                <div className="bg-sitm-navy text-white rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden group z-10 border border-white/10">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-sitm-maroon/20 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-sitm-maroon/30 transition-colors"></div>
+                {/* SITM Card (Highlighted - Premium Gold) */}
+                <div className="bg-sitm-gold text-sitm-navy rounded-3xl p-8 shadow-[0_20px_50px_rgba(0,0,0,0.3)] relative overflow-hidden group z-10 border border-white/20">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/20 rounded-full blur-3xl -mr-10 -mt-10 group-hover:bg-white/30 transition-colors"></div>
                   <div className="flex items-center gap-3 mb-8">
-                    <div className="w-10 h-10 bg-sitm-gold rounded-full flex items-center justify-center">
-                      <Check className="text-sitm-navy" size={24} />
+                    <div className="w-10 h-10 bg-sitm-navy rounded-full flex items-center justify-center">
+                      <Check className="text-sitm-gold" size={24} />
                     </div>
                     <h3 className="text-2xl font-bold font-serif">{activeData.sitm.title}</h3>
                   </div>
@@ -208,8 +223,8 @@ export function WhySITM() {
                         transition={{ delay: i * 0.1 + 0.3 }}
                         className="flex items-start gap-3"
                       >
-                        <div className="mt-1 w-5 h-5 bg-sitm-maroon/40 rounded-full flex items-center justify-center shrink-0">
-                           <div className="w-2 h-2 bg-sitm-gold rounded-full" />
+                        <div className="mt-1 w-5 h-5 bg-sitm-navy/10 rounded-full flex items-center justify-center shrink-0">
+                           <div className="w-2 h-2 bg-sitm-navy rounded-full" />
                         </div>
                         <span className="text-lg leading-tight font-medium">{feature}</span>
                       </motion.li>
@@ -217,19 +232,19 @@ export function WhySITM() {
                   </ul>
                 </div>
 
-                {/* Traditional Colleges Card (Solid Mustard Tinted) */}
-                <div className="bg-[#E1BD40] dark:bg-[#C1A130] border border-sitm-gold/30 rounded-3xl p-8 shadow-sm scale-95 opacity-90 transition-all duration-300 md:-ml-8 z-0">
+                {/* Traditional Colleges Card (Premium White) */}
+                <div className="bg-white dark:bg-slate-200 border-2 border-sitm-gold rounded-3xl p-8 shadow-sm scale-95 opacity-90 transition-all duration-300 md:-ml-8 z-0">
                    <div className="flex items-center gap-3 mb-8">
-                    <div className="w-10 h-10 bg-black/10 dark:bg-black/20 rounded-full flex items-center justify-center">
-                      <X className="text-red-700" size={24} />
+                    <div className="w-10 h-10 bg-black/5 rounded-full flex items-center justify-center">
+                      <X className="text-red-500" size={24} />
                     </div>
-                    <h3 className="text-2xl font-bold font-serif text-slate-900 dark:text-slate-900">{activeData.traditional.title}</h3>
+                    <h3 className="text-2xl font-bold font-serif text-slate-900">{activeData.traditional.title}</h3>
                   </div>
                   <ul className="space-y-5">
                     {activeData.traditional.features.map((feature, i) => (
-                      <li key={i} className="flex items-start gap-3 text-slate-800">
+                      <li key={i} className="flex items-start gap-3 text-slate-600">
                         <div className="mt-1 w-5 h-5 bg-black/5 rounded-full flex items-center justify-center shrink-0">
-                           <div className="w-2 h-2 bg-slate-600 rounded-full" />
+                           <div className="w-2 h-2 bg-slate-400 rounded-full" />
                         </div>
                         <span className="text-md leading-tight font-medium">{feature}</span>
                       </li>
@@ -238,7 +253,7 @@ export function WhySITM() {
                 </div>
               </motion.div>
             </AnimatePresence>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

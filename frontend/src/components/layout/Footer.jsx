@@ -1,6 +1,6 @@
 import { Facebook, Twitter, Instagram, Linkedin, Youtube, Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "../common/Button";
-import logo from "../../assets/logo.jpeg";
+import logo from "../../assets/logo_new-removebg-preview.png";
 
 export function Footer() {
   return (

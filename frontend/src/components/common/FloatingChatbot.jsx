@@ -95,7 +95,7 @@ export function FloatingChatbot() {
           // Small delay to prevent accidental click after drag
           setTimeout(() => setIsDragging(false), 50);
         }}
-        className="fixed bottom-10 right-10 z-[9999] cursor-grab active:cursor-grabbing pointer-events-auto touch-none"
+        className="fixed bottom-10 right-10 z-9999 cursor-grab active:cursor-grabbing pointer-events-auto touch-none"
         initial={{ opacity: 0, scale: 0.5 }}
         animate={{ opacity: 1, scale: 1 }}
       >
@@ -110,7 +110,7 @@ export function FloatingChatbot() {
               onClick={(e) => e.stopPropagation()}
             >
               {/* Chat Header */}
-              <div className="bg-gradient-to-r from-sitm-navy to-sitm-maroon p-4 text-white">
+              <div className="bg-linear-to-r from-sitm-navy to-sitm-maroon p-4 text-white">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <div className="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center">

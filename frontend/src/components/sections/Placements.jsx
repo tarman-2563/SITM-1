@@ -4,7 +4,14 @@ import { Counter } from "../common/Counter";
 
 export function Placements() {
   return (
-    <section id="placement" className="relative py-20 bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden">
+    <section id="placement" className="relative py-28 overflow-hidden
+      bg-linear-to-b
+      from-[#7b2d2d]/20
+      via-white
+      to-[#7b2d2d]/20
+
+      dark:bg-slate-950
+      transition-colors duration-300">
       {/* Advanced "Neural Circuit" Background - 60/20/12/8 Re-design */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Layer 1: Subtle Navy Grid */}
@@ -116,7 +123,7 @@ export function Placements() {
         <div className="grid md:grid-cols-4 gap-6 mb-20">
             {[
                 { label: "Highest Package", value: <Counter from={1} to={12} duration={3} suffix=" LPA" />, icon: TrendingUp },
-                { label: "Partner Companies", value: "150+", icon: Building2 },
+                { label: "Partner Companies", value: "1500+", icon: Building2 },
                 { label: "Students Placed", value: "95%", icon: Users },
                 { label: "Industry Awards", value: "25+", icon: Award },
             ].map((stat, i) => (
@@ -130,8 +137,17 @@ export function Placements() {
             ))}
         </div>
 
-        <div className="bg-sitm-navy/5 dark:bg-white/5 rounded-3xl p-10">
-            <h3 className="text-2xl font-bold font-serif text-center mb-10 text-sitm-navy dark:text-white">Our Placement Companies</h3>
+        <div className="bg-blue-500/5 dark:bg-white/5 rounded-3xl p-10">
+        <div className="text-center mb-10">
+             <h2 className="text-4xl md:text-5xl font-extrabold">
+          <span className="text-gray-900 dark:text-white">
+            Our Placement
+          </span>{" "}
+          <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">
+            Companies
+          </span>
+        </h2>
+        </div>
             
             {/* Infinite Scroll Marquee */}
             {/* Infinite Scroll Marquee */}
@@ -140,22 +156,22 @@ export function Placements() {
                 <div className="animate-marquee whitespace-nowrap flex items-center gap-8">
                     {[
                         { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
-                        { name: "Wipro", color: "text-[#000000]", logo: "wipro.com" },
+                        { name: "Wipro", color: "text-[#0070AD]", logo: "wipro.com" },
                         { name: "Infosys", color: "text-[#007CC3]", logo: "infosys.com" },
                         { name: "Capgemini", color: "text-[#0070AD]", logo: "capgemini.com" },
                         { name: "HDFC Bank", color: "text-[#004C8F]", logo: "hdfcbank.com" },
-                        { name: "Amazon", color: "text-[#232F3E]", logo: "amazon.com" },
+                        { name: "Amazon", color: "text-[#0070AD]", logo: "amazon.com" },
                         { name: "Tech Mahindra", color: "text-[#E51A2C]", logo: "techmahindra.com" },
                         { name: "Cognizant", color: "text-[#0033A0]", logo: "cognizant.com" },
                         { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
                         { name: "IBM", color: "text-[#052FAD]", logo: "ibm.com" },
                         // Duplicates for loop
                         { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
-                        { name: "Wipro", color: "text-[#000000]", logo: "wipro.com" },
+                        { name: "Wipro", color: "text-[#0070AD]", logo: "wipro.com" },
                         { name: "Infosys", color: "text-[#007CC3]", logo: "infosys.com" },
                         { name: "Capgemini", color: "text-[#0070AD]", logo: "capgemini.com" },
                         { name: "HDFC Bank", color: "text-[#004C8F]", logo: "hdfcbank.com" },
-                        { name: "Amazon", color: "text-[#232F3E]", logo: "amazon.com" },
+                        { name: "Amazon", color: "text-[#0070AD]", logo: "amazon.com" },
                         { name: "Tech Mahindra", color: "text-[#E51A2C]", logo: "techmahindra.com" },
                         { name: "Cognizant", color: "text-[#0033A0]", logo: "cognizant.com" },
                         { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
@@ -185,7 +201,7 @@ export function Placements() {
                         { name: "Google", color: "text-[#4285F4]", logo: "google.com" },
                         { name: "Deloitte", color: "text-[#86BC25]", logo: "deloitte.com" },
                         { name: "Genus", color: "text-[#F58220]", logo: "genuspower.com" },
-                        { name: "ITC Limited", color: "text-[#000000]", logo: "itcportal.com" },
+                        { name: "ITC Limited", color: "text-[#0070AD]", logo: "itcportal.com" },
                         { name: "Emami", color: "text-[#00964D]", logo: "emamiltd.in" },
                         { name: "Britannia", color: "text-[#ED1C24]", logo: "britannia.co.in" },
                         { name: "Sutherland", color: "text-[#C8102E]", logo: "sutherlandglobal.com" },
@@ -196,7 +212,7 @@ export function Placements() {
                         { name: "Google", color: "text-[#4285F4]", logo: "google.com" },
                         { name: "Deloitte", color: "text-[#86BC25]", logo: "deloitte.com" },
                         { name: "Genus", color: "text-[#F58220]", logo: "genuspower.com" },
-                        { name: "ITC Limited", color: "text-[#000000]", logo: "itcportal.com" },
+                        { name: "ITC Limited", color: "text-[#0070AD]", logo: "itcportal.com" },
                         { name: "Emami", color: "text-[#00964D]", logo: "emamiltd.in" },
                         { name: "Britannia", color: "text-[#ED1C24]", logo: "britannia.co.in" },
                         { name: "Sutherland", color: "text-[#C8102E]", logo: "sutherlandglobal.com" },
