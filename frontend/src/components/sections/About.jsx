@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AboutSidebar } from "./AboutSidebar";
+import HostelImg from "../../assets/gallery/Hostel.jpg";
 
 export function About() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -75,7 +76,8 @@ export function About() {
                 viewport={{ once: true }}
                 className="absolute top-1 right-2 w-24 h-24 flex items-center justify-center"
               >
-                  <div className="absolute inset-0 bg-linear-to-br from-sitm-maroon via-[#5d1014] to-black/80 rounded-full border-2 border-white shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+                  <div className="absolute inset-0 rounded-full border-2 border-white shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden">
+                      <img src={HostelImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
                       <motion.div 
                         animate={{ x: ["-100%", "200%"] }}
                         transition={{ duration: 4, repeat: Infinity, ease: "linear", repeatDelay: 1 }}
@@ -96,12 +98,12 @@ export function About() {
                     className="text-center relative z-20 pointer-events-none"
                   >
                       <span 
-                        className="block text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_8px_15px_rgba(0,0,0,0.5)] filter tracking-tighter"
+                      className="block text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_8px_15px_rgba(0,0,0,0.5)] filter tracking-tighter"
                       >
                         31+
                       </span>
                       <span 
-                        className="text-[8px] font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 uppercase tracking-[0.15em] leading-tight block drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
+                      className="text-[8px] font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 uppercase tracking-[0.15em] leading-tight block drop-shadow-[0_4px_8px_rgba(0,0,0,0.4)]"
                       >
                         Years of<br/>Legacy
                       </span>
@@ -169,7 +171,8 @@ export function About() {
                 className="absolute -bottom-10 -right-12 w-44 h-44 flex items-center justify-center md:flex group/badge"
               >
                   {/* The Maroon Circle Backdrop (Clipped for shine) */}
-                  <div className="absolute inset-0 bg-linear-to-br from-sitm-maroon via-[#5d1014] to-black/80 rounded-full border-4 border-white dark:border-slate-800 shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_-8px_15px_rgba(0,0,0,0.5),inset_0_8px_15px_rgba(255,255,255,0.2)] overflow-hidden">
+                  <div className="absolute inset-0 rounded-full border-4 border-white dark:border-slate-800 shadow-[0_25px_50px_rgba(0,0,0,0.4),inset_0_-8px_15px_rgba(0,0,0,0.5),inset_0_8px_15px_rgba(255,255,255,0.2)] overflow-hidden">
+                      <img src={HostelImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
                       {/* Shine Animation Overlay */}
                       <motion.div 
                         animate={{ x: ["-100%", "200%"] }}
