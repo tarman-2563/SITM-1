@@ -61,15 +61,59 @@ export function Scholarships() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-br from-sitm-navy via-sitm-maroon to-sitm-navy overflow-hidden">
+      <section className="relative pt-36 pb-20 bg-gradient-to-br from-sitm-navy via-sitm-maroon to-sitm-navy overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         
         {/* Background Pattern */}
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"></div>
-          <div className="absolute top-32 right-20 w-16 h-16 border-2 border-white rounded-full"></div>
-          <div className="absolute bottom-20 left-1/4 w-12 h-12 border-2 border-white rounded-full"></div>
-          <div className="absolute bottom-32 right-1/3 w-24 h-24 border-2 border-white rounded-full"></div>
+          <motion.div 
+            animate={{ 
+              rotate: 360,
+              scale: [1, 1.1, 1]
+            }}
+            transition={{ 
+              duration: 20, 
+              repeat: Infinity, 
+              ease: "linear" 
+            }}
+            className="absolute top-10 left-10 w-20 h-20 border-2 border-white rounded-full"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              rotate: -360,
+              y: [0, -10, 0]
+            }}
+            transition={{ 
+              duration: 15, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute top-32 right-20 w-16 h-16 border-2 border-white rounded-full"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              scale: [1, 1.2, 1],
+              opacity: [0.3, 0.7, 0.3]
+            }}
+            transition={{ 
+              duration: 8, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute bottom-20 left-1/4 w-12 h-12 border-2 border-white rounded-full"
+          ></motion.div>
+          <motion.div 
+            animate={{ 
+              rotate: 360,
+              x: [0, 15, 0]
+            }}
+            transition={{ 
+              duration: 12, 
+              repeat: Infinity, 
+              ease: "easeInOut" 
+            }}
+            className="absolute bottom-32 right-1/3 w-24 h-24 border-2 border-white rounded-full"
+          ></motion.div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -79,37 +123,161 @@ export function Scholarships() {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <div className="flex justify-center mb-6">
-              <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <Award className="w-10 h-10 text-white" />
-              </div>
-            </div>
+            <motion.div 
+              initial={{ scale: 0, rotate: -180 }}
+              animate={{ scale: 1, rotate: 0 }}
+              transition={{ duration: 1, delay: 0.3, type: "spring", bounce: 0.5 }}
+              className="flex justify-center mb-6"
+            >
+              <motion.div 
+                animate={{ 
+                  boxShadow: [
+                    "0 0 20px rgba(255,255,255,0.3)",
+                    "0 0 40px rgba(255,255,255,0.5)",
+                    "0 0 20px rgba(255,255,255,0.3)"
+                  ]
+                }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm"
+              >
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                >
+                  <Award className="w-10 h-10 text-white" />
+                </motion.div>
+              </motion.div>
+            </motion.div>
             
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-              SITM Scholarships
-            </h1>
+            <motion.h1 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.5 }}
+              className="text-4xl md:text-6xl font-bold text-white mb-6"
+            >
+              <motion.span
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.7 }}
+              >
+                SITM 
+              </motion.span>
+              <motion.span
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.9 }}
+              >
+                {" "}Scholarships
+              </motion.span>
+            </motion.h1>
             <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
               Empowering Dreams, Enabling Excellence
             </p>
-            <p className="text-lg text-white/80 mb-10 max-w-2xl mx-auto">
+
+            {/* Stats integrated into hero */}
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10"
+            >
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 0.8 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-4 cursor-pointer"
+              >
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.0 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  ₹2Cr+
+                </motion.div>
+                <div className="text-white/80 text-sm">Scholarships Awarded</div>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.0 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-4 cursor-pointer"
+              >
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.2 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  500+
+                </motion.div>
+                <div className="text-white/80 text-sm">Students Benefited</div>
+              </motion.div>
+              <motion.div 
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: 1.2 }}
+                whileHover={{ scale: 1.05, y: -5 }}
+                className="bg-white/10 backdrop-blur-sm rounded-xl p-4 cursor-pointer"
+              >
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.8, delay: 1.4 }}
+                  className="text-3xl font-bold text-white mb-1"
+                >
+                  4
+                </motion.div>
+                <div className="text-white/80 text-sm">Scholarship Programs</div>
+              </motion.div>
+            </motion.div>
+
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.6 }}
+              className="text-lg text-white/80 mb-10 max-w-2xl mx-auto"
+            >
               At SITM, we believe that financial constraints should never be a barrier to quality education. 
               Discover our scholarship programs designed to support deserving students.
-            </p>
+            </motion.p>
             
-            <Button
-              onClick={openApplyNowModal}
-              size="lg"
-              className="bg-white text-sitm-navy hover:bg-gray-100 font-semibold px-8 py-4 text-lg"
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.8 }}
+              className="flex justify-center"
             >
-              Apply for Scholarships
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <Button
+                  onClick={openApplyNowModal}
+                  size="lg"
+                  className="bg-white text-sitm-navy hover:bg-gray-100 font-semibold px-8 py-4 text-lg"
+                >
+                  Apply for Scholarships
+                  <motion.div
+                    animate={{ x: [0, 5, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="ml-2"
+                  >
+                    <ArrowRight className="w-5 h-5" />
+                  </motion.div>
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
+      {/* Remove the separate stats section */}
+
       {/* Scholarships Grid */}
-      <section className="py-20">
+      <section className="py-20 bg-gray-50 dark:bg-slate-950">
         <div className="container mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -117,12 +285,22 @@ export function Scholarships() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="text-center mb-16"
           >
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <motion.h2 
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4"
+            >
               Available Scholarship Programs
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+              className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto"
+            >
               Choose from our diverse range of scholarship opportunities designed to support students from all backgrounds.
-            </p>
+            </motion.p>
           </motion.div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
@@ -132,7 +310,7 @@ export function Scholarships() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className={`${scholarship.bgColor} ${scholarship.borderColor} border rounded-2xl p-8 hover:shadow-lg transition-all duration-300 group cursor-pointer`}
+                className={`${scholarship.bgColor} ${scholarship.borderColor} border rounded-2xl p-8 hover:shadow-2xl hover:shadow-sitm-maroon/20 hover:-translate-y-2 hover:scale-105 transition-all duration-300 group cursor-pointer transform`}
               >
                 <div className="flex items-start gap-6">
                   <div className={`w-16 h-16 bg-gradient-to-br ${scholarship.color} rounded-xl flex items-center justify-center text-white flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}>
@@ -168,75 +346,103 @@ export function Scholarships() {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <div className="flex justify-center mb-6">
-              <div className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm">
-                <Heart className="w-8 h-8 text-white" />
-              </div>
-            </div>
+            <motion.div 
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="flex justify-center mb-6"
+            >
+              <motion.div 
+                animate={{ 
+                  scale: [1, 1.1, 1],
+                  rotate: [0, 5, -5, 0]
+                }}
+                transition={{ 
+                  duration: 4, 
+                  repeat: Infinity, 
+                  ease: "easeInOut" 
+                }}
+                className="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center backdrop-blur-sm"
+              >
+                <motion.div
+                  animate={{ 
+                    scale: [1, 1.2, 1]
+                  }}
+                  transition={{ 
+                    duration: 2, 
+                    repeat: Infinity, 
+                    ease: "easeInOut" 
+                  }}
+                >
+                  <Heart className="w-8 h-8 text-white" />
+                </motion.div>
+              </motion.div>
+            </motion.div>
             
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-3xl md:text-4xl font-bold text-white mb-6"
+            >
               Your Dreams Matter to Us
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
+            </motion.h2>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+              className="text-xl text-white/90 mb-8"
+            >
               Don't let financial barriers stop you from achieving excellence. 
               Apply now and take the first step towards your bright future.
-            </p>
+            </motion.p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                onClick={openApplyNowModal}
-                size="lg"
-                className="bg-white text-sitm-navy hover:bg-gray-100 font-semibold px-8 py-4"
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.8 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+            >
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
-                <GraduationCap className="mr-2 w-5 h-5" />
-                Start Your Application
-              </Button>
+                <Button
+                  onClick={openApplyNowModal}
+                  size="lg"
+                  className="bg-white text-sitm-navy hover:bg-gray-100 font-semibold px-8 py-4"
+                >
+                  <motion.div
+                    animate={{ rotate: [0, 10, -10, 0] }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                    className="mr-2"
+                  >
+                    <GraduationCap className="w-5 h-5" />
+                  </motion.div>
+                  Start Your Application
+                </Button>
+              </motion.div>
               
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white hover:text-sitm-navy font-semibold px-8 py-4"
-                onClick={() => window.location.href = 'mailto:scholarships@sitm.ac.in'}
+              <motion.div
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Contact Scholarship Office
-              </Button>
-            </div>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="border-white text-white hover:bg-white hover:text-sitm-navy font-semibold px-8 py-4"
+                  onClick={() => window.location.href = 'mailto:scholarships@sitm.ac.in'}
+                >
+                  Contact Scholarship Office
+                </Button>
+              </motion.div>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats Section */}
+      {/* White space before footer */}
       <section className="py-16 bg-white dark:bg-slate-900">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              <div className="text-4xl font-bold text-sitm-maroon dark:text-sitm-gold mb-2">₹2Cr+</div>
-              <div className="text-gray-600 dark:text-gray-300">Scholarships Awarded</div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <div className="text-4xl font-bold text-sitm-maroon dark:text-sitm-gold mb-2">500+</div>
-              <div className="text-gray-600 dark:text-gray-300">Students Benefited</div>
-            </motion.div>
-            
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <div className="text-4xl font-bold text-sitm-maroon dark:text-sitm-gold mb-2">4</div>
-              <div className="text-gray-600 dark:text-gray-300">Scholarship Programs</div>
-            </motion.div>
-          </div>
-        </div>
       </section>
 
       <Footer />

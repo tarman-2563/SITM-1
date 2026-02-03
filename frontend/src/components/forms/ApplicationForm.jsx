@@ -234,7 +234,7 @@ export function ApplicationForm({
           {success ? (
             <div className="flex flex-col h-full">
               {/* Success Header with Close Button */}
-              <div className="flex-shrink-0 bg-gradient-to-r from-green-600 via-green-700 to-green-600 dark:from-green-800 dark:via-green-700 dark:to-green-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
+              <div className="flex-shrink-0 bg-gradient-to-r from-green-600 via-green-700 to-green-600 dark:from-green-800 dark:via-green-700 dark:to-green-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between rounded-t-2xl sm:rounded-t-3xl">
                 <div className="flex items-center gap-4 sm:gap-6">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 rounded-full flex items-center justify-center">
                     <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -283,7 +283,7 @@ export function ApplicationForm({
           ) : (
             <>
               {/* Header - Fixed height */}
-              <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
+              <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between rounded-t-2xl sm:rounded-t-3xl">
                 <div className="flex items-center gap-4 sm:gap-6">
                   <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-full flex items-center justify-center">
                     <GraduationCap className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
