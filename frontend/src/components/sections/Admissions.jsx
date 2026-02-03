@@ -6,20 +6,31 @@ export function Admissions() {
   const { openDownloadBrochureModal, openEnquireNowModal } = useLeadCapture();
 
   return (
-    <section id="admissions" className="py-20 bg-sitm-navy text-white relative overflow-hidden">
+    <section id="admissions" className="py-20 relative
+    transition-colors duration-300
+
+    /* Light mode */
+    bg-linear-to-b
+    from-purple-300
+    via-gray-600
+    to-purple-300
+
+    /* Dark mode (unchanged) */
+    dark:bg-slate-950
+     overflow-hidden">
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-16 items-center">
             <div>
-                <span className="text-sitm-gold font-serif italic text-lg">Join Us</span>
+                <span className="text-sitm-gold font-serif italic text-2xl">Join Us</span>
                 <h2 className="text-4xl md:text-5xl font-bold text-white mt-2 mb-6 font-serif">Admission Process 2026</h2>
-                <p className="text-gray-300 text-lg mb-8">
+                <p className="text-blue-100 text-lg mb-8">
                     Start your journey towards a successful career. Applications are now open for the academic year 2026-27. Secure your seat today!
                 </p>
 
                 <div className="space-y-6 mb-10">
-                    <h3 className="text-2xl font-bold font-serif text-sitm-gold">Eligibility Criteria</h3>
+                    <h3 className="text-2xl font-bold font-serif text-sitm-gold ">Eligibility Criteria</h3>
                     <ul className="space-y-4">
                         {[
                             "Passed 10+2 with Physics, Chemistry, and Mathematics.",
@@ -29,7 +40,7 @@ export function Admissions() {
                         ].map((item, i) => (
                             <li key={i} className="flex items-start gap-3">
                                 <CheckCircle className="text-sitm-gold shrink-0 mt-1" size={20} />
-                                <span className="text-gray-200 text-lg">{item}</span>
+                                <span className="text-blue-100 text-lg">{item}</span>
                             </li>
                         ))}
                     </ul>

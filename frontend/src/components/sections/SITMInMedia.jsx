@@ -31,8 +31,8 @@ export default function SITMInMedia() {
       dark:bg-slate-950 
       overflow-hidden ">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4">
-        <h2 className="text-4xl md:text-5xl font-extrabold">
+        
+        <h2 className="text-4xl md:text-5xl font-extrabold pb-5">
           <span className="text-gray-900 dark:text-white">
             SITM In
           </span>{" "}
@@ -40,7 +40,7 @@ export default function SITMInMedia() {
             Media
           </span>
         </h2>
-      </div>
+      
 
         <div className="flex flex-col lg:flex-row items-start gap-12 lg:gap-8">
           

@@ -7,7 +7,7 @@ export function Placements() {
     <section id="placement" className="relative py-28 overflow-hidden
       bg-linear-to-b
       from-[#7b2d2d]/20
-      via-white
+      via-gray-100
       to-[#7b2d2d]/20
 
       dark:bg-slate-950
@@ -127,11 +127,11 @@ export function Placements() {
                 { label: "Students Placed", value: "95%", icon: Users },
                 { label: "Industry Awards", value: "25+", icon: Award },
             ].map((stat, i) => (
-                <div key={i} className="bg-gray-50 dark:bg-slate-900 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-slate-800 text-center hover:-translate-y-2 transition-transform duration-300 group">
+                <div key={i} className="bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300 group">
                     <div className="w-16 h-16 mx-auto bg-sitm-gold/10 rounded-full flex items-center justify-center text-sitm-maroon dark:text-sitm-gold mb-4 group-hover:bg-sitm-maroon group-hover:text-white transition-colors duration-300">
                         <stat.icon size={32} />
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold font-serif text-sitm-navy dark:text-white mb-2">{stat.value}</div>
+                    <div className="text-4xl md:text-5xl font-bold font-serif text-sitm-navy mb-2">{stat.value}</div>
                     <div className="text-sm uppercase tracking-wide text-gray-500">{stat.label}</div>
                 </div>
             ))}
@@ -140,12 +140,11 @@ export function Placements() {
         <div className="bg-blue-500/5 dark:bg-white/5 rounded-3xl p-10">
         <div className="text-center mb-10">
              <h2 className="text-4xl md:text-5xl font-extrabold">
-          <span className="text-gray-900 dark:text-white">
-            Our Placement
-          </span>{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">
-            Companies
-          </span>
+          <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
+                Our Placement Companies
+                </span>
+              </span>
         </h2>
         </div>
             
@@ -177,7 +176,7 @@ export function Placements() {
                         { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
                         { name: "IBM", color: "text-[#052FAD]", logo: "ibm.com" },
                     ].map((company, i) => (
-                        <div key={`r1-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r1-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
@@ -189,8 +188,8 @@ export function Placements() {
                         </div>
                     ))}
                 </div>
-                <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50  to-transparent z-2"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 to-transparent z-2"></div>
             </div>
 
             {/* Infinite Scroll Marquee - Row 2 (Reverse) */}
@@ -219,7 +218,7 @@ export function Placements() {
                         { name: "Mahindra", color: "text-[#E31837]", logo: "mahindra.com" },
                         { name: "JCB", color: "text-[#FDB913]", logo: "jcb.com" },
                     ].map((company, i) => (
-                        <div key={`r2-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r2-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
@@ -231,8 +230,8 @@ export function Placements() {
                         </div>
                     ))}
                 </div>
-                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 to-transparent z-10"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 to-transparent z-10"></div>
             </div>
 
             {/* Infinite Scroll Marquee - Row 3 */}
@@ -261,7 +260,7 @@ export function Placements() {
                         { name: "Indian Oil", color: "text-[#F47920]", logo: "iocl.com" },
                         { name: "Quality Austria", color: "text-[#E30613]", logo: "qualityaustria.com" },
                     ].map((company, i) => (
-                        <div key={`r3-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white dark:bg-slate-900 rounded-2xl shadow-md border border-gray-100 dark:border-slate-800 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r3-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white  rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
@@ -273,8 +272,8 @@ export function Placements() {
                         </div>
                     ))}
                 </div>
-                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
-                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 dark:from-slate-900 to-transparent z-10"></div>
+                 <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 to-transparent z-10"></div>
+                <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 to-transparent z-10"></div>
             </div>
         </div>
       </div>

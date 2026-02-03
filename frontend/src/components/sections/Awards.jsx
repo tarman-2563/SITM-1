@@ -48,7 +48,13 @@ export function Awards() {
   ];
 
   return (
-    <section id="awards" className="py-24 bg-white dark:bg-slate-900 transition-colors duration-300 relative overflow-hidden">
+    <section id="awards" className="py-24 bg-linear-to-b
+      from-purple-300
+      via-white
+      to-[#7b2d2d]/20
+
+      dark:bg-slate-950
+      transition-colors duration-300 overflow-hidden">
         {/* Background Decorative Elements */}
         <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
             <div className="absolute -top-24 -left-24 w-96 h-96 bg-sitm-gold/5 rounded-full blur-3xl"></div>
@@ -71,9 +77,11 @@ export function Awards() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-6 font-serif"
           >
-            Awards & Achievements
+            <p className="text-transparent bg-clip-text bg-linear-to-r from-red-500 via-yellow-400 to-green-600 relative z-10 px-2">
+              Awards & Achievements
+            </p>
+            
           </motion.h2>
-          <div className="w-24 h-1 bg-sitm-maroon mx-auto rounded-full"></div>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">

@@ -15,6 +15,7 @@ import { AdminUserManagement } from "./pages/admin/AdminUserManagement";
 
 import { FloatingChatbot } from "./components/common/FloatingChatbot";
 import { FloatingCTA } from "./components/common/FloatingCTA";
+import FloatingWhatsApp from "./components/common/FloatingWhatsApp";
 
 // Import API test utility in development only
 if (import.meta.env.DEV) {
@@ -47,6 +48,7 @@ function App() {
           </Routes>
 
           {/* Global floating components */}
+          <FloatingWhatsApp/>
           <FloatingChatbot />
           <FloatingCTA />
         </Router>
