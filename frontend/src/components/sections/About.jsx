@@ -74,7 +74,7 @@ export function About() {
                 initial={{ scale: 0.8, opacity: 0 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                className="absolute top-1 right-2 w-24 h-24 flex items-center justify-center"
+                className="absolute bottom-1 right-1 w-28 h-28 flex items-center justify-center"
               >
                   <div className="absolute inset-0 rounded-full border-2 border-white shadow-[0_10px_30px_rgba(0,0,0,0.5)] overflow-hidden">
                       <img src={HostelImg} alt="" className="absolute inset-0 w-full h-full object-cover" />
@@ -98,7 +98,7 @@ export function About() {
                     className="text-center relative z-20 pointer-events-none"
                   >
                       <span 
-                      className="block text-3xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_8px_15px_rgba(0,0,0,0.5)] filter tracking-tighter"
+                      className="block text-4xl font-black text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 drop-shadow-[0_8px_15px_rgba(0,0,0,0.5)] filter tracking-tighter"
                       >
                         31+
                       </span>
@@ -133,7 +133,7 @@ export function About() {
                 </p>
 
                 <p>
-                  His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
+                  His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 text-border-black">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
                 </p>
               </div>
 
@@ -244,7 +244,7 @@ export function About() {
                 From his early student years, Dr. Lodh supported himself through home tuitions. Teaching was not an afterthought. It was survival, training, and purpose rolled into one. There was no patron, no inherited network, no institutional backing. Every step forward was earned independently.
               </p>
               <p>
-                His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
+                His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 text-border-black">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
               </p>
             </div>
 

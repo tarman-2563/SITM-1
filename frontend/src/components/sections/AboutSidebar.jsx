@@ -67,7 +67,7 @@ export function AboutSidebar({ isOpen, onClose }) {
                   </p>
 
                   <p>
-                    His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
+                    His academic journey took him from Gurucharan College, Silchar to Gauhati University, where he completed his MSc and MPhil. Later came an <span className="font-bold text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-200 to-amber-400 text-border-black">honorary doctorate from Ballbridge University</span>, but long before titles arrived, the identity of a teacher had already taken root.
                   </p>
 
                   <h3 className="text-xl font-bold text-sitm-navy dark:text-white mt-8 mb-4">The Birth of Scholars Academy</h3>

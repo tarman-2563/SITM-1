@@ -141,7 +141,7 @@ export function Navbar() {
                 className="h-16 md:h-20 w-auto object-contain block transition-transform duration-300 group-hover:scale-105" 
               />
               
-              <span className={cn("text-3xl font-bold font-serif leading-none mt-1 text-white")}>
+              <span className={cn("text-3xl font-bold font-serif leading-none mt-1 text-outline-black")}>
                 SITM
               </span>
             </Link>
@@ -154,7 +154,7 @@ export function Navbar() {
                   href={link.href}
                   className={cn(
                     "text-sm font-semibold hover:text-sitm-gold transition-colors relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-0.5 after:bg-white after:transition-all hover:after:w-full",
-                     "text-white"
+                     "text-outline-black"
                   )}
                 >
                   {link.name}
@@ -175,7 +175,7 @@ export function Navbar() {
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="text-white"
               >
-                {isMobileMenuOpen ? <X /> : <Menu />}
+                {isMobileMenuOpen ? <X className="icon-outline-black" /> : <Menu className="icon-outline-black" />}
               </button>
             </div>
           </div>
