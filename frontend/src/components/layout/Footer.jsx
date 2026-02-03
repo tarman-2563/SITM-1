@@ -11,11 +11,11 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand Column */}
           <div className="space-y-6">
-            <div className="flex items-center gap-3">
-              <img src={logo} alt="SITM Logo" className="h-14 w-auto rounded-lg" />
+            <div className="flex items-center gap-4 p-0 m-0">
+              <img src={logo} alt="SITM Logo" className="h-28 w-auto object-contain transition-transform duration-300 hover:scale-105 p-0 m-0" />
               <div className="flex flex-col">
-                <span className="text-2xl font-bold font-serif leading-none">SITM</span>
-                <span className="text-[0.6rem] tracking-wider uppercase text-gray-400">Excellence in Education</span>
+                <span className="text-3xl font-bold font-serif leading-none tracking-tight text-white text-outline-black">SITM</span>
+                <span className="text-[0.7rem] tracking-[0.2em] uppercase text-sitm-gold font-semibold mt-1">Excellence in Education</span>
               </div>
             </div>
             <p className="text-gray-300 leading-relaxed">
