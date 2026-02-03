@@ -143,7 +143,7 @@ export function Navbar() {
           />
         </div>
 
-        <div className="container relative z-10 mx-auto px-4 md:px-6 flex justify-between items-center">
+        <div className="w-full relative z-10 mx-auto pl-10 pr-[20px] flex justify-between items-center">
           <Link to="/" className="flex items-center gap-1 group">
             <img 
               src={logo} 
