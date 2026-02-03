@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useLeadCapture } from '../../context/LeadCaptureContext';
-import { GraduationCap, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { Award, X, ArrowRight } from 'lucide-react';
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
-  const { openApplyNowModal } = useLeadCapture();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setTimeout(() => {
       if (!isDismissed) {
         setIsVisible(true);
       }
-    }, 5000); // Show after 5 seconds
+    }, 8000); // Show after 8 seconds
 
     return () => clearTimeout(timer);
   }, [isDismissed]);
@@ -21,14 +21,19 @@ export function FloatingCTA() {
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
+    // Remember dismissal for this session
+    sessionStorage.setItem('scholarship_popup_dismissed', 'true');
   };
 
-  const handleApply = () => {
-    openApplyNowModal();
+  const handleViewScholarships = () => {
+    navigate('/scholarships');
     setIsVisible(false);
   };
 
-  if (isDismissed) return null;
+  // Don't show if already dismissed in this session
+  if (isDismissed || sessionStorage.getItem('scholarship_popup_dismissed')) {
+    return null;
+  }
 
   return (
     <AnimatePresence>
@@ -50,22 +55,23 @@ export function FloatingCTA() {
 
             <div className="flex items-start gap-3">
               <div className="w-10 h-10 bg-sitm-maroon rounded-full flex items-center justify-center flex-shrink-0">
-                <GraduationCap className="w-5 h-5 text-white" />
+                <Award className="w-5 h-5 text-white" />
               </div>
               
               <div className="flex-1">
                 <h4 className="font-bold text-gray-900 dark:text-white text-sm mb-1">
-                  Ready to Start Your Journey?
+                  🎓 Scholarships Available!
                 </h4>
                 <p className="text-gray-600 dark:text-gray-300 text-xs mb-3">
-                  Join SITM and build your future with practical learning.
+                  Don't let finances limit your dreams. Explore our scholarship opportunities.
                 </p>
                 
                 <button
-                  onClick={handleApply}
-                  className="w-full bg-sitm-maroon text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-sitm-maroon-light transition-colors duration-200"
+                  onClick={handleViewScholarships}
+                  className="w-full bg-sitm-maroon text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-sitm-maroon-light transition-colors duration-200 flex items-center justify-center gap-2"
                 >
-                  Apply Now - Free
+                  View Scholarships
+                  <ArrowRight size={14} />
                 </button>
               </div>
             </div>

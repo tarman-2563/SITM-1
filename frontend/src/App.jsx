@@ -8,6 +8,7 @@ import { Application } from "./pages/Application";
 import { Login } from "./pages/Login";
 import { Activate } from "./pages/Activate";
 import { Dashboard } from "./pages/Dashboard";
+import { Scholarships } from "./pages/Scholarships";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { ApplicationDetail } from "./pages/admin/ApplicationDetail";
@@ -31,6 +32,7 @@ function App() {
             {/* Public routes */}
             <Route path="/" element={<Home />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/application/:leadId" element={<Application />} />
             <Route path="/login" element={<Login />} />
             <Route path="/activate/:token" element={<Activate />} />
