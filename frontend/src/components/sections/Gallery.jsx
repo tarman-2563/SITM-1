@@ -185,32 +185,36 @@ export function Gallery() {
       </div>
 
       <div className="mx-auto px-5 max-w-7xl relative z-10">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-8 font-serif relative inline-block">
-            Photo Gallery
-            <svg
-              className="absolute -bottom-6 left-0 w-[110%] h-6 pointer-events-none"
-              viewBox="0 0 240 30"
-              preserveAspectRatio="none"
-            >
-              <defs>
-                <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="#22d3ee" /> {/* Cyan */}
-                  <stop offset="20%" stopColor="#4ade80" /> {/* Green */}
-                  <stop offset="50%" stopColor="#facc15" /> {/* Yellow */}
-                  <stop offset="100%" stopColor="#fb923c" /> {/* Orange */}
-                </linearGradient>
-              </defs>
-              <path
-                d="M5,15 L15,25 L28,5 C40,5 50,25 70,25 C90,25 100,5 130,5 C160,5 175,25 205,25 Q225,25 235,15"
-                fill="none"
-                stroke="url(#waveGradient)"
-                strokeWidth="5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </h2>
+        <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight text-left mx-auto w-fit ">
+          <span className="relative inline-block">
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
+                Photo Gallery
+                </span>
+                <svg
+                  className="absolute inset-0 w-[210%] h-[220%] -left-[55%] -top-[60%] pointer-events-none z-0"
+                  viewBox="0 0 200 60"
+                  fill="none"
+                >
+                  <motion.path
+                    d="M1,30 C1,10 199,10 199,30 C199,50 1,50 12,32"
+                    stroke="#facc15"
+                    strokeWidth="1.2"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.8 }}
+                    transition={{ duration: 1.5, delay: 1, ease: "easeInOut" }}
+                  />
+                  <motion.path
+                    d="M12,28 C18,8 199,12 199,32 C199,52 12,48 22,35"
+                    stroke="#facc15"
+                    strokeWidth="0.8"
+                    strokeLinecap="round"
+                    initial={{ pathLength: 0, opacity: 0 }}
+                    animate={{ pathLength: 1, opacity: 0.6 }}
+                    transition={{ duration: 1.8, delay: 1.2, ease: "easeInOut" }}
+                  />
+                </svg>
+              </span>
         </div>
 
 

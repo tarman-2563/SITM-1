@@ -3,6 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Counter } from "../common/Counter";
 
 export function Placements() {
+  const valueColorMap = {
+  indigo: "text-indigo-600 dark:text-indigo-400",
+  emerald: "text-emerald-600 dark:text-emerald-400",
+  rose: "text-rose-600 dark:text-rose-400",
+  amber: "text-amber-600 dark:text-amber-400",
+};
+
   return (
     <section id="placement" className="relative py-28 overflow-hidden
       bg-linear-to-b
@@ -122,17 +129,44 @@ export function Placements() {
         
         <div className="grid md:grid-cols-4 gap-6 mb-20">
             {[
-                { label: "Highest Package", value: <Counter from={1} to={12} duration={3} suffix=" LPA" />, icon: TrendingUp },
-                { label: "Partner Companies", value: "1500+", icon: Building2 },
-                { label: "Students Placed", value: "95%", icon: Users },
-                { label: "Industry Awards", value: "25+", icon: Award },
-            ].map((stat, i) => (
+                    {
+                      label: "Highest Package",
+                      value: <Counter from={1} to={12} duration={3} suffix=" LPA" />,
+                      icon: TrendingUp,
+                      valueColor: "indigo",
+                    },
+                    {
+                      label: "Partner Companies",
+                      value: "1500+",
+                      icon: Building2,
+                      valueColor: "emerald",
+                    },
+                    {
+                      label: "Students Placed",
+                      value: "95%",
+                      icon: Users,
+                      valueColor: "rose",
+                    },
+                    {
+                      label: "Industry Awards",
+                      value: "25+",
+                      icon: Award,
+                      valueColor: "amber",
+                    },
+                  ]
+                  .map((stat, i) => (
                 <div key={i} className="bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300 group">
                     <div className="w-16 h-16 mx-auto bg-sitm-gold/10 rounded-full flex items-center justify-center text-sitm-maroon dark:text-sitm-gold mb-4 group-hover:bg-sitm-maroon group-hover:text-white transition-colors duration-300">
                         <stat.icon size={32} />
                     </div>
-                    <div className="text-4xl md:text-5xl font-bold font-serif text-sitm-navy mb-2">{stat.value}</div>
-                    <div className="text-sm uppercase tracking-wide text-gray-500">{stat.label}</div>
+                      <div
+                        className={`text-4xl md:text-5xl font-bold font-serif mb-2
+                          ${valueColorMap[stat.valueColor]}`}
+                      >
+                        {stat.value}
+                      </div>
+
+                    <div className="text-sm uppercase tracking-wide text-blue-400">{stat.label}</div>
                 </div>
             ))}
         </div>
