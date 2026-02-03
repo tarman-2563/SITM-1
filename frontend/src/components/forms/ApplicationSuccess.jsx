@@ -142,24 +142,12 @@ export function ApplicationSuccess({
           </div>
         </div>
 
-        {/* Action Buttons - Made more prominent */}
+        {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-6">
-          {/* Debug info - remove in production */}
-          {process.env.NODE_ENV === 'development' && (
-            <div className="w-full bg-gray-100 dark:bg-slate-800 rounded-lg p-4 mb-4 text-xs">
-              <h5 className="font-semibold mb-2">Debug Info:</h5>
-              <div className="space-y-1">
-                <div>accountCreated: {String(accountCreated)}</div>
-                <div>activationToken: {activationToken ? 'Present' : 'Missing'}</div>
-                <div>submittedApplicationId: {submittedApplicationId || 'Missing'}</div>
-              </div>
-            </div>
-          )}
-          
           {accountCreated && activationToken && (
             <Button
               onClick={() => onActivateAccount(activationToken)}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 flex items-center gap-2"
+              variant="secondary"
               size="lg"
             >
               <User size={16} />
@@ -171,7 +159,7 @@ export function ApplicationSuccess({
           {!accountCreated && activationToken && (
             <Button
               onClick={() => onActivateAccount(activationToken)}
-              className="bg-orange-600 hover:bg-orange-700 text-white px-8 py-3 flex items-center gap-2"
+              variant="primary"
               size="lg"
             >
               <User size={16} />
@@ -191,7 +179,6 @@ export function ApplicationSuccess({
                   window.location.href = '/login';
                 }}
                 variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-600 hover:text-white"
               >
                 Go to Login Page
               </Button>
@@ -199,6 +186,7 @@ export function ApplicationSuccess({
           )}
           <Button
             variant="outline"
+            size="lg"
             onClick={() => {
               // Generate and download application summary
               const summary = `
@@ -225,15 +213,13 @@ Contact us at +91 98765 43210 for any queries.
               document.body.removeChild(a);
               URL.revokeObjectURL(url);
             }}
-            className="flex items-center gap-2"
           >
             <Download size={16} />
             Download Summary
           </Button>
           <Button 
             onClick={onClose}
-            variant={accountCreated && activationToken ? "outline" : "default"}
-            className={accountCreated && activationToken ? "" : "bg-green-600 hover:bg-green-700 text-white px-8 py-3"}
+            variant={accountCreated && activationToken ? "outline" : "primary"}
             size="lg"
           >
             {accountCreated && activationToken ? "Close" : "Done - Close Application"}

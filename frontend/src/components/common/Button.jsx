@@ -27,7 +27,7 @@ export const Button = ({
   return (
     <button
       className={cn(
-        "rounded-full transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed",
+        "rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
         className

@@ -1,7 +1,14 @@
+import { useLocation } from "react-router-dom";
 import { FaWhatsapp } from "react-icons/fa";
 
 export default function FloatingWhatsApp() {
+  const location = useLocation();
   const message = encodeURIComponent("Hello 👋 I want to know more about SITM");
+
+  // Don't show on scholarships page
+  if (location.pathname === '/scholarships') {
+    return null;
+  }
 
   return (
     <a

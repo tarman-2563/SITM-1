@@ -1,27 +1,31 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Award, X, ArrowRight } from 'lucide-react';
 
 export function FloatingCTA() {
   const [isVisible, setIsVisible] = useState(false);
   const [isDismissed, setIsDismissed] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
+    if (location.pathname === '/scholarships') {
+      return;
+    }
+
     const timer = setTimeout(() => {
       if (!isDismissed) {
         setIsVisible(true);
       }
-    }, 8000); // Show after 8 seconds
+    }, 5000); 
 
     return () => clearTimeout(timer);
-  }, [isDismissed]);
+  }, [isDismissed, location.pathname]);
 
   const handleDismiss = () => {
     setIsVisible(false);
     setIsDismissed(true);
-    // Remember dismissal for this session
     sessionStorage.setItem('scholarship_popup_dismissed', 'true');
   };
 
@@ -44,7 +48,7 @@ export function FloatingCTA() {
           exit={{ opacity: 0, scale: 0.8, y: 20 }}
           className="fixed bottom-6 right-6 z-40 max-w-sm"
         >
-          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 p-4 relative">
+          <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 p-3 relative">
             {/* Close button */}
             <button
               onClick={handleDismiss}
@@ -59,16 +63,16 @@ export function FloatingCTA() {
               </div>
               
               <div className="flex-1">
-                <h4 className="font-bold text-gray-900 dark:text-white text-sm mb-1">
-                  🎓 Scholarships Available!
+                <h4 className="font-sans font-black text-gray-900 dark:text-white text-sm mb-1">
+                  🎓 <span className="font-black">Scholarships Available!</span>
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 text-xs mb-3">
+                <p className="font-sans text-gray-600 dark:text-gray-300 text-xs mb-3">
                   Don't let finances limit your dreams. Explore our scholarship opportunities.
                 </p>
                 
                 <button
                   onClick={handleViewScholarships}
-                  className="w-full bg-sitm-maroon text-white text-sm font-medium py-2 px-4 rounded-lg hover:bg-sitm-maroon-light transition-colors duration-200 flex items-center justify-center gap-2"
+                  className="w-full bg-sitm-maroon text-white text-sm font-sans font-medium py-2 px-4 rounded-lg hover:bg-sitm-maroon-light transition-colors duration-200 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   View Scholarships
                   <ArrowRight size={14} />

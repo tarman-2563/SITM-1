@@ -1,9 +1,17 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import { MessageCircle, X, Send, Bot, Sparkles } from "lucide-react";
 import aiMascot from "../../assets/ai-mascot.png";
 
 export function FloatingChatbot() {
+  const location = useLocation();
+  
+  // Don't show on scholarships page - MUST be before any other hooks
+  if (location.pathname === '/scholarships') {
+    return null;
+  }
+
   const [isOpen, setIsOpen] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
   const [position, setPosition] = useState({ x: 0, y: 0 });

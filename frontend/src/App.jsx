@@ -3,7 +3,7 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { LeadCaptureProvider } from "./context/LeadCaptureContext";
 
 import { Home } from "./pages/Home";
-import { Programs } from "./components/sections/Programs";
+import { Programs } from "./pages/Programs";
 import { Application } from "./pages/Application";
 import { Login } from "./pages/Login";
 import { Activate } from "./pages/Activate";
@@ -32,6 +32,7 @@ function App() {
             {/* Public routes */}
             <Route path="/" element={<Home />} />
             <Route path="/programs" element={<Programs />} />
+            <Route path="/programs/:programId" element={<Programs />} />
             <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/application/:leadId" element={<Application />} />
             <Route path="/login" element={<Login />} />
