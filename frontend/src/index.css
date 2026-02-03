@@ -10,6 +10,7 @@
     --color-sitm-maroon-light: #C0262D;
     --color-sitm-gold: #D4AF37;
     --color-sitm-gold-light: #F1D36E;
+    --color-sitm-brown: #5D4037;
 
     --font-sans: "Inter", system-ui, sans-serif;
     --font-serif: "Playfair Display", serif;
@@ -23,9 +24,7 @@
     }
 
     body {
-        @apply antialiased font-sans text-gray-900 bg-gray-50
-               dark:bg-slate-950 dark:text-gray-100
-               transition-colors duration-300;
+        @apply antialiased font-sans text-gray-900 bg-gray-50 dark:bg-slate-950 dark:text-gray-100 transition-colors duration-300;
     }
 
     h1,
@@ -40,6 +39,7 @@
 
 /* ---------------- Utilities ---------------- */
 @layer utilities {
+
     /* Hide scrollbar */
     .scrollbar-hide {
         -ms-overflow-style: none;
@@ -94,6 +94,7 @@
         opacity: 0;
         transform: translateY(20px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -104,6 +105,7 @@
     0% {
         transform: translateX(0);
     }
+
     100% {
         transform: translateX(-50%);
     }
@@ -121,6 +123,7 @@
     0% {
         transform: translateX(-50%);
     }
+
     100% {
         transform: translateX(0);
     }

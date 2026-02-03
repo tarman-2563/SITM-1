@@ -18,7 +18,7 @@ import SITMInMedia from "../components/sections/SITMInMedia";
 
 export function Home() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-slate-950 transition-colors duration-300">
+    <div className="min-h-screen duration-300">
       <Navbar />
       <Reveal width="100%">
         <Hero />

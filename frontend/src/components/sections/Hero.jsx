@@ -7,7 +7,7 @@ export function Hero() {
   const { openApplyNowModal, openVirtualTourModal } = useLeadCapture();
 
   return (
-    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center mt-0 md:-mt-30">
+    <div className="relative h-screen w-full overflow-hidden flex items-center justify-center">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video autoPlay loop muted playsInline className="w-full h-full object-cover">

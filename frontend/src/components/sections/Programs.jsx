@@ -272,21 +272,30 @@ export function Programs() {
                   x: 0, 
                   opacity: 1 
                 }}
+                whileHover={{ 
+                  y: -15,
+                  scale: 1.02,
+                  transition: { duration: 0.3, ease: "easeOut" }
+                }}
                 viewport={{ once: false }}
                 transition={{ 
                   duration: 0.8,
                   delay: (index % 2) * 0.2
                 }}
                 onClick={() => openSchool(school)}
-                className="relative h-112 rounded-3xl overflow-hidden shadow-xl group border border-white/20"
+                className="relative h-112 rounded-3xl overflow-hidden shadow-xl group border border-white/20 text-left"
               >
+                {/* Background Gradient */}
                 <div
                   className={`absolute inset-0 bg-gradient-to-br ${school.color} group-hover:scale-110 transition-transform duration-700`}
                 />
+                
                 {/* Large Decorative Background Icon */}
                 <div className="absolute top-4 right-2 opacity-[0.08] group-hover:opacity-[0.12] transition-opacity duration-700 rotate-[15deg]">
                   <GraduationCap className="w-56 h-56 text-sitm-navy" strokeWidth={0.5} />
                 </div>
+
+                {/* Main Card Content */}
                 <div className="relative z-10 h-full p-10 flex flex-col justify-between text-sitm-navy">
                   <div className="mb-6 bg-white/50 p-4 rounded-2xl w-fit">
                     {school.icon}
@@ -295,12 +304,12 @@ export function Programs() {
                     <h3 className="text-2xl font-serif font-bold mb-2">
                       {school.name}
                     </h3>
-                    <p className="text-sm opacity-80 mb-6">
+                    <p className="text-sm opacity-80 mb-6 font-medium">
                       {school.programs.length} Industry-ready programs
                     </p>
-                    {/* View Program Button */}
-                    <div className="w-full py-3 bg-sitm-navy text-white rounded-full font-bold text-sm uppercase tracking-wider group-hover:bg-sitm-maroon transition-colors duration-300 text-center">
-                      View Program
+                    {/* View Program Button - Now decorative since whole card is button */}
+                    <div className="w-full py-3 bg-sitm-navy text-white rounded-full font-bold text-sm uppercase tracking-wider group-hover:bg-sitm-maroon transition-colors duration-300 text-center shadow-lg">
+                      View Programs
                     </div>
                   </div>
                 </div>
