@@ -22,7 +22,7 @@ export function Placements() {
       {/* Advanced "Neural Circuit" Background - 60/20/12/8 Re-design */}
       <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
         {/* Layer 1: Subtle Navy Grid */}
-        <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05]"
+        <div className="absolute inset-0 opacity-[1] dark:opacity-[1]"
           style={{
             backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-sitm-navy) 1px, transparent 0)`,
             backgroundSize: '40px 40px'
@@ -30,7 +30,7 @@ export function Placements() {
         </div>
 
         {/* Layer 2: Animated Neural Circuit SVG (Navy Paths) */}
-        <svg className="absolute inset-0 w-full h-full opacity-10 dark:opacity-20" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute inset-0 w-full h-full opacity-30 dark:opacity-70" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stopColor="var(--color-sitm-navy)" stopOpacity="0.1" />
@@ -46,10 +46,10 @@ export function Placements() {
           </defs>
 
           {/* Circuit Paths (Navy Blue - 20%) */}
-          <path d="M 0 100 Q 200 150 400 100 T 800 150" fill="none" stroke="url(#navyGrad)" strokeWidth="1.5" />
-          <path d="M 1000 800 Q 800 750 600 800 T 200 750" fill="none" stroke="url(#navyGrad)" strokeWidth="1.5" />
-          <path d="M 100 0 L 300 300 L 0 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="0.5" opacity="0.2" />
-          <path d="M 900 0 L 700 300 L 1000 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="0.5" opacity="0.2" />
+          <path d="M 0 100 Q 200 150 400 100 T 800 150" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
+          <path d="M 1000 800 Q 800 750 600 800 T 200 750" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
+          <path d="M 100 0 L 300 300 L 0 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
+          <path d="M 900 0 L 700 300 L 1000 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
 
           {/* Pulsing Data Packets (Red & Gold - 12% / 8%) */}
           {[...Array(6)].map((_, i) => (
@@ -90,15 +90,15 @@ export function Placements() {
         {/* Layer 3: Floating Tech Icons (Maroon/Navy) */}
         <div className="absolute inset-0">
           {[
-            { Icon: Cpu, top: "15%", left: "10%", size: 40, color: "var(--color-sitm-navy)" },
-            { Icon: Globe, top: "70%", left: "5%", size: 30, color: "var(--color-sitm-maroon)" },
-            { Icon: Database, top: "20%", left: "85%", size: 35, color: "var(--color-sitm-navy)" },
-            { Icon: Code, top: "80%", left: "90%", size: 25, color: "var(--color-sitm-maroon)" },
-            { Icon: Zap, top: "45%", left: "92%", size: 20, color: "var(--color-sitm-gold)" },
+            { Icon: Cpu, top: "15%", left: "10%", size: 50, color: "var(--color-sitm-navy)" },
+            { Icon: Globe, top: "70%", left: "5%", size: 40, color: "var(--color-sitm-maroon)" },
+            { Icon: Database, top: "20%", left: "85%", size: 45, color: "var(--color-sitm-navy)" },
+            { Icon: Code, top: "80%", left: "90%", size: 35, color: "var(--color-sitm-maroon)" },
+            { Icon: Zap, top: "45%", left: "92%", size: 30, color: "var(--color-sitm-gold)" },
           ].map((item, i) => (
             <motion.div
               key={`tech-${i}`}
-              className="absolute opacity-[0.08] dark:opacity-20"
+              className="absolute opacity-[0.8] dark:opacity-50"
               style={{ top: item.top, left: item.left, color: item.color }}
               animate={{ 
                 y: [0, -25, 0],
@@ -131,7 +131,24 @@ export function Placements() {
             {[
                     {
                       label: "Highest Package",
-                      value: <Counter from={1} to={12} duration={3} suffix=" LPA" />,
+
+                      value: (
+                          <motion.span
+                            animate={{
+                              scale: [1, 1.10, 1],
+                              opacity: [1, 0.85, 1],
+                            }}
+                            transition={{
+                              duration: 2,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                            className="inline-block text-indigo-600 dark:text-indigo-400"
+                          >
+                            <Counter from={1} to={12} duration={2} suffix=" LPA" />
+                          </motion.span>
+                        ),
+
                       icon: TrendingUp,
                       valueColor: "indigo",
                     },
@@ -175,8 +192,8 @@ export function Placements() {
         <div className="text-center mb-10">
              <h2 className="text-4xl md:text-5xl font-extrabold">
           <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
-                Our Placement Companies
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-red-800 via-yellow-500 to-green-700 relative z-10 px-2">
+                1500+ Placement Partners
                 </span>
               </span>
         </h2>
@@ -186,7 +203,7 @@ export function Placements() {
             {/* Infinite Scroll Marquee */}
             {/* Infinite Scroll Marquee - Row 1 */}
             <div className="relative flex overflow-x-hidden group mb-6">
-                <div className="animate-marquee whitespace-nowrap flex items-center gap-8">
+                <div className="animate-marquee whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
                         { name: "Wipro", color: "text-[#0070AD]", logo: "wipro.com" },
@@ -210,7 +227,7 @@ export function Placements() {
                         { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
                         { name: "IBM", color: "text-[#052FAD]", logo: "ibm.com" },
                     ].map((company, i) => (
-                        <div key={`r1-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r1-${i}`} className="inline-flex items-center gap-0 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 w-auto shrink-0 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
@@ -228,7 +245,7 @@ export function Placements() {
 
             {/* Infinite Scroll Marquee - Row 2 (Reverse) */}
             <div className="relative flex overflow-x-hidden group mb-6">
-                <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-8">
+                <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "Microsoft", color: "text-[#00A4EF]", logo: "microsoft.com" },
                         { name: "Google", color: "text-[#4285F4]", logo: "google.com" },
@@ -252,7 +269,7 @@ export function Placements() {
                         { name: "Mahindra", color: "text-[#E31837]", logo: "mahindra.com" },
                         { name: "JCB", color: "text-[#FDB913]", logo: "jcb.com" },
                     ].map((company, i) => (
-                        <div key={`r2-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r2-${i}`} className="inline-flex items-center gap-0 px-10 py-6 bg-white rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 w-auto shrink-0 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
@@ -270,7 +287,7 @@ export function Placements() {
 
             {/* Infinite Scroll Marquee - Row 3 */}
             <div className="relative flex overflow-x-hidden group">
-                <div className="animate-marquee whitespace-nowrap flex items-center gap-8">
+                <div className="animate-marquee whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "BSNL", color: "text-[#005CA9]", logo: "bsnl.co.in" },
                         { name: "Oil India", color: "text-[#D71920]", logo: "oil-india.com" },
@@ -294,7 +311,7 @@ export function Placements() {
                         { name: "Indian Oil", color: "text-[#F47920]", logo: "iocl.com" },
                         { name: "Quality Austria", color: "text-[#E30613]", logo: "qualityaustria.com" },
                     ].map((company, i) => (
-                        <div key={`r3-${i}`} className="inline-flex items-center gap-6 px-10 py-6 bg-white  rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 min-w-95 hover:scale-105 transition-transform duration-300">
+                        <div key={`r3-${i}`} className="inline-flex items-center gap-0 px-10 py-6 bg-white  rounded-2xl shadow-md border border-gray-100 dark:border-slate-200 w-auto shrink-0 hover:scale-105 transition-transform duration-300">
                              <div className="w-10 h-10 shrink-0 bg-white rounded-xl p-1 flex items-center justify-center border border-gray-100 overflow-hidden shadow-sm">
                                 <img 
                                     src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 

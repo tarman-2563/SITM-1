@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { motion } from "framer-motion";
+
 
 const initialImages = [
   "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
@@ -21,7 +23,7 @@ export default function SITMInMedia() {
   };
 
   return (
-    <section className="py-20 transition-colors duration-300
+    <section className="relative py-20 transition-colors duration-300
 
       bg-linear-to-b
       from-[#7b2d2d]/20
@@ -30,8 +32,85 @@ export default function SITMInMedia() {
 
       dark:bg-slate-950 
       overflow-hidden ">
-      <div className="max-w-7xl mx-auto px-6">
-        
+
+      {/* MEDIA SVG BACKGROUND */}
+<motion.svg
+  viewBox="0 0 300 300"
+  className="hidden md:block absolute top-0 right-0 z-0
+           md:-translate-x-8 lg:-translate-x-12
+           w-72 h-72 md:w-96 md:h-96
+           opacity-[0.08] dark:opacity-[0.18]
+           pointer-events-none"
+
+
+
+  initial={{ opacity: 0, scale: 0.9 }}
+  animate={{ opacity: 1, scale: 1 }}
+  transition={{ duration: 1.2, ease: "easeOut" }}
+>
+  {/* CAMERA BODY */}
+  <rect
+    x="60"
+    y="110"
+    width="140"
+    height="80"
+    rx="18"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    className="text-sitm-navy dark:text-sitm-gold"
+  />
+
+  {/* CAMERA LENS */}
+  <circle
+    cx="130"
+    cy="150"
+    r="24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="3"
+    className="text-sitm-navy dark:text-sitm-gold"
+  />
+
+  {/* BROADCAST WAVES */}
+  {[1, 2, 3].map((i) => (
+    <motion.path
+      key={i}
+      d={`M ${200 + i * 8} ${130 - i * 10} 
+          Q ${240 + i * 10} 150 
+          ${200 + i * 8} ${170 + i * 10}`}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="text-indigo-600 dark:text-sitm-gold"
+      initial={{ opacity: 0.2 }}
+      animate={{ opacity: [0.2, 0.6, 0.2] }}
+      transition={{
+        duration: 3,
+        repeat: Infinity,
+        delay: i * 0.6,
+        ease: "easeInOut",
+      }}
+    />
+  ))}
+
+  {/* MOVING MEDIA DOT */}
+  <motion.circle
+    r="4"
+    fill="currentColor"
+    className="text-sitm-maroon"
+    initial={{ cx: 210, cy: 150 }}
+    animate={{ cx: [210, 250], opacity: [0, 1, 0] }}
+    transition={{
+      duration: 3,
+      repeat: Infinity,
+      ease: "linear",
+    }}
+  />
+</motion.svg>
+
+
+      <div className="relative z-10 max-w-7xl mx-auto px-6">  
         <h2 className="text-4xl md:text-5xl font-extrabold pb-5">
           <span className="text-gray-900 dark:text-white">
             SITM In

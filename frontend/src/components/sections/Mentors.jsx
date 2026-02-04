@@ -1,4 +1,6 @@
 import { motion } from "framer-motion";
+import { Users, Briefcase, Sparkles } from "lucide-react";
+
 
 const mentors = [
   {
@@ -51,9 +53,53 @@ export default function Mentors() {
 
       dark:bg-slate-950 
       overflow-hidden"
+      
     >
       {/* Glow Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.15),transparent_60%)]" />
+          <motion.div
+              animate={{ 
+                rotate: [0, -6, 6, 0],
+                y: [0, -15, 0]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[10%] left-[5%] opacity-[0.07] dark:opacity-[0.3] pointer-events-none"
+            >
+              <Users
+                className="w-72 h-72 text-indigo-600 dark:text-sitm-gold"
+                strokeWidth={1}
+              />
+            </motion.div>
+            <motion.div
+              animate={{ 
+                rotate: [0, 6, -6, 0],
+                y: [0, -15, 0]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute top-[8%] right-[5%] opacity-[0.07] dark:opacity-[0.3] pointer-events-none"
+            >
+              <Briefcase
+                className="w-72 h-72 text-purple-600 dark:text-sitm-gold"
+                strokeWidth={1}
+              />
+            </motion.div>
+
+            <motion.div
+              animate={{ 
+                rotate: [0, 6, -6, 0],
+                y: [0, 15, 0]
+              }}
+              transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+              className="absolute bottom-[10%] right-[5%] opacity-[0.07] dark:opacity-[0.3] pointer-events-none"
+            >
+              <Users
+                className="w-72 h-72 text-purple-600 dark:text-sitm-gold"
+                strokeWidth={1}
+              />
+            </motion.div>
+
+
+
 
       {/* Header */}
       <div className="relative z-10 text-center max-w-3xl mx-auto mb-16 px-4">
