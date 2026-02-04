@@ -110,25 +110,25 @@ export default function Mentors() {
         <motion.div
           animate={{ rotate: [0, 10, 0], y: [0, -15, 0] }}
           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[10%] opacity-[0.05] dark:opacity-[0.03]"
+          className="absolute top-[10%] left-[10%] opacity-[0.12] dark:opacity-[0.08]"
         >
-          <Users className="w-64 h-64 text-sitm-navy dark:text-sitm-gold" strokeWidth={0.5} />
+          <Users className="w-64 h-64 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
         </motion.div>
         
         <motion.div
           animate={{ rotate: [0, -15, 0], y: [0, 20, 0] }}
           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[10%] right-[10%] opacity-[0.05] dark:opacity-[0.03]"
+          className="absolute bottom-[10%] right-[10%] opacity-[0.12] dark:opacity-[0.08]"
         >
-          <Briefcase className="w-72 h-72 text-sitm-navy dark:text-sitm-gold" strokeWidth={0.5} />
+          <Briefcase className="w-72 h-72 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
         </motion.div>
 
         <motion.div
           animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
           transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[40%] right-[5%] opacity-[0.04] dark:opacity-[0.02]"
+          className="absolute top-[40%] right-[5%] opacity-[0.1] dark:opacity-[0.06]"
         >
-          <Brain className="w-56 h-56 text-sitm-navy dark:text-sitm-gold" strokeWidth={0.5} />
+          <Brain className="w-56 h-56 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
         </motion.div>
 
         <motion.div 
