@@ -52,7 +52,6 @@ function App() {
 
           {/* Global floating components */}
           <FloatingWhatsApp/>
-          <FloatingChatbot />
           <FloatingCTA />
         </Router>
       </LeadCaptureProvider>
