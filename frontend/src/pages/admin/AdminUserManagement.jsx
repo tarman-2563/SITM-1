@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { authService } from '../../services/authService';
 import { adminService } from '../../services/adminService';
-import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/common/Button';
 import { CreateAdminModal } from '../../components/admin/CreateAdminModal';
 import { EditAdminModal } from '../../components/admin/EditAdminModal';
+import { DeleteConfirmModal } from '../../components/admin/DeleteConfirmModal';
 import { 
   ArrowLeft, 
   UserPlus, 
@@ -32,7 +32,10 @@ export function AdminUserManagement() {
   const [error, setError] = useState(null);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedAdmin, setSelectedAdmin] = useState(null);
+  const [adminToDelete, setAdminToDelete] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
   const [filters, setFilters] = useState({
     search: '',
     role: '',
@@ -104,14 +107,31 @@ export function AdminUserManagement() {
     }
   };
 
-  const handleDeleteAdmin = async (adminId, adminName) => {
-    if (window.confirm(`Are you sure you want to delete admin "${adminName}"? This action cannot be undone.`)) {
-      try {
-        await adminService.deleteAdmin(adminId);
-        await loadAdmins(); // Refresh the list
-      } catch (err) {
-        setError(err.message || 'Failed to delete admin');
-      }
+  const handleDeleteAdmin = (admin) => {
+    setAdminToDelete(admin);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDeleteAdmin = async () => {
+    if (!adminToDelete) return;
+    
+    setIsDeleting(true);
+    try {
+      await adminService.deleteAdmin(adminToDelete._id);
+      await loadAdmins(); // Refresh the list
+      setShowDeleteModal(false);
+      setAdminToDelete(null);
+    } catch (err) {
+      setError(err.message || 'Failed to delete admin');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
+  const handleCloseDeleteModal = () => {
+    if (!isDeleting) {
+      setShowDeleteModal(false);
+      setAdminToDelete(null);
     }
   };
 
@@ -151,7 +171,6 @@ export function AdminUserManagement() {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-        <Navbar />
         <div className="container mx-auto px-4 py-20 text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -169,7 +188,6 @@ export function AdminUserManagement() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -395,7 +413,7 @@ export function AdminUserManagement() {
                         </button>
                         {admin.role !== 'super_admin' && (
                           <button
-                            onClick={() => handleDeleteAdmin(admin._id, `${admin.firstName} ${admin.lastName}`)}
+                            onClick={() => handleDeleteAdmin(admin)}
                             className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
                             title="Delete Admin"
                           >
@@ -467,6 +485,15 @@ export function AdminUserManagement() {
         }}
         admin={selectedAdmin}
         onSubmit={handleEditAdmin}
+      />
+
+      <DeleteConfirmModal
+        isOpen={showDeleteModal}
+        onClose={handleCloseDeleteModal}
+        onConfirm={confirmDeleteAdmin}
+        adminName={adminToDelete ? `${adminToDelete.firstName} ${adminToDelete.lastName}` : ''}
+        adminEmail={adminToDelete?.email || ''}
+        isLoading={isDeleting}
       />
 
       <Footer />

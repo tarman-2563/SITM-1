@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { authService } from '../../services/authService';
 import { adminService } from '../../services/adminService';
-import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/common/Button';
 import { 
@@ -146,7 +145,6 @@ export function AdminDashboard() {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-        <Navbar />
         <div className="container mx-auto px-4 py-20 text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -164,7 +162,6 @@ export function AdminDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-8">

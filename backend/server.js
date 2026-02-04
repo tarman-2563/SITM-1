@@ -17,7 +17,6 @@ const maintenance = require("./middlewares/maintenance");
 const leadsRouter = require("./routes/leadRoutes");
 const authRouter = require("./routes/authRoutes");
 const admissionRouter = require("./routes/admissionRoutes");
-const documentRouter = require("./routes/documentRoutes");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -49,6 +48,24 @@ app.use(timeout.handler({
   }
 }));
 
+app.use(compression());
+
+if (process.env.NODE_ENV === 'production') {
+  app.use(morgan('combined'));
+} else {
+  app.use(morgan('dev'));
+}
+
+app.use(cors({
+  origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : ["http://localhost:5173"],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
+
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
 const generalLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
   max: 100,
@@ -74,22 +91,6 @@ const authLimiter = rateLimit({
 app.use("/api/v1/", generalLimiter);
 app.use("/api/v1/auth/login", authLimiter);
 app.use("/api/v1/auth/forgot-password", authLimiter);
-
-app.use(compression());
-
-if (process.env.NODE_ENV === 'production') {
-  app.use(morgan('combined'));
-} else {
-  app.use(morgan('dev'));
-}
-
-app.use(cors({
-  origin: process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : ["http://localhost:5173"],
-  credentials: true
-}));
-
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 validateEnv();
 connectDB();
@@ -133,10 +134,7 @@ app.get("/", (req, res) => {
 app.use("/api/v1/leads", leadsRouter);
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/admission", admissionRouter);
-app.use("/api/v1/documents", documentRouter);
 
-// Serve uploaded files statically
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 if (process.env.NODE_ENV !== 'production') {
   app.get("/api/test-email", async (req, res) => {

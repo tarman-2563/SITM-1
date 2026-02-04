@@ -3,7 +3,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { adminService } from '../../services/adminService';
 import { authService } from '../../services/authService';
-import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/common/Button';
 import { 
@@ -132,7 +131,6 @@ export function ApplicationDetail() {
   if (error) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-        <Navbar />
         <div className="container mx-auto px-4 py-20 text-center">
           <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
           <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
@@ -150,7 +148,6 @@ export function ApplicationDetail() {
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-      <Navbar />
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center gap-4 mb-8">

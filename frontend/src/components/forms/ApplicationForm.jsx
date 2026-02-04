@@ -4,7 +4,6 @@ import { useApplicationForm } from '../../hooks/useApplicationForm';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { AcademicInfoStep } from './steps/AcademicInfoStep';
 import { FamilyInfoStep } from './steps/FamilyInfoStep';
-import { DocumentUploadStep } from './steps/DocumentUploadStep';
 import { ReviewSubmitStep } from './steps/ReviewSubmitStep';
 import { ApplicationSuccess } from './ApplicationSuccess';
 import { AccountActivation } from './AccountActivation';
@@ -15,7 +14,6 @@ import {
   User,
   GraduationCap,
   Users,
-  Upload,
   FileCheck
 } from 'lucide-react';
 
@@ -40,12 +38,6 @@ const STEPS = [
   },
   { 
     id: 4, 
-    title: 'Document Upload', 
-    icon: Upload,
-    description: 'Upload required documents'
-  },
-  { 
-    id: 5, 
     title: 'Review & Complete', 
     icon: FileCheck,
     description: 'Review and complete process'
@@ -121,9 +113,9 @@ export function ApplicationForm({
     setShowAccountActivation(false);
   };
 
-  // Handle moving to document upload step without submitting application
+  // Handle moving to review step after family info
   const handleFamilyInfoNext = async () => {
-    nextStep(); // Just move to document upload step without submitting
+    nextStep(); // Move to review step (now step 4)
   };
 
   const renderStep = () => {
@@ -158,15 +150,6 @@ export function ApplicationForm({
           />
         );
       case 4:
-        return (
-          <DocumentUploadStep
-            applicationId={submittedApplicationId}
-            onNext={nextStep}
-            onPrev={prevStep}
-            allowSkip={!submittedApplicationId} // Allow skipping if no application ID yet
-          />
-        );
-      case 5:
         return (
           <ReviewSubmitStep
             formData={formData}

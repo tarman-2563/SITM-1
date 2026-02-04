@@ -92,16 +92,6 @@ const admissionSchema = new mongoose.Schema(
       type: String,
       unique: true
     },
-    documents: [
-      {
-        name: String,
-        url: String,
-        uploadedAt: {
-          type: Date,
-          default: Date.now
-        }
-      }
-    ],
     remarks: String,
     reviewedBy: {
       type: mongoose.Schema.Types.ObjectId,
