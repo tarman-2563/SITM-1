@@ -148,28 +148,28 @@ export function Programs() {
   const bankPartners = [
     {
       name: 'State Bank of India',
-      logo: '🏦',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/cc/SBI-logo.svg/200px-SBI-logo.svg.png',
       interestRate: '8.5% - 10.5%',
       maxAmount: '₹30 Lakhs',
       processingTime: '7-10 days'
     },
     {
       name: 'HDFC Bank',
-      logo: '🏛️',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/28/HDFC_Bank_Logo.svg/200px-HDFC_Bank_Logo.svg.png',
       interestRate: '9.0% - 11.0%',
       maxAmount: '₹25 Lakhs',
       processingTime: '5-7 days'
     },
     {
       name: 'ICICI Bank',
-      logo: '🏢',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/ICICI_Bank_Logo.svg/200px-ICICI_Bank_Logo.svg.png',
       interestRate: '8.8% - 10.8%',
       maxAmount: '₹35 Lakhs',
       processingTime: '7-14 days'
     },
     {
       name: 'Axis Bank',
-      logo: '🏪',
+      logo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Axis_Bank_logo.svg/200px-Axis_Bank_logo.svg.png',
       interestRate: '9.2% - 11.2%',
       maxAmount: '₹20 Lakhs',
       processingTime: '5-10 days'
@@ -193,7 +193,51 @@ export function Programs() {
       <Navbar />
       
       {/* Hero Section */}
-      <section className="relative pt-36 pb-16 bg-gray-50 dark:bg-slate-950">
+      <section className="relative pt-36 pb-16 bg-gray-50 dark:bg-slate-950 overflow-hidden">
+        {/* Background Graphics - Similar to other sections */}
+        <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+          {/* Subtle Geometric Dot Pattern */}
+          <div 
+            className="absolute inset-0 opacity-[0.1]"
+            style={{ 
+              backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+              backgroundSize: "30px 30px"
+            }}
+          ></div>
+
+          {/* Large Graduation Cap Icon - Top Right */}
+          <motion.div
+            animate={{ 
+              rotate: [0, 5, -5, 0],
+              y: [0, -10, 0]
+            }}
+            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+            className="absolute top-[5%] right-[5%] opacity-[0.08] dark:opacity-[0.05]"
+          >
+            <GraduationCap className="w-80 h-80 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
+          </motion.div>
+
+          {/* Animated Background Blobs */}
+          <motion.div 
+            animate={{ 
+              x: [0, -100, 0],
+              y: [0, -50, 0],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+            className="absolute -top-[10%] -right-[10%] w-[50%] h-[50%] bg-[#F6E294]/20 rounded-full blur-[100px]"
+          />
+          <motion.div 
+            animate={{ 
+              x: [0, 70, 0],
+              y: [0, -100, 0],
+              scale: [1.2, 1, 1.2]
+            }}
+            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+            className="absolute top-[30%] -left-[15%] w-[60%] h-[60%] bg-[#D56B6F]/20 rounded-full blur-[120px]"
+          />
+        </div>
+
         <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -236,27 +280,6 @@ export function Programs() {
         </div>
       </section>
 
-      {/* Program Selection Dropdown */}
-      <section className="py-8 bg-white dark:bg-slate-900 border-b border-gray-200 dark:border-slate-700">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center">
-            <select
-              value={programId || 'mechanical-engineering'}
-              onChange={(e) => navigate(`/programs/${e.target.value}`)}
-              className="px-6 py-3 bg-white dark:bg-slate-800 border border-gray-300 dark:border-slate-600 rounded-lg text-gray-900 dark:text-white font-medium focus:outline-none focus:ring-2 focus:ring-sitm-maroon"
-            >
-              <option value="mechanical-engineering">Mechanical Engineering</option>
-              <option value="computer-science-engineering">Computer Science Engineering</option>
-              <option value="civil-engineering">Civil Engineering</option>
-              <option value="electrical-engineering">Electrical & Electronics Engineering</option>
-              <option value="electronics-communication">Electronics & Communication Engineering</option>
-              <option value="business-administration">Bachelor of Business Administration</option>
-              <option value="computer-applications">Bachelor of Computer Applications</option>
-              <option value="data-science">Data Science</option>
-            </select>
-          </div>
-        </div>
-      </section>
 
       {/* Syllabus Section */}
       <section className="py-24 relative bg-gray-50 dark:bg-slate-950 overflow-hidden">
@@ -485,34 +508,6 @@ export function Programs() {
                 </motion.div>
               </div>
             </motion.div>
-
-            <motion.div 
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="mt-8 bg-blue-50 dark:bg-blue-900/20 border-2 border-blue-200 dark:border-blue-800 rounded-2xl p-8"
-            >
-              <h4 className="font-bold text-xl text-blue-900 dark:text-blue-300 mb-4">Payment Options</h4>
-              <ul className="text-blue-800 dark:text-blue-200 space-y-2">
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  Annual payment with 5% discount
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  Semester-wise payment available
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  EMI options through bank partners
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-blue-600 rounded-full"></div>
-                  Scholarship opportunities available
-                </li>
-              </ul>
-            </motion.div>
           </div>
         </div>
       </section>
@@ -606,7 +601,24 @@ export function Programs() {
                 className="bg-white dark:bg-slate-900 rounded-3xl border border-white/20 shadow-xl p-8 hover:shadow-2xl transition-all duration-300"
               >
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="text-5xl">{bank.logo}</div>
+                  <div className="w-16 h-16 bg-white rounded-lg p-2 shadow-sm border border-gray-200 dark:border-slate-700 flex items-center justify-center">
+                    <img 
+                      src={bank.logo} 
+                      alt={`${bank.name} logo`}
+                      className="w-full h-full object-contain"
+                      onError={(e) => {
+                        // Fallback to text if image fails to load
+                        e.target.style.display = 'none';
+                        e.target.nextSibling.style.display = 'block';
+                      }}
+                    />
+                    <div 
+                      className="hidden text-sitm-maroon font-bold text-xs text-center"
+                      style={{ display: 'none' }}
+                    >
+                      {bank.name.split(' ').map(word => word[0]).join('')}
+                    </div>
+                  </div>
                   <h3 className="text-2xl font-serif font-bold text-gray-900 dark:text-white">{bank.name}</h3>
                 </div>
                 

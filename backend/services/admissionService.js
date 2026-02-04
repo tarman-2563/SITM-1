@@ -53,7 +53,6 @@ const completeApplication = async (applicationData, req) => {
     guardianEmail: applicationData.familyInfo.father.email || null,
     familyInfo: applicationData.familyInfo,
     additionalInfo: applicationData.additionalInfo,
-    documents: applicationData.documents || [],
     source: "website_complete",
     submittedAt: new Date()
   };

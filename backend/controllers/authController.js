@@ -221,17 +221,22 @@ const getAdmins = async (req, res) => {
 
 const createAdmin = async (req, res) => {
   try {
+    console.log('Create admin request body:', req.body);
     validate(req);
+    console.log('Validation passed, calling authService.createAdmin');
     const admin = await authService.createAdmin(req.body);
+    console.log('Admin created successfully in controller');
     res.status(201).json({
       status: 'success',
       message: 'Admin created successfully',
       data: admin
     });
   } catch (error) {
+    console.error('Create admin error:', error);
     res.status(error.statusCode || 500).json({
       status: 'error',
-      message: error.message
+      message: error.message,
+      errors: error.errors || []
     });
   }
 };

@@ -260,7 +260,8 @@ const getAdmins = async (query = {}) => {
 };
 
 const createAdmin = async (data) => {
-  const { name, email, password, role, department } = data;
+  console.log('Creating admin with data:', data);
+  const { name, email, password, role } = data;
   
   // Check if user already exists
   const existingUser = await User.findOne({ email });
@@ -283,7 +284,7 @@ const createAdmin = async (data) => {
     role,
     userType: 'staff',
     staff: {
-      department,
+      department: 'general',
       designation: 'Administrator',
       joiningDate: new Date()
     },
@@ -292,12 +293,14 @@ const createAdmin = async (data) => {
     emailVerifiedAt: new Date()
   };
 
+  console.log('Creating user with userData:', userData);
   const admin = await User.create(userData);
+  console.log('Admin created successfully:', admin._id);
   return admin;
 };
 
 const updateAdmin = async (adminId, data) => {
-  const allowed = ['firstName', 'lastName', 'role', 'staff.department', 'isActive'];
+  const allowed = ['firstName', 'lastName', 'role', 'isActive'];
   const update = {};
 
   Object.keys(data).forEach(key => {

@@ -67,8 +67,7 @@ export const useApplicationForm = (leadId) => {
       },
       howDidYouHear: '',
       expectations: ''
-    },
-    documents: []
+    }
   });
   
   const [isLoading, setIsLoading] = useState(false);
@@ -137,8 +136,7 @@ export const useApplicationForm = (leadId) => {
         personalInfo: formData.personalInfo,
         academicInfo: formData.academicInfo,
         familyInfo: formData.familyInfo,
-        additionalInfo: formData.additionalInfo,
-        documents: formData.documents
+        additionalInfo: formData.additionalInfo
       };
 
       const response = await applicationService.completeApplication(applicationData);
@@ -224,8 +222,7 @@ export const useApplicationForm = (leadId) => {
         },
         howDidYouHear: '',
         expectations: ''
-      },
-      documents: []
+      }
     });
     setError(null);
     setSuccess(false);

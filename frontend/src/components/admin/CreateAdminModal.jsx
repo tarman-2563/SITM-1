@@ -7,7 +7,6 @@ import {
   Mail, 
   Lock, 
   Shield, 
-  Building, 
   Eye, 
   EyeOff, 
   AlertCircle, 
@@ -21,8 +20,7 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'admin',
-    department: 'admissions'
+    role: 'admin'
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -30,13 +28,7 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
   const [error, setError] = useState('');
   const [validationErrors, setValidationErrors] = useState({});
 
-  const departments = [
-    { value: 'admissions', label: 'Admissions' },
-    { value: 'academics', label: 'Academics' },
-    { value: 'placements', label: 'Placements' },
-    { value: 'general', label: 'General' },
-    { value: 'it', label: 'IT' }
-  ];
+
 
   const validateForm = () => {
     const errors = {};
@@ -98,8 +90,7 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
         name: formData.name.trim(),
         email: formData.email.toLowerCase(),
         password: formData.password,
-        role: formData.role,
-        department: formData.department
+        role: formData.role
       });
       
       // Reset form on success
@@ -108,8 +99,7 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
         email: '',
         password: '',
         confirmPassword: '',
-        role: 'admin',
-        department: 'admissions'
+        role: 'admin'
       });
       setValidationErrors({});
     } catch (err) {
@@ -126,8 +116,7 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
         email: '',
         password: '',
         confirmPassword: '',
-        role: 'admin',
-        department: 'admissions'
+        role: 'admin'
       });
       setValidationErrors({});
       setError('');
@@ -155,11 +144,11 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-2xl h-[95vh] bg-white dark:bg-slate-900 rounded-2xl sm:rounded-3xl shadow-2xl border border-gray-200 dark:border-slate-700 mx-2 sm:mx-4 flex flex-col"
+          className="relative w-full max-w-2xl h-[95vh] bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700 mx-2 sm:mx-4 flex flex-col"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header - Consistent with existing design */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between">
+          <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-4 sm:gap-6">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-full flex items-center justify-center">
                 <UserPlus className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
@@ -264,28 +253,6 @@ export function CreateAdminModal({ isOpen, onClose, onSubmit }) {
                         <option value="super_admin">Super Admin</option>
                       </select>
                       <Shield className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                    </div>
-                  </div>
-
-                  {/* Department */}
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                      Department *
-                    </label>
-                    <div className="relative">
-                      <select
-                        value={formData.department}
-                        onChange={(e) => handleInputChange('department', e.target.value)}
-                        className="w-full p-3 pl-12 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors"
-                        disabled={isLoading}
-                      >
-                        {departments.map((dept) => (
-                          <option key={dept.value} value={dept.value}>
-                            {dept.label}
-                          </option>
-                        ))}
-                      </select>
-                      <Building className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                     </div>
                   </div>
 

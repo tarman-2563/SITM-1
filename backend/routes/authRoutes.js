@@ -63,21 +63,21 @@ authRouter.post(
   protect,
   authorize("super_admin"),
   [
-    body("name").trim().isLength({ min: 1 }),
-    body("email").isEmail(),
-    body("password").isLength({ min: 6 }),
-    body("role").isIn(["admin", "super_admin"]),
-    body("department").isIn(["admissions", "academics", "placements", "general", "it"])
+    body("name").trim().isLength({ min: 1 }).withMessage("Name is required"),
+    body("email").isEmail().withMessage("Valid email is required"),
+    body("password").isLength({ min: 6 }).withMessage("Password must be at least 6 characters"),
+    body("role").isIn(["admin", "super_admin"]).withMessage("Role must be admin or super_admin")
   ],
   createAdmin
 );
 
 authRouter.put("/admin/users/:id", [
   param("id").isMongoId().withMessage("Valid user ID is required"),
-  body("name").optional().trim().isLength({ min: 1 }).withMessage("Name cannot be empty"),
+  body("firstName").optional().trim().isLength({ min: 1 }).withMessage("First name cannot be empty"),
+  body("lastName").optional().trim().isLength({ min: 1 }).withMessage("Last name cannot be empty"),
   body("email").optional().isEmail().withMessage("Valid email is required"),
   body("role").optional().isIn(["admin", "super_admin"]).withMessage("Role must be admin or super_admin"),
-  body("department").optional().isIn(["admissions", "academics", "placements", "general", "it"]).withMessage("Invalid department")
+  body("isActive").optional().isBoolean().withMessage("isActive must be a boolean")
 ], protect, authorize("super_admin"), updateAdmin);
 
 authRouter.delete("/admin/users/:id", [
