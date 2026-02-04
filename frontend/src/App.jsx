@@ -6,6 +6,8 @@ import { Home } from "./pages/Home";
 import { Programs } from "./pages/Programs";
 import { Application } from "./pages/Application";
 import { Login } from "./pages/Login";
+import { ForgotPassword } from "./pages/ForgotPassword";
+import { ResetPassword } from "./pages/ResetPassword";
 import { Activate } from "./pages/Activate";
 import { Dashboard } from "./pages/Dashboard";
 import { Scholarships } from "./pages/Scholarships";
@@ -36,6 +38,8 @@ function App() {
             <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/application/:leadId" element={<Application />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/activate/:token" element={<Activate />} />
 
             {/* User dashboard */}

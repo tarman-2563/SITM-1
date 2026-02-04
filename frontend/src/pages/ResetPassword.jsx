@@ -1,38 +1,44 @@
-import { useState } from 'react';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../components/common/Button';
-import { Footer } from '../components/layout/Footer';
 import { authService } from '../services/authService';
-import { AlertCircle, Loader2, Eye, EyeOff, Mail, Lock, ArrowLeft } from 'lucide-react';
+import { Lock, ArrowLeft, AlertCircle, CheckCircle, Loader2, Eye, EyeOff } from 'lucide-react';
 
-export function Login() {
+export function ResetPassword() {
+  const { token } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
   
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    password: '',
+    confirmPassword: ''
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [validationErrors, setValidationErrors] = useState({});
+  const [success, setSuccess] = useState(false);
 
-  // Get redirect path from location state or default to dashboard
-  const redirectTo = location.state?.from || '/dashboard';
+  useEffect(() => {
+    if (!token) {
+      setError('Invalid reset token');
+    }
+  }, [token]);
 
   const validateForm = () => {
     const errors = {};
 
-    if (!formData.email) {
-      errors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      errors.email = 'Please enter a valid email address';
-    }
-
     if (!formData.password) {
       errors.password = 'Password is required';
+    } else if (formData.password.length < 6) {
+      errors.password = 'Password must be at least 6 characters';
+    }
+
+    if (!formData.confirmPassword) {
+      errors.confirmPassword = 'Please confirm your password';
+    } else if (formData.password !== formData.confirmPassword) {
+      errors.confirmPassword = 'Passwords do not match';
     }
 
     setValidationErrors(errors);
@@ -64,28 +70,72 @@ export function Login() {
     setError(null);
 
     try {
-      const response = await authService.login(formData.email, formData.password);
+      const response = await authService.resetPassword(token, formData.password);
+      setSuccess(true);
       
-      // Redirect to intended page or dashboard
-      const targetPath = response.data.redirectTo || redirectTo;
-      navigate(targetPath, { replace: true });
+      // Auto-redirect to login after 3 seconds
+      setTimeout(() => {
+        navigate('/login', { 
+          state: { 
+            message: 'Password reset successful! Please log in with your new password.' 
+          } 
+        });
+      }, 3000);
     } catch (err) {
-      setError(err.message || 'Login failed. Please try again.');
+      setError(err.message || 'Failed to reset password. The link may have expired.');
     } finally {
       setIsLoading(false);
     }
   };
 
+  if (success) {
+    return (
+      <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
+        <div className="container mx-auto px-4 py-20">
+          <div className="max-w-md mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-8 text-center"
+            >
+              <div className="w-16 h-16 bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
+                <CheckCircle className="w-8 h-8 text-green-600 dark:text-green-400" />
+              </div>
+              
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+                Password Reset Successful!
+              </h1>
+              
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                Your password has been successfully reset. You can now log in with your new password.
+              </p>
+              
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
+                Redirecting to login page...
+              </p>
+              
+              <Link to="/login">
+                <Button className="w-full">
+                  Go to Login
+                </Button>
+              </Link>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-      {/* Back to Home Button */}
+      {/* Back to Login Button */}
       <div className="absolute top-6 left-6 z-10">
         <Link
-          to="/"
+          to="/login"
           className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors group"
         >
           <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
-          <span className="text-sm font-medium">Back to Home</span>
+          <span className="text-sm font-medium">Back to Login</span>
         </Link>
       </div>
 
@@ -101,10 +151,10 @@ export function Login() {
                 <Lock className="w-8 h-8 text-sitm-maroon" />
               </div>
               <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                Welcome Back
+                Reset Your Password
               </h1>
               <p className="text-gray-600 dark:text-gray-300">
-                Sign in to access your SITM portal
+                Enter your new password below
               </p>
             </div>
 
@@ -118,31 +168,7 @@ export function Login() {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    value={formData.email}
-                    onChange={(e) => handleInputChange('email', e.target.value)}
-                    className={`w-full p-3 pl-12 rounded-lg border ${
-                      validationErrors.email 
-                        ? 'border-red-300 dark:border-red-600' 
-                        : 'border-gray-300 dark:border-slate-600'
-                    } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
-                    placeholder="Enter your email"
-                    disabled={isLoading}
-                  />
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-                </div>
-                {validationErrors.email && (
-                  <p className="text-red-500 text-xs mt-1">{validationErrors.email}</p>
-                )}
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Password
+                  New Password
                 </label>
                 <div className="relative">
                   <input
@@ -154,8 +180,9 @@ export function Login() {
                         ? 'border-red-300 dark:border-red-600' 
                         : 'border-gray-300 dark:border-slate-600'
                     } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
-                    placeholder="Enter your password"
+                    placeholder="Enter your new password"
                     disabled={isLoading}
+                    required
                   />
                   <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
                   <button
@@ -171,25 +198,36 @@ export function Login() {
                 )}
               </div>
 
-              <div className="flex items-center justify-between">
-                <div className="flex items-center">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Confirm New Password
+                </label>
+                <div className="relative">
                   <input
-                    id="remember-me"
-                    name="remember-me"
-                    type="checkbox"
-                    className="h-4 w-4 text-sitm-maroon focus:ring-sitm-maroon border-gray-300 rounded"
+                    type={showConfirmPassword ? 'text' : 'password'}
+                    value={formData.confirmPassword}
+                    onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                    className={`w-full p-3 pl-12 pr-12 rounded-lg border ${
+                      validationErrors.confirmPassword 
+                        ? 'border-red-300 dark:border-red-600' 
+                        : 'border-gray-300 dark:border-slate-600'
+                    } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
+                    placeholder="Confirm your new password"
+                    disabled={isLoading}
+                    required
                   />
-                  <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700 dark:text-gray-300">
-                    Remember me
-                  </label>
+                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300"
+                  >
+                    {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                  </button>
                 </div>
-
-                <Link
-                  to="/forgot-password"
-                  className="text-sm text-sitm-maroon hover:text-sitm-maroon-light dark:text-sitm-gold dark:hover:text-sitm-gold-light"
-                >
-                  Forgot password?
-                </Link>
+                {validationErrors.confirmPassword && (
+                  <p className="text-red-500 text-xs mt-1">{validationErrors.confirmPassword}</p>
+                )}
               </div>
 
               <Button
@@ -201,22 +239,22 @@ export function Login() {
                 {isLoading ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    Signing in...
+                    Resetting Password...
                   </>
                 ) : (
-                  'Sign In'
+                  'Reset Password'
                 )}
               </Button>
             </form>
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                Don't have an account?{' '}
+                Remember your password?{' '}
                 <Link
-                  to="/#admissions"
+                  to="/login"
                   className="text-sitm-maroon hover:text-sitm-maroon-light dark:text-sitm-gold dark:hover:text-sitm-gold-light font-medium"
                 >
-                  Apply for admission
+                  Sign in
                 </Link>
               </p>
             </div>
