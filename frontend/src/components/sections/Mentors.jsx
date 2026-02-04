@@ -57,7 +57,9 @@ export default function Mentors() {
     >
       {/* Glow Background */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.15),transparent_60%)]" />
-          <motion.div
+
+      
+          {/* <motion.div
               animate={{ 
                 rotate: [0, -6, 6, 0],
                 y: [0, -15, 0]
@@ -97,9 +99,7 @@ export default function Mentors() {
                 strokeWidth={1}
               />
             </motion.div>
-
-
-
+ */}
 
       {/* Header */}
       <div className="relative z-10 text-center max-w-3xl mx-auto mb-16 px-4">

@@ -6,18 +6,26 @@ export function Admissions() {
   const { openDownloadBrochureModal, openEnquireNowModal } = useLeadCapture();
 
   return (
-    <section id="admissions" className="py-20 relative
+    <section
+  id="admissions"
+  className="
+    relative py-20 overflow-hidden
     transition-colors duration-300
 
-    /* Light mode */
-    bg-linear-to-b
-    from-purple-300
-    via-gray-600
-    to-purple-300
+    /* Light mode – same family, slightly darker */
+    bg-gradient-to-b
+    from-slate-500/90
+    via-gray-500
+    to-slate-800/90
 
-    /* Dark mode (unchanged) */
-    dark:bg-slate-950
-     overflow-hidden">
+    /* Dark mode – deeper version of same */
+    dark:bg-gradient-to-b
+    dark:from-slate-950
+    dark:via-gray-500
+    dark:to-black
+  "
+>
+
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
       <div className="container mx-auto px-4 relative z-10">

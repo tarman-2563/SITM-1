@@ -50,7 +50,7 @@ export function Awards() {
   return (
     <section id="awards" className="py-24 bg-linear-to-b
       from-purple-300
-      via-white
+      via-gray-400
       to-[#7b2d2d]/20
 
       dark:bg-slate-950

@@ -33,103 +33,24 @@ export default function StartupFunding() {
         dark:bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25),transparent_40%)]"
       />
 
-     <svg
-  className="absolute inset-0 w-full h-full pointer-events-none"
-  viewBox="0 0 1200 1200"
-  fill="none"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs>
-    <linearGradient id="flowGradient1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stopColor="#6366f1" />
-      <stop offset="100%" stopColor="#22d3ee" />
-    </linearGradient>
+      <svg
+        className="absolute inset-0 w-full h-full pointer-events-none"
+        viewBox="0 0 1200 1200"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <defs>
+          <linearGradient id="flowGradient1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%" stopColor="#6366f1" />
+            <stop offset="100%" stopColor="#22d3ee" />
+          </linearGradient>
 
-    <linearGradient id="flowGradient2" x1="1" y1="0" x2="0" y2="1">
-      <stop offset="0%" stopColor="#22c55e" />
-      <stop offset="100%" stopColor="#6366f1" />
-    </linearGradient>
-  </defs>
-
-  {/* ================= TOP RIGHT → BOTTOM LEFT ================= */}
-  <motion.path
-    d="
-      M1200 -100
-      C 900 300, 600 600, 0 1300
-    "
-    stroke="url(#flowGradient1)"
-    strokeWidth="22"
-    strokeLinecap="round"
-    initial={{ pathLength: 0, opacity: 0.15 }}
-    animate={{ pathLength: 1, opacity: [0.15, 0.35, 0.15] }}
-    transition={{
-      duration: 7,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    }}
-    style={{
-      filter: 'blur(6px)',
-    }}
-  />
-
-  <motion.path
-    d="
-      M1200 -100
-      C 900 300, 600 600, 0 1300
-    "
-    stroke="url(#flowGradient1)"
-    strokeWidth="8"
-    strokeDasharray="14 18"
-    strokeLinecap="round"
-    animate={{ opacity: [0.3, 0.6, 0.3] }}
-    transition={{
-      duration: 7,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    }}
-  />
-
-  {/* ================= TOP LEFT → BOTTOM RIGHT ================= */}
-  <motion.path
-    d="
-      M0 -100
-      C 300 300, 600 600, 1200 1300
-    "
-    stroke="url(#flowGradient2)"
-    strokeWidth="22"
-    strokeLinecap="round"
-    initial={{ pathLength: 0, opacity: 0.15 }}
-    animate={{ pathLength: 1, opacity: [0.15, 0.35, 0.15] }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    }}
-    style={{
-      filter: 'blur(6px)',
-    }}
-  />
-
-  <motion.path
-    d="
-      M0 -100
-      C 300 300, 600 600, 1200 1300
-    "
-    stroke="url(#flowGradient2)"
-    strokeWidth="8"
-    strokeDasharray="14 18"
-    strokeLinecap="round"
-    animate={{ opacity: [0.3, 0.6, 0.3] }}
-    transition={{
-      duration: 8,
-      repeat: Infinity,
-      ease: 'easeInOut',
-    }}
-  />
-</svg>
-
-
-
+          <linearGradient id="flowGradient2" x1="1" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#22c55e" />
+            <stop offset="100%" stopColor="#6366f1" />
+          </linearGradient>
+        </defs>
+      </svg>
 
       {/* Floating Accent */}
       <div

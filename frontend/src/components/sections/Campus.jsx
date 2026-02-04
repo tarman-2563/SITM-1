@@ -43,7 +43,7 @@ export function Campus() {
     bg-linear-to-b
     from-[#7b2d2d]/20
     via-white
-    to-purple-200
+    to-[#7b2d2d]/20
 
     /* Dark mode (unchanged) */
     dark:bg-slate-950">
