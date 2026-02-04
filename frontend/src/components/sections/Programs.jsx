@@ -18,6 +18,7 @@ export function Programs() {
       name: "School of Engineering",
       icon: <Rocket className="w-10 h-10" />,
       color: "from-sitm-gold to-sitm-gold",
+      shortPrograms: ["CSE", "ECE", "EEE", "ME", "CE"],
       programs: [
         {
           title: "Mechanical Engineering",
@@ -245,9 +246,27 @@ export function Programs() {
                       <h3 className="text-xl font-serif font-bold mb-2">
                         {school.name}
                       </h3>
-                      <p className="text-sm opacity-80 mb-6">
+                      <p className="text-sm opacity-80 mb-2">
                         {school.programs.length} Industry-ready programs
                       </p>
+                      {/* Program Names Preview */}
+                      <div className="mb-6">
+                        {school.id === "engineering" ? (
+                          <div className="flex flex-wrap gap-2">
+                            {school.shortPrograms.map((p, i) => (
+                              <span key={i} className="flex items-center text-sm font-black bg-white/10 backdrop-blur-md px-3 py-1 rounded-full shadow-[0_8px_16px_rgba(0,0,0,0.2)] border border-white/80 whitespace-nowrap text-sitm-navy transform hover:scale-105 transition-all duration-300">
+                                <span className="mr-2 text-sitm-maroon font-black">•</span>
+                                {p}
+                              </span>
+                            ))}
+                          </div>
+                        ) : (
+                          <div className={`text-xs font-bold flex items-center w-fit px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md shadow-[0_8px_16px_rgba(0,0,0,0.2)] border ${index === 2 ? 'border-white/80' : 'border-sitm-gold/80'}`}>
+                            <span className="mr-2 text-sitm-maroon font-black">•</span>
+                            {school.programs[0].title}
+                          </div>
+                        )}
+                      </div>
                       {/* View Program Button */}
                       <div className="w-full py-3 bg-sitm-navy text-white rounded-full font-bold text-sm uppercase tracking-wider group-hover:bg-sitm-maroon transition-colors duration-300 text-center">
                         View Program
@@ -304,9 +323,31 @@ export function Programs() {
                     <h3 className="text-2xl font-serif font-bold mb-2">
                       {school.name}
                     </h3>
-                    <p className="text-sm opacity-80 mb-6 font-medium">
+                    <p className="text-sm opacity-80 mb-3 font-medium">
                       {school.programs.length} Industry-ready programs
                     </p>
+                    {/* Program Names Preview */}
+                    <div className="mb-6">
+                      {school.id === "engineering" ? (
+                        <div className="flex flex-wrap gap-3">
+                          {school.shortPrograms.map((p, i) => (
+                            <motion.span 
+                              key={i} 
+                              whileHover={{ scale: 1.1, backgroundColor: "rgba(255,255,255,0.2)", borderColor: "rgba(255,255,255,1)" }}
+                              className="flex items-center text-sm font-black bg-white/10 backdrop-blur-md px-4 py-1.5 rounded-full shadow-[0_12px_24px_rgba(0,0,0,0.25)] border border-white/80 whitespace-nowrap text-sitm-navy cursor-default transition-all duration-300"
+                            >
+                              <span className="mr-2 text-sitm-maroon font-black">•</span>
+                              {p}
+                            </motion.span>
+                          ))}
+                        </div>
+                      ) : (
+                        <div className={`text-sm font-bold flex items-center px-5 py-2 rounded-2xl border ${index === 2 ? 'border-white/80 shadow-[0_12px_24px_rgba(0,0,0,0.2)]' : 'border-sitm-gold/80 shadow-[0_12px_24px_rgba(0,0,0,0.25)]'} w-fit bg-white/10 backdrop-blur-md text-sitm-navy transition-all duration-300 transform hover:scale-105`}>
+                          <span className="mr-2 text-sitm-maroon font-black">•</span>
+                          {school.programs[0].title}
+                        </div>
+                      )}
+                    </div>
                     {/* View Program Button - Now decorative since whole card is button */}
                     <div className="w-full py-3 bg-sitm-navy text-white rounded-full font-bold text-sm uppercase tracking-wider group-hover:bg-sitm-maroon transition-colors duration-300 text-center shadow-lg">
                       View Programs
@@ -326,13 +367,13 @@ export function Programs() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-40 bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
+                className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-md flex items-center justify-center p-6"
               >
                 <button
                   onClick={closeModal}
-                  className="absolute top-4 right-4 md:top-8 md:right-8 p-2 md:p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-colors z-10"
+                  className="absolute top-4 right-4 md:top-8 md:right-8 p-2 md:p-3 rounded-full bg-white/10 text-white hover:bg-sitm-gold hover:text-sitm-navy transition-all duration-300 z-[60] shadow-2xl backdrop-blur-md border border-white/20"
                 >
-                  <X className="w-5 h-5 md:w-6 md:h-6" />
+                  <X className="w-6 h-6 md:w-8 md:h-8" />
                 </button>
 
                 {/* Navigation Arrows */}
