@@ -61,12 +61,12 @@ export default function StartupFunding() {
       </div>
 
       <div className="container mx-auto px-4 relative z-10 max-w-7xl">
-        {/* Mobile View: Horizontal Scrollable Row */}
-        <div className="md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-5 pb-8 px-2">
+        {/* Mobile View: Vertical Stacked Rows */}
+        <div className="md:hidden grid grid-cols-1 gap-8 px-2">
             
           {/* ================= MOBILE CARD 1 ================= */}
           <div
-            className="min-w-[260px] min-h-[420px] flex flex-col justify-between flex-shrink-0 snap-center relative rounded-3xl p-6
+            className="min-h-[450px] flex flex-col justify-between relative rounded-3xl p-6
             bg-white/90 dark:bg-white/5
             backdrop-blur-xl
             border border-sitm-gold/30
@@ -91,15 +91,15 @@ export default function StartupFunding() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
               {[
                 { value: "₹10L+", label: "Seed Funding" },
                 { value: "1-to-1", label: "Mentorship" },
-                { value: "0 → 1", label: "Startup Journey" },
+                { value: "0 → 1", label: "Journey" },
               ].map((item, i) => (
                 <div key={i} className="rounded-xl p-3 text-center bg-sitm-gold/10 dark:bg-white/5 backdrop-blur-xl border border-sitm-gold/20">
                   <motion.h3 
-                    animate={item.value === "₹10L+" ? { scale: [1, 1.15, 1] } : {}}
+                    animate={item.value === "₹10L+" ? { scale: [1, 1.1, 1] } : {}}
                     transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
                     className={`${item.value === "₹10L+" ? "text-2xl" : "text-lg"} font-serif italic font-black text-transparent bg-clip-text bg-linear-to-r from-sitm-maroon to-sitm-navy dark:from-sitm-gold dark:to-white`}
                   >
@@ -113,7 +113,7 @@ export default function StartupFunding() {
 
           {/* ================= MOBILE CARD 2 ================= */}
           <div
-            className="min-w-[260px] min-h-[420px] flex flex-col flex-shrink-0 snap-center relative rounded-3xl p-6
+            className="min-h-[300px] flex flex-col justify-center relative rounded-3xl p-6
             bg-white/90 dark:bg-white/5
             backdrop-blur-xl
             border border-sitm-gold/30
