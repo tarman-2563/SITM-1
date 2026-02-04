@@ -191,19 +191,10 @@ const forgotPassword = async (email, req) => {
     return { success: false, message: "No user found with this email" };
   }
 
-  const resetToken = crypto.randomBytes(20).toString("hex");
-  user.resetPasswordToken = crypto
-    .createHash("sha256")
-    .update(resetToken)
-    .digest("hex");
-  user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
-
-  await user.save();
-
-  const resetUrl = `${req.protocol}://${req.get("host")}/reset-password/${resetToken}`;
-  await emailService.sendPasswordResetEmail(user, resetUrl);
-
-  return { success: true };
+  // Removed password reset email functionality
+  // Users will need to contact admin for password reset
+  
+  return { success: false, message: "Password reset via email has been disabled. Please contact support." };
 };
 
 const resetPassword = async (token, newPassword) => {

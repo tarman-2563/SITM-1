@@ -136,21 +136,9 @@ const completeApplication = async (applicationData, req) => {
     // Don't throw error - application should still be saved even if user creation fails
   }
 
-  // Send email notifications
-  try {
-    // Only send admin notification - no email to user
-    logger.debug("Sending application admin notification");
-    await emailService.sendApplicationAdminNotification(admission);
-    logger.info("Application admin notification sent successfully");
-  } catch (emailError) {
-    logger.error("Email sending failed:", {
-      error: emailError.message,
-      code: emailError.code,
-      response: emailError.response
-    });
-    // Don't throw error - application should still be saved even if email fails
-  }
-
+  // Send email notifications - REMOVED
+  // Only keeping lead confirmation email, removing admin notifications
+  
   logger.info("Application completed successfully", { 
     applicationId: admission.applicationId,
     email: admission.email,
@@ -234,11 +222,7 @@ const updateApplicationStatus = async (
     { new: true, runValidators: true }
   );
 
-  if (admission) {
-    try {
-      await emailService.sendStatusUpdateEmail(admission);
-    } catch {}
-  }
+  // Removed status update email - no longer sending emails for status changes
 
   return admission;
 };
