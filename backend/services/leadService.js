@@ -1,5 +1,5 @@
 const Lead=require("../models/Lead");
-const { sendLeadConfirmation, sendLeadAdminNotification } = require("./emailService")
+const { sendLeadConfirmation } = require("./emailService")
 
 const createLeadService=async(leadData,req)=>{
     try{
@@ -24,15 +24,10 @@ const createLeadService=async(leadData,req)=>{
                 console.log("Email configuration check:");
                 console.log("- SMTP_HOST:", process.env.SMTP_HOST);
                 console.log("- SMTP_USER:", process.env.SMTP_USER);
-                console.log("- ADMIN_EMAIL:", process.env.ADMIN_EMAIL);
                 
                 await sendLeadConfirmation(lead, req);
                 await lead.addActivity("email_sent","Sent lead confirmation email");
                 console.log("Confirmation email sent successfully");
-                
-                console.log("Sending admin notification to:", process.env.ADMIN_EMAIL);
-                await sendLeadAdminNotification(lead);
-                console.log("Admin notification sent successfully");
              }
              catch(emailError){
                 console.error("Email sending failed:", emailError);

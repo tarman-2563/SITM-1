@@ -80,47 +80,6 @@ const templates = {
       </div>
     `
   }),
-
-  "lead-admin-notification": (data) => ({
-    subject: `New Lead Captured | ${data.name} – ${data.program}`,
-    html: `
-      <div style="font-family: Arial, Helvetica, sans-serif; background-color:#f4f6f8; padding:20px;">
-        <div style="max-width:600px; margin:0 auto; background:#ffffff; border-radius:8px; padding:24px;">
-          
-          <h2 style="color:#002366; margin-top:0;">
-            New Lead Captured
-          </h2>
-
-          <p style="font-size:15px; color:#333;">
-            A new prospective student has submitted their details.
-          </p>
-
-          <table style="width:100%; border-collapse:collapse; margin-top:16px;">
-            <tr>
-              <td style="padding:8px; font-weight:bold;">Name:</td>
-              <td style="padding:8px;">${data.name}</td>
-            </tr>
-            <tr style="background:#f9f9f9;">
-              <td style="padding:8px; font-weight:bold;">Email:</td>
-              <td style="padding:8px;">${data.email}</td>
-            </tr>
-            <tr>
-              <td style="padding:8px; font-weight:bold;">Phone:</td>
-              <td style="padding:8px;">${data.phone}</td>
-            </tr>
-            <tr style="background:#f9f9f9;">
-              <td style="padding:8px; font-weight:bold;">Program:</td>
-              <td style="padding:8px;">${data.program}</td>
-            </tr>
-          </table>
-
-          <p style="font-size:14px; color:#555; margin-top:20px;">
-            Please follow up with the candidate as soon as possible.
-          </p>
-        </div>
-      </div>
-    `
-  })
 };
 
 
