@@ -18,149 +18,221 @@ export default function StartupFunding() {
 
   return (
     <section
-      className="relative py-28 overflow-hidden
-      bg-linear-to-b
-      from-[#7b2d2d]/20
-      via-white
-      to-[#7b2d2d]/20
-      dark:bg-slate-950
-      transition-colors duration-300"
+      id="startup-funding"
+      className="relative py-24 bg-white dark:bg-slate-950 transition-colors duration-300 overflow-hidden"
     >
-      {/* Neon Glow Background */}
-      <div
-        className="absolute inset-0 
-        bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.18),transparent_60%)]
-        dark:bg-[radial-gradient(circle_at_center,rgba(99,102,241,0.25),transparent_40%)]"
-      />
+      {/* Background Aurora/Glow Graphics - Mirroring About style but different directions */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Subtle Geometric Dot Pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.1]"
+          style={{ 
+            backgroundImage: `radial-gradient(#D56B6F 1px, transparent 1px)`,
+            backgroundSize: "30px 30px"
+          }}
+        ></div>
 
-      <svg
-        className="absolute inset-0 w-full h-full pointer-events-none"
-        viewBox="0 0 1200 1200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <linearGradient id="flowGradient1" x1="0" y1="0" x2="1" y2="1">
-            <stop offset="0%" stopColor="#6366f1" />
-            <stop offset="100%" stopColor="#22d3ee" />
-          </linearGradient>
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -right-[15%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 80, 0],
+            y: [0, 100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] -left-[20%] w-[65%] h-[65%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[0%] right-[10%] w-[60%] h-[60%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
+      </div>
 
-          <linearGradient id="flowGradient2" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22c55e" />
-            <stop offset="100%" stopColor="#6366f1" />
-          </linearGradient>
-        </defs>
-      </svg>
-
-      {/* Floating Accent */}
-      <div
-        className="absolute -top-32 left-1/2 -translate-x-1/2 
-        w-150 h-150 rounded-full blur-3xl
-        bg-indigo-400/20 dark:bg-indigo-600/20"
-      />
-
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: "easeOut" }}
-        viewport={{ once: true }}
-        className="relative z-10 max-w-7xl mx-auto px-6"
-      >
-        {/* Cards Wrapper */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
-
-          {/* ================= CARD 1 ================= */}
+      <div className="container mx-auto px-4 relative z-10 max-w-7xl">
+        {/* Mobile View: Horizontal Scrollable Row */}
+        <div className="md:hidden overflow-x-auto scrollbar-hide snap-x snap-mandatory flex gap-5 pb-8 px-2">
+            
+          {/* ================= MOBILE CARD 1 ================= */}
           <div
-            className="relative rounded-3xl p-10 md:p-14
-            bg-white/70 dark:bg-slate-950/70
+            className="min-w-[260px] min-h-[420px] flex flex-col justify-between flex-shrink-0 snap-center relative rounded-3xl p-6
+            bg-white/90 dark:bg-white/5
             backdrop-blur-xl
-            border border-indigo-500/20
-            shadow-[0_0_60px_rgba(99,102,241,0.25)]"
+            border border-sitm-gold/30
+            shadow-[0_15px_40px_rgba(0,0,0,0.05)]"
           >
-            <span className="inline-block mb-6 px-5 py-2 rounded-full text-sm font-semibold
-              bg-indigo-100 text-indigo-700
-              dark:bg-indigo-500/10 dark:text-indigo-400">
-              🚀 Startup Ecosystem @ SITM
+            <div>
+              <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider
+                bg-sitm-gold/10 text-sitm-maroon dark:text-sitm-gold">
+                🚀 Startup Ecosystem
+              </span>
+
+              <h2 className="text-xl font-serif font-black leading-tight mb-4 text-sitm-navy dark:text-white">
+                From Ideas to Startups —
+                <span className="block mt-1 text-lg text-sitm-navy dark:text-sitm-gold font-serif italic font-black">
+                  Backed by <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-sitm-gold">₹10L</span> Seed Funding
+                </span>
+              </h2>
+
+              <p className="text-sm text-sitm-navy/70 dark:text-gray-300 leading-relaxed mb-6 font-medium">
+                Expert mentorship and early-stage funding to transform innovative
+                ideas into real, scalable startups.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 gap-3">
+              {[
+                { value: "₹10L+", label: "Seed Funding" },
+                { value: "1-to-1", label: "Mentorship" },
+                { value: "0 → 1", label: "Startup Journey" },
+              ].map((item, i) => (
+                <div key={i} className="rounded-xl p-3 text-center bg-sitm-gold/10 dark:bg-white/5 backdrop-blur-xl border border-sitm-gold/20">
+                  <motion.h3 
+                    animate={item.value === "₹10L+" ? { scale: [1, 1.15, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className={`${item.value === "₹10L+" ? "text-2xl" : "text-lg"} font-serif italic font-black text-transparent bg-clip-text bg-linear-to-r from-sitm-maroon to-sitm-navy dark:from-sitm-gold dark:to-white`}
+                  >
+                    {item.value}
+                  </motion.h3>
+                  <p className="text-[9px] font-bold uppercase text-sitm-maroon/60 dark:text-gray-400">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* ================= MOBILE CARD 2 ================= */}
+          <div
+            className="min-w-[260px] min-h-[420px] flex flex-col flex-shrink-0 snap-center relative rounded-3xl p-6
+            bg-white/90 dark:bg-white/5
+            backdrop-blur-xl
+            border border-sitm-gold/30
+            shadow-[0_15px_40px_rgba(0,0,0,0.05)]"
+          >
+            <span className="inline-block mb-4 px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-wider
+              bg-sitm-gold/10 text-sitm-maroon dark:text-sitm-gold">
+              🌍 Global Exposure
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              <span className="text-gray-900 dark:text-white">
-                From Ideas to Startups —
-              </span>{" "}
-              <span className="bg-clip-text text-transparent 
-                bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500">
-                Backed by ₹10L Seed Funding
+            <h2 className="text-xl font-serif font-black leading-tight mb-4 text-sitm-navy dark:text-white">
+              Students Went International —
+              <span className="block mt-1 text-lg text-sitm-navy dark:text-sitm-gold font-serif italic font-black">
+                <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-sitm-gold">Thailand</span> Competition
               </span>
             </h2>
 
-            <p className="mt-6 text-lg text-blue-700 dark:text-gray-300">
-              At <span className="font-semibold">SITM</span>, student founders receive
+            <p className="text-sm text-sitm-navy/70 dark:text-gray-300 leading-relaxed font-medium">
+              SITM students proudly represented India at an international-level
+              competition in <span className="font-bold italic text-sitm-navy dark:text-sitm-gold">Thailand</span>, gaining confidence and cultural insight on a global stage.
+            </p>
+          </div>
+        </div>
+
+        {/* Desktop View: Grid with Split-Side Sliding Animations */}
+        <div className="hidden md:grid grid-cols-2 gap-10">
+
+          {/* ================= DESKTOP CARD 1 (LEFT) ================= */}
+          <motion.div
+            initial={{ x: -100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative rounded-4xl p-10
+            bg-white/80 dark:bg-white/5
+            backdrop-blur-2xl
+            border border-sitm-gold/40
+            shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_60px_rgba(255,255,255,0.02)]"
+          >
+            <span className="inline-block mb-6 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest
+              bg-sitm-gold/10 text-sitm-maroon dark:text-sitm-gold">
+              🚀 Startup Ecosystem @ SITM
+            </span>
+
+            <h2 className="text-4xl md:text-5xl font-serif font-black leading-tight text-sitm-navy dark:text-white">
+              From Ideas to Startups —
+              <span className="block mt-2 text-3xl md:text-4xl text-sitm-navy dark:text-sitm-gold font-serif italic font-black drop-shadow-sm">
+                Backed by <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-sitm-gold">₹10L</span> Seed Funding
+              </span>
+            </h2>
+
+            <p className="mt-8 text-lg text-sitm-navy/70 dark:text-gray-300 leading-relaxed font-medium">
+              At <span className="font-bold text-sitm-navy dark:text-white">SITM</span>, student founders receive
               expert mentorship and early-stage funding to transform innovative
               ideas into real, scalable startups.
             </p>
 
-            <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-6">
+            <div className="mt-12 grid grid-cols-3 gap-6">
               {[
-                { value: "₹10L+", label: "Seed Funding", color: "indigo" },
-                { value: "1-to-1", label: "Founder Mentorship", color: "emerald" },
-                { value: "0 → 1", label: "Startup Journey", color: "rose" },
+                { value: "₹10L+", label: "Seed Funding" },
+                { value: "1-to-1", label: "Founder Mentorship" },
+                { value: "0 → 1", label: "Startup Journey" },
               ].map((item, i) => (
                 <div
                   key={i}
-                  className={`rounded-2xl p-6 text-center
-                    bg-white/80 dark:bg-slate-900/60
-                    ${colorMap[item.color].border}
-                  `}
+                  className="rounded-2xl p-6 text-center
+                    bg-sitm-gold/10 dark:bg-white/5 backdrop-blur-xl
+                    border border-sitm-gold/20
+                  "
                 >
-                  <h3
-                    className={`text-2xl font-bold ${colorMap[item.color].text}`}
+                  <motion.h3 
+                    animate={item.value === "₹10L+" ? { scale: [1, 1.15, 1] } : {}}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className={`${item.value === "₹10L+" ? "text-4xl" : "text-2xl"} font-serif italic font-black text-transparent bg-clip-text bg-linear-to-r from-sitm-maroon to-sitm-navy dark:from-sitm-gold dark:to-white`}
                   >
                     {item.value}
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
+                  </motion.h3>
+                  <p className="mt-1 text-xs font-bold uppercase text-sitm-maroon/60 dark:text-gray-400">
                     {item.label}
                   </p>
                 </div>
               ))}
             </div>
+          </motion.div>
 
-          </div>
-
-          {/* ================= CARD 2 ================= */}
-          <div
-            className="relative rounded-3xl p-10 md:p-14
-            bg-white/70 dark:bg-slate-950/70
-            backdrop-blur-xl
-            border border-emerald-500/20
-            shadow-[0_0_60px_rgba(16,185,129,0.25)]"
+          {/* ================= DESKTOP CARD 2 (RIGHT) ================= */}
+          <motion.div
+            initial={{ x: 100, opacity: 0 }}
+            whileInView={{ x: 0, opacity: 1 }}
+            viewport={{ once: false }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative rounded-4xl p-10
+            bg-white/80 dark:bg-white/5
+            backdrop-blur-2xl
+            border border-sitm-gold/40
+            shadow-[0_20px_50px_rgba(0,0,0,0.05)] dark:shadow-[0_0_60px_rgba(255,255,255,0.02)]"
           >
-            <span className="inline-block mb-6 px-5 py-2 rounded-full text-sm font-semibold
-              bg-emerald-100 text-emerald-700
-              dark:bg-emerald-500/10 dark:text-emerald-400">
+            <span className="inline-block mb-6 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest
+              bg-sitm-gold/10 text-sitm-maroon dark:text-sitm-gold">
               🌍 Global Exposure @ SITM
             </span>
 
-            <h2 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              <span className="text-gray-900 dark:text-white">
-                Students Went International —
-              </span>{" "}
-              <span className="bg-clip-text text-transparent 
-                bg-linear-to-r from-emerald-500 via-teal-500 to-cyan-500">
-                Thailand Competition
+            <h2 className="text-4xl md:text-5xl font-serif font-black leading-tight text-sitm-navy dark:text-white">
+              Students Went International —
+              <span className="block mt-2 text-3xl md:text-4xl text-sitm-navy dark:text-sitm-gold font-serif italic font-black drop-shadow-sm">
+                <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-sitm-gold">Thailand</span> Competition
               </span>
             </h2>
 
-            <p className="mt-6 text-lg text-blue-700 dark:text-gray-300">
+            <p className="mt-8 text-lg text-sitm-navy/70 dark:text-gray-300 leading-relaxed font-medium">
               SITM students proudly represented India at an international-level
-              competition in <span className="font-semibold">Thailand</span>.
+              competition in <span className="font-bold italic ">Thailand</span>.
               This global exposure helped students gain international
               experience, cultural insight, and confidence while competing
               alongside teams from different countries.
             </p>
-          </div>
-
+          </motion.div>
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
