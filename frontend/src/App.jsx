@@ -12,6 +12,11 @@ import { Activate } from "./pages/Activate";
 import { Dashboard } from "./pages/Dashboard";
 import { Scholarships } from "./pages/Scholarships";
 
+import { Engineering } from "./pages/programs/Engineering";
+import { BCA } from "./pages/programs/BCA";
+import { BBA } from "./pages/programs/BBA";
+import { DataScience } from "./pages/programs/DataScience";
+
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { ApplicationDetail } from "./pages/admin/ApplicationDetail";
 import { AdminUserManagement } from "./pages/admin/AdminUserManagement";
@@ -20,7 +25,6 @@ import { FloatingChatbot } from "./components/common/FloatingChatbot";
 import { FloatingCTA } from "./components/common/FloatingCTA";
 import FloatingWhatsApp from "./components/common/FloatingWhatsApp";
 
-// Import API test utility in development only
 if (import.meta.env.DEV) {
   import("./utils/apiTest");
 }
@@ -31,10 +35,16 @@ function App() {
       <LeadCaptureProvider>
         <Router>
           <Routes>
-            {/* Public routes */}
             <Route path="/" element={<Home />} />
             <Route path="/programs" element={<Programs />} />
-            <Route path="/programs/:programId" element={<Programs />} />
+            
+            <Route path="/programs/engineering" element={<Engineering />} />
+            <Route path="/programs/engineering/:branch" element={<Engineering />} />
+            
+            <Route path="/programs/bca" element={<BCA />} />
+            <Route path="/programs/bba" element={<BBA />} />
+            <Route path="/programs/data-science" element={<DataScience />} />
+            
             <Route path="/scholarships" element={<Scholarships />} />
             <Route path="/application/:leadId" element={<Application />} />
             <Route path="/login" element={<Login />} />
@@ -42,11 +52,9 @@ function App() {
             <Route path="/reset-password/:token" element={<ResetPassword />} />
             <Route path="/activate/:token" element={<Activate />} />
 
-            {/* User dashboard */}
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/student/dashboard" element={<Dashboard />} />
 
-            {/* Admin routes */}
             <Route path="/admin" element={<AdminDashboard />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/users" element={<AdminUserManagement />} />
@@ -54,7 +62,6 @@ function App() {
             <Route path="/admin/applications/:id" element={<ApplicationDetail />} />
           </Routes>
 
-          {/* Global floating components */}
           <FloatingWhatsApp/>
           <FloatingCTA />
         </Router>

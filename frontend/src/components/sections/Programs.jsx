@@ -405,50 +405,79 @@ export function Programs() {
                 >
                   {/* Content */}
                   <div className="flex-1 p-6 md:p-12 overflow-y-auto">
-                    <h3 className="text-2xl md:text-4xl font-serif font-bold mb-4 md:mb-6">
-                      {
-                        selectedSchool.programs[currentProgramIndex]
-                          .title
-                      }
-                    </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg mb-6 md:mb-10">
-                      {
-                        selectedSchool.programs[currentProgramIndex]
-                          .desc
-                      }
-                    </p>
+                    {selectedSchool.id === "engineering" ? (
+                      // Special content for Engineering School
+                      <>
+                        <h3 className="text-2xl md:text-4xl font-serif font-bold mb-4 md:mb-6">
+                          School of Engineering
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg mb-6 md:mb-10">
+                          Comprehensive engineering education across 5 specialized branches with cutting-edge technology, 
+                          industry partnerships, and hands-on learning experiences. Our programs combine theoretical 
+                          knowledge with practical skills to prepare future engineers.
+                        </p>
 
-                    <div className="flex gap-3 md:gap-4 flex-wrap mb-4 md:mb-6">
-                      <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
-                        {
-                          selectedSchool.programs[currentProgramIndex]
-                            .duration
-                        }
-                      </span>
-                      <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
-                        Seats:{" "}
-                        {
-                          selectedSchool.programs[currentProgramIndex]
-                            .intake
-                        }
-                      </span>
-                    </div>
+                        <div className="flex gap-3 md:gap-4 flex-wrap mb-4 md:mb-6">
+                          <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
+                            4 Years Duration
+                          </span>
+                          <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
+                            60 Seats per Branch
+                          </span>
+                          <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
+                            5 Specializations
+                          </span>
+                        </div>
+                      </>
+                    ) : (
+                      // Original content for other schools
+                      <>
+                        <h3 className="text-2xl md:text-4xl font-serif font-bold mb-4 md:mb-6">
+                          {
+                            selectedSchool.programs[currentProgramIndex]
+                              .title
+                          }
+                        </h3>
+                        <p className="text-gray-600 dark:text-gray-300 text-base md:text-lg mb-6 md:mb-10">
+                          {
+                            selectedSchool.programs[currentProgramIndex]
+                              .desc
+                          }
+                        </p>
 
-                    {/* Program Navigation Indicator */}
-                    {selectedSchool.programs.length > 1 && (
-                      <div className="flex gap-2 mt-6 md:mt-8">
-                        {selectedSchool.programs.map((_, index) => (
-                          <button
-                            key={index}
-                            onClick={() => setCurrentProgramIndex(index)}
-                            className={`h-2 rounded-full transition-all ${
-                              index === currentProgramIndex 
-                                ? 'w-8 bg-sitm-gold' 
-                                : 'w-2 bg-gray-300 dark:bg-gray-600'
-                            }`}
-                          />
-                        ))}
-                      </div>
+                        <div className="flex gap-3 md:gap-4 flex-wrap mb-4 md:mb-6">
+                          <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
+                            {
+                              selectedSchool.programs[currentProgramIndex]
+                                .duration
+                            }
+                          </span>
+                          <span className="px-4 md:px-5 py-2 bg-gray-100 dark:bg-slate-800 rounded-lg font-bold text-sm md:text-base">
+                            Seats:{" "}
+                            {
+                              selectedSchool.programs[currentProgramIndex]
+                                .intake
+                            }
+                          </span>
+                        </div>
+
+                        {/* Program Navigation Indicator */}
+                        {selectedSchool.programs.length > 1 && (
+                          <div className="flex gap-2 mt-6 md:mt-8">
+                            {selectedSchool.programs.map((_, index) => (
+                              <button
+                                key={index}
+                                onClick={() => setCurrentProgramIndex(index)}
+                                className={`h-2 rounded-full transition-all ${
+                                  index === currentProgramIndex 
+                                    ? 'w-8 bg-sitm-gold' 
+                                    : 'w-2 bg-gray-300 dark:bg-gray-600'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
 
@@ -456,7 +485,7 @@ export function Programs() {
                   <div className="md:w-[320px] bg-sitm-navy p-6 md:p-10 text-center flex flex-col justify-center">
                     <ArrowUpRight className="w-10 h-10 md:w-12 md:h-12 text-sitm-gold mx-auto mb-4 md:mb-6" />
                     <h4 className="text-white font-bold text-lg md:text-xl mb-3 md:mb-4">
-                      Ready to Apply?
+                      {selectedSchool.id === "engineering" ? "Explore Engineering" : "Ready to Apply?"}
                     </h4>
 
                     <button
@@ -467,11 +496,14 @@ export function Programs() {
                     </button>
 
                     <Link
-                      to="/programs"
+                      to={selectedSchool.id === "engineering" ? "/programs/engineering" : 
+                          selectedSchool.id === "business" ? "/programs/bba" :
+                          selectedSchool.id === "computer" ? "/programs/bca" :
+                          selectedSchool.id === "data-science" ? "/programs/data-science" : "/programs"}
                       onClick={closeModal}
                       className="text-white/80 text-xs md:text-sm hover:text-white transition-colors"
                     >
-                      View Full Syllabus
+                      {selectedSchool.id === "engineering" ? "View All Branches" : "View Full Syllabus"}
                     </Link>
                   </div>
                 </motion.div>

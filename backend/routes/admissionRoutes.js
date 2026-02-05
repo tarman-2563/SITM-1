@@ -42,11 +42,6 @@ admissionRouter.get("/stats/overview", protect, authorize("admin", "super_admin"
 // CSV Export route - Admin only (must be before /:id route)
 admissionRouter.get("/export/csv", protect, authorize("admin", "super_admin"), exportApplicationsCSV);
 
-// Test route to verify CSV export is accessible
-admissionRouter.get("/export/test", protect, authorize("admin", "super_admin"), (req, res) => {
-  res.json({ message: "CSV export route is accessible", timestamp: new Date().toISOString() });
-});
-
 admissionRouter.get("/:id", [
   param("id").isMongoId().withMessage("Valid application ID is required")
 ], protect, authorize("admin", "super_admin"), getApplicationById);
