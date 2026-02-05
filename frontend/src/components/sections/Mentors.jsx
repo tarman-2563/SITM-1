@@ -1,4 +1,4 @@
-import { cloneElement } from "react";
+import { cloneElement, useState } from "react";
 import { motion } from "framer-motion";
 import { Briefcase, Building2, LayoutGrid, Code2, Palette, BarChart3, Cloud, Terminal, Brain, Database, ShieldCheck, TestTube2, Settings2, Rocket, Users } from "lucide-react";
 
@@ -27,6 +27,41 @@ const mentors = [
 
 const row1 = mentors.slice(0, 10);
 const row2 = mentors.slice(10, 20);
+
+const CompanyLogo = ({ domain, company }) => {
+  const [logoUrl, setLogoUrl] = useState(`https://www.google.com/s2/favicons?domain=${domain}&sz=128`);
+  const [errorCount, setErrorCount] = useState(0);
+  
+  const handleLogoError = () => {
+    if (errorCount === 0) {
+      setLogoUrl(`https://icons.duckduckgo.com/ip3/${domain}.ico`);
+      setErrorCount(1);
+    } else if (errorCount === 1) {
+      setLogoUrl(`https://logo.clearbit.com/${domain}`);
+      setErrorCount(2);
+    } else {
+      setErrorCount(3);
+    }
+  };
+
+  return (
+    <div className="mt-3 flex items-center justify-center gap-2 py-1 px-3 bg-white/30 dark:bg-white/10 rounded-full border border-sitm-gold/30 dark:border-white/10 backdrop-blur-sm w-fit mx-auto shadow-sm group-hover/card:border-sitm-gold/50 transition-colors duration-500">
+      {errorCount < 3 ? (
+        <img 
+          src={logoUrl} 
+          alt={company} 
+          className="w-4 h-4 object-contain filter drop-shadow-sm transition-transform duration-300 group-hover/card:scale-110"
+          onError={handleLogoError}
+        />
+      ) : (
+        <Building2 className="w-3.5 h-3.5 text-gray-500" />
+      )}
+      <span className="text-[9px] text-sitm-navy dark:text-gray-200 font-black uppercase tracking-widest">
+        {company}
+      </span>
+    </div>
+  );
+};
 
 const MarqueeRow = ({ items, direction = "left", speed = 40 }) => {
   return (
@@ -68,18 +103,7 @@ const MarqueeRow = ({ items, direction = "left", speed = 40 }) => {
                 </div>
                 
                 {/* Real Company Logo */}
-                <div className="mt-3 flex items-center justify-center gap-2 py-1 px-3 bg-white/30 dark:bg-white/10 rounded-full border border-sitm-gold/30 dark:border-white/10 backdrop-blur-sm w-fit mx-auto shadow-sm">
-                   <img 
-                      src={`https://logo.clearbit.com/${mentor.domain}`} 
-                      alt={mentor.company} 
-                      className="w-4 h-4 object-contain filter drop-shadow-sm transition-transform duration-300 group-hover/card:scale-110"
-                      onError={(e) => { e.currentTarget.style.display = 'none'; e.currentTarget.nextSibling.style.display = 'block'; }}
-                   />
-                   <Building2 className="w-3.5 h-3.5 text-gray-500 hidden" />
-                   <span className="text-[9px] text-sitm-navy dark:text-gray-200 font-black uppercase tracking-widest">
-                     {mentor.company}
-                   </span>
-                </div>
+                <CompanyLogo domain={mentor.domain} company={mentor.company} />
               </div>
               
               {/* Decorative Corner Highlight */}

@@ -15,6 +15,7 @@ import Mentors from "../components/sections/Mentors";
 import StartupFunding from "../components/sections/StartupFunding";
 import StudentPlaced from "../components/sections/StudentPlaced";
 import SITMInMedia from "../components/sections/SITMInMedia";
+import FiresideChats from "../components/sections/FiresideChats";
 
 export function Home() {
   return (
@@ -30,6 +31,9 @@ export function Home() {
         <About />
       </Reveal>
       <Programs />
+      <Reveal width="100%">
+        <FiresideChats />
+      </Reveal>
       <Reveal width="100%">
         <Mentors />
       </Reveal>
