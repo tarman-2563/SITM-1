@@ -269,6 +269,27 @@ const getAdmissionStatistics = async () => {
   };
 };
 
+// Get all applications for CSV export (without pagination)
+const getAllApplicationsForExport = async (filters = {}) => {
+  try {
+    logger.debug("Fetching applications for CSV export", { filters });
+    
+    const applications = await Admission.find(filters)
+      .populate('leadId', 'firstName lastName email phone program')
+      .populate('reviewedBy', 'firstName lastName email')
+      .populate('userId', 'firstName lastName email')
+      .sort({ createdAt: -1 })
+      .lean(); // Use lean() for better performance when we don't need mongoose documents
+    
+    logger.debug(`Found ${applications.length} applications for export`);
+    return applications;
+    
+  } catch (error) {
+    logger.error("Error fetching applications for export:", error);
+    throw error;
+  }
+};
+
 module.exports = {
   admissionService: {
     completeApplication,
@@ -276,6 +297,7 @@ module.exports = {
     getAllApplications,
     getApplicationById,
     updateApplicationStatus,
-    getAdmissionStatistics
+    getAdmissionStatistics,
+    getAllApplicationsForExport
   }
 };

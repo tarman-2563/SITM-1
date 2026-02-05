@@ -1,6 +1,7 @@
 const { validationResult } = require("express-validator");
 const { admissionService } = require("../services/admissionService");
 const logger = require("../utils/logger");
+const { exportApplicationsToCsv } = require("../utils/csvExport");
 
 const completeApplication = async (req, res) => {
   try {
@@ -228,11 +229,90 @@ const getAdmissionStats = async (req, res) => {
   }
 };
 
+// Export applications to CSV
+const exportApplicationsCSV = async (req, res) => {
+  try {
+    logger.debug("Processing CSV export request", { query: req.query });
+    
+    // Get query parameters for filtering
+    const { status, program, search, startDate, endDate } = req.query;
+    
+    // Build filter object
+    const filters = {};
+    if (status) filters.status = status;
+    if (program) filters.program = program;
+    if (search) {
+      filters.$or = [
+        { firstName: { $regex: search, $options: 'i' } },
+        { lastName: { $regex: search, $options: 'i' } },
+        { email: { $regex: search, $options: 'i' } },
+        { applicationId: { $regex: search, $options: 'i' } }
+      ];
+    }
+    if (startDate || endDate) {
+      filters.createdAt = {};
+      if (startDate) filters.createdAt.$gte = new Date(startDate);
+      if (endDate) filters.createdAt.$lte = new Date(endDate);
+    }
+
+    logger.debug("CSV export filters:", filters);
+
+    // Get applications from service
+    const applications = await admissionService.getAllApplicationsForExport(filters);
+    
+    logger.debug(`Found ${applications.length} applications for export`);
+    
+    if (!applications || applications.length === 0) {
+      return res.status(200).json({
+        status: "success",
+        message: "No applications found matching the criteria",
+        count: 0
+      });
+    }
+    
+    // Generate CSV content
+    const csvContent = exportApplicationsToCsv(applications);
+    
+    if (!csvContent) {
+      return res.status(500).json({
+        status: "error",
+        message: "Failed to generate CSV content"
+      });
+    }
+    
+    // Generate filename with timestamp
+    const timestamp = new Date().toISOString().split('T')[0];
+    const filename = `applications_export_${timestamp}.csv`;
+    
+    logger.debug(`Sending CSV file: ${filename}, size: ${csvContent.length} characters`);
+    
+    // Set response headers for file download
+    res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+    res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+    res.setHeader('Cache-Control', 'no-cache');
+    res.setHeader('Pragma', 'no-cache');
+    
+    // Send CSV content
+    res.status(200).send(csvContent);
+    
+    logger.info(`CSV export completed successfully: ${applications.length} applications exported`);
+    
+  } catch (error) {
+    logger.error("CSV export failed:", error);
+    res.status(500).json({
+      status: "error",
+      message: "Failed to export applications",
+      error: process.env.NODE_ENV === 'development' ? error.message : 'Internal server error'
+    });
+  }
+};
+
 module.exports = {
   completeApplication,
   getApplicationStatus,
   getAllApplications,
   getApplicationById,
   updateApplicationStatus,
-  getAdmissionStats
+  getAdmissionStats,
+  exportApplicationsCSV
 };

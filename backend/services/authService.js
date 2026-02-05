@@ -1,5 +1,5 @@
 const User = require("../models/User");
-const { emailService } = require("./emailService");
+const { sendPasswordResetEmail } = require("./emailService");
 const crypto = require("crypto");
 
 const loginUser = async (email, password) => {
@@ -191,10 +191,41 @@ const forgotPassword = async (email, req) => {
     return { success: false, message: "No user found with this email" };
   }
 
-  // Removed password reset email functionality
-  // Users will need to contact admin for password reset
+  // Generate reset token
+  const resetToken = crypto.randomBytes(20).toString('hex');
   
-  return { success: false, message: "Password reset via email has been disabled. Please contact support." };
+  // Hash token and set to resetPasswordToken field
+  user.resetPasswordToken = crypto.createHash('sha256').update(resetToken).digest('hex');
+  
+  // Set expire time (10 minutes)
+  user.resetPasswordExpire = Date.now() + 10 * 60 * 1000;
+  
+  await user.save();
+
+  // Create reset URL - should point to frontend
+  const frontendUrl = process.env.FRONTEND_URL || `${req.protocol}://${req.get('host')}`;
+  const resetUrl = `${frontendUrl}/reset-password/${resetToken}`;
+
+  try {
+    await sendPasswordResetEmail(user.email, user.fullName, resetUrl);
+    
+    return { 
+      success: true, 
+      message: "Password reset email sent successfully" 
+    };
+  } catch (error) {
+    console.error('Password reset email error:', error);
+    
+    // Clear reset token fields if email fails
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    
+    return { 
+      success: false, 
+      message: "Email could not be sent. Please try again later." 
+    };
+  }
 };
 
 const resetPassword = async (token, newPassword) => {

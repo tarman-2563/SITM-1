@@ -1,11 +1,9 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Button } from '../components/common/Button';
-import { Navbar } from '../components/layout/Navbar';
-import { Footer } from '../components/layout/Footer';
 import { authService } from '../services/authService';
-import { CheckCircle, AlertCircle, Loader2, Eye, EyeOff } from 'lucide-react';
+import { CheckCircle, AlertCircle, Loader2, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 
 export function Activate() {
   const { token } = useParams();
@@ -105,29 +103,50 @@ export function Activate() {
   if (error && !activationInfo) {
     return (
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-        <Navbar />
+        {/* Back to Home Button */}
+        <div className="absolute top-6 left-6 z-10">
+          <Link
+            to="/"
+            className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors group"
+          >
+            <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+            <span className="text-sm font-medium">Back to Home</span>
+          </Link>
+        </div>
+
         <div className="container mx-auto px-4 py-20 text-center">
           <div className="max-w-md mx-auto">
-            <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-              Activation Failed
-            </h1>
-            <p className="text-gray-600 dark:text-gray-300 mb-6">
-              {error}
-            </p>
-            <Button onClick={() => navigate('/')}>
-              Go to Homepage
-            </Button>
+            <div className="bg-white dark:bg-slate-900 rounded-2xl shadow-xl p-8">
+              <AlertCircle className="w-16 h-16 text-red-500 mx-auto mb-4" />
+              <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+                Activation Failed
+              </h1>
+              <p className="text-gray-600 dark:text-gray-300 mb-6">
+                {error}
+              </p>
+              <Button onClick={() => navigate('/')}>
+                Go to Homepage
+              </Button>
+            </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
-      <Navbar />
+      {/* Back to Home Button */}
+      <div className="absolute top-6 left-6 z-10">
+        <Link
+          to="/"
+          className="flex items-center gap-2 text-gray-600 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white transition-colors group"
+        >
+          <ArrowLeft className="w-5 h-5 transition-transform group-hover:-translate-x-1" />
+          <span className="text-sm font-medium">Back to Home</span>
+        </Link>
+      </div>
+
       <div className="container mx-auto px-4 py-20">
         <div className="max-w-md mx-auto">
           {success ? (
@@ -261,7 +280,6 @@ export function Activate() {
           )}
         </div>
       </div>
-      <Footer />
     </div>
   );
 }

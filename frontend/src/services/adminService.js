@@ -98,5 +98,26 @@ export const adminService = {
     } catch (error) {
       throw error.response?.data || error;
     }
+  },
+
+  // Export applications to CSV
+  exportApplicationsCSV: async (filters = {}) => {
+    try {
+      const queryParams = new URLSearchParams();
+      
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) {
+          queryParams.append(key, value);
+        }
+      });
+
+      const response = await api.get(`/admission/export/csv?${queryParams.toString()}`, {
+        responseType: 'blob' // Important for file downloads
+      });
+      
+      return response;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
   }
 };
