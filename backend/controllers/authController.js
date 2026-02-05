@@ -160,16 +160,23 @@ const changePassword = async (req, res) => {
 const forgotPassword = async (req, res) => {
   try {
     validate(req);
-    
-    // Password reset via email has been disabled
-    res.status(400).json({
-      status: "error",
-      message: "Password reset via email has been disabled. Please contact support for assistance."
+    const result = await authService.forgotPassword(req.body.email, req);
+
+    if (!result.success) {
+      return res.status(400).json({
+        status: "error",
+        message: result.message
+      });
+    }
+
+    res.json({
+      status: "success",
+      message: "Password reset email sent successfully"
     });
   } catch (error) {
     res.status(500).json({
       status: "error",
-      message: "Service unavailable"
+      message: error.message
     });
   }
 };

@@ -133,7 +133,7 @@ export function EditAdminModal({ isOpen, onClose, admin, onSubmit }) {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header - Consistent with existing design */}
-          <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between rounded-t-2xl">>
+          <div className="flex-shrink-0 bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy dark:from-slate-800 dark:via-slate-700 dark:to-slate-800 px-4 sm:px-8 py-4 sm:py-6 flex items-center justify-between rounded-t-2xl">
             <div className="flex items-center gap-4 sm:gap-6">
               <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/10 rounded-full flex items-center justify-center">
                 <Edit className="w-5 h-5 sm:w-6 sm:h-6 text-white" />

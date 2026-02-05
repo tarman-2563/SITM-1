@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Building2, TrendingUp, Users, Award, Cpu, Globe, Database, Code, Zap, Briefcase, GraduationCap } from "lucide-react";
 
 const students = [
   {
@@ -45,124 +46,63 @@ const loopStudents = [...students, ...students];
 export default function StudentPlaced() {
   return (
     <section
-      className="relative py-24 transition-colors duration-300
-
-      bg-linear-to-b
-      from-[#7b2d2d]/20
-      via-white
-      to-[#7b2d2d]/20
-
-      dark:bg-slate-950 
-      overflow-hidden"
+      className="relative py-24 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300"
     >
-      {/* Glow */}
-      <div className="absolute inset-0
-        bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.18),transparent_65%)]
-        dark:bg-[radial-gradient(circle_at_top,rgba(99,102,241,0.25),transparent_65%)]"
-      />
-       {/* background SVG */}
-       
-        <svg
-            className="absolute top-0 right-0 w-1/2 h-full opacity-30 dark:opacity-80 pointer-events-none"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1000 1000"
-            preserveAspectRatio="xMaxYMid meet"
-          >
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -right-[15%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 80, 0],
+            y: [0, 100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] -left-[20%] w-[65%] h-[65%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[0%] right-[10%] w-[60%] h-[60%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
 
-          <defs>
-            <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="var(--color-sitm-navy)" stopOpacity="0.5" />
-              <stop offset="100%" stopColor="var(--color-sitm-navy)" stopOpacity="0.8" />
-            </linearGradient>
-            <filter id="glow-red">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Circuit Paths (Navy Blue - 20%) */}
-          <path d="M 0 100 Q 200 150 400 100 T 800 150" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
-          <path d="M 1000 800 Q 800 750 600 800 T 200 750" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
-          <path d="M 100 0 L 300 300 L 0 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
-          <path d="M 900 0 L 700 300 L 1000 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
-
-          {/* Pulsing Data Packets (Red & Gold - 12% / 8%) */}
-          {[...Array(6)].map((_, i) => (
-            <motion.circle
-              key={`pulse-red-${i}`}
-              r="4"
-              fill="var(--color-sitm-maroon)"
-              filter="url(#glow-red)"
-              initial={{ offsetDistance: "0%" }}
-              animate={{ offsetDistance: "100%" }}
-              transition={{ 
-                duration: 9 + i, 
-                repeat: Infinity, 
-                ease: "linear",
-                delay: i * 1 
+        {/* Bold Thematic Background Icons */}
+        <div className="absolute inset-0">
+          {[
+            { Icon: Building2, top: "10%", left: "5%", size: 140, rotate: 15 },
+            { Icon: GraduationCap, top: "60%", left: "85%", size: 160, rotate: -15 },
+            { Icon: Briefcase, top: "75%", left: "10%", size: 130, rotate: 10 },
+            { Icon: Award, top: "15%", left: "80%", size: 120, rotate: -20 },
+          ].map((item, i) => (
+            <motion.div
+              key={`bg-icon-${i}`}
+              className="absolute text-sitm-navy dark:text-sitm-gold opacity-[0.06] dark:opacity-[0.12]"
+              style={{ top: item.top, left: item.left }}
+              animate={{ 
+                y: [0, -30, 0],
+                rotate: [item.rotate, item.rotate + 5, item.rotate - 5, item.rotate]
               }}
-              style={{ offsetPath: "path('M 0 100 Q 200 150 400 100 T 800 150')" }}
-            />
-          ))}
-          {[...Array(6)].map((_, i) => (
-            <motion.circle
-              key={`pulse-gold-${i}`}
-              r="3"
-              fill="var(--color-sitm-gold)"
-              initial={{ offsetDistance: "0%" }}
-              animate={{ offsetDistance: "100%" }}
               transition={{ 
-                duration: 9 + i, 
+                duration: 10 + i * 2, 
                 repeat: Infinity, 
-                ease: "linear",
-                delay: i * 2 
+                ease: "easeInOut" 
               }}
-              style={{ offsetPath: "path('M 1000 800 Q 800 750 600 800 T 200 750')" }}
-            />
+            >
+              <item.Icon size={item.size} strokeWidth={2} />
+            </motion.div>
           ))}
-        </svg>
-
-        <svg
-            className="absolute top-0 left-0 w-1/2 h-full opacity-30 dark:opacity-80 pointer-events-none scale-x-[-1]"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 1000 1000"
-            preserveAspectRatio="xMaxYMid meet"
-          >
-            <defs>
-              <linearGradient id="navyGradLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="var(--color-sitm-navy)" stopOpacity="0.5" />
-                <stop offset="100%" stopColor="var(--color-sitm-navy)" stopOpacity="0.8" />
-              </linearGradient>
-
-              <filter id="glowRedLeft">
-                <feGaussianBlur stdDeviation="3" result="coloredBlur" />
-                <feMerge>
-                  <feMergeNode in="coloredBlur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            <path d="M 0 100 Q 200 150 400 100 T 800 150" fill="none" stroke="url(#navyGradLeft)" strokeWidth="2" />
-            <path d="M 1000 800 Q 800 750 600 800 T 200 750" fill="none" stroke="url(#navyGradLeft)" strokeWidth="2" />
-
-            {[...Array(6)].map((_, i) => (
-              <motion.circle
-                key={`left-red-${i}`}
-                r="4"
-                fill="var(--color-sitm-maroon)"
-                filter="url(#glowRedLeft)"
-                initial={{ offsetDistance: "0%" }}
-                animate={{ offsetDistance: "100%" }}
-                transition={{ duration: 9 + i, repeat: Infinity, ease: "linear", delay: i }}
-                style={{ offsetPath: "path('M 0 100 Q 200 150 400 100 T 800 150')" }}
-              />
-            ))}
-          </svg>
-
+        </div>
+      </div>
 
       {/* Header */}
       <div className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4">

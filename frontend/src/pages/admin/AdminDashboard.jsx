@@ -24,7 +24,8 @@ import {
   Edit,
   Trash2,
   LogOut,
-  Loader2
+  Loader2,
+  FileDown
 } from 'lucide-react';
 
 export function AdminDashboard() {
@@ -40,6 +41,7 @@ export function AdminDashboard() {
     search: ''
   });
   const [currentPage, setCurrentPage] = useState(1);
+  const [isExporting, setIsExporting] = useState(false);
 
   useEffect(() => {
     const initializeAdminDashboard = async () => {
@@ -111,6 +113,44 @@ export function AdminDashboard() {
       await loadApplications(); // Refresh the list
     } catch (err) {
       console.error('Failed to update status:', err);
+    }
+  };
+
+  const handleExportCSV = async () => {
+    setIsExporting(true);
+    try {
+      const response = await adminService.exportApplicationsCSV(filters);
+      
+      // Create blob from response
+      const blob = new Blob([response.data], { type: 'text/csv' });
+      
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      
+      // Generate filename with current date and filters
+      const timestamp = new Date().toISOString().split('T')[0];
+      let filename = `applications_export_${timestamp}`;
+      
+      if (filters.status) filename += `_${filters.status}`;
+      if (filters.program) filename += `_${filters.program}`;
+      filename += '.csv';
+      
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      
+      // Cleanup
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+      
+      console.log('CSV export completed successfully');
+    } catch (err) {
+      console.error('Failed to export CSV:', err);
+      // You could add a toast notification here
+    } finally {
+      setIsExporting(false);
     }
   };
 
@@ -323,6 +363,25 @@ export function AdminDashboard() {
                   <option value="BCA">BCA</option>
                   <option value="BBA">BBA</option>
                 </select>
+
+                {/* CSV Export Button */}
+                <Button
+                  onClick={handleExportCSV}
+                  disabled={isExporting}
+                  className="flex items-center gap-2 bg-sitm-maroon hover:bg-sitm-maroon/90 text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
+                >
+                  {isExporting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Exporting...
+                    </>
+                  ) : (
+                    <>
+                      <FileDown className="w-4 h-4" />
+                      Export CSV
+                    </>
+                  )}
+                </Button>
               </div>
             </div>
           </div>
