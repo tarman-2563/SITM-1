@@ -1,137 +1,89 @@
-import { Building2, TrendingUp, Users, Award, Cpu, Globe, Database, Code, Zap } from "lucide-react";
+import { Building2, TrendingUp, Users, Award, Cpu, Globe, Database, Code, Zap, Briefcase, GraduationCap } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Counter } from "../common/Counter";
 
 export function Placements() {
-  const valueColorMap = {
-  indigo: "text-indigo-600 dark:text-indigo-400",
-  emerald: "text-emerald-600 dark:text-emerald-400",
-  rose: "text-rose-600 dark:text-rose-400",
-  amber: "text-amber-600 dark:text-amber-400",
-};
 
   return (
-    <section id="placement" className="relative py-28 overflow-hidden
-      bg-linear-to-b
-      from-[#7b2d2d]/20
-      via-gray-100
-      to-[#7b2d2d]/20
+    <section id="placement" className="relative py-28 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300">
+      {/* Background Aurora/Glow Graphics - About Style with Bold Icons */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        <motion.div 
+          animate={{ 
+            x: [0, -100, 0],
+            y: [0, -50, 0],
+            scale: [1, 1.2, 1]
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -right-[15%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[100px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, 80, 0],
+            y: [0, 100, 0],
+            scale: [1.2, 1, 1.2]
+          }}
+          transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[20%] -left-[20%] w-[65%] h-[65%] bg-[#F6E294]/20 rounded-full blur-[120px]"
+        />
+        <motion.div 
+          animate={{ 
+            x: [0, -120, 0],
+            y: [0, 80, 0]
+          }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[0%] right-[10%] w-[60%] h-[60%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
 
-      dark:bg-slate-950
-      transition-colors duration-300">
-      {/* Advanced "Neural Circuit" Background - 60/20/12/8 Re-design */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
-        {/* Layer 1: Subtle Navy Grid */}
-        <div className="absolute inset-0 opacity-[1] dark:opacity-[1]"
-          style={{
-            backgroundImage: `radial-gradient(circle at 1px 1px, var(--color-sitm-navy) 1px, transparent 0)`,
-            backgroundSize: '40px 40px'
-          }}>
-        </div>
-
-        {/* Layer 2: Animated Neural Circuit SVG (Navy Paths) */}
-        <svg className="absolute inset-0 w-full h-full opacity-30 dark:opacity-70" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="var(--color-sitm-navy)" stopOpacity="0.1" />
-              <stop offset="100%" stopColor="var(--color-sitm-navy)" stopOpacity="0.4" />
-            </linearGradient>
-            <filter id="glow-red">
-              <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-              <feMerge>
-                <feMergeNode in="coloredBlur"/>
-                <feMergeNode in="SourceGraphic"/>
-              </feMerge>
-            </filter>
-          </defs>
-
-          {/* Circuit Paths (Navy Blue - 20%) */}
-          <path d="M 0 100 Q 200 150 400 100 T 800 150" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
-          <path d="M 1000 800 Q 800 750 600 800 T 200 750" fill="none" stroke="url(#navyGrad)" strokeWidth="2" />
-          <path d="M 100 0 L 300 300 L 0 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
-          <path d="M 900 0 L 700 300 L 1000 600" fill="none" stroke="var(--color-sitm-navy)" strokeWidth="1" opacity="1" />
-
-          {/* Pulsing Data Packets (Red & Gold - 12% / 8%) */}
-          {[...Array(6)].map((_, i) => (
-            <motion.circle
-              key={`pulse-red-${i}`}
-              r="4"
-              fill="var(--color-sitm-maroon)"
-              filter="url(#glow-red)"
-              initial={{ offsetDistance: "0%" }}
-              animate={{ offsetDistance: "100%" }}
-              transition={{ 
-                duration: 6 + i, 
-                repeat: Infinity, 
-                ease: "linear",
-                delay: i * 1.5 
-              }}
-              style={{ offsetPath: "path('M 0 100 Q 200 150 400 100 T 800 150')" }}
-            />
-          ))}
-          {[...Array(6)].map((_, i) => (
-            <motion.circle
-              key={`pulse-gold-${i}`}
-              r="3"
-              fill="var(--color-sitm-gold)"
-              initial={{ offsetDistance: "0%" }}
-              animate={{ offsetDistance: "100%" }}
-              transition={{ 
-                duration: 9 + i, 
-                repeat: Infinity, 
-                ease: "linear",
-                delay: i * 2 
-              }}
-              style={{ offsetPath: "path('M 1000 800 Q 800 750 600 800 T 200 750')" }}
-            />
-          ))}
-        </svg>
-
-        {/* Layer 3: Floating Tech Icons (Maroon/Navy) */}
+        {/* Bold Thematic Background Icons */}
         <div className="absolute inset-0">
           {[
-            { Icon: Cpu, top: "15%", left: "10%", size: 50, color: "var(--color-sitm-navy)" },
-            { Icon: Globe, top: "70%", left: "5%", size: 40, color: "var(--color-sitm-maroon)" },
-            { Icon: Database, top: "20%", left: "85%", size: 45, color: "var(--color-sitm-navy)" },
-            { Icon: Code, top: "80%", left: "90%", size: 35, color: "var(--color-sitm-maroon)" },
-            { Icon: Zap, top: "45%", left: "92%", size: 30, color: "var(--color-sitm-gold)" },
+            { Icon: Briefcase, top: "10%", left: "5%", size: 140, rotate: 15 },
+            { Icon: GraduationCap, top: "60%", left: "85%", size: 160, rotate: -15 },
+            { Icon: Building2, top: "75%", left: "10%", size: 130, rotate: 10 },
+            { Icon: Award, top: "15%", left: "80%", size: 120, rotate: -20 },
           ].map((item, i) => (
             <motion.div
-              key={`tech-${i}`}
-              className="absolute opacity-[0.8] dark:opacity-50"
-              style={{ top: item.top, left: item.left, color: item.color }}
+              key={`bg-icon-${i}`}
+              className="absolute text-sitm-navy dark:text-sitm-gold opacity-[0.06] dark:opacity-[0.12]"
+              style={{ top: item.top, left: item.left }}
               animate={{ 
-                y: [0, -25, 0],
-                rotate: [0, 15, -15, 0],
+                y: [0, -30, 0],
+                rotate: [item.rotate, item.rotate + 5, item.rotate - 5, item.rotate]
               }}
               transition={{ 
-                duration: 7 + i, 
+                duration: 10 + i * 2, 
                 repeat: Infinity, 
-                ease: "easeInOut",
+                ease: "easeInOut" 
               }}
             >
-              <item.Icon size={item.size} />
+              <item.Icon size={item.size} strokeWidth={2} />
             </motion.div>
           ))}
         </div>
-
-        {/* Layer 4: Subtle Navy Glows */}
-        <div className="absolute top-1/4 -left-20 w-150 h-150 bg-sitm-navy/5 rounded-full blur-[150px]"></div>
-        <div className="absolute bottom-1/4 -right-20 w-125 h-125 bg-sitm-maroon/5 rounded-full blur-[150px]"></div>
       </div>
 
       <div className="container relative mx-auto px-4 z-10">
-        <div className="text-center mb-16">
-          <span className="text-sitm-maroon font-serif italic text-lg dark:text-sitm-gold">Corporate Relations</span>
-          <h2 className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-4 font-serif">Training & Placements</h2>
-          <div className="w-24 h-1 bg-sitm-gold mx-auto"></div>
-        </div>
+        <motion.div 
+          initial={{ y: -50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block mb-6 px-6 py-2 rounded-full text-xs font-black uppercase tracking-widest bg-sitm-gold/10 text-sitm-maroon dark:text-sitm-gold">
+            Corporate Relations @ SITM
+          </span>
+          <h2 className="text-4xl md:text-5xl font-serif font-black leading-tight text-sitm-navy dark:text-white mt-2">
+            Training & <span className="bg-clip-text text-transparent bg-linear-to-r from-cyan-400 to-sitm-gold">Placements</span>
+          </h2>
+        </motion.div>
         
-        <div className="grid md:grid-cols-4 gap-6 mb-20">
+        {/* Stats Section: Mobile Scrollable Row / Desktop Grid */}
+        <div className="flex md:grid md:grid-cols-4 gap-6 mb-20 overflow-x-auto scrollbar-hide snap-x snap-mandatory pt-4 pb-6 md:pb-0 px-2 md:px-0">
             {[
                     {
                       label: "Highest Package",
-
                       value: (
                           <motion.span
                             animate={{
@@ -143,66 +95,73 @@ export function Placements() {
                               repeat: Infinity,
                               ease: "easeInOut",
                             }}
-                            className="inline-block text-indigo-600 dark:text-indigo-400"
+                            className="inline-block"
                           >
                             <Counter from={1} to={12} duration={2} suffix=" LPA" />
                           </motion.span>
                         ),
-
                       icon: TrendingUp,
-                      valueColor: "indigo",
+                      side: "left"
                     },
                     {
                       label: "Partner Companies",
                       value: "1500+",
                       icon: Building2,
-                      valueColor: "emerald",
+                      side: "left"
                     },
                     {
                       label: "Students Placed",
                       value: "95%",
                       icon: Users,
-                      valueColor: "rose",
+                      side: "right"
                     },
                     {
                       label: "Industry Awards",
                       value: "25+",
                       icon: Award,
-                      valueColor: "amber",
+                      side: "right"
                     },
                   ]
                   .map((stat, i) => (
-                <div key={i} className="bg-gray-50 p-8 rounded-xl shadow-lg border border-gray-100 text-center hover:-translate-y-2 transition-transform duration-300 group">
+                <motion.div 
+                  key={i}
+                  initial={{ x: stat.side === "left" ? -100 : 100, opacity: 0 }}
+                  whileInView={{ x: 0, opacity: 1 }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.8, delay: i * 0.1, ease: "easeOut" }}
+                  className="min-w-[260px] md:min-w-0 flex-shrink-0 snap-center bg-sitm-gold/10 dark:bg-white/5 backdrop-blur-xl p-8 rounded-2xl border border-sitm-gold/20 text-center hover:-translate-y-2 transition-transform duration-300 group"
+                >
                     <div className="w-16 h-16 mx-auto bg-sitm-gold/10 rounded-full flex items-center justify-center text-sitm-maroon dark:text-sitm-gold mb-4 group-hover:bg-sitm-maroon group-hover:text-white transition-colors duration-300">
                         <stat.icon size={32} />
                     </div>
-                      <div
-                        className={`text-4xl md:text-5xl font-bold font-serif mb-2
-                          ${valueColorMap[stat.valueColor]}`}
-                      >
+                      <div className="text-3xl md:text-4xl font-serif font-black mb-2 text-transparent bg-clip-text bg-linear-to-r from-sitm-maroon to-sitm-navy dark:from-sitm-gold dark:to-white">
                         {stat.value}
                       </div>
 
-                    <div className="text-sm uppercase tracking-wide text-blue-400">{stat.label}</div>
-                </div>
+                    <div className="text-[10px] font-black uppercase tracking-widest text-sitm-navy/50 dark:text-gray-400">{stat.label}</div>
+                </motion.div>
             ))}
         </div>
 
-        <div className="bg-blue-500/5 dark:bg-white/5 rounded-3xl p-10">
-        <div className="text-center mb-10">
-             <h2 className="text-4xl md:text-5xl font-extrabold">
-          <span className="relative inline-block">
-                <span className="text-transparent bg-clip-text bg-linear-to-r from-red-800 via-yellow-500 to-green-700 relative z-10 px-2">
-                1500+ Placement Partners
-                </span>
-              </span>
-        </h2>
+        <motion.div 
+          initial={{ y: 50, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          viewport={{ once: false }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="bg-sitm-gold/5 dark:bg-white/5 backdrop-blur-2xl rounded-4xl p-10 border border-sitm-gold/20"
+        >
+        <div className="text-center mb-12">
+             <h2 className="text-3xl md:text-4xl font-serif font-black leading-tight text-sitm-navy dark:text-white">
+                <span className="bg-clip-text text-transparent bg-linear-to-r from-sitm-maroon to-sitm-navy dark:from-sitm-gold dark:to-white">
+                  1500+
+                </span> Placement Partners
+            </h2>
         </div>
             
             {/* Infinite Scroll Marquee */}
             {/* Infinite Scroll Marquee */}
             {/* Infinite Scroll Marquee - Row 1 */}
-            <div className="relative flex overflow-x-hidden group mb-6">
+            <div className="relative flex overflow-x-hidden group mb-6 py-4">
                 <div className="animate-marquee whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
@@ -244,7 +203,7 @@ export function Placements() {
             </div>
 
             {/* Infinite Scroll Marquee - Row 2 (Reverse) */}
-            <div className="relative flex overflow-x-hidden group mb-6">
+            <div className="relative flex overflow-x-hidden group mb-6 py-4">
                 <div className="animate-marquee-reverse whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "Microsoft", color: "text-[#00A4EF]", logo: "microsoft.com" },
@@ -286,7 +245,7 @@ export function Placements() {
             </div>
 
             {/* Infinite Scroll Marquee - Row 3 */}
-            <div className="relative flex overflow-x-hidden group">
+            <div className="relative flex overflow-x-hidden group py-4">
                 <div className="animate-marquee whitespace-nowrap flex items-center gap-4">
                     {[
                         { name: "BSNL", color: "text-[#005CA9]", logo: "bsnl.co.in" },
@@ -326,7 +285,7 @@ export function Placements() {
                  <div className="absolute top-0 left-0 w-20 h-full bg-linear-to-r from-gray-50 to-transparent z-10"></div>
                 <div className="absolute top-0 right-0 w-20 h-full bg-linear-to-l from-gray-50 to-transparent z-10"></div>
             </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

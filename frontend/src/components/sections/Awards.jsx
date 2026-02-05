@@ -48,46 +48,70 @@ export function Awards() {
   ];
 
   return (
-    <section id="awards" className="py-24 bg-linear-to-b
-      from-purple-300
-      via-gray-400
-      to-[#7b2d2d]/20
+    <section
+      id="awards"
+      className="
+        relative py-24 overflow-hidden
+        bg-white dark:bg-slate-950
+        transition-colors duration-300
+      "
+    >
+      {/* ===== GRADIENT BLOBS ===== */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
 
-      dark:bg-slate-950
-      transition-colors duration-300 overflow-hidden">
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div className="absolute -top-24 -left-24 w-96 h-96 bg-sitm-gold/5 rounded-full blur-3xl"></div>
-            <div className="absolute top-1/2 right-0 w-64 h-64 bg-sitm-maroon/5 rounded-full blur-3xl"></div>
-        </div>
+        <motion.div
+          animate={{ x: [0, -120, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }}
+          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+          className="absolute -top-[10%] -right-[15%] w-[55%] h-[55%]
+                     bg-[#D56B6F]/20 rounded-full blur-[110px]"
+        />
 
+        <motion.div
+          animate={{ x: [0, 90, 0], y: [0, 110, 0], scale: [1.2, 1, 1.2] }}
+          transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
+          className="absolute top-[25%] -left-[20%] w-[65%] h-[65%]
+                     bg-[#F6E294]/20 rounded-full blur-[130px]"
+        />
+
+        <motion.div
+          animate={{ x: [0, -140, 0], y: [0, 90, 0] }}
+          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          className="absolute bottom-[0%] right-[10%] w-[60%] h-[60%]
+                     bg-[#D56B6F]/20 rounded-full blur-[120px]"
+        />
+      </div>
+
+      {/* ===== CONTENT ===== */}
       <div className="container mx-auto px-4 relative z-10">
+
+        {/* Heading */}
         <div className="text-center mb-16">
-           <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="text-sitm-gold font-serif italic text-lg"
-           >
-                Hall of Fame
-           </motion.span>
-          <motion.h2 
+          >
+            Hall of Fame
+          </motion.span>
+
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl md:text-5xl font-bold text-sitm-navy dark:text-white mt-2 mb-6 font-serif"
+            className="text-4xl md:text-5xl font-bold mt-2 mb-6 font-serif"
           >
-            <p className="text-transparent bg-clip-text bg-linear-to-r from-red-500 via-yellow-400 to-green-600 relative z-10 px-2">
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 via-yellow-400 to-green-600 px-2">
               Awards & Achievements
-            </p>
-            
+            </span>
           </motion.h2>
         </div>
 
+        {/* Cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {awards.map((award, index) => (
-                <AwardCard key={index} award={award} index={index} />
-            ))}
+          {awards.map((award, index) => (
+            <AwardCard key={index} award={award} index={index} />
+          ))}
         </div>
       </div>
     </section>
@@ -95,34 +119,52 @@ export function Awards() {
 }
 
 function AwardCard({ award, index }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
-            viewport={{ once: true }}
-            className="group relative bg-gray-50 dark:bg-slate-800 p-8 rounded-2xl border border-gray-100 dark:border-slate-700 hover:shadow-xl hover:shadow-sitm-navy/5 transition-all duration-300 hover:-translate-y-2"
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      viewport={{ once: true }}
+      className="
+        group relative
+        bg-gray-50 dark:bg-slate-800
+        p-8 rounded-2xl
+        border border-gray-100 dark:border-slate-700
+        hover:shadow-xl hover:shadow-sitm-navy/5
+        transition-all duration-300 hover:-translate-y-2
+      "
+    >
+      {/* Top */}
+      <div className="flex items-start justify-between mb-6">
+
+        {/* Icon Box */}
+        <div
+          className={`p-4 rounded-xl ${award.color} bg-opacity-10 text-sitm-navy dark:text-white group-hover:bg-opacity-20 transition-all`}
         >
-            <div className="flex items-start justify-between mb-6">
-                <div className={`p-4 rounded-xl ${award.color} bg-opacity-10 text-sitm-navy dark:text-white group-hover:bg-opacity-20 transition-all`}>
-                    <div className={`${award.color.replace('bg-', 'text-')} dark:text-white`}>
-                        {award.icon}
-                    </div>
-                </div>
-                <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white dark:bg-slate-900 rounded-full border border-gray-200 dark:border-slate-700 text-gray-500">
-                    {award.year}
-                </span>
-            </div>
+          {/* ✅ ICON FIX ONLY */}
+          <div className="text-slate-900 dark:text-white">
+            {award.icon}
+          </div>
+        </div>
 
-            <h3 className="text-xl font-serif font-bold text-sitm-navy dark:text-white mb-3 group-hover:text-sitm-maroon dark:group-hover:text-sitm-gold transition-colors">
-                {award.title}
-            </h3>
-            
-            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                {award.desc}
-            </p>
+        {/* Year */}
+        <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white dark:bg-slate-900 rounded-full border border-gray-200 dark:border-slate-700 text-gray-500 dark:text-gray-300">
+          {award.year}
+        </span>
+      </div>
 
-             <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sitm-gold to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-        </motion.div>
-    );
+      {/* Title */}
+      <h3 className="text-xl font-serif font-bold text-sitm-navy dark:text-white mb-3 group-hover:text-sitm-maroon dark:group-hover:text-sitm-gold transition-colors">
+        {award.title}
+      </h3>
+
+      {/* Desc */}
+      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
+        {award.desc}
+      </p>
+
+      {/* Bottom Line */}
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sitm-gold to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+    </motion.div>
+  );
 }
