@@ -6,26 +6,21 @@ import { adminService } from '../../services/adminService';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/common/Button';
 import { 
-  Users, 
   FileText, 
   TrendingUp, 
   Clock, 
   CheckCircle, 
   AlertCircle,
   UserPlus,
-  Settings,
   BarChart3,
-  Mail,
-  Calendar,
-  Filter,
   Search,
-  Download,
   Eye,
   Edit,
-  Trash2,
   LogOut,
   Loader2,
-  FileDown
+  FileDown,
+  CalendarDays,
+  X
 } from 'lucide-react';
 
 export function AdminDashboard() {
@@ -42,6 +37,11 @@ export function AdminDashboard() {
   });
   const [currentPage, setCurrentPage] = useState(1);
   const [isExporting, setIsExporting] = useState(false);
+  const [showDateModal, setShowDateModal] = useState(false);
+  const [dateRange, setDateRange] = useState({
+    startDate: '',
+    endDate: ''
+  });
 
   useEffect(() => {
     const initializeAdminDashboard = async () => {
@@ -74,6 +74,20 @@ export function AdminDashboard() {
 
     initializeAdminDashboard();
   }, [navigate, currentPage, filters]);
+
+  // Close date modal when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showDateModal && !event.target.closest('.date-modal')) {
+        setShowDateModal(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showDateModal]);
 
   const loadStats = async () => {
     try {
@@ -119,7 +133,14 @@ export function AdminDashboard() {
   const handleExportCSV = async () => {
     setIsExporting(true);
     try {
-      const response = await adminService.exportApplicationsCSV(filters);
+      // Combine current filters with date range
+      const exportFilters = {
+        ...filters,
+        ...(dateRange.startDate && { startDate: dateRange.startDate }),
+        ...(dateRange.endDate && { endDate: dateRange.endDate })
+      };
+
+      const response = await adminService.exportApplicationsCSV(exportFilters);
       
       // Create blob from response
       const blob = new Blob([response.data], { type: 'text/csv' });
@@ -133,8 +154,10 @@ export function AdminDashboard() {
       const timestamp = new Date().toISOString().split('T')[0];
       let filename = `applications_export_${timestamp}`;
       
-      if (filters.status) filename += `_${filters.status}`;
-      if (filters.program) filename += `_${filters.program}`;
+      if (exportFilters.status) filename += `_${exportFilters.status}`;
+      if (exportFilters.program) filename += `_${exportFilters.program}`;
+      if (exportFilters.startDate) filename += `_from_${exportFilters.startDate}`;
+      if (exportFilters.endDate) filename += `_to_${exportFilters.endDate}`;
       filename += '.csv';
       
       link.download = filename;
@@ -145,13 +168,47 @@ export function AdminDashboard() {
       document.body.removeChild(link);
       window.URL.revokeObjectURL(url);
       
-      console.log('CSV export completed successfully');
+      // Clear date range filters after successful export
+      setDateRange({
+        startDate: '',
+        endDate: ''
+      });
+      
+      // Close date modal after successful export
+      setShowDateModal(false);
     } catch (err) {
       console.error('Failed to export CSV:', err);
-      // You could add a toast notification here
+      
+      // Show user-friendly error message
+      let errorMessage = 'Failed to export CSV';
+      if (err.response) {
+        errorMessage += `: ${err.response.status} ${err.response.statusText}`;
+      } else if (err.message) {
+        errorMessage += `: ${err.message}`;
+      }
+      
+      alert(errorMessage);
     } finally {
       setIsExporting(false);
     }
+  };
+
+  const handleQuickDateFilter = (days) => {
+    const endDate = new Date();
+    const startDate = new Date();
+    startDate.setDate(startDate.getDate() - days);
+    
+    setDateRange({
+      startDate: startDate.toISOString().split('T')[0],
+      endDate: endDate.toISOString().split('T')[0]
+    });
+  };
+
+  const clearDateFilter = () => {
+    setDateRange({
+      startDate: '',
+      endDate: ''
+    });
   };
 
   const getStatusColor = (status) => {
@@ -366,21 +423,11 @@ export function AdminDashboard() {
 
                 {/* CSV Export Button */}
                 <Button
-                  onClick={handleExportCSV}
-                  disabled={isExporting}
+                  onClick={() => setShowDateModal(true)}
                   className="flex items-center gap-2 bg-sitm-maroon hover:bg-sitm-maroon/90 text-white px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
                 >
-                  {isExporting ? (
-                    <>
-                      <Loader2 className="w-4 h-4 animate-spin" />
-                      Exporting...
-                    </>
-                  ) : (
-                    <>
-                      <FileDown className="w-4 h-4" />
-                      Export CSV
-                    </>
-                  )}
+                  <FileDown className="w-4 h-4" />
+                  Export CSV
                 </Button>
               </div>
             </div>
@@ -456,6 +503,161 @@ export function AdminDashboard() {
           </div>
         </motion.div>
       </div>
+
+      {/* Date Selection Modal */}
+      {showDateModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          {/* Backdrop */}
+          <div 
+            className="absolute inset-0 bg-gradient-to-br from-black/40 via-black/60 to-black/40 backdrop-blur-md"
+            onClick={() => setShowDateModal(false)}
+          />
+
+          {/* Modal */}
+          <div className="date-modal relative w-full max-w-md bg-white dark:bg-slate-900 rounded-2xl shadow-2xl border border-gray-200 dark:border-slate-700">
+            {/* Header */}
+            <div className="bg-gradient-to-r from-sitm-navy via-sitm-maroon to-sitm-navy px-6 py-4 rounded-t-2xl">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center">
+                    <CalendarDays className="w-5 h-5 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-white">Export CSV</h3>
+                    <p className="text-white/80 text-sm">Select date range for export</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowDateModal(false)}
+                  className="p-2 text-white/70 hover:text-white transition-colors rounded-full hover:bg-white/10"
+                >
+                  <X size={20} />
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="p-6 space-y-6">
+              {/* Quick Date Filters */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Quick Filters</h4>
+                <div className="grid grid-cols-2 gap-3">
+                  <button
+                    onClick={() => handleQuickDateFilter(7)}
+                    className="px-4 py-3 text-sm bg-blue-50 text-blue-700 dark:bg-blue-900/20 dark:text-blue-300 rounded-lg hover:bg-blue-100 dark:hover:bg-blue-900/30 transition-colors font-medium"
+                  >
+                    Last 7 days
+                  </button>
+                  <button
+                    onClick={() => handleQuickDateFilter(30)}
+                    className="px-4 py-3 text-sm bg-green-50 text-green-700 dark:bg-green-900/20 dark:text-green-300 rounded-lg hover:bg-green-100 dark:hover:bg-green-900/30 transition-colors font-medium"
+                  >
+                    Last 30 days
+                  </button>
+                  <button
+                    onClick={() => handleQuickDateFilter(90)}
+                    className="px-4 py-3 text-sm bg-purple-50 text-purple-700 dark:bg-purple-900/20 dark:text-purple-300 rounded-lg hover:bg-purple-100 dark:hover:bg-purple-900/30 transition-colors font-medium"
+                  >
+                    Last 3 months
+                  </button>
+                  <button
+                    onClick={clearDateFilter}
+                    className="px-4 py-3 text-sm bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors font-medium"
+                  >
+                    Clear All
+                  </button>
+                </div>
+              </div>
+
+              {/* Custom Date Range */}
+              <div>
+                <h4 className="text-sm font-semibold text-gray-700 dark:text-gray-300 mb-3">Custom Date Range</h4>
+                <div className="space-y-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                      From Date
+                    </label>
+                    <input
+                      type="date"
+                      value={dateRange.startDate}
+                      onChange={(e) => setDateRange(prev => ({ ...prev, startDate: e.target.value }))}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-600 dark:text-gray-400 mb-2">
+                      To Date
+                    </label>
+                    <input
+                      type="date"
+                      value={dateRange.endDate}
+                      onChange={(e) => setDateRange(prev => ({ ...prev, endDate: e.target.value }))}
+                      className="w-full px-4 py-3 border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Current Selection Display */}
+              {(dateRange.startDate || dateRange.endDate) && (
+                <div className="p-4 bg-gradient-to-r from-sitm-maroon/10 to-sitm-navy/10 dark:from-sitm-maroon/20 dark:to-sitm-navy/20 rounded-lg border border-sitm-maroon/20 dark:border-sitm-maroon/30">
+                  <h5 className="text-sm font-semibold text-sitm-maroon dark:text-sitm-maroon-light mb-2">
+                    Selected Date Range
+                  </h5>
+                  <div className="space-y-1">
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <span className="font-medium">From:</span> {dateRange.startDate ? new Date(dateRange.startDate).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      }) : 'Not selected'}
+                    </p>
+                    <p className="text-sm text-gray-700 dark:text-gray-300">
+                      <span className="font-medium">To:</span> {dateRange.endDate ? new Date(dateRange.endDate).toLocaleDateString('en-US', { 
+                        year: 'numeric', 
+                        month: 'long', 
+                        day: 'numeric' 
+                      }) : 'Not selected'}
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Footer */}
+            <div className="px-6 py-4 bg-gray-50 dark:bg-slate-800 rounded-b-2xl border-t border-gray-200 dark:border-slate-700">
+              <div className="flex gap-3">
+                <Button
+                  variant="outline"
+                  onClick={() => setShowDateModal(false)}
+                  className="flex-1"
+                  disabled={isExporting}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  onClick={handleExportCSV}
+                  disabled={isExporting}
+                  className="flex-1 bg-sitm-maroon hover:bg-sitm-maroon/90 text-white"
+                >
+                  {isExporting ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                      Exporting...
+                    </>
+                  ) : (
+                    <>
+                      <FileDown className="w-4 h-4 mr-2" />
+                      Export CSV
+                    </>
+                  )}
+                </Button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );

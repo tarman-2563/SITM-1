@@ -232,7 +232,11 @@ const getAdmissionStats = async (req, res) => {
 // Export applications to CSV
 const exportApplicationsCSV = async (req, res) => {
   try {
-    logger.debug("Processing CSV export request", { query: req.query });
+    logger.debug("Processing CSV export request", { 
+      query: req.query,
+      user: req.user?.email,
+      timestamp: new Date().toISOString()
+    });
     
     // Get query parameters for filtering
     const { status, program, search, startDate, endDate } = req.query;
@@ -249,31 +253,48 @@ const exportApplicationsCSV = async (req, res) => {
         { applicationId: { $regex: search, $options: 'i' } }
       ];
     }
+    
+    // Handle date filtering
     if (startDate || endDate) {
       filters.createdAt = {};
-      if (startDate) filters.createdAt.$gte = new Date(startDate);
-      if (endDate) filters.createdAt.$lte = new Date(endDate);
+      if (startDate) {
+        // Parse start date and set to beginning of day
+        const start = new Date(startDate);
+        start.setHours(0, 0, 0, 0);
+        filters.createdAt.$gte = start;
+      }
+      if (endDate) {
+        // Parse end date and set to end of day
+        const end = new Date(endDate);
+        end.setHours(23, 59, 59, 999);
+        filters.createdAt.$lte = end;
+      }
     }
-
-    logger.debug("CSV export filters:", filters);
 
     // Get applications from service
     const applications = await admissionService.getAllApplicationsForExport(filters);
     
-    logger.debug(`Found ${applications.length} applications for export`);
-    
     if (!applications || applications.length === 0) {
-      return res.status(200).json({
-        status: "success",
-        message: "No applications found matching the criteria",
-        count: 0
-      });
+      logger.info("No applications found for CSV export");
+      
+      // Return empty CSV with headers
+      const csvContent = exportApplicationsToCsv([]);
+      const timestamp = new Date().toISOString().split('T')[0];
+      const filename = `applications_export_${timestamp}_empty.csv`;
+      
+      res.setHeader('Content-Type', 'text/csv; charset=utf-8');
+      res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+      res.setHeader('Cache-Control', 'no-cache');
+      res.setHeader('Pragma', 'no-cache');
+      
+      return res.status(200).send(csvContent || 'No data available');
     }
     
     // Generate CSV content
     const csvContent = exportApplicationsToCsv(applications);
     
     if (!csvContent) {
+      logger.error("Failed to generate CSV content");
       return res.status(500).json({
         status: "error",
         message: "Failed to generate CSV content"
@@ -283,8 +304,6 @@ const exportApplicationsCSV = async (req, res) => {
     // Generate filename with timestamp
     const timestamp = new Date().toISOString().split('T')[0];
     const filename = `applications_export_${timestamp}.csv`;
-    
-    logger.debug(`Sending CSV file: ${filename}, size: ${csvContent.length} characters`);
     
     // Set response headers for file download
     res.setHeader('Content-Type', 'text/csv; charset=utf-8');
@@ -298,7 +317,13 @@ const exportApplicationsCSV = async (req, res) => {
     logger.info(`CSV export completed successfully: ${applications.length} applications exported`);
     
   } catch (error) {
-    logger.error("CSV export failed:", error);
+    logger.error("CSV export failed:", {
+      error: error.message,
+      stack: error.stack,
+      user: req.user?.email,
+      query: req.query
+    });
+    
     res.status(500).json({
       status: "error",
       message: "Failed to export applications",

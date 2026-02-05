@@ -1,34 +1,48 @@
 const createCsvContent = (data, headers) => {
-  if (!data || data.length === 0) {
+  try {
+    if (!data || data.length === 0) {
+      return headers.join(',') + '\n';
+    }
+
+    if (!Array.isArray(headers) || headers.length === 0) {
+      return '';
+    }
+
+    // Create header row
+    const headerRow = headers.join(',');
+    
+    // Create data rows
+    const dataRows = data.map((row, index) => {
+      try {
+        return headers.map(header => {
+          let value = row[header] || '';
+          
+          // Handle nested objects (e.g., address.city)
+          if (header.includes('.')) {
+            const keys = header.split('.');
+            value = keys.reduce((obj, key) => obj?.[key] || '', row);
+          }
+          
+          // Escape commas and quotes in values
+          if (typeof value === 'string') {
+            if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+              value = `"${value.replace(/"/g, '""')}"`;
+            }
+          }
+          
+          return value;
+        }).join(',');
+      } catch (error) {
+        console.error(`Error processing row ${index}:`, error);
+        return headers.map(() => '').join(','); // Return empty row
+      }
+    });
+
+    return [headerRow, ...dataRows].join('\n');
+  } catch (error) {
+    console.error('Error in createCsvContent:', error);
     return '';
   }
-
-  // Create header row
-  const headerRow = headers.join(',');
-  
-  // Create data rows
-  const dataRows = data.map(row => {
-    return headers.map(header => {
-      let value = row[header] || '';
-      
-      // Handle nested objects (e.g., address.city)
-      if (header.includes('.')) {
-        const keys = header.split('.');
-        value = keys.reduce((obj, key) => obj?.[key] || '', row);
-      }
-      
-      // Escape commas and quotes in values
-      if (typeof value === 'string') {
-        if (value.includes(',') || value.includes('"') || value.includes('\n')) {
-          value = `"${value.replace(/"/g, '""')}"`;
-        }
-      }
-      
-      return value;
-    }).join(',');
-  });
-
-  return [headerRow, ...dataRows].join('\n');
 };
 
 const formatApplicationForCsv = (application) => {
@@ -96,25 +110,41 @@ const formatApplicationForCsv = (application) => {
 };
 
 const exportApplicationsToCsv = (applications) => {
-  const formattedData = applications.map(formatApplicationForCsv);
-  
-  const headers = [
-    'Application ID', 'First Name', 'Last Name', 'Email', 'Phone', 'Program', 'Status',
-    'Date of Birth', 'Gender', 'Nationality', 'Category', 'Blood Group', 'Aadhar Number',
-    'Street Address', 'City', 'State', 'Pincode',
-    'Previous Qualification', 'Board/University', 'Percentage', 'Year of Passing',
-    'Entrance Exam', 'Exam Roll Number', 'Exam Score', 'Exam Rank',
-    'Guardian Name', 'Guardian Phone', 'Guardian Occupation',
-    'Father Name', 'Father Occupation', 'Father Phone', 'Father Email', 'Father Income',
-    'Mother Name', 'Mother Occupation', 'Mother Phone', 'Mother Email',
-    'Guardian Contact Name', 'Guardian Relation', 'Guardian Contact Phone', 'Guardian Contact Email', 'Guardian Address',
-    'Annual Income', 'Hostel Required', 'Transport Required', 'Medical Conditions',
-    'Emergency Contact Name', 'Emergency Contact Relation', 'Emergency Contact Phone',
-    'How Did You Hear', 'Expectations', 'Achievements', 'Source', 'Remarks',
-    'Reviewed By', 'Reviewed At', 'Submitted At', 'Applied Date', 'Last Updated'
-  ];
+  try {
+    if (!Array.isArray(applications)) {
+      return '';
+    }
+    
+    const formattedData = applications.map((app, index) => {
+      try {
+        return formatApplicationForCsv(app);
+      } catch (error) {
+        console.error(`Error formatting application ${index}:`, error);
+        return {}; // Return empty object to avoid breaking the export
+      }
+    });
+    
+    const headers = [
+      'Application ID', 'First Name', 'Last Name', 'Email', 'Phone', 'Program', 'Status',
+      'Date of Birth', 'Gender', 'Nationality', 'Category', 'Blood Group', 'Aadhar Number',
+      'Street Address', 'City', 'State', 'Pincode',
+      'Previous Qualification', 'Board/University', 'Percentage', 'Year of Passing',
+      'Entrance Exam', 'Exam Roll Number', 'Exam Score', 'Exam Rank',
+      'Guardian Name', 'Guardian Phone', 'Guardian Occupation',
+      'Father Name', 'Father Occupation', 'Father Phone', 'Father Email', 'Father Income',
+      'Mother Name', 'Mother Occupation', 'Mother Phone', 'Mother Email',
+      'Guardian Contact Name', 'Guardian Relation', 'Guardian Contact Phone', 'Guardian Contact Email', 'Guardian Address',
+      'Annual Income', 'Hostel Required', 'Transport Required', 'Medical Conditions',
+      'Emergency Contact Name', 'Emergency Contact Relation', 'Emergency Contact Phone',
+      'How Did You Hear', 'Expectations', 'Achievements', 'Source', 'Remarks',
+      'Reviewed By', 'Reviewed At', 'Submitted At', 'Applied Date', 'Last Updated'
+    ];
 
-  return createCsvContent(formattedData, headers);
+    return createCsvContent(formattedData, headers);
+  } catch (error) {
+    console.error('Error in exportApplicationsToCsv:', error);
+    return '';
+  }
 };
 
 const exportStudentsToCsv = (students) => {
