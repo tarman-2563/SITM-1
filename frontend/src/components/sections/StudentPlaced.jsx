@@ -105,7 +105,13 @@ export default function StudentPlaced() {
       </div>
 
       {/* Header */}
-      <div className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4">
+      <motion.div 
+        initial={{ opacity: 0, y: -50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: false, amount: 0.5 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4"
+      >
         <span className="text-sitm-maroon font-serif italic text-lg dark:text-sitm-gold">Student Placements</span>
 
         <h2 className="text-4xl md:text-5xl font-extrabold">
@@ -116,10 +122,16 @@ export default function StudentPlaced() {
             Pride
           </span>
         </h2>
-      </div>
+      </motion.div>
 
       {/* Marquee */}
-      <div className="relative z-10 overflow-hidden group">
+      <motion.div 
+        initial={{ opacity: 0, x: 100 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: false, amount: 0.2 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        className="relative z-10 overflow-hidden group"
+      >
         <div
           className="flex gap-8 w-max
           animate-marquee
@@ -159,7 +171,7 @@ export default function StudentPlaced() {
             </motion.div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

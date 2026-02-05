@@ -124,12 +124,18 @@ export default function SITMInMedia() {
       <div className="relative z-10 max-w-7xl mx-auto px-6">
 
         {/* Heading */}
-        <h2 className="text-4xl md:text-5xl font-extrabold pb-5">
+        <motion.h2 
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-4xl md:text-5xl font-extrabold pb-5"
+        >
           <span className="text-gray-900 dark:text-white">SITM In </span>
           <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">
             Media
           </span>
-        </h2>
+        </motion.h2>
 
         {/* ===== LAYOUT  ===== */}
         <div className="
@@ -139,7 +145,12 @@ export default function SITMInMedia() {
 
 
           {/* Featured Image */}
-          <div className="
+          <motion.div 
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="
             w-[280px] h-[360px]        
             sm:w-[340px] sm:h-[420px] 
             md:w-[420px] md:h-[480px] 
@@ -152,10 +163,15 @@ export default function SITMInMedia() {
               alt="Featured media"
               className="w-full h-full object-cover"
             />
-          </div>
+          </motion.div>
 
           {/* Right Side */}
-          <div className="
+          <motion.div 
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="
             flex flex-col w-[600px] shrink-0
             mt-6        
             sm:mt-10
@@ -207,7 +223,7 @@ export default function SITMInMedia() {
               ))}
             </div>
 
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

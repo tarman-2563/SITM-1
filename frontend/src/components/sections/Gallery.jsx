@@ -214,7 +214,13 @@ export function Gallery() {
       </div>
 
       <div className="mx-auto px-5 max-w-7xl relative z-10">
-        <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight text-left mx-auto w-fit ">
+        <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight text-left mx-auto w-fit "
+        >
           <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
                 Photo Gallery
@@ -244,7 +250,7 @@ export function Gallery() {
                   />
                 </svg>
               </span>
-        </div>
+        </motion.div>
 
 
         {/* Mobile: Horizontal Scroll with 2x2 Grid */}
@@ -341,10 +347,13 @@ export function Gallery() {
           {featuredImages.map((image, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              viewport={{ once: true }}
+              initial={{ 
+                opacity: 0, 
+                x: index < 4 ? -100 : 100 
+              }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: (index % 4) * 0.1 }}
+              viewport={{ once: false, amount: 0.2 }}
               className={`relative rounded-xl overflow-hidden shadow-lg group cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl ${image.isHighlighted
                 ? "md:col-span-2 md:row-span-2 ring-4 ring-sitm-gold ring-opacity-60"
                 : ""
