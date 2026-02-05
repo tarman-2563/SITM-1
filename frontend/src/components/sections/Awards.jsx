@@ -58,6 +58,17 @@ export function Awards() {
     >
       {/* ===== GRADIENT BLOBS ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {/* Large Decorative Background Icon */}
+        <motion.div
+          animate={{ 
+            rotate: [0, -5, 5, 0],
+            y: [0, 15, 0]
+          }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-[10%] left-[5%] opacity-[0.08] dark:opacity-[0.05]"
+        >
+          <Trophy className="w-80 h-80 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
+        </motion.div>
 
         <motion.div
           animate={{ x: [0, -120, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }}
@@ -96,9 +107,10 @@ export function Awards() {
           </motion.span>
 
           <motion.h2
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: -100 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
+            viewport={{ once: false, amount: 0.5 }}
+            transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
             className="text-4xl md:text-5xl font-bold mt-2 mb-6 font-serif"
           >
             <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 via-yellow-400 to-green-600 px-2">
@@ -121,17 +133,17 @@ export function Awards() {
 function AwardCard({ award, index }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, delay: index * 0.1 }}
-      viewport={{ once: true }}
+      initial={{ opacity: 0, x: index < 3 ? -200 : 200 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      whileHover={{ y: -10 }}
+      transition={{ duration: 0.8, delay: (index % 3) * 0.1, ease: "easeOut" }}
+      viewport={{ once: false, amount: 0.2 }}
       className="
         group relative
         bg-gray-50 dark:bg-slate-800
         p-8 rounded-2xl
         border border-gray-100 dark:border-slate-700
         hover:shadow-xl hover:shadow-sitm-navy/5
-        transition-all duration-300 hover:-translate-y-2
       "
     >
       {/* Top */}
