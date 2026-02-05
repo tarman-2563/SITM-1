@@ -121,7 +121,13 @@ export function Campus() {
       
       <div className="container mx-auto px-4">
 
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: -100 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, amount: 0.5 }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="text-center mb-16"
+        >
             <div className="text-xl sm:text-2xl md:text-3xl lg:text-5xl font-serif font-bold mb-4 md:mb-6 leading-tight text-left mx-auto w-fit ">
           <span className="relative inline-block">
                 <span className="text-transparent bg-clip-text bg-linear-to-r from-cyan-400 via-yellow-400 to-amber-500 relative z-10 px-2">
@@ -159,11 +165,16 @@ export function Campus() {
           <p className="mt-4 text-gray-600 dark:text-white max-w-2xl mx-auto">
               A vibrant campus designed to foster creativity, collaboration, and holistic development.
           </p>
-        </div>
+        </motion.div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-[200px]">
     {facilities.slice(0, 6).map((fac, i) => (
-    <div 
+    <motion.div 
       key={i} 
+      initial={{ opacity: 0, x: i < 3 ? -200 : 200 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      whileHover={{ y: -8 }}
+      transition={{ duration: 0.8, delay: (i % 3) * 0.1, ease: "easeOut" }}
+      viewport={{ once: false, amount: 0.2 }}
       className="relative rounded-xl overflow-hidden group cursor-pointer"
     >
       <img 
@@ -179,7 +190,7 @@ export function Campus() {
 
         <div className="h-1 w-0 bg-sitm-gold mt-2 group-hover:w-full transition-all duration-500"></div>
       </div>
-    </div>
+    </motion.div>
       ))}
     </div>
 
