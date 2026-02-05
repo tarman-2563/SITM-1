@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
-import { Plus, X, ChevronLeft, ChevronRight } from "lucide-react";
+import { Plus, X, ChevronLeft, ChevronRight, Image, Camera, Film, PictureInPicture } from "lucide-react";
 
 // Import all gallery images
 import Award from "../../assets/gallery/Award.jpg";
@@ -182,6 +182,35 @@ export function Gallery() {
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
           className="absolute top-[20%] right-[20%] w-[55%] h-[55%] bg-[#D56B6F]/20 rounded-full blur-[110px]"
         />
+      </div>
+
+      {/* FLOATING DECORATIVE ICONS */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[
+          { Icon: Camera, top: "5%", left: "10%", size: 130, rotate: -12 },
+          { Icon: Image, top: "75%", left: "5%", size: 140, rotate: 15 },
+          { Icon: Film, top: "15%", left: "85%", size: 120, rotate: 20 },
+          { Icon: PictureInPicture, top: "80%", left: "88%", size: 110, rotate: -10 },
+          { Icon: Camera, top: "45%", left: "92%", size: 100, rotate: 5 },
+          { Icon: Image, top: "40%", left: "3%", size: 115, rotate: -15 },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-sitm-maroon dark:text-sitm-gold opacity-[0.05] dark:opacity-[0.12]"
+            style={{ top: item.top, left: item.left }}
+            animate={{
+              y: [0, -25, 0],
+              rotate: [item.rotate, item.rotate + 10, item.rotate],
+            }}
+            transition={{
+              duration: 12 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <item.Icon size={item.size} strokeWidth={1} />
+          </motion.div>
+        ))}
       </div>
 
       <div className="mx-auto px-5 max-w-7xl relative z-10">

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "../common/Button";
 import { useLeadCapture } from "../../context/LeadCaptureContext";
-import { CheckCircle, Download } from "lucide-react";
+import { CheckCircle, Download, UserPlus, FileText, GraduationCap } from "lucide-react";
 
 export function Admissions() {
   const { openDownloadBrochureModal, openEnquireNowModal } = useLeadCapture();
@@ -47,6 +47,34 @@ export function Admissions() {
         />
       </div>
 
+      {/* FLOATING DECORATIVE ICONS */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[
+          { Icon: UserPlus, top: "10%", left: "5%", size: 120, rotate: 15 },
+          { Icon: FileText, top: "60%", left: "85%", size: 140, rotate: -15 },
+          { Icon: GraduationCap, top: "80%", left: "10%", size: 130, rotate: 10 },
+          { Icon: CheckCircle, top: "20%", left: "90%", size: 100, rotate: -10 },
+          { Icon: FileText, top: "45%", left: "50%", size: 110, rotate: 20 },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-sitm-maroon dark:text-sitm-gold opacity-[0.05] dark:opacity-[0.1]"
+            style={{ top: item.top, left: item.left }}
+            animate={{
+              y: [0, -20, 0],
+              rotate: [item.rotate, item.rotate + 10, item.rotate],
+            }}
+            transition={{
+              duration: 10 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <item.Icon size={item.size} strokeWidth={1} />
+          </motion.div>
+        ))}
+      </div>
+
       {/* Dot Pattern Overlay */}
       <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#FFD700_1px,transparent_1px)] [background-size:20px_20px]"></div>
 
@@ -55,7 +83,12 @@ export function Admissions() {
         <div className="grid md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT CONTENT */}
-          <div>
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+          >
             <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic text-2xl">
               Join Us
             </span>
@@ -111,10 +144,16 @@ export function Admissions() {
                 Helpline: +91 98765 43210
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* RIGHT FORM CARD */}
-          <div className="bg-white dark:bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-gray-200 dark:border-white/10 shadow-2xl">
+          <motion.div 
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, amount: 0.2 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="bg-white dark:bg-white/5 backdrop-blur-lg p-8 rounded-2xl border border-gray-200 dark:border-white/10 shadow-2xl"
+          >
 
             <h3 className="text-2xl font-bold font-serif text-sitm-navy dark:text-white mb-6 text-center">
               Enquire Now
@@ -137,7 +176,7 @@ export function Admissions() {
                 Quick form • No login required • Instant response
               </p>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>

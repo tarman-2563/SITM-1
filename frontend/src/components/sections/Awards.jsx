@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Trophy, Award, Star, Medal, Users, BookOpen } from "lucide-react";
+import { Trophy, Award, Star, Medal, Users, BookOpen, Crown } from "lucide-react";
 
 export function Awards() {
   const awards = [
@@ -58,17 +58,34 @@ export function Awards() {
     >
       {/* ===== GRADIENT BLOBS ===== */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        {/* Large Decorative Background Icon */}
-        <motion.div
-          animate={{ 
-            rotate: [0, -5, 5, 0],
-            y: [0, 15, 0]
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[5%] opacity-[0.08] dark:opacity-[0.05]"
-        >
-          <Trophy className="w-80 h-80 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
-        </motion.div>
+      {/* FLOATING DECORATIVE ICONS */}
+      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {[
+          { Icon: Trophy, top: "10%", left: "5%", size: 130, rotate: 12 },
+          { Icon: Award, top: "70%", left: "8%", size: 120, rotate: -10 },
+          { Icon: Medal, top: "20%", left: "88%", size: 140, rotate: -15 },
+          { Icon: Star, top: "78%", left: "85%", size: 130, rotate: 10 },
+          { Icon: Crown, top: "45%", left: "2%", size: 110, rotate: -8 },
+          { Icon: Award, top: "40%", left: "95%", size: 100, rotate: 15 },
+        ].map((item, i) => (
+          <motion.div
+            key={i}
+            className="absolute text-sitm-navy dark:text-sitm-gold opacity-[0.06] dark:opacity-[0.1]"
+            style={{ top: item.top, left: item.left }}
+            animate={{
+              y: [0, -25, 0],
+              rotate: [item.rotate, item.rotate + 10, item.rotate],
+            }}
+            transition={{
+              duration: 12 + i * 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <item.Icon size={item.size} strokeWidth={1} />
+          </motion.div>
+        ))}
+      </div>
 
         <motion.div
           animate={{ x: [0, -120, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }}
