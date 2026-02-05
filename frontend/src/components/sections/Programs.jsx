@@ -69,7 +69,7 @@ export function Programs() {
       color: "from-white to-gray-200",
       programs: [
         {
-          title: "Bachelor of Business Administration",
+          title: "BBA",
           desc:
             "Developing future business leaders with expertise in finance, marketing, and HR.",
           intake: 40,
@@ -85,7 +85,7 @@ export function Programs() {
       color: "from-sitm-gold to-sitm-gold",
       programs: [
         {
-          title: "Bachelor of Computer Applications",
+          title: "BCA",
           desc:
             "A comprehensive course in software development and modern programming.",
           intake: 40,
@@ -261,7 +261,7 @@ export function Programs() {
                             ))}
                           </div>
                         ) : (
-                          <div className={`text-xs font-bold flex items-center w-fit px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md shadow-[0_8px_16px_rgba(0,0,0,0.2)] border ${index === 2 ? 'border-white/80' : 'border-sitm-gold/80'}`}>
+                          <div className={`text-xs font-bold flex items-center w-fit px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md shadow-[0_8px_16px_rgba(0,0,0,0.2)] border ${index === 2 ? 'border-white/80' : 'border-sitm-gold/80'} ${(index === 1 || index === 2) ? 'mx-auto' : ''}`}>
                             <span className="mr-2 text-sitm-maroon font-black">•</span>
                             {school.programs[0].title}
                           </div>
@@ -342,7 +342,7 @@ export function Programs() {
                           ))}
                         </div>
                       ) : (
-                        <div className={`text-sm font-bold flex items-center px-5 py-2 rounded-2xl border ${index === 2 ? 'border-white/80 shadow-[0_12px_24px_rgba(0,0,0,0.2)]' : 'border-sitm-gold/80 shadow-[0_12px_24px_rgba(0,0,0,0.25)]'} w-fit bg-white/10 backdrop-blur-md text-sitm-navy transition-all duration-300 transform hover:scale-105`}>
+                        <div className={`text-sm font-bold flex items-center px-5 py-2 rounded-2xl border ${index === 2 ? 'border-white/80 shadow-[0_12px_24px_rgba(0,0,0,0.2)]' : 'border-sitm-gold/80 shadow-[0_12px_24px_rgba(0,0,0,0.25)]'} w-fit bg-white/10 backdrop-blur-md text-sitm-navy transition-all duration-300 transform hover:scale-105 ${(index === 1 || index === 2) ? 'mx-auto' : ''}`}>
                           <span className="mr-2 text-sitm-maroon font-black">•</span>
                           {school.programs[0].title}
                         </div>

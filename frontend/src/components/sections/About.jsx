@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { AboutSidebar } from "./AboutSidebar";
 import HostelImg from "../../assets/gallery/Hostel.jpg";
+import AboutImg from "../../assets/about.jpeg";
 
 export function About() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -53,7 +54,7 @@ export function About() {
             {/* Background Image */}
             <div className="absolute inset-0">
               <img 
-                src="https://sitmguwahati.ac.in/assets/Campus-Badc-v75.jpeg" 
+                src={AboutImg} 
                 alt="SITM Campus" 
                 className="w-full h-full object-cover" 
               />
@@ -159,7 +160,7 @@ export function About() {
             >
               <div className="absolute -inset-4 bg-linear-to-r from-sitm-maroon to-sitm-gold rounded-2xl opacity-20 group-hover:opacity-30 blur-lg transition duration-500"></div>
               <img 
-                src="https://sitmguwahati.ac.in/assets/Campus-Badc-v75.jpeg" 
+                src={AboutImg} 
                 alt="SITM Campus" 
                 className="relative rounded-2xl shadow-2xl w-full object-cover h-125 border-4 border-white dark:border-slate-800 transition-transform duration-500 group-hover:scale-[1.01]" 
               />
