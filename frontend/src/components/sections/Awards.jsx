@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Trophy, Award, Star, Medal, Users, BookOpen, Crown } from "lucide-react";
+import { SectionHeader } from "../common/SectionHeader";
+import { Trophy, Award, Star, Medal, Users, BookOpen } from "lucide-react";
 
 export function Awards() {
   const awards = [
@@ -7,193 +8,171 @@ export function Awards() {
       title: "IET India Scholarship",
       desc: "Recognizing outstanding engineering talent. Multiple SITM students have been recipients of this prestigious national scholarship.",
       year: "2024-25",
-      icon: <Award className="w-6 h-6" />,
-      color: "bg-sitm-maroon"
+      icon: <Award className="w-5 h-5" />,
     },
     {
       title: "Smart India Hackathon",
       desc: "SITM-IQAC successfully organized and participated in the national-level innovation competition recognized by the Ministry of Education.",
       year: "2023",
-      icon: <Users className="w-6 h-6" />,
-      color: "bg-sitm-navy"
+      icon: <Users className="w-5 h-5" />,
     },
     {
       title: "NAAC Accredited",
       desc: "Recognized for maintaining high quality standards in education, infrastructure, and student support services.",
       year: "Since 2016",
-      icon: <Star className="w-6 h-6" />,
-      color: "bg-sitm-gold"
+      icon: <Star className="w-5 h-5" />,
     },
     {
       title: "Inter-College Cricket",
       desc: "Champions of the Regional Inter-College Cricket Tournament season 4, showcasing sporting excellence alongside academics.",
       year: "2024",
-      icon: <Trophy className="w-6 h-6" />,
-      color: "bg-sitm-maroon"
+      icon: <Trophy className="w-5 h-5" />,
     },
     {
       title: "Tata Imagination Challenge",
       desc: "Active participation and recognition in one of India's largest student-industry collaborative challenges.",
       year: "2024",
-      icon: <BookOpen className="w-6 h-6" />,
-      color: "bg-sitm-navy"
+      icon: <BookOpen className="w-5 h-5" />,
     },
     {
       title: "Academic Excellence",
       desc: "Zubeen Garg Memorial Gold Medal awarded to branch toppers for exceptional academic performance.",
       year: "Annual",
-      icon: <Medal className="w-6 h-6" />,
-      color: "bg-sitm-maroon"
+      icon: <Medal className="w-5 h-5" />,
     }
   ];
 
   return (
     <section
       id="awards"
-      className="
-        relative py-24 overflow-hidden
-        bg-white dark:bg-slate-950
-        transition-colors duration-300
-      "
+      className="scroll-mt-24 relative py-20 md:py-28 overflow-hidden bg-gradient-to-b from-gray-50 to-rose-50/30 dark:from-slate-900 dark:to-slate-950 transition-colors duration-300"
     >
-      {/* ===== GRADIENT BLOBS ===== */}
+      {/* Animated Background Elements */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-      {/* FLOATING DECORATIVE ICONS */}
-      <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+        {/* Subtle dot pattern */}
+        <div 
+          className="absolute inset-0 opacity-[0.08]"
+          style={{ 
+            backgroundImage: `radial-gradient(#D56B6F 2px, transparent 2px)`,
+            backgroundSize: "40px 40px"
+          }}
+        />
+        
+        {/* Floating trophy icons */}
         {[
-          { Icon: Trophy, top: "10%", left: "5%", size: 130, rotate: 12 },
-          { Icon: Award, top: "70%", left: "8%", size: 120, rotate: -10 },
-          { Icon: Medal, top: "20%", left: "88%", size: 140, rotate: -15 },
-          { Icon: Star, top: "78%", left: "85%", size: 130, rotate: 10 },
-          { Icon: Crown, top: "45%", left: "2%", size: 110, rotate: -8 },
-          { Icon: Award, top: "40%", left: "95%", size: 100, rotate: 15 },
+          { Icon: Trophy, top: "15%", left: "8%", size: 100, delay: 0 },
+          { Icon: Award, top: "25%", right: "10%", size: 90, delay: 1 },
+          { Icon: Medal, top: "65%", left: "12%", size: 110, delay: 2 },
+          { Icon: Star, top: "75%", right: "15%", size: 95, delay: 3 },
         ].map((item, i) => (
           <motion.div
             key={i}
-            className="absolute text-sitm-navy dark:text-sitm-gold opacity-[0.06] dark:opacity-[0.1]"
-            style={{ top: item.top, left: item.left }}
+            className="absolute text-sitm-gold/15 dark:text-sitm-gold/10"
+            style={{ 
+              top: item.top, 
+              left: item.left, 
+              right: item.right 
+            }}
             animate={{
               y: [0, -25, 0],
-              rotate: [item.rotate, item.rotate + 10, item.rotate],
+              rotate: [0, 8, -8, 0],
+              opacity: [0.15, 0.25, 0.15],
             }}
             transition={{
-              duration: 12 + i * 2,
+              duration: 8 + i,
               repeat: Infinity,
               ease: "easeInOut",
+              delay: item.delay,
             }}
           >
-            <item.Icon size={item.size} strokeWidth={1} />
+            <item.Icon size={item.size} strokeWidth={1.5} />
           </motion.div>
         ))}
-      </div>
-
+        
+        {/* Gradient orbs */}
         <motion.div
-          animate={{ x: [0, -120, 0], y: [0, -60, 0], scale: [1, 1.2, 1] }}
-          transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-          className="absolute -top-[10%] -right-[15%] w-[55%] h-[55%]
-                     bg-[#D56B6F]/20 rounded-full blur-[110px]"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.06, 0.12, 0.06],
+          }}
+          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute top-1/3 right-1/4 w-[400px] h-[400px] bg-sitm-gold/25 rounded-full blur-3xl"
         />
-
         <motion.div
-          animate={{ x: [0, 90, 0], y: [0, 110, 0], scale: [1.2, 1, 1.2] }}
-          transition={{ duration: 26, repeat: Infinity, ease: "linear" }}
-          className="absolute top-[25%] -left-[20%] w-[65%] h-[65%]
-                     bg-[#F6E294]/20 rounded-full blur-[130px]"
-        />
-
-        <motion.div
-          animate={{ x: [0, -140, 0], y: [0, 90, 0] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute bottom-[0%] right-[10%] w-[60%] h-[60%]
-                     bg-[#D56B6F]/20 rounded-full blur-[120px]"
+          animate={{
+            scale: [1.2, 1, 1.2],
+            opacity: [0.06, 0.12, 0.06],
+          }}
+          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+          className="absolute bottom-1/3 left-1/4 w-[400px] h-[400px] bg-sitm-maroon/25 rounded-full blur-3xl"
         />
       </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <SectionHeader
+          eyebrow="Hall of Fame"
+          title="Awards & Achievements"
+          description="Recognition of excellence in academics, innovation, and holistic development"
+        />
 
-      {/* ===== CONTENT ===== */}
-      <div className="container mx-auto px-4 relative z-10">
-
-        {/* Heading */}
-        <div className="text-center mb-16">
-          <motion.span
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-sitm-gold font-serif italic text-lg"
-          >
-            Hall of Fame
-          </motion.span>
-
-          <motion.h2
-            initial={{ opacity: 0, y: -100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.5 }}
-            transition={{ duration: 1, delay: 0.1, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-bold mt-2 mb-6 font-serif"
-          >
-            <span className="text-transparent bg-clip-text bg-linear-to-r from-red-500 via-yellow-400 to-green-600 px-2">
-              Awards & Achievements
-            </span>
-          </motion.h2>
-        </div>
-
-        {/* Cards */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {awards.map((award, index) => (
-            <AwardCard key={index} award={award} index={index} />
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              whileHover={{ 
+                y: -12, 
+                scale: 1.03,
+                rotateY: 5,
+              }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              viewport={{ once: false }}
+              className="group relative bg-rose-50/80 dark:bg-slate-900 p-6 rounded-2xl border-2 border-sitm-maroon/40 dark:border-sitm-gold/30 hover:border-sitm-maroon dark:hover:border-sitm-gold shadow-lg hover:shadow-2xl transition-all cursor-pointer shadow-[0_0_20px_rgba(213,107,111,0.3)] dark:shadow-[0_0_20px_rgba(246,226,148,0.2)] hover:shadow-[0_0_35px_rgba(213,107,111,0.5)] dark:hover:shadow-[0_0_35px_rgba(246,226,148,0.4)]"
+            >
+              {/* Shine effect on hover */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-white/20 via-transparent to-transparent pointer-events-none"></div>
+              
+              {/* Icon with pulse animation */}
+              <motion.div 
+                className="w-14 h-14 bg-sitm-gold/20 rounded-xl flex items-center justify-center text-sitm-maroon dark:text-sitm-gold mb-4 group-hover:bg-sitm-gold group-hover:text-sitm-navy transition-all shadow-md group-hover:shadow-lg"
+                whileHover={{ 
+                  scale: [1, 1.2, 1],
+                  rotate: [0, 10, -10, 0]
+                }}
+                transition={{ duration: 0.5 }}
+              >
+                {award.icon}
+              </motion.div>
+
+              {/* Year Badge with animation */}
+              <motion.span 
+                className="absolute top-6 right-6 px-3 py-1 text-xs font-bold uppercase tracking-wider bg-sitm-maroon/10 dark:bg-sitm-gold/10 rounded-full text-sitm-maroon dark:text-sitm-gold border border-sitm-maroon/20 dark:border-sitm-gold/20 group-hover:bg-sitm-maroon group-hover:text-white dark:group-hover:bg-sitm-gold dark:group-hover:text-sitm-navy transition-all"
+                whileHover={{ scale: 1.1 }}
+              >
+                {award.year}
+              </motion.span>
+
+              {/* Title */}
+              <h3 className="text-lg font-bold text-sitm-navy dark:text-white mb-2 group-hover:text-sitm-maroon dark:group-hover:text-sitm-gold transition-colors">
+                {award.title}
+              </h3>
+
+              {/* Description */}
+              <p className="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">
+                {award.desc}
+              </p>
+              
+              {/* Bottom accent line */}
+              <motion.div 
+                className="absolute bottom-0 left-0 h-1 bg-gradient-to-r from-sitm-maroon to-sitm-gold rounded-b-2xl"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+              ></motion.div>
+            </motion.div>
           ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function AwardCard({ award, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, x: index < 3 ? -200 : 200 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      whileHover={{ y: -10 }}
-      transition={{ duration: 0.8, delay: (index % 3) * 0.1, ease: "easeOut" }}
-      viewport={{ once: false, amount: 0.2 }}
-      className="
-        group relative
-        bg-gray-50 dark:bg-slate-800
-        p-8 rounded-2xl
-        border border-gray-100 dark:border-slate-700
-        hover:shadow-xl hover:shadow-sitm-navy/5
-      "
-    >
-      {/* Top */}
-      <div className="flex items-start justify-between mb-6">
-
-        {/* Icon Box */}
-        <div
-          className={`p-4 rounded-xl ${award.color} bg-opacity-10 text-sitm-navy dark:text-white group-hover:bg-opacity-20 transition-all`}
-        >
-          {/* ✅ ICON FIX ONLY */}
-          <div className="text-slate-900 dark:text-white">
-            {award.icon}
-          </div>
-        </div>
-
-        {/* Year */}
-        <span className="px-3 py-1 text-xs font-bold uppercase tracking-wider bg-white dark:bg-slate-900 rounded-full border border-gray-200 dark:border-slate-700 text-gray-500 dark:text-gray-300">
-          {award.year}
-        </span>
-      </div>
-
-      {/* Title */}
-      <h3 className="text-xl font-serif font-bold text-sitm-navy dark:text-white mb-3 group-hover:text-sitm-maroon dark:group-hover:text-sitm-gold transition-colors">
-        {award.title}
-      </h3>
-
-      {/* Desc */}
-      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-        {award.desc}
-      </p>
-
-      {/* Bottom Line */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-sitm-gold to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
-    </motion.div>
   );
 }

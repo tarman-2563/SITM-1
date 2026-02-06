@@ -9,25 +9,22 @@ export const Button = ({
 }) => {
   const variants = {
     primary:
-      "bg-sitm-maroon text-white hover:bg-sitm-maroon-light shadow-lg hover:shadow-xl",
+      "bg-sitm-gold text-sitm-navy hover:bg-sitm-gold-light shadow-md hover:shadow-lg font-semibold",
     secondary:
-      "bg-sitm-gold text-sitm-navy hover:bg-sitm-gold-light shadow-md hover:shadow-lg",
-    outline:
-      "border-2 border-sitm-maroon text-sitm-maroon hover:bg-sitm-maroon hover:text-white dark:border-sitm-gold dark:text-sitm-gold dark:hover:bg-sitm-gold dark:hover:text-sitm-navy",
+      "border-2 border-sitm-navy text-sitm-navy hover:bg-sitm-navy hover:text-white dark:border-sitm-gold dark:text-sitm-gold dark:hover:bg-sitm-gold dark:hover:text-sitm-navy shadow-sm hover:shadow-md",
     ghost: "bg-transparent hover:bg-gray-100 dark:hover:bg-slate-800 text-gray-700 dark:text-gray-200",
   };
 
   const sizes = {
-    sm: "px-3 py-1.5 text-sm",
-    md: "px-6 py-3 text-base font-medium",
-    lg: "px-8 py-4 text-lg font-semibold",
-    icon: "p-2",
+    sm: "px-4 py-2 text-sm min-h-[36px]",
+    md: "px-6 py-3 text-base min-h-[44px]",
+    lg: "px-8 py-4 text-lg min-h-[52px]",
   };
 
   return (
     <button
       className={cn(
-        "rounded-lg transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed",
+        "rounded-full transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed font-medium",
         variants[variant],
         sizes[size],
         className
