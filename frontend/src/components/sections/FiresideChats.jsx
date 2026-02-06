@@ -194,13 +194,25 @@ export default function FiresideChats() {
           whileInView={{ y: 0, opacity: 1 }}
           viewport={{ once: false }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
           <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="font-serif font-bold text-2xl md:text-3xl uppercase tracking-[0.2em] drop-shadow-sm text-transparent bg-clip-text bg-linear-to-r from-sitm-gold to-sitm-maroon dark:from-cyan-400 dark:via-yellow-200 dark:to-amber-400">Fireside Chats</span>
+              <span 
+                className="font-serif font-bold text-2xl md:text-3xl uppercase tracking-[0.2em] drop-shadow-sm text-transparent bg-clip-text bg-linear-to-r from-sitm-gold to-sitm-maroon dark:from-cyan-400 dark:via-yellow-200 dark:to-amber-400"
+              >
+                Fireside Chats
+              </span>
           </div>
           <p className="mt-6 text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed">
-            Real insights from industry leaders and visionaries who visited SITM to share their journey and wisdom.
+            Learning from leaders of top companies
+            <br />
+            <motion.span
+              animate={{ scale: [1, 1.1, 1] }} 
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block mt-2 font-semibold text-sitm-navy dark:text-white"
+            >
+              Ask · Learn · Apply
+            </motion.span>
           </p>
         </motion.div>
 

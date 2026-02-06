@@ -46,7 +46,7 @@ const loopStudents = [...students, ...students];
 export default function StudentPlaced() {
   return (
     <section
-      className="relative py-24 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300"
+      className="relative py-10 overflow-hidden bg-white dark:bg-slate-950 transition-colors duration-300"
     >
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -110,17 +110,21 @@ export default function StudentPlaced() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: false, amount: 0.5 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4"
+        className="relative z-10 text-center max-w-3xl mx-auto mb-4 px-4"
       >
 
-        <h2 className="text-4xl md:text-5xl font-extrabold">
-          <span className="text-gray-900 dark:text-white">
-            SITM
-          </span>{" "}
-          <span className="text-transparent bg-clip-text bg-linear-to-r from-sitm-navy to-indigo-600 dark:from-white dark:to-sitm-gold">
-            Pride
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <span className="text-sitm-maroon dark:text-sitm-gold font-serif font-bold text-3xl md:text-5xl uppercase tracking-[0.2em] drop-shadow-sm">
+            SITM{" "}
+            <motion.span
+              animate={{ scale: [1, 1.1, 1] }} 
+              transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+              className="inline-block text-transparent bg-clip-text bg-linear-to-r from-sitm-gold to-sitm-maroon dark:from-cyan-400 dark:to-sitm-gold"
+            >
+              Pride
+            </motion.span>
           </span>
-        </h2>
+        </div>
       </motion.div>
 
       {/* Marquee */}
@@ -140,14 +144,14 @@ export default function StudentPlaced() {
             <motion.div
               key={i}
               whileHover={{ scale: 1.05 }}
-              className="relative w-72 rounded-3xl overflow-hidden
+              className="relative w-60 rounded-3xl overflow-hidden
                 bg-linear-to-br from-indigo-500 via-purple-500 to-pink-500 p-px"
             >
               <div className="relative rounded-3xl overflow-hidden
                 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl">
 
                 {/* Image */}
-                <div className="relative h-72 overflow-hidden">
+                <div className="relative h-60 overflow-hidden">
                   <img
                     src={student.photo}
                     alt={student.name}

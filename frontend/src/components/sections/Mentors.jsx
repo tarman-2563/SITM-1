@@ -193,7 +193,16 @@ export default function Mentors() {
           className="text-center mb-2"
         >
           <div className="flex items-center justify-center gap-4 mb-6">
-              <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic font-bold text-2xl md:text-3xl uppercase tracking-[0.2em] drop-shadow-sm">Meet our mentors</span>
+              <span className="text-sitm-maroon dark:text-sitm-gold font-serif font-bold text-2xl md:text-3xl uppercase tracking-[0.2em] drop-shadow-sm">
+                Meet our{" "}
+                <motion.span
+                  animate={{ scale: [1, 1.1, 1] }} 
+                  transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                  className="inline-block text-transparent bg-clip-text bg-linear-to-r from-sitm-gold to-sitm-maroon dark:from-cyan-400 dark:to-sitm-gold"
+                >
+                  mentors
+                </motion.span>
+              </span>
           </div>
           <p className="mt-8 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
             100+ mentors from top corporates delivering masterclasses, expert
