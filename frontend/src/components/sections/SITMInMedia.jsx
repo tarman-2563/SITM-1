@@ -3,11 +3,13 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 const initialImages = [
-  "https://images.unsplash.com/photo-1522202176988-66273c2fd55f",
-  "https://images.unsplash.com/photo-1521737604893-d14cc237f11d",
-  "https://images.unsplash.com/photo-1551836022-d5d88e9218df",
-  "https://images.unsplash.com/photo-1519389950473-47ba0277781c",
-  "https://images.unsplash.com/photo-1556761175-4b46a572b786",
+  "/news/Media1.jpg",
+  "/news/Media3.jpg",
+  "/news/Media2.jpeg",
+  "/news/Media4.jpg",
+  "/news/Media5.jpg",
+  "/news/Media6.jpg",
+  "/news/Media7.jpg",
 ];
 
 export default function SITMInMedia() {
@@ -151,17 +153,17 @@ export default function SITMInMedia() {
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="
-            w-[280px] h-[360px]        
-            sm:w-[340px] sm:h-[420px] 
-            md:w-[420px] md:h-[480px] 
-            lg:w-[520px] lg:h-[520px] 
+            w-70 h-90        
+            sm:w-85 sm:h-105 
+            md:w-105 md:h-120 
+            lg:w-130 lg:h-130 
             rounded-3xl overflow-hidden shrink-0
           ">
 
             <img
               src={images[0]}
               alt="Featured media"
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain"
             />
           </motion.div>
 
@@ -172,7 +174,7 @@ export default function SITMInMedia() {
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="
-            flex flex-col w-[600px] shrink-0
+            flex flex-col w-150 shrink-0
             mt-6        
             sm:mt-10
             md:mt-16

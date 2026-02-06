@@ -193,7 +193,7 @@ function AwardCard({ award, index }) {
       </p>
 
       {/* Bottom Line */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-sitm-gold to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+      <div className="absolute bottom-0 left-0 w-full h-1 bg-linear-to-r from-transparent via-sitm-gold to-transparent transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
     </motion.div>
   );
 }
