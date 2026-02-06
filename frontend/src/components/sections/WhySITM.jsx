@@ -110,20 +110,20 @@ export function WhySITM() {
             {/* Left Column - What Matters + Traditional */}
             <div className="bg-white dark:bg-slate-900 rounded-l-2xl shadow-md border border-black/5 dark:border-white/10 overflow-hidden">
               {/* Header */}
-              <div className="py-3 px-4 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
-                <span className="text-xl font-bold text-slate-800 dark:text-white">What Matters</span>
+              <div className="py-2 px-3 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800 min-h-[56px] flex items-center justify-center">
+                <span className="text-lg font-bold text-slate-800 dark:text-white">What Matters</span>
               </div>
               {/* Rows */}
-              {comparisonData.map((item, idx) => (
+              {comparisonData.map((item) => (
                 <div 
                   key={item.id}
-                  className="py-3 px-4 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
+                  className="py-2 px-3 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0 min-h-[64px] flex items-center"
                 >
-                  <div className="flex items-center gap-3">
-                    <div className="p-2.5 bg-white dark:bg-slate-700 rounded-xl text-sitm-maroon dark:text-sitm-gold shadow-sm">
+                  <div className="flex items-center gap-2">
+                    <div className="p-1.5 bg-white dark:bg-slate-700 rounded-lg text-sitm-maroon dark:text-sitm-gold shadow-sm">
                       {item.icon}
                     </div>
-                    <span className="font-bold text-base text-sitm-navy dark:text-white">
+                    <span className="font-bold text-sm text-sitm-navy dark:text-white">
                       {item.category}
                     </span>
                   </div>
@@ -141,22 +141,22 @@ export function WhySITM() {
                 className="bg-sitm-gold rounded-2xl shadow-2xl border-2 border-sitm-gold-light overflow-hidden h-full"
               >
                 {/* Header */}
-                <div className="py-4 px-4 text-center border-b-2 border-sitm-navy/20">
-                  <div className="flex items-center justify-center gap-3">
-                    <div className="w-12 h-12 bg-sitm-navy rounded-xl flex items-center justify-center shadow-lg">
-                      <Check className="text-sitm-gold" size={24} strokeWidth={3} />
+                <div className="py-2 px-3 text-center border-b-2 border-sitm-navy/20 min-h-[56px] flex items-center justify-center">
+                  <div className="flex items-center justify-center gap-2">
+                    <div className="w-9 h-9 bg-sitm-navy rounded-lg flex items-center justify-center shadow-lg">
+                      <Check className="text-sitm-gold" size={20} strokeWidth={3} />
                     </div>
-                    <span className="text-2xl font-bold text-sitm-navy">SITM Advantage</span>
+                    <span className="text-xl font-bold text-sitm-navy">SITM Advantage</span>
                   </div>
                 </div>
                 {/* Rows */}
-                {comparisonData.map((item, idx) => (
+                {comparisonData.map((item) => (
                   <div 
                     key={item.id}
-                    className="py-3 px-4 border-b border-sitm-navy/10 last:border-0"
+                    className="py-2 px-3 border-b border-sitm-navy/10 last:border-0 min-h-[64px] flex items-center"
                   >
-                    <div className="flex items-start gap-3">
-                      <Check className="text-sitm-navy flex-shrink-0 mt-0.5" size={18} strokeWidth={3} />
+                    <div className="flex items-start gap-2">
+                      <Check className="text-sitm-navy flex-shrink-0 mt-0.5" size={16} strokeWidth={3} />
                       <p className="text-sm leading-relaxed text-sitm-navy font-semibold">
                         {item.sitm}
                       </p>
@@ -169,22 +169,22 @@ export function WhySITM() {
             {/* Right Column - Traditional Colleges */}
             <div className="bg-white dark:bg-slate-900 rounded-r-2xl shadow-md border border-black/5 dark:border-white/10 overflow-hidden">
               {/* Header */}
-              <div className="py-3 px-4 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
-                <div className="flex items-center justify-center gap-3">
-                  <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center shadow-lg">
-                    <X className="text-red-600 dark:text-red-500" size={22} strokeWidth={3} />
+              <div className="py-2 px-3 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800 min-h-[56px] flex items-center justify-center">
+                <div className="flex items-center justify-center gap-2">
+                  <div className="w-8 h-8 bg-red-100 dark:bg-red-900/30 rounded-lg flex items-center justify-center shadow-lg">
+                    <X className="text-red-600 dark:text-red-500" size={18} strokeWidth={3} />
                   </div>
-                  <span className="text-xl font-bold text-slate-800 dark:text-white">Traditional Colleges</span>
+                  <span className="text-lg font-bold text-slate-800 dark:text-white">Traditional Colleges</span>
                 </div>
               </div>
               {/* Rows */}
-              {comparisonData.map((item, idx) => (
+              {comparisonData.map((item) => (
                 <div 
                   key={item.id}
-                  className="py-3 px-4 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
+                  className="py-2 px-3 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0 min-h-[64px] flex items-center"
                 >
-                  <div className="flex items-start gap-3">
-                    <X className="text-red-600 dark:text-red-500 flex-shrink-0 mt-0.5" size={18} strokeWidth={3} />
+                  <div className="flex items-start gap-2">
+                    <X className="text-red-600 dark:text-red-500 flex-shrink-0 mt-0.5" size={16} strokeWidth={3} />
                     <p className="text-sm leading-relaxed text-slate-700 dark:text-slate-300 font-medium">
                       {item.traditional}
                     </p>
