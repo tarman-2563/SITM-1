@@ -1,6 +1,6 @@
 import { cloneElement, useState } from "react";
 import { motion } from "framer-motion";
-import { Briefcase, Building2, LayoutGrid, Code2, Palette, BarChart3, Cloud, Terminal, Brain, Database, ShieldCheck, TestTube2, Settings2, Rocket, Users } from "lucide-react";
+import { Briefcase, Building2, LayoutGrid, Code2, Palette, BarChart3, Cloud, Terminal, Brain, Database, ShieldCheck, TestTube2, Settings2, Rocket, Users, Compass, Target, GraduationCap } from "lucide-react";
 
 const mentors = [
   { name: "Amit Sharma", role: "Product Manager", company: "Google", domain: "google.com", photo: "https://randomuser.me/api/portraits/men/32.jpg", icon: <LayoutGrid className="text-indigo-500" /> },
@@ -132,28 +132,28 @@ export default function Mentors() {
 
         {/* Large Decorative Background Icons - Similar to Programs */}
         <motion.div
-          animate={{ rotate: [0, 10, 0], y: [0, -15, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[10%] left-[10%] opacity-[0.12] dark:opacity-[0.08]"
-        >
-          <Users className="w-64 h-64 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
-        </motion.div>
-        
-        <motion.div
-          animate={{ rotate: [0, -15, 0], y: [0, 20, 0] }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute bottom-[10%] right-[10%] opacity-[0.12] dark:opacity-[0.08]"
-        >
-          <Briefcase className="w-72 h-72 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
-        </motion.div>
-
-        <motion.div
-          animate={{ scale: [1, 1.1, 1], rotate: [0, 5, 0] }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute top-[40%] right-[5%] opacity-[0.1] dark:opacity-[0.06]"
-        >
-          <Brain className="w-56 h-56 text-sitm-navy dark:text-sitm-gold" strokeWidth={1} />
-        </motion.div>
+           animate={{ rotate: [0, 360], scale: [1, 1.1, 1] }}
+           transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+           className="absolute top-[10%] left-[5%] opacity-[0.06] dark:opacity-[0.04]"
+         >
+           <Compass className="w-64 h-64 text-sitm-navy dark:text-sitm-gold" strokeWidth={1.5} />
+         </motion.div>
+         
+         <motion.div
+           animate={{ y: [0, -30, 0], opacity: [0.06, 0.1, 0.06] }}
+           transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute bottom-[15%] right-[5%] opacity-[0.06] dark:opacity-[0.04]"
+         >
+           <Target className="w-72 h-72 text-sitm-navy dark:text-sitm-gold" strokeWidth={1.5} />
+         </motion.div>
+ 
+         <motion.div
+           animate={{ rotate: [0, -10, 0], scale: [1, 1.1, 1] }}
+           transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
+           className="absolute top-[40%] right-[35%] opacity-[0.05] dark:opacity-[0.03]"
+         >
+           <GraduationCap className="w-96 h-96 text-sitm-navy dark:text-sitm-gold" strokeWidth={1.5} />
+         </motion.div>
 
         <motion.div 
           animate={{ 
@@ -193,9 +193,7 @@ export default function Mentors() {
           className="text-center mb-2"
         >
           <div className="flex items-center justify-center gap-4 mb-6">
-              <div className="w-16 h-1 bg-sitm-gold shadow-sm"></div>
               <span className="text-sitm-maroon dark:text-sitm-gold font-serif italic font-bold text-2xl md:text-3xl uppercase tracking-[0.2em] drop-shadow-sm">Meet our mentors</span>
-              <div className="w-16 h-1 bg-sitm-gold shadow-sm"></div>
           </div>
           <p className="mt-8 text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
             100+ mentors from top corporates delivering masterclasses, expert

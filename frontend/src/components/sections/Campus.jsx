@@ -159,9 +159,6 @@ export function Campus() {
                 </svg>
               </span>
         </div>
-              
-          <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4 font-serif">Campus Infrastructure</h2>
-          <div className="w-24 h-1 bg-sitm-gold mx-auto"></div>
           <p className="mt-4 text-gray-600 dark:text-white max-w-2xl mx-auto">
               A vibrant campus designed to foster creativity, collaboration, and holistic development.
           </p>

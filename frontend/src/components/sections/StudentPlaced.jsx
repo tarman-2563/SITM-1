@@ -112,7 +112,6 @@ export default function StudentPlaced() {
         transition={{ duration: 0.8, ease: "easeOut" }}
         className="relative z-10 text-center max-w-3xl mx-auto mb-14 px-4"
       >
-        <span className="text-sitm-maroon font-serif italic text-lg dark:text-sitm-gold">Student Placements</span>
 
         <h2 className="text-4xl md:text-5xl font-extrabold">
           <span className="text-gray-900 dark:text-white">
@@ -130,7 +129,7 @@ export default function StudentPlaced() {
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: false, amount: 0.2 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        className="relative z-10 overflow-hidden group"
+        className="relative z-10 overflow-hidden group py-12"
       >
         <div
           className="flex gap-8 w-max
