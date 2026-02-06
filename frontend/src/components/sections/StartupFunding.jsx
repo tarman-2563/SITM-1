@@ -218,7 +218,7 @@ export default function StartupFunding() {
                 <h3 className="text-2xl text-sitm-gold font-serif italic font-black drop-shadow-lg">
                   1-to-1
                 </h3>
-                <p className="mt-3 text-xs font-bold uppercase text-slate-600 dark:text-gray-400">
+                <p className="mt-3 text-xs font-bold uppercase text-slate-600 dark:text-gray-300">
                   Founder Mentorship
                 </p>
               </motion.div>
@@ -236,7 +236,7 @@ export default function StartupFunding() {
                 <h3 className="text-2xl text-sitm-gold font-serif italic font-black drop-shadow-lg">
                   0 → 1
                 </h3>
-                <p className="mt-3 text-xs font-bold uppercase text-slate-600 dark:text-gray-400">
+                <p className="mt-3 text-xs font-bold uppercase text-slate-600 dark:text-gray-300">
                   Startup Journey
                 </p>
               </motion.div>
