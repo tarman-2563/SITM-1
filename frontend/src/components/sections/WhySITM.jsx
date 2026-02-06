@@ -55,7 +55,7 @@ const comparisonData = [
 
 export function WhySITM() {
   return (
-    <section id="why-sitm" className="scroll-mt-24 relative py-20 md:py-28 bg-white dark:bg-slate-950 overflow-hidden">
+    <section id="why-sitm" className="scroll-mt-24 relative py-12 md:py-16 bg-white dark:bg-slate-950 overflow-hidden">
       {/* Subtle Background */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-30">
         <div 
@@ -76,12 +76,12 @@ export function WhySITM() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold mb-6">
             <span className="text-sitm-gold drop-shadow-md">
               SITM Curated
             </span>
-            <span className="text-slate-400 dark:text-slate-500 mx-4 text-3xl sm:text-4xl lg:text-5xl">vs</span>
-            <span className="text-slate-500 dark:text-slate-400 text-3xl sm:text-4xl lg:text-5xl">Traditional Colleges</span>
+            <span className="text-slate-400 dark:text-slate-500 mx-4 text-2xl sm:text-3xl lg:text-4xl">vs</span>
+            <span className="text-slate-500 dark:text-slate-400 text-2xl sm:text-3xl lg:text-4xl">Traditional Colleges</span>
           </h2>
           
           <p className="text-lg sm:text-xl text-slate-600 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -110,14 +110,14 @@ export function WhySITM() {
             {/* Left Column - What Matters + Traditional */}
             <div className="bg-white dark:bg-slate-900 rounded-l-2xl shadow-md border border-black/5 dark:border-white/10 overflow-hidden">
               {/* Header */}
-              <div className="py-5 px-6 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
+              <div className="py-3 px-4 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
                 <span className="text-xl font-bold text-slate-800 dark:text-white">What Matters</span>
               </div>
               {/* Rows */}
               {comparisonData.map((item, idx) => (
                 <div 
                   key={item.id}
-                  className="py-5 px-6 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
+                  className="py-3 px-4 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
                 >
                   <div className="flex items-center gap-3">
                     <div className="p-2.5 bg-white dark:bg-slate-700 rounded-xl text-sitm-maroon dark:text-sitm-gold shadow-sm">
@@ -141,7 +141,7 @@ export function WhySITM() {
                 className="bg-sitm-gold rounded-2xl shadow-2xl border-2 border-sitm-gold-light overflow-hidden h-full"
               >
                 {/* Header */}
-                <div className="py-6 px-6 text-center border-b-2 border-sitm-navy/20">
+                <div className="py-4 px-4 text-center border-b-2 border-sitm-navy/20">
                   <div className="flex items-center justify-center gap-3">
                     <div className="w-12 h-12 bg-sitm-navy rounded-xl flex items-center justify-center shadow-lg">
                       <Check className="text-sitm-gold" size={24} strokeWidth={3} />
@@ -153,7 +153,7 @@ export function WhySITM() {
                 {comparisonData.map((item, idx) => (
                   <div 
                     key={item.id}
-                    className="py-5 px-6 border-b border-sitm-navy/10 last:border-0"
+                    className="py-3 px-4 border-b border-sitm-navy/10 last:border-0"
                   >
                     <div className="flex items-start gap-3">
                       <Check className="text-sitm-navy flex-shrink-0 mt-0.5" size={18} strokeWidth={3} />
@@ -169,7 +169,7 @@ export function WhySITM() {
             {/* Right Column - Traditional Colleges */}
             <div className="bg-white dark:bg-slate-900 rounded-r-2xl shadow-md border border-black/5 dark:border-white/10 overflow-hidden">
               {/* Header */}
-              <div className="py-5 px-6 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
+              <div className="py-3 px-4 text-center border-b-2 border-black/10 dark:border-white/20 bg-gray-50 dark:bg-slate-800">
                 <div className="flex items-center justify-center gap-3">
                   <div className="w-10 h-10 bg-red-100 dark:bg-red-900/30 rounded-xl flex items-center justify-center shadow-lg">
                     <X className="text-red-600 dark:text-red-500" size={22} strokeWidth={3} />
@@ -181,7 +181,7 @@ export function WhySITM() {
               {comparisonData.map((item, idx) => (
                 <div 
                   key={item.id}
-                  className="py-5 px-6 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
+                  className="py-3 px-4 bg-gray-50 dark:bg-slate-800 border-b border-black/5 dark:border-white/10 last:border-0"
                 >
                   <div className="flex items-start gap-3">
                     <X className="text-red-600 dark:text-red-500 flex-shrink-0 mt-0.5" size={18} strokeWidth={3} />
