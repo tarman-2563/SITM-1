@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
@@ -11,7 +12,8 @@ import {
   Users,
   ChevronDown,
   ChevronUp,
-  BarChart3
+  BarChart3,
+  ArrowLeft
 } from 'lucide-react';
 
 export function DataScience() {
@@ -111,8 +113,18 @@ export function DataScience() {
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <Navbar />
       
+      {/* Back Link */}
+      <section className="pt-32 pb-4 bg-gray-50 dark:bg-slate-950">
+        <div className="container mx-auto px-4">
+          <Link to="/#programs" className="inline-flex items-center gap-2 text-sitm-maroon dark:text-sitm-gold hover:underline mb-4">
+            <ArrowLeft size={16} />
+            Back to Programs
+          </Link>
+        </div>
+      </section>
+      
       {/* Hero Section */}
-      <section className="relative pt-36 pb-16 bg-gray-50 dark:bg-slate-950 overflow-hidden">
+      <section className="relative pb-16 bg-gray-50 dark:bg-slate-950 overflow-hidden">
         <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
           <div 
             className="absolute inset-0 opacity-[0.1]"

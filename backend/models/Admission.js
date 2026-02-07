@@ -51,7 +51,7 @@ const admissionSchema = new mongoose.Schema(
     program: {
       type: String,
       required: [true, "Program selection is required"],
-      enum: ["CSE", "ECE", "ME", "CE", "BCA", "BBA"]
+      enum: ["CSE", "ECE", "EEE", "ME", "CE", "BCA", "BBA", "DATA_SCIENCE"]
     },
     previousEducation: {
       qualification: { type: String, required: true },
@@ -71,17 +71,19 @@ const admissionSchema = new mongoose.Schema(
     },
     guardianName: {
       type: String,
-      required: [true, "Guardian name is required"],
-      trim: true
+      required: false,
+      trim: true,
+      default: "Not Specified"
     },
     guardianPhone: {
       type: String,
-      required: [true, "Guardian phone is required"],
+      required: false,
       match: [/^[6-9]\d{9}$/, "Please enter a valid Indian phone number"]
     },
     guardianOccupation: {
       type: String,
-      required: [true, "Guardian occupation is required"]
+      required: false,
+      default: "Not Specified"
     },
     status: {
       type: String,

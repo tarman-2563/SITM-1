@@ -503,7 +503,7 @@ export function Programs() {
                       onClick={closeModal}
                       className="text-white/80 text-xs md:text-sm hover:text-white transition-colors"
                     >
-                      {selectedSchool.id === "engineering" ? "View All Branches" : "View Full Syllabus"}
+                      {selectedSchool.id === "engineering" ? "View All Branches" : "View Full Program"}
                     </Link>
                   </div>
                 </motion.div>

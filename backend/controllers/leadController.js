@@ -50,6 +50,9 @@ const getLeadById = async (req, res) => {
             email: lead.email,
             phone: lead.phone,
             program: lead.program,
+            state: lead.state,
+            tenthPercentage: lead.tenthPercentage,
+            twelfthInfo: lead.twelfthInfo,
             status: lead.leadStatus
         }
         res.status(200).json({ status: "success", data: responseData });

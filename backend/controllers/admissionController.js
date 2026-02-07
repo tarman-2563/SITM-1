@@ -7,6 +7,10 @@ const completeApplication = async (req, res) => {
   try {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
+      logger.error("Application validation failed", { 
+        errors: errors.array(),
+        body: req.body 
+      });
       return res.status(400).json({
         status: "error",
         message: "Validation failed",
@@ -188,7 +192,7 @@ const getAllApplications = async (req, res) => {
     }
 
     // Validate program filter
-    if (filters.program && !["CSE", "ECE", "ME", "CE", "BCA", "BBA"].includes(filters.program)) {
+    if (filters.program && !["CSE", "ECE", "EEE", "ME", "CE", "BCA", "BBA", "DATA_SCIENCE"].includes(filters.program)) {
       return res.status(400).json({
         status: "error",
         message: "Invalid program filter"

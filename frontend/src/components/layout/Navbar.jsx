@@ -173,6 +173,20 @@ export function Navbar() {
               )}
               isScrolled={isScrolled}
             />
+            <Link to="/login">
+              <Button 
+                size="sm" 
+                variant="outline"
+                className={cn(
+                  "border-2 transition-all duration-300",
+                  isScrolled 
+                    ? "border-sitm-navy text-sitm-navy hover:bg-sitm-navy hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-sitm-navy" 
+                    : "border-white text-white hover:bg-white hover:text-sitm-navy"
+                )}
+              >
+                Login
+              </Button>
+            </Link>
             <a href="#admissions">
               <Button size="sm">
                 Apply Now
@@ -252,12 +266,19 @@ export function Navbar() {
                   ))}
                 </nav>
 
-                {/* CTA Button */}
-                <a href="#admissions" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button className="w-full" size="lg">
-                    Apply Now
-                  </Button>
-                </a>
+                {/* CTA Buttons */}
+                <div className="space-y-3">
+                  <Link to="/login" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button variant="outline" className="w-full border-2 border-sitm-navy text-sitm-navy hover:bg-sitm-navy hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-sitm-navy" size="lg">
+                      Login
+                    </Button>
+                  </Link>
+                  <a href="#admissions" onClick={() => setIsMobileMenuOpen(false)}>
+                    <Button className="w-full" size="lg">
+                      Apply Now
+                    </Button>
+                  </a>
+                </div>
               </div>
             </motion.div>
           </>

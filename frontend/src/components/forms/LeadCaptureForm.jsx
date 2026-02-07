@@ -7,10 +7,21 @@ import { CheckCircle, AlertCircle, Loader2, X, ArrowRight } from 'lucide-react';
 const PROGRAMS = [
   { value: 'CSE', label: 'Computer Science & Engineering' },
   { value: 'ECE', label: 'Electronics & Communication Engineering' },
+  { value: 'EEE', label: 'Electrical & Electronics Engineering' },
   { value: 'ME', label: 'Mechanical Engineering' },
   { value: 'CE', label: 'Civil Engineering' },
   { value: 'BCA', label: 'Bachelor of Computer Applications' },
-  { value: 'BBA', label: 'Bachelor of Business Administration' }
+  { value: 'BBA', label: 'Bachelor of Business Administration' },
+  { value: 'DATA_SCIENCE', label: 'Data Science' }
+];
+
+const INDIAN_STATES = [
+  'Andhra Pradesh', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chhattisgarh',
+  'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jharkhand', 'Karnataka',
+  'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram',
+  'Nagaland', 'Odisha', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',
+  'Telangana', 'Tripura', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal',
+  'Delhi', 'Jammu and Kashmir', 'Ladakh'
 ];
 
 export function LeadCaptureForm({ 
@@ -26,7 +37,10 @@ export function LeadCaptureForm({
     lastName: '',
     email: '',
     phone: '',
-    program: ''
+    program: '',
+    state: '',
+    tenthPercentage: '',
+    twelfthInfo: ''
   });
   
   const [errors, setErrors] = useState({});
@@ -48,9 +62,8 @@ export function LeadCaptureForm({
       newErrors.lastName = 'Last name must be 2-50 characters';
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    // Email is optional, but if provided, must be valid
+    if (formData.email.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
@@ -62,6 +75,26 @@ export function LeadCaptureForm({
 
     if (!formData.program) {
       newErrors.program = 'Please select a program';
+    }
+
+    if (!formData.state) {
+      newErrors.state = 'Please select your state';
+    }
+
+    if (!formData.tenthPercentage) {
+      newErrors.tenthPercentage = '10th percentage is required';
+    } else if (isNaN(formData.tenthPercentage) || formData.tenthPercentage < 0 || formData.tenthPercentage > 100) {
+      newErrors.tenthPercentage = 'Please enter a valid percentage (0-100)';
+    }
+
+    if (!formData.twelfthInfo) {
+      newErrors.twelfthInfo = '12th information is required';
+    } else if (formData.twelfthInfo.toLowerCase() !== 'appearing') {
+      // If it's not "appearing", validate as percentage
+      const percentage = parseFloat(formData.twelfthInfo);
+      if (isNaN(percentage) || percentage < 0 || percentage > 100) {
+        newErrors.twelfthInfo = 'Enter "Appearing" or a valid percentage (0-100)';
+      }
     }
 
     setErrors(newErrors);
@@ -103,7 +136,10 @@ export function LeadCaptureForm({
           lastName: '',
           email: '',
           phone: '',
-          program: ''
+          program: '',
+          state: '',
+          tenthPercentage: '',
+          twelfthInfo: ''
         });
         setErrors({});
         setLeadId(null);
@@ -197,9 +233,6 @@ export function LeadCaptureForm({
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                     {title}
                   </h2>
-                  <p className="text-gray-600 dark:text-gray-300">
-                    {subtitle}
-                  </p>
                 </div>
 
                 {error && (
@@ -312,6 +345,74 @@ export function LeadCaptureForm({
                     {errors.program && (
                       <p className="text-red-500 text-xs mt-1">{errors.program}</p>
                     )}
+                  </div>
+
+                  {/* State */}
+                  <div>
+                    <select
+                      value={formData.state}
+                      onChange={(e) => handleInputChange('state', e.target.value)}
+                      className={`w-full p-3 rounded-lg border ${
+                        errors.state 
+                          ? 'border-red-300 dark:border-red-600' 
+                          : 'border-gray-300 dark:border-slate-600'
+                      } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
+                      disabled={isLoading}
+                    >
+                      <option value="">Select Your State</option>
+                      {INDIAN_STATES.map((state) => (
+                        <option key={state} value={state}>
+                          {state}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.state && (
+                      <p className="text-red-500 text-xs mt-1">{errors.state}</p>
+                    )}
+                  </div>
+
+                  {/* 10th Percentage */}
+                  <div>
+                    <input
+                      type="number"
+                      step="0.01"
+                      min="0"
+                      max="100"
+                      placeholder="10th Percentage"
+                      value={formData.tenthPercentage}
+                      onChange={(e) => handleInputChange('tenthPercentage', e.target.value)}
+                      className={`w-full p-3 rounded-lg border ${
+                        errors.tenthPercentage 
+                          ? 'border-red-300 dark:border-red-600' 
+                          : 'border-gray-300 dark:border-slate-600'
+                      } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
+                      disabled={isLoading}
+                    />
+                    {errors.tenthPercentage && (
+                      <p className="text-red-500 text-xs mt-1">{errors.tenthPercentage}</p>
+                    )}
+                  </div>
+
+                  {/* 12th Info - Single Field */}
+                  <div>
+                    <input
+                      type="text"
+                      placeholder='12th: Type "Appearing" or enter percentage'
+                      value={formData.twelfthInfo}
+                      onChange={(e) => handleInputChange('twelfthInfo', e.target.value)}
+                      className={`w-full p-3 rounded-lg border ${
+                        errors.twelfthInfo 
+                          ? 'border-red-300 dark:border-red-600' 
+                          : 'border-gray-300 dark:border-slate-600'
+                      } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sitm-maroon dark:focus:ring-sitm-gold transition-colors`}
+                      disabled={isLoading}
+                    />
+                    {errors.twelfthInfo && (
+                      <p className="text-red-500 text-xs mt-1">{errors.twelfthInfo}</p>
+                    )}
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                      Type "Appearing" if currently in 12th, or enter your percentage if completed
+                    </p>
                   </div>
 
                   {/* Submit Button */}

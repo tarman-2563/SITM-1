@@ -20,7 +20,6 @@ import {
   MapPin,
   CreditCard,
   Download,
-  Edit,
   Eye,
   BookOpen,
   Award,
@@ -651,17 +650,9 @@ function ProfileTab({ user, formatDate }) {
             Personal Information
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mt-2">
-            View and manage your personal details and contact information
+            View your personal details and contact information
           </p>
         </div>
-        <Button 
-          variant="outline" 
-          size="sm" 
-          className="flex items-center gap-2 font-semibold border-sitm-maroon/30 text-sitm-maroon dark:text-white dark:border-white/30 hover:bg-sitm-maroon hover:text-white hover:border-sitm-maroon transition-all duration-300"
-        >
-          <Edit className="w-4 h-4" />
-          Edit Profile
-        </Button>
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -802,31 +793,31 @@ function ProfileTab({ user, formatDate }) {
 
         {/* Right Sidebar */}
         <div className="space-y-6">
-          {/* Emergency Contact - Enhanced */}
+          {/* Academic Information - Enhanced */}
           <div className="bg-white dark:bg-slate-800 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-xl">
             <h4 className="font-bold text-lg text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-3">
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-orange-600 dark:from-orange-600 dark:to-orange-700 rounded-lg flex items-center justify-center shadow-md">
-                <Phone className="w-5 h-5 text-white" />
+              <div className="w-8 h-8 bg-gradient-to-br from-sitm-navy to-sitm-maroon dark:from-sitm-gold dark:to-sitm-maroon rounded-lg flex items-center justify-center shadow-md">
+                <GraduationCap className="w-5 h-5 text-white" />
               </div>
-              Emergency Contact
+              Academic Information
             </h4>
             <div className="space-y-4">
               <div className="space-y-2">
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Contact Name</p>
+                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Program</p>
                 <p className="text-base font-medium text-gray-900 dark:text-gray-100 bg-white/60 dark:bg-slate-700/80 rounded-lg px-3 py-2 border border-gray-200/50 dark:border-slate-600">
-                  {user?.profile?.emergencyContact?.name || 'Not provided'}
+                  {user?.academic?.program || 'Not assigned'}
                 </p>
               </div>
               <div className="space-y-2">
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Relationship</p>
+                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Admission Year</p>
                 <p className="text-base font-medium text-gray-900 dark:text-gray-100 bg-white/60 dark:bg-slate-700/80 rounded-lg px-3 py-2 border border-gray-200/50 dark:border-slate-600">
-                  {user?.profile?.emergencyContact?.relationship || 'Not provided'}
+                  {user?.academic?.admissionYear || 'Not assigned'}
                 </p>
               </div>
               <div className="space-y-2">
-                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Phone Number</p>
-                <p className="text-base font-medium text-gray-900 dark:text-gray-100 bg-white/60 dark:bg-slate-700/80 rounded-lg px-3 py-2 border border-gray-200/50 dark:border-slate-600 font-mono">
-                  {user?.profile?.emergencyContact?.phone || 'Not provided'}
+                <p className="text-sm font-semibold text-gray-600 dark:text-gray-300 uppercase tracking-wide">Status</p>
+                <p className="text-base font-medium text-gray-900 dark:text-gray-100 bg-white/60 dark:bg-slate-700/80 rounded-lg px-3 py-2 border border-gray-200/50 dark:border-slate-600 capitalize">
+                  {user?.academic?.currentStatus || 'Applicant'}
                 </p>
               </div>
             </div>

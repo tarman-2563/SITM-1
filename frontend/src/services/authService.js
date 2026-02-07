@@ -48,6 +48,33 @@ export const authService = {
     }
   },
 
+  // Send OTP for login
+  sendLoginOTP: async (phone) => {
+    try {
+      const response = await api.post('/auth/send-login-otp', { phone });
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Login with OTP
+  loginWithOTP: async (phone, otp) => {
+    try {
+      const response = await api.post('/auth/login-with-otp', { phone, otp });
+      
+      // Store token and user data
+      if (response.data.data?.token) {
+        localStorage.setItem('token', response.data.data.token);
+        localStorage.setItem('user', JSON.stringify(response.data.data.user));
+      }
+      
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
   // Logout
   logout: async () => {
     try {

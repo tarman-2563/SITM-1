@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Button } from '../common/Button';
-import { CheckCircle, Download, Mail, Phone, Calendar, User } from 'lucide-react';
+import { CheckCircle, Download, User } from 'lucide-react';
 
 export function ApplicationSuccess({ 
   onClose, 
@@ -34,12 +34,14 @@ export function ApplicationSuccess({
           </p>
           
           {accountCreated && activationToken && (
-            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 mb-6">
-              <div className="flex items-center justify-center gap-2 text-blue-700 dark:text-blue-400 mb-2">
-                <User className="w-5 h-5" />
-                <span className="font-semibold">Student Account Created!</span>
+            <div className="bg-white dark:bg-slate-800 border-2 border-sitm-gold dark:border-sitm-gold/80 rounded-xl p-6 mb-6 shadow-lg">
+              <div className="flex items-center justify-center gap-3 mb-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-sitm-gold to-yellow-500 rounded-full flex items-center justify-center">
+                  <User className="w-6 h-6 text-white" />
+                </div>
+                <span className="text-xl font-bold text-gray-900 dark:text-white">Student Account Created!</span>
               </div>
-              <p className="text-sm text-blue-600 dark:text-blue-300">
+              <p className="text-center text-gray-700 dark:text-gray-300 leading-relaxed">
                 We've created a student portal account for you. Activate it now to track your application status, 
                 upload documents, and receive updates.
               </p>
@@ -74,70 +76,6 @@ export function ApplicationSuccess({
                   day: 'numeric'
                 })}
               </span>
-            </div>
-          </div>
-        </div>
-
-        {/* Next Steps */}
-        <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-6 mb-6">
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-            <Calendar className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            What Happens Next?
-          </h4>
-          <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-blue-600 dark:text-blue-400 font-bold text-xs">1</span>
-              </div>
-              <div>
-                <p className="font-medium">Email Confirmation</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  You'll receive a confirmation email within 24 hours with your application details.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-blue-600 dark:text-blue-400 font-bold text-xs">2</span>
-              </div>
-              <div>
-                <p className="font-medium">Application Review</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  Our admissions team will review your application within 3-5 business days.
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start gap-3">
-              <div className="w-6 h-6 bg-blue-100 dark:bg-blue-900/50 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
-                <span className="text-blue-600 dark:text-blue-400 font-bold text-xs">3</span>
-              </div>
-              <div>
-                <p className="font-medium">Counselor Contact</p>
-                <p className="text-xs text-gray-600 dark:text-gray-400">
-                  An admission counselor will contact you to discuss next steps and answer any questions.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Contact Information */}
-        <div className="bg-sitm-navy dark:bg-slate-800 text-white rounded-lg p-6 mb-6">
-          <h4 className="font-semibold mb-4">Need Help?</h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
-            <div className="flex items-center gap-3">
-              <Phone className="w-4 h-4 text-sitm-gold" />
-              <div>
-                <p className="font-medium">Call Us</p>
-                <p className="text-gray-300">+91 98765 43210</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-3">
-              <Mail className="w-4 h-4 text-sitm-gold" />
-              <div>
-                <p className="font-medium">Email Us</p>
-                <p className="text-gray-300">admissions@sitm.ac.in</p>
-              </div>
             </div>
           </div>
         </div>

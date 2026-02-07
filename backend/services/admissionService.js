@@ -26,10 +26,11 @@ const completeApplication = async (applicationData, req) => {
   if (!applicationData.academicInfo || !applicationData.academicInfo.previousEducation) {
     throw new Error("Academic information is required");
   }
-  if (!applicationData.familyInfo || !applicationData.familyInfo.father) {
-    throw new Error("Family information is required");
-  }
 
+  // Family info is now optional - use defaults if not provided
+  const familyInfo = applicationData.familyInfo || {};
+  const fatherInfo = familyInfo.father || {};
+  
   const admissionData = {
     leadId: applicationData.leadId,
     firstName: lead.firstName,
@@ -47,12 +48,12 @@ const completeApplication = async (applicationData, req) => {
     previousEducation: applicationData.academicInfo.previousEducation,
     entranceExam: applicationData.academicInfo.entranceExam,
     achievements: applicationData.academicInfo.achievements || [],
-    guardianName: applicationData.familyInfo.father.name,
-    guardianPhone: applicationData.familyInfo.father.phone,
-    guardianOccupation: applicationData.familyInfo.father.occupation,
-    guardianEmail: applicationData.familyInfo.father.email || null,
-    familyInfo: applicationData.familyInfo,
-    additionalInfo: applicationData.additionalInfo,
+    guardianName: fatherInfo.name || `${lead.firstName} ${lead.lastName}'s Guardian`,
+    guardianPhone: fatherInfo.phone || lead.phone,
+    guardianOccupation: fatherInfo.occupation || "Not Specified",
+    guardianEmail: fatherInfo.email || lead.email || null,
+    familyInfo: familyInfo,
+    additionalInfo: applicationData.additionalInfo || {},
     source: "website_complete",
     submittedAt: new Date()
   };

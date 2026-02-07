@@ -7,7 +7,6 @@ import {
   Lock, 
   Eye, 
   EyeOff, 
-  CheckCircle, 
   AlertCircle, 
   Loader2,
   ArrowRight
@@ -197,42 +196,8 @@ export function AccountActivation({
             )}
           </div>
 
-          {/* Benefits */}
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <h5 className="font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              What you'll get access to:
-            </h5>
-            <ul className="space-y-2 text-sm text-gray-700 dark:text-gray-300">
-              <li className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                Track your application status in real-time
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                Upload additional documents anytime
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                Receive important updates and notifications
-              </li>
-              <li className="flex items-center gap-2">
-                <div className="w-1.5 h-1.5 bg-blue-500 rounded-full"></div>
-                Access admission resources and guides
-              </li>
-            </ul>
-          </div>
-
           {/* Action Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              onClick={onSkip}
-              disabled={isLoading}
-              className="flex items-center gap-2"
-            >
-              Skip for Now
-            </Button>
+          <div className="flex justify-center">
             <Button
               type="submit"
               disabled={isLoading || !password || !confirmPassword}
@@ -253,14 +218,6 @@ export function AccountActivation({
             </Button>
           </div>
         </form>
-
-        {/* Security Note */}
-        <div className="text-center mt-6">
-          <p className="text-xs text-gray-500 dark:text-gray-400">
-            🔒 Your account is secured with industry-standard encryption. 
-            You can change your password anytime from your profile settings.
-          </p>
-        </div>
       </div>
     </motion.div>
   );
