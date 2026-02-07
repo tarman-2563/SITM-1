@@ -84,16 +84,17 @@ export function BankPartners() {
               duration: 0.6,
               delay: index * 0.1
             }}
-            className="bg-white dark:bg-slate-800 rounded-xl p-4 text-center shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-sitm-maroon hover:border-sitm-maroon relative overflow-hidden group hover:shadow-sitm-maroon/50 hover:scale-105"
+            className="relative group"
           >
-            {/* Glowing border effect */}
-            <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-[0_0_20px_rgba(213,107,111,0.6)] pointer-events-none"></div>
+            {/* Light glow in light mode, pinkish-red glow in dark mode */}
+            <div className="absolute -inset-0.5 bg-gray-300/30 dark:bg-rose-400/30 rounded-xl blur-sm group-hover:bg-gray-400/50 dark:group-hover:bg-rose-500/50 transition-all duration-300"></div>
             
-            {/* Bold shining effect overlay */}
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-sitm-maroon/30 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out"></div>
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-sitm-gold/40 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out delay-100"></div>
-            
-            <div className="mb-2 h-16 flex items-center justify-center p-2 bg-gray-50 dark:bg-slate-900 rounded-lg relative z-10">
+            {/* Main card with increased height and colored background */}
+            <div className={`relative ${bank.bgColor} dark:bg-slate-800 rounded-xl p-4 text-center shadow-lg hover:shadow-2xl transition-all duration-300 border-2 border-gray-300 dark:border-rose-400 min-h-[140px] flex flex-col justify-between overflow-hidden`}>
+              {/* Shimmer effect overlay */}
+              <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out bg-gradient-to-r from-transparent via-white/60 dark:via-rose-400/40 to-transparent"></div>
+              
+              <div className="mb-2 h-16 flex items-center justify-center p-2 bg-white dark:bg-slate-900 rounded-lg relative z-10">
               <img 
                 src={bank.logo} 
                 alt={`${bank.name} logo`}
@@ -109,9 +110,10 @@ export function BankPartners() {
                 </span>
               </div>
             </div>
-            <h3 className="text-xs font-bold text-gray-900 dark:text-white leading-tight relative z-10">
+            <h3 className="text-xs font-bold text-gray-900 dark:text-white leading-tight relative z-10 mt-auto">
               {bank.name}
             </h3>
+          </div>
           </motion.div>
         ))}
       </div>
