@@ -2,6 +2,11 @@ import { Building2, TrendingUp, Users, Award } from "lucide-react";
 import { motion } from "framer-motion";
 import { SectionHeader } from "../common/SectionHeader";
 import { Counter } from "../common/Counter";
+import jacobsLogo from "../../assets/logos/jacobs.jpeg";
+import ayesaLogo from "../../assets/logos/ayesa.jpeg";
+import gammonLogo from "../../assets/logos/gammon.jpeg";
+import systraMvaLogo from "../../assets/logos/systra_mva.jpeg";
+import systraLogo from "../../assets/logos/systra.jpeg";
 
 export function Placements() {
   return (
@@ -147,22 +152,22 @@ export function Placements() {
           <div className="relative flex overflow-x-hidden group mb-6 py-4">
             <div className="animate-marquee whitespace-nowrap flex items-center gap-4">
               {[
-                { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
-                { name: "Wipro", color: "text-[#0070AD]", logo: "wipro.com" },
-                { name: "Infosys", color: "text-[#007CC3]", logo: "infosys.com" },
-                { name: "Capgemini", color: "text-[#0070AD]", logo: "capgemini.com" },
-                { name: "HDFC Bank", color: "text-[#004C8F]", logo: "hdfcbank.com" },
+                { name: "Jacobs", color: "text-[#000000]", src: jacobsLogo },
+                { name: "Ayesa", color: "text-[#6D6E71]", src: ayesaLogo },
+                { name: "Gammon", color: "text-[#ED1C24]", src: gammonLogo },
+                { name: "Systra MVA", color: "text-[#E31837]", src: systraMvaLogo },
+                { name: "Systra", color: "text-[#E31837]", src: systraLogo },
                 { name: "Amazon", color: "text-[#FF9900]", logo: "amazon.com" },
                 { name: "Tech Mahindra", color: "text-[#E51A2C]", logo: "techmahindra.com" },
                 { name: "Cognizant", color: "text-[#0033A0]", logo: "cognizant.com" },
                 { name: "Accenture", color: "text-[#A100FF]", logo: "accenture.com" },
                 { name: "IBM", color: "text-[#052FAD]", logo: "ibm.com" },
                 // Duplicates for loop
-                { name: "TATA Consultancy Services", color: "text-[#3577BB]", logo: "tcs.com" },
-                { name: "Wipro", color: "text-[#0070AD]", logo: "wipro.com" },
-                { name: "Infosys", color: "text-[#007CC3]", logo: "infosys.com" },
-                { name: "Capgemini", color: "text-[#0070AD]", logo: "capgemini.com" },
-                { name: "HDFC Bank", color: "text-[#004C8F]", logo: "hdfcbank.com" },
+                { name: "Jacobs", color: "text-[#000000]", src: jacobsLogo },
+                { name: "Ayesa", color: "text-[#6D6E71]", src: ayesaLogo },
+                { name: "Gammon", color: "text-[#ED1C24]", src: gammonLogo },
+                { name: "Systra MVA", color: "text-[#E31837]", src: systraMvaLogo },
+                { name: "Systra", color: "text-[#E31837]", src: systraLogo },
                 { name: "Amazon", color: "text-[#FF9900]", logo: "amazon.com" },
                 { name: "Tech Mahindra", color: "text-[#E51A2C]", logo: "techmahindra.com" },
                 { name: "Cognizant", color: "text-[#0033A0]", logo: "cognizant.com" },
@@ -172,7 +177,7 @@ export function Placements() {
                 <div key={`r1-${i}`} className="inline-flex items-center gap-3 px-8 py-5 bg-white dark:bg-slate-800 rounded-2xl shadow-md border border-gray-100 dark:border-slate-700 shrink-0 hover:scale-105 transition-transform duration-300">
                   <div className="w-10 h-10 shrink-0 bg-white dark:bg-slate-700 rounded-xl p-1 flex items-center justify-center border border-gray-100 dark:border-slate-600 overflow-hidden shadow-sm">
                     <img 
-                      src={`https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
+                      src={company.src || `https://unavatar.io/${company.logo}?fallback=https://ui-avatars.com/api/?name=${encodeURIComponent(company.name)}&background=random&color=fff`} 
                       alt={company.name} 
                       className="w-full h-full object-contain"
                     />

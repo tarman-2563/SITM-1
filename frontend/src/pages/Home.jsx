@@ -1,5 +1,6 @@
 import { Navbar } from "../components/layout/Navbar";
 import { Hero } from "../components/sections/Hero";
+import { Overview } from "../components/sections/Overview";
 import { About } from "../components/sections/About";
 import { Admissions } from "../components/sections/Admissions";
 import { Programs } from "../components/sections/Programs";
@@ -24,6 +25,7 @@ export function Home() {
       <Reveal width="100%">
         <Hero />
       </Reveal>
+      <Overview />
       <Reveal width="100%">
         <WhySITM />
       </Reveal>
