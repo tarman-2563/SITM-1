@@ -1,5 +1,6 @@
 const Lead=require("../models/Lead");
-const { sendLeadConfirmation } = require("./emailService")
+const { sendLeadConfirmation } = require("./emailService");
+const { Parser } = require('json2csv');
 
 const createLeadService=async(leadData,req)=>{
     try{
@@ -75,7 +76,123 @@ const getLeadByIdService=async(leadId)=>{
     }
 }
 
+const getAllLeadsService = async (filters = {}) => {
+    try {
+        const { page = 1, limit = 10, program, state, search, startDate, endDate } = filters;
+        
+        const query = {};
+        
+        if (program) {
+            query.program = program;
+        }
+        
+        if (state) {
+            query.state = state;
+        }
+        
+        if (search) {
+            query.$or = [
+                { firstName: { $regex: search, $options: 'i' } },
+                { lastName: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } },
+                { phone: { $regex: search, $options: 'i' } }
+            ];
+        }
+        
+        if (startDate || endDate) {
+            query.createdAt = {};
+            if (startDate) {
+                query.createdAt.$gte = new Date(startDate);
+            }
+            if (endDate) {
+                query.createdAt.$lte = new Date(endDate);
+            }
+        }
+        
+        const skip = (page - 1) * limit;
+        
+        const leads = await Lead.find(query)
+            .sort({ createdAt: -1 })
+            .skip(skip)
+            .limit(parseInt(limit));
+        
+        const total = await Lead.countDocuments(query);
+        
+        return {
+            leads,
+            pagination: {
+                total,
+                page: parseInt(page),
+                pages: Math.ceil(total / limit),
+                limit: parseInt(limit)
+            }
+        };
+    } catch (err) {
+        throw new Error("Error retrieving leads: " + err.message);
+    }
+}
+
+const exportLeadsCSVService = async (filters = {}) => {
+    try {
+        const { program, state, search, startDate, endDate } = filters;
+        
+        const query = {};
+        
+        if (program) {
+            query.program = program;
+        }
+        
+        if (state) {
+            query.state = state;
+        }
+        
+        if (search) {
+            query.$or = [
+                { firstName: { $regex: search, $options: 'i' } },
+                { lastName: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } },
+                { phone: { $regex: search, $options: 'i' } }
+            ];
+        }
+        
+        if (startDate || endDate) {
+            query.createdAt = {};
+            if (startDate) {
+                query.createdAt.$gte = new Date(startDate);
+            }
+            if (endDate) {
+                query.createdAt.$lte = new Date(endDate);
+            }
+        }
+        
+        const leads = await Lead.find(query).sort({ createdAt: -1 });
+        
+        const fields = [
+            { label: 'First Name', value: 'firstName' },
+            { label: 'Last Name', value: 'lastName' },
+            { label: 'Email', value: 'email' },
+            { label: 'Phone', value: 'phone' },
+            { label: 'Program', value: 'program' },
+            { label: 'State', value: 'state' },
+            { label: '10th Percentage', value: 'tenthPercentage' },
+            { label: '12th Info', value: 'twelfthInfo' },
+            { label: 'Status', value: 'leadStatus' },
+            { label: 'Submitted Date', value: 'createdAt' },
+            { label: 'Last Activity', value: 'lastActivity' }
+        ];
+        
+        const json2csvParser = new Parser({ fields });
+        const csv = json2csvParser.parse(leads);
+        
+        return csv;
+    } catch (err) {
+        throw new Error("Error exporting leads to CSV: " + err.message);
+    }
+}
+
 module.exports={
     createLeadService,
-    getLeadByIdService
+    getLeadByIdService,
+    getAllLeadsService,
+    exportLeadsCSVService
 }

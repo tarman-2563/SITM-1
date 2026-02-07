@@ -23,10 +23,7 @@ export function ThemeToggle({ className, isScrolled }) {
       ) : (
         <Moon 
           size={20} 
-          className={cn(
-            "transition-colors duration-300",
-            isScrolled ? "text-sitm-navy" : "text-white group-hover:text-sitm-navy"
-          )} 
+          className="text-sitm-navy transition-colors duration-300" 
         />
       )}
     </button>

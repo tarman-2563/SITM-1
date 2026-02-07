@@ -1,9 +1,11 @@
 const express = require("express");
 const { body, param } = require("express-validator");
-const { createLead, getLeadById } = require("../controllers/leadController");
+const { createLead, getLeadById, getAllLeads, exportLeadsCSV } = require("../controllers/leadController");
+const { protect, authorize } = require("../middlewares/auth");
 
 const leadsRouter = express.Router();
 
+// Public route - create lead
 leadsRouter.post("/", [
     body("firstName").trim().isLength({ min: 2, max: 50 }).withMessage("First name must be 2-50 characters long"),
     body("lastName").trim().isLength({ min: 2, max: 50 }).withMessage("Last name must be 2-50 characters long"),
@@ -15,6 +17,11 @@ leadsRouter.post("/", [
     body("twelfthInfo").trim().notEmpty().withMessage("12th information is required")
 ], createLead);
 
+// Admin routes - protected
+leadsRouter.get("/all", protect, authorize('admin', 'super_admin'), getAllLeads);
+leadsRouter.get("/export", protect, authorize('admin', 'super_admin'), exportLeadsCSV);
+
+// Get single lead
 leadsRouter.get("/:id", [
     param("id").isMongoId().withMessage("Valid lead ID is required")
 ], getLeadById);

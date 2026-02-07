@@ -1,5 +1,5 @@
 const { validationResult } = require("express-validator");
-const { createLeadService, getLeadByIdService } = require("../services/leadService");
+const { createLeadService, getLeadByIdService, getAllLeadsService, exportLeadsCSVService } = require("../services/leadService");
 const logger = require("../utils/logger");
 
 const createLead = async (req, res) => {
@@ -62,7 +62,54 @@ const getLeadById = async (req, res) => {
     }
 }
 
+const getAllLeads = async (req, res) => {
+    try {
+        const filters = {
+            page: req.query.page,
+            limit: req.query.limit,
+            program: req.query.program,
+            state: req.query.state,
+            search: req.query.search,
+            startDate: req.query.startDate,
+            endDate: req.query.endDate
+        };
+        
+        const result = await getAllLeadsService(filters);
+        
+        res.status(200).json({
+            status: "success",
+            data: result
+        });
+    } catch (err) {
+        logger.error("Error fetching leads", { error: err.message });
+        res.status(500).json({ status: "error", message: err.message });
+    }
+}
+
+const exportLeadsCSV = async (req, res) => {
+    try {
+        const filters = {
+            program: req.query.program,
+            state: req.query.state,
+            search: req.query.search,
+            startDate: req.query.startDate,
+            endDate: req.query.endDate
+        };
+        
+        const csv = await exportLeadsCSVService(filters);
+        
+        res.setHeader('Content-Type', 'text/csv');
+        res.setHeader('Content-Disposition', 'attachment; filename=leads_export.csv');
+        res.status(200).send(csv);
+    } catch (err) {
+        logger.error("Error exporting leads CSV", { error: err.message });
+        res.status(500).json({ status: "error", message: err.message });
+    }
+}
+
 module.exports={
     createLead,
-    getLeadById
+    getLeadById,
+    getAllLeads,
+    exportLeadsCSV
 }

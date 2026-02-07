@@ -119,5 +119,44 @@ export const adminService = {
     } catch (error) {
       throw error.response?.data || error;
     }
+  },
+
+  // Get all leads with filters
+  getAllLeads: async (params = {}) => {
+    try {
+      const queryParams = new URLSearchParams();
+      
+      Object.entries(params).forEach(([key, value]) => {
+        if (value) {
+          queryParams.append(key, value);
+        }
+      });
+
+      const response = await api.get(`/leads/all?${queryParams.toString()}`);
+      return response.data;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
+  },
+
+  // Export leads to CSV
+  exportLeadsCSV: async (filters = {}) => {
+    try {
+      const queryParams = new URLSearchParams();
+      
+      Object.entries(filters).forEach(([key, value]) => {
+        if (value) {
+          queryParams.append(key, value);
+        }
+      });
+
+      const response = await api.get(`/leads/export?${queryParams.toString()}`, {
+        responseType: 'blob' // Important for file downloads
+      });
+      
+      return response;
+    } catch (error) {
+      throw error.response?.data || error;
+    }
   }
 };
