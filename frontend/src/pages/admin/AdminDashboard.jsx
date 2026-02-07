@@ -5,6 +5,7 @@ import { authService } from '../../services/authService';
 import { adminService } from '../../services/adminService';
 import { Footer } from '../../components/layout/Footer';
 import { Button } from '../../components/common/Button';
+import { LeadCapturesSection } from '../../components/admin/LeadCapturesSection';
 import { 
   FileText, 
   TrendingUp, 
@@ -502,6 +503,11 @@ export function AdminDashboard() {
             </table>
           </div>
         </motion.div>
+
+        {/* Lead Captures Section */}
+        <div className="mt-8">
+          <LeadCapturesSection />
+        </div>
       </div>
 
       {/* Date Selection Modal */}

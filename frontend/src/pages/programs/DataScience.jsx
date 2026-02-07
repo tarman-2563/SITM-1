@@ -5,6 +5,7 @@ import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { BankPartners } from '../../components/common/BankPartners';
 import { BarChart3, Clock, BookOpen, ArrowLeft } from 'lucide-react';
+import dataScienceImage from '../../assets/datascience.png';
 
 export function DataScience() {
   useEffect(() => {
@@ -38,44 +39,26 @@ export function DataScience() {
                 <BarChart3 className="w-10 h-10 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">
               Data Science
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Deep dive into statistical modeling, big data analytics, and machine learning with hands-on experience in modern data science tools and techniques
-            </p>
           </motion.div>
 
-          {/* Program Image Placeholder */}
+          {/* Program Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
             className="mb-16"
           >
-            <div className="relative h-96 bg-gradient-to-br from-sitm-navy/10 to-sitm-maroon/10 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <BarChart3 className="w-24 h-24 text-sitm-maroon/30 mx-auto mb-4" />
-                  <p className="text-gray-500 dark:text-gray-400">Data Science Program Image</p>
-                </div>
-              </div>
+            <div className="relative h-[600px] rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700 shadow-xl">
+              <img 
+                src={dataScienceImage} 
+                alt="Data Science Program" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
-
-          {/* Quick Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
-              <Clock className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">3 Years</div>
-              <div className="text-gray-600 dark:text-gray-400">Duration (6 Semesters)</div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
-              <BookOpen className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">Industry</div>
-              <div className="text-gray-600 dark:text-gray-400">Focused Program</div>
-            </div>
-          </div>
         </div>
       </section>
 

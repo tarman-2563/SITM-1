@@ -58,71 +58,13 @@ export function Navbar() {
 
   return (
     <div className="fixed top-0 left-0 w-full z-50">
-      {/* Top Marquee Bar */}
-      <div className={cn(
-        "bg-sitm-gold/60 text-white overflow-hidden relative transition-all duration-500",
-        isScrolled ? "h-0 py-0 opacity-0" : "h-auto py-1.5 opacity-100"
-      )}>
-        {/* Gradient fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 bg-gradient-to-r from-sitm-gold/60 to-transparent z-10 pointer-events-none" />
-        <div className="absolute right-0 top-0 bottom-0 w-20 bg-gradient-to-l from-sitm-gold/60 to-transparent z-10 pointer-events-none" />
-        
-        <div className="flex whitespace-nowrap animate-marquee gap-8 items-center">
-          {/* AICTE */}
-          <div className="flex items-center gap-2">
-            <img src="/logos/Aictelogo.png" alt="AICTE Approved" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Approved by AICTE, New Delhi
-            </span>
-          </div>
-
-          {/* GU */}
-          <div className="flex items-center gap-2">
-            <img src="/logos/gulogo.jpg" alt="Guwahati University Affiliated" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Affiliated to Guwahati University
-            </span>
-          </div>
-
-          {/* ASTU */}
-          <div className="flex items-center gap-2">
-            <img src="/logos/Astulogo.png" alt="ASTU Affiliated" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Affiliated to Assam Science and Technology University
-            </span>
-          </div>
-
-          {/* Duplicate for smooth loop */}
-          <div className="flex items-center gap-2">
-            <img src="/logos/Aictelogo.png" alt="AICTE Approved" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Approved by AICTE, New Delhi
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <img src="/logos/gulogo.jpg" alt="Guwahati University Affiliated" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Affiliated to Guwahati University
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2">
-            <img src="/logos/Astulogo.png" alt="ASTU Affiliated" className="h-4 w-auto" />
-            <span className="text-xs font-medium">
-              Affiliated to Assam Science and Technology University
-            </span>
-          </div>
-        </div>
-      </div>
-
       {/* Main Navbar */}
       <nav
         className={cn(
           "w-full transition-all duration-300 border-b",
           isScrolled
             ? "bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-black/5 dark:border-white/10 shadow-md py-2"
-            : "bg-white/10 dark:bg-black/20 backdrop-blur-md border-white/10 dark:border-white/5 py-3"
+            : "bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl border-black/5 dark:border-white/10 shadow-md py-3"
         )}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
@@ -134,10 +76,7 @@ export function Navbar() {
               className="h-14 w-auto object-contain block transition-transform duration-300 group-hover:scale-105" 
             />
             <div className="flex flex-col">
-              <span className={cn(
-                "text-2xl font-bold font-serif leading-none",
-                isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
-              )}>
+              <span className="text-2xl font-bold font-serif leading-none text-sitm-navy dark:text-white">
                 SITM
               </span>
             </div>
@@ -150,10 +89,7 @@ export function Navbar() {
                 key={link.name}
                 href={link.href}
                 className={cn(
-                  "text-sm font-semibold transition-colors relative py-2",
-                  isScrolled 
-                    ? "text-sitm-navy dark:text-white hover:text-sitm-maroon dark:hover:text-sitm-gold" 
-                    : "text-white/90 hover:text-white",
+                  "text-sm font-semibold transition-colors relative py-2 text-sitm-navy dark:text-white hover:text-sitm-maroon dark:hover:text-sitm-gold",
                   activeSection === link.id && "text-sitm-gold"
                 )}
               >
@@ -177,12 +113,7 @@ export function Navbar() {
               <Button 
                 size="sm" 
                 variant="outline"
-                className={cn(
-                  "border-2 transition-all duration-300",
-                  isScrolled 
-                    ? "border-sitm-navy text-sitm-navy hover:bg-sitm-navy hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-sitm-navy" 
-                    : "border-white text-white hover:bg-white hover:text-sitm-navy"
-                )}
+                className="border-2 transition-all duration-300 border-sitm-navy text-sitm-navy hover:bg-sitm-navy hover:text-white dark:border-white dark:text-white dark:hover:bg-white dark:hover:text-sitm-navy"
               >
                 Login
               </Button>
@@ -197,19 +128,12 @@ export function Navbar() {
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-3 lg:hidden">
             <ThemeToggle 
-              className={cn(
-                isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
-              )}
-              isScrolled={isScrolled}
+              className="text-sitm-navy dark:text-white"
+              isScrolled={true}
             />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={cn(
-                "p-2 rounded-lg transition-colors",
-                isScrolled 
-                  ? "text-sitm-navy dark:text-white hover:bg-gray-100 dark:hover:bg-slate-800" 
-                  : "text-white hover:bg-white/10"
-              )}
+              className="p-2 rounded-lg transition-colors text-sitm-navy dark:text-white hover:bg-gray-100 dark:hover:bg-slate-800"
               aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}

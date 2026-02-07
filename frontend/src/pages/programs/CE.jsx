@@ -5,6 +5,7 @@ import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { BankPartners } from '../../components/common/BankPartners';
 import { Building2, Clock, BookOpen, ArrowLeft, Rocket, TrendingUp, Target, Layers, HardHat, Wrench } from 'lucide-react';
+import civilImage from '../../assets/civil.png';
 
 export function CE() {
   useEffect(() => {
@@ -36,15 +37,9 @@ export function CE() {
                 <Building2 className="w-10 h-10 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-8">
               Civil Engineering
             </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Comprehensive program focusing on planning, design, construction, and maintenance of infrastructure to shape the physical foundation of society
-            </p>
-            <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">
-              Affiliated under Assam Science and Technology University (ASTU)
-            </p>
           </motion.div>
 
           <motion.div
@@ -53,28 +48,14 @@ export function CE() {
             transition={{ delay: 0.2 }}
             className="mb-16"
           >
-            <div className="relative h-96 bg-gradient-to-br from-sitm-navy/10 to-sitm-maroon/10 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <Building2 className="w-24 h-24 text-sitm-maroon/30 mx-auto mb-4" />
-                  <p className="text-gray-500 dark:text-gray-400">Civil Engineering Program Image</p>
-                </div>
-              </div>
+            <div className="relative h-[600px] rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700 shadow-xl">
+              <img 
+                src={civilImage} 
+                alt="Civil Engineering Program" 
+                className="w-full h-full object-cover"
+              />
             </div>
           </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
-              <Clock className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">4 Years</div>
-              <div className="text-gray-600 dark:text-gray-400">Duration (8 Semesters)</div>
-            </div>
-            <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
-              <BookOpen className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">AICTE</div>
-              <div className="text-gray-600 dark:text-gray-400">Approved Program</div>
-            </div>
-          </div>
         </div>
       </section>
 
