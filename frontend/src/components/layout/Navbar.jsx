@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { Button } from "../common/Button";
@@ -11,6 +11,8 @@ export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("");
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,7 +59,10 @@ export function Navbar() {
   ];
 
   return (
-    <div className="fixed top-0 left-0 w-full z-50">
+    <div className={cn(
+      "fixed left-0 w-full z-40 transition-all duration-300",
+      isHomePage ? (isScrolled ? "top-0" : "top-[28px]") : "top-0"
+    )}>
       {/* Main Navbar */}
       <nav
         className={cn(
@@ -83,7 +88,7 @@ export function Navbar() {
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden lg:flex items-center gap-6">
+          <div className="hidden lg:flex items-center gap-6 ml-12">
             {navLinks.map((link) => (
               <a
                 key={link.name}

@@ -1,4 +1,5 @@
 import { Navbar } from "../components/layout/Navbar";
+import { AnnouncementBar } from "../components/common/AnnouncementBar";
 import { Hero } from "../components/sections/Hero";
 import { Overview } from "../components/sections/Overview";
 import { About } from "../components/sections/About";
@@ -21,6 +22,7 @@ import FiresideChats from "../components/sections/FiresideChats";
 export function Home() {
   return (
     <div className="min-h-screen duration-300">
+      <AnnouncementBar />
       <Navbar />
       <Reveal width="100%">
         <Hero />
