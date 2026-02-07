@@ -110,29 +110,29 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
     <div className="space-y-8">
       {/* Header Section */}
       <div className="text-center">
-        <div className="w-16 h-16 bg-gradient-to-br from-sitm-maroon to-sitm-navy rounded-full flex items-center justify-center mx-auto mb-4">
+        <div className="w-16 h-16 bg-gradient-to-br from-sitm-maroon via-sitm-navy to-sitm-maroon dark:from-sitm-gold dark:via-sitm-maroon dark:to-sitm-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
           <User className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
           Personal Information
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
           Please provide your personal details accurately as they will appear on official documents. 
           All fields marked with * are required.
         </p>
       </div>
 
       {/* Basic Information Card */}
-      <div className="bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-          <div className="w-2 h-2 bg-sitm-maroon rounded-full"></div>
+      <div className="bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-2xl p-6 border border-gray-200 dark:border-slate-600 shadow-lg dark:shadow-slate-900/50">
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+          <div className="w-2 h-2 bg-sitm-maroon dark:bg-sitm-gold rounded-full"></div>
           Basic Details
         </h4>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Date of Birth */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Date of Birth *
             </label>
             <input
@@ -143,7 +143,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                 errors.dateOfBirth 
                   ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                   : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-              } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+              } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
             />
             {errors.dateOfBirth && (
               <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
@@ -155,7 +155,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
 
           {/* Gender */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Gender *
             </label>
             <select
@@ -165,7 +165,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                 errors.gender 
                   ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                   : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-              } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+              } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
             >
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
@@ -182,20 +182,20 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
 
           {/* Nationality */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Nationality
             </label>
             <input
               type="text"
               value={data.nationality}
               onChange={(e) => handleInputChange('nationality', e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20 transition-all duration-200"
+              className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20 transition-all duration-200"
             />
           </div>
 
           {/* Category */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Category *
             </label>
             <select
@@ -205,7 +205,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                 errors.category 
                   ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                   : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-              } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+              } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
             >
               <option value="">Select Category</option>
               {CATEGORIES.map((category) => (
@@ -224,13 +224,13 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
 
           {/* Blood Group */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Blood Group
             </label>
             <select
               value={data.bloodGroup}
               onChange={(e) => handleInputChange('bloodGroup', e.target.value)}
-              className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-800 text-gray-900 dark:text-white hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20 transition-all duration-200"
+              className="w-full p-4 rounded-xl border-2 border-gray-200 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20 transition-all duration-200"
             >
               <option value="">Select Blood Group</option>
               {BLOOD_GROUPS.map((group) => (
@@ -243,7 +243,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
 
           {/* Aadhar Number */}
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Aadhar Number
             </label>
             <input
@@ -255,7 +255,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                 errors.aadharNumber 
                   ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                   : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-              } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+              } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
             />
             {errors.aadharNumber && (
               <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
@@ -268,15 +268,15 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
       </div>
 
       {/* Address Information Card */}
-      <div className="bg-gradient-to-br from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-700 shadow-sm">
-        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-6 flex items-center gap-2">
-          <div className="w-2 h-2 bg-sitm-maroon rounded-full"></div>
+      <div className="bg-gradient-to-br from-white via-gray-50 to-white dark:from-slate-800/80 dark:via-slate-800 dark:to-slate-900/80 rounded-2xl p-6 border border-gray-200 dark:border-slate-600 shadow-lg dark:shadow-slate-900/50">
+        <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+          <div className="w-2 h-2 bg-sitm-maroon dark:bg-sitm-gold rounded-full"></div>
           Address Information
         </h4>
         
         <div className="space-y-6">
           <div>
-            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+            <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
               Street Address *
             </label>
             <input
@@ -288,7 +288,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                 errors['address.street'] 
                   ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                   : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-              } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+              } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
             />
             {errors['address.street'] && (
               <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
@@ -300,7 +300,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                 City *
               </label>
               <input
@@ -312,7 +312,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                   errors['address.city'] 
                     ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                     : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-                } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+                } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
               />
               {errors['address.city'] && (
                 <p className="text-red-500 text-sm mt-2 flex items-center gap-1">
@@ -323,7 +323,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                 State *
               </label>
               <select
@@ -333,7 +333,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                   errors['address.state'] 
                     ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                     : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-                } bg-white dark:bg-slate-800 text-gray-900 dark:text-white focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+                } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
               >
                 <option value="">Select State</option>
                 {STATES.map((state) => (
@@ -351,7 +351,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
             </div>
 
             <div>
-              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 mb-2">
+              <label className="block text-sm font-semibold text-gray-700 dark:text-gray-200 mb-2">
                 Pincode *
               </label>
               <input
@@ -363,7 +363,7 @@ export function PersonalInfoStep({ data, onChange, onNext }) {
                   errors['address.pincode'] 
                     ? 'border-red-300 dark:border-red-600 bg-red-50 dark:bg-red-900/20' 
                     : 'border-gray-200 dark:border-slate-600 hover:border-sitm-maroon dark:hover:border-sitm-gold focus:border-sitm-maroon dark:focus:border-sitm-gold'
-                } bg-white dark:bg-slate-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
+                } bg-white dark:bg-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-sitm-maroon/20 dark:focus:ring-sitm-gold/20`}
               />
               {errors['address.pincode'] && (
                 <p className="text-red-500 text-sm mt-2 flex items-center gap-1">

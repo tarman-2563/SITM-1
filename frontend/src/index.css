@@ -164,3 +164,11 @@
 .animate-marquee-reverse {
     animation: marquee-reverse 30s linear infinite;
 }
+
+.animate-marquee-slow {
+    animation: marquee 15s linear infinite;
+}
+
+.animate-marquee-slow:hover {
+    animation-play-state: paused;
+}

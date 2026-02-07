@@ -167,9 +167,12 @@ export function Navbar() {
                 )}
               </a>
             ))}
-            <ThemeToggle className={cn(
-              isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
-            )} />
+            <ThemeToggle 
+              className={cn(
+                isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
+              )}
+              isScrolled={isScrolled}
+            />
             <a href="#admissions">
               <Button size="sm">
                 Apply Now
@@ -179,9 +182,12 @@ export function Navbar() {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-3 lg:hidden">
-            <ThemeToggle className={cn(
-              isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
-            )} />
+            <ThemeToggle 
+              className={cn(
+                isScrolled ? "text-sitm-navy dark:text-white" : "text-white"
+              )}
+              isScrolled={isScrolled}
+            />
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className={cn(

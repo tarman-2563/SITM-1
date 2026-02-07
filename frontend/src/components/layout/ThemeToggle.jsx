@@ -1,21 +1,34 @@
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "../../context/ThemeContext";
-import { Button } from "../common/Button";
 import { cn } from "../../lib/utils";
 
-export function ThemeToggle({ className }) {
+export function ThemeToggle({ className, isScrolled }) {
   const { theme, setTheme } = useTheme();
 
   return (
-    <Button
-      variant="ghost"
-      size="icon"
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className={cn("relative overflow-hidden", className)}
+    <button
+      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      className={cn(
+        "p-2.5 rounded-xl border-2 transition-all duration-300 hover:shadow-lg hover:scale-105 group cursor-pointer",
+        theme === 'dark'
+          ? "border-slate-700 hover:bg-slate-800 hover:border-sitm-gold"
+          : "border-gray-200 hover:bg-gray-100 hover:border-sitm-navy",
+        className
+      )}
+      title={theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
       aria-label="Toggle theme"
     >
-      <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0 icon-outline-black" />
-      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100 icon-outline-black" />
-    </Button>
+      {theme === 'dark' ? (
+        <Sun size={20} className="text-sitm-gold" />
+      ) : (
+        <Moon 
+          size={20} 
+          className={cn(
+            "transition-colors duration-300",
+            isScrolled ? "text-sitm-navy" : "text-white group-hover:text-sitm-navy"
+          )} 
+        />
+      )}
+    </button>
   );
 }

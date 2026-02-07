@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useApplicationForm } from '../../hooks/useApplicationForm';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
@@ -67,6 +67,7 @@ export function ApplicationForm({
   const [showAccountActivation, setShowAccountActivation] = useState(false);
   const [activationToken, setActivationToken] = useState(null);
   const [accountCreated, setAccountCreated] = useState(false);
+  const scrollContainerRef = useRef(null);
 
   // Auto-save indicator
   useEffect(() => {
@@ -76,6 +77,16 @@ export function ApplicationForm({
       return () => clearTimeout(timer);
     }
   }, [formData, leadId]);
+
+  // Scroll to top when step changes
+  useEffect(() => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+  }, [currentStep]);
 
   // Handle escape key to close modal
   useEffect(() => {
@@ -358,7 +369,10 @@ export function ApplicationForm({
               </div>
 
               {/* Form Content - Scrollable area with custom scrollbar */}
-              <div className="flex-1 overflow-y-auto scrollbar-thin">
+              <div 
+                ref={scrollContainerRef}
+                className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-300 dark:scrollbar-thumb-slate-600 scrollbar-track-transparent hover:scrollbar-thumb-gray-400 dark:hover:scrollbar-thumb-slate-500"
+              >
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={currentStep}
