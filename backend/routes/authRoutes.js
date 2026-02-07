@@ -2,6 +2,7 @@ const express = require("express");
 const { body, param } = require("express-validator");
 const { protect, authorize } = require("../middlewares/auth");
 const {login,getActivationInfo,activateAccount,getProfile,updateProfile,changePassword,forgotPassword,resetPassword,logout,getAdmins,createAdmin,updateAdmin,deleteAdmin} = require("../controllers/authController");
+const { sendLoginOTP, loginWithOTP } = require("../controllers/otpController");
 
 const authRouter = express.Router();
 
@@ -9,6 +10,22 @@ authRouter.post(
   "/login",
   [body("email").isEmail(), body("password").isLength({ min: 1 })],
   login
+);
+
+// OTP Login routes
+authRouter.post(
+  "/send-login-otp",
+  [body("phone").matches(/^[6-9]\d{9}$/).withMessage("Valid 10-digit phone number is required")],
+  sendLoginOTP
+);
+
+authRouter.post(
+  "/login-with-otp",
+  [
+    body("phone").matches(/^[6-9]\d{9}$/).withMessage("Valid 10-digit phone number is required"),
+    body("otp").isLength({ min: 6, max: 6 }).withMessage("OTP must be 6 digits")
+  ],
+  loginWithOTP
 );
 
 authRouter.get("/activate/:token", getActivationInfo);

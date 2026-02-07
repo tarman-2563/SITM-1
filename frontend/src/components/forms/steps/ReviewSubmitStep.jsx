@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Button } from '../../common/Button';
-import { ArrowLeft, Send, AlertCircle, Loader2, Edit } from 'lucide-react';
+import { ArrowLeft, Send, AlertCircle, Loader2 } from 'lucide-react';
 
 export function ReviewSubmitStep({ 
   formData, 
@@ -64,14 +64,8 @@ export function ReviewSubmitStep({
         
         {/* Basic Information */}
         <div>
-          <h4 className="text-md font-semibold text-gray-900 dark:text-white mb-3 flex items-center gap-2">
+          <h4 className="text-md font-semibold text-gray-900 dark:text-white mb-3">
             Basic Information
-            <button 
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              className="text-sitm-maroon dark:text-sitm-gold hover:underline text-sm font-normal"
-            >
-              <Edit size={14} className="inline" /> Edit
-            </button>
           </h4>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
             <div>

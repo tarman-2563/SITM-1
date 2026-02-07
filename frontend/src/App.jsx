@@ -16,6 +16,11 @@ import { Engineering } from "./pages/programs/Engineering";
 import { BCA } from "./pages/programs/BCA";
 import { BBA } from "./pages/programs/BBA";
 import { DataScience } from "./pages/programs/DataScience";
+import { CSE } from "./pages/programs/CSE";
+import { ECE } from "./pages/programs/ECE";
+import { EEE } from "./pages/programs/EEE";
+import { ME } from "./pages/programs/ME";
+import { CE } from "./pages/programs/CE";
 
 import { AdminDashboard } from "./pages/admin/AdminDashboard";
 import { ApplicationDetail } from "./pages/admin/ApplicationDetail";
@@ -40,6 +45,12 @@ function App() {
             
             <Route path="/programs/engineering" element={<Engineering />} />
             <Route path="/programs/engineering/:branch" element={<Engineering />} />
+            
+            <Route path="/programs/cse" element={<CSE />} />
+            <Route path="/programs/ece" element={<ECE />} />
+            <Route path="/programs/eee" element={<EEE />} />
+            <Route path="/programs/me" element={<ME />} />
+            <Route path="/programs/ce" element={<CE />} />
             
             <Route path="/programs/bca" element={<BCA />} />
             <Route path="/programs/bba" element={<BBA />} />

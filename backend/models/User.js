@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema(
       },
       program: {
         type: String,
-        enum: ["CSE", "ECE", "ME", "CE", "BCA", "BBA"]
+        enum: ["CSE", "ECE", "EEE", "ME", "CE", "BCA", "BBA", "DATA_SCIENCE"]
       },
       batch: Number,
       semester: Number,
@@ -166,6 +166,11 @@ const userSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
+    phoneVerified: {
+      type: Boolean,
+      default: false
+    },
+    phoneVerifiedAt: Date,
     activationToken: String,
     activationExpire: Date,
     emailVerifiedAt: Date,

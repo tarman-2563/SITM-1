@@ -7,9 +7,12 @@ const leadsRouter = express.Router();
 leadsRouter.post("/", [
     body("firstName").trim().isLength({ min: 2, max: 50 }).withMessage("First name must be 2-50 characters long"),
     body("lastName").trim().isLength({ min: 2, max: 50 }).withMessage("Last name must be 2-50 characters long"),
-    body("email").isEmail().normalizeEmail().withMessage("Valid email address is required"),
+    body("email").optional({ checkFalsy: true }).isEmail().normalizeEmail().withMessage("Valid email address is required"),
     body("phone").matches(/^[6-9]\d{9}$/).withMessage("Valid Indian phone number is required (10 digits starting with 6-9)"),
-    body("program").isIn(["CSE", "ECE", "ME", "CE", "BCA", "BBA"]).withMessage("Program must be one of: CSE, ECE, ME, CE, BCA, BBA")
+    body("program").isIn(["CSE", "ECE", "EEE", "ME", "CE", "BCA", "BBA", "DATA_SCIENCE"]).withMessage("Program must be one of: CSE, ECE, EEE, ME, CE, BCA, BBA, DATA_SCIENCE"),
+    body("state").trim().notEmpty().withMessage("State is required"),
+    body("tenthPercentage").isFloat({ min: 0, max: 100 }).withMessage("10th percentage must be between 0 and 100"),
+    body("twelfthInfo").trim().notEmpty().withMessage("12th information is required")
 ], createLead);
 
 leadsRouter.get("/:id", [

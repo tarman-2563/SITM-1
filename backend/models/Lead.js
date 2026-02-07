@@ -15,8 +15,8 @@ const leadSchema=new mongoose.Schema({
     },
     email:{
         type:String,
-        required:[true,"Email is required"],
-        unique:true,
+        required:false,
+        sparse:true,
         lowercase:true,
         match:[/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,"Please enter a valid email address"]
     },
@@ -28,7 +28,23 @@ const leadSchema=new mongoose.Schema({
     program:{
         type:String,
         required:[true,"Program of interest is required"],
-        enum:["CSE","ECE","ME","CE","BCA","BBA"]
+        enum:["CSE","ECE","EEE","ME","CE","BCA","BBA","DATA_SCIENCE"]
+    },
+    state:{
+        type:String,
+        required:[true,"State is required"],
+        trim:true
+    },
+    tenthPercentage:{
+        type:Number,
+        required:[true,"10th percentage is required"],
+        min:[0,"Percentage cannot be less than 0"],
+        max:[100,"Percentage cannot exceed 100"]
+    },
+    twelfthInfo:{
+        type:String,
+        required:[true,"12th information is required"],
+        trim:true
     },
     leadStatus:{
         type:String,

@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { Navbar } from '../../components/layout/Navbar';
 import { Footer } from '../../components/layout/Footer';
 import { BankPartners } from '../../components/common/BankPartners';
-import { Code, Clock, Users, DollarSign, CreditCard, BookOpen, ArrowLeft } from 'lucide-react';
+import { Building2, Clock, Users, DollarSign, CreditCard, BookOpen, ArrowLeft } from 'lucide-react';
 
-export function BCA() {
+export function CE() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -14,12 +14,12 @@ export function BCA() {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-950">
       <Navbar />
-      
+
       <section className="pt-32 pb-4 bg-gray-50 dark:bg-slate-950">
         <div className="container mx-auto px-4">
-          <Link to="/#programs" className="inline-flex items-center gap-2 text-sitm-maroon dark:text-sitm-gold hover:underline mb-4">
+          <Link to="/programs/engineering" className="inline-flex items-center gap-2 text-sitm-maroon dark:text-sitm-gold hover:underline mb-4">
             <ArrowLeft size={16} />
-            Back to Programs
+            Back to Engineering Programs
           </Link>
         </div>
       </section>
@@ -33,14 +33,14 @@ export function BCA() {
           >
             <div className="flex justify-center mb-6">
               <div className="w-20 h-20 bg-gradient-to-br from-sitm-maroon to-sitm-navy rounded-2xl flex items-center justify-center shadow-xl">
-                <Code className="w-10 h-10 text-white" />
+                <Building2 className="w-10 h-10 text-white" />
               </div>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-              Bachelor of Computer Applications
+              Civil Engineering
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-              Comprehensive computer applications program focusing on software development, web technologies, and modern programming practices
+              Comprehensive program in structural design, construction management, environmental engineering, and infrastructure development
             </p>
           </motion.div>
 
@@ -53,8 +53,8 @@ export function BCA() {
             <div className="relative h-96 bg-gradient-to-br from-sitm-navy/10 to-sitm-maroon/10 rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-slate-700">
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
-                  <Code className="w-24 h-24 text-sitm-maroon/30 mx-auto mb-4" />
-                  <p className="text-gray-500 dark:text-gray-400">BCA Program Image</p>
+                  <Building2 className="w-24 h-24 text-sitm-maroon/30 mx-auto mb-4" />
+                  <p className="text-gray-500 dark:text-gray-400">Civil Engineering Program Image</p>
                 </div>
               </div>
             </div>
@@ -63,13 +63,13 @@ export function BCA() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
             <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
               <Clock className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">3 Years</div>
-              <div className="text-gray-600 dark:text-gray-400">Duration (6 Semesters)</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">4 Years</div>
+              <div className="text-gray-600 dark:text-gray-400">Duration (8 Semesters)</div>
             </div>
             <div className="bg-white dark:bg-slate-900 rounded-xl p-6 border border-gray-200 dark:border-slate-700 text-center">
               <BookOpen className="w-8 h-8 text-sitm-maroon mx-auto mb-3" />
-              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">GU</div>
-              <div className="text-gray-600 dark:text-gray-400">Affiliated Program</div>
+              <div className="text-2xl font-bold text-gray-900 dark:text-white mb-1">AICTE</div>
+              <div className="text-gray-600 dark:text-gray-400">Approved Program</div>
             </div>
           </div>
         </div>
@@ -83,7 +83,6 @@ export function BCA() {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-sitm-maroon to-sitm-gold mx-auto mb-6"></div>
           </div>
-
           <div className="bg-gray-50 dark:bg-slate-800 rounded-2xl p-12 border border-gray-200 dark:border-slate-700">
             <div className="text-center text-gray-500 dark:text-gray-400">
               <BookOpen className="w-16 h-16 mx-auto mb-4 opacity-50" />
@@ -114,7 +113,7 @@ export function BCA() {
                 {/* Tuition Fee */}
                 <div className="flex justify-between items-center pb-6 border-b border-gray-200 dark:border-slate-700">
                   <span className="text-gray-700 dark:text-gray-300 font-medium">Tuition Fee</span>
-                  <span className="text-2xl font-bold text-gray-900 dark:text-white">₹50,667</span>
+                  <span className="text-2xl font-bold text-gray-900 dark:text-white">₹91,812</span>
                 </div>
 
                 {/* Hostel Fee */}

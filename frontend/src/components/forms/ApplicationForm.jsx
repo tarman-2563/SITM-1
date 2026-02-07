@@ -3,7 +3,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useApplicationForm } from '../../hooks/useApplicationForm';
 import { PersonalInfoStep } from './steps/PersonalInfoStep';
 import { AcademicInfoStep } from './steps/AcademicInfoStep';
-import { FamilyInfoStep } from './steps/FamilyInfoStep';
 import { ReviewSubmitStep } from './steps/ReviewSubmitStep';
 import { ApplicationSuccess } from './ApplicationSuccess';
 import { AccountActivation } from './AccountActivation';
@@ -13,7 +12,6 @@ import {
   X,
   User,
   GraduationCap,
-  Users,
   FileCheck
 } from 'lucide-react';
 
@@ -32,12 +30,6 @@ const STEPS = [
   },
   { 
     id: 3, 
-    title: 'Family Information', 
-    icon: Users,
-    description: 'Family and guardian details'
-  },
-  { 
-    id: 4, 
     title: 'Review & Complete', 
     icon: FileCheck,
     description: 'Review and complete process'
@@ -124,9 +116,9 @@ export function ApplicationForm({
     setShowAccountActivation(false);
   };
 
-  // Handle moving to review step after family info
-  const handleFamilyInfoNext = async () => {
-    nextStep(); // Move to review step (now step 4)
+  // Handle moving to review step after academic info
+  const handleAcademicInfoNext = async () => {
+    nextStep(); // Move to review step (now step 3)
   };
 
   const renderStep = () => {
@@ -144,23 +136,11 @@ export function ApplicationForm({
           <AcademicInfoStep
             data={formData.academicInfo}
             onChange={(data) => updateFormData('academicInfo', data)}
-            onNext={nextStep}
+            onNext={handleAcademicInfoNext}
             onPrev={prevStep}
           />
         );
       case 3:
-        return (
-          <FamilyInfoStep
-            data={formData.familyInfo}
-            additionalInfo={formData.additionalInfo}
-            onFamilyChange={(data) => updateFormData('familyInfo', data)}
-            onAdditionalChange={(data) => updateFormData('additionalInfo', data)}
-            onNext={handleFamilyInfoNext}
-            onPrev={prevStep}
-            isLoading={isLoading}
-          />
-        );
-      case 4:
         return (
           <ReviewSubmitStep
             formData={formData}
@@ -307,8 +287,8 @@ export function ApplicationForm({
               </div>
 
               {/* Progress Steps - Fixed height */}
-              <div className="flex-shrink-0 bg-gradient-to-b from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 px-4 sm:px-8 py-3 sm:py-4 border-b border-gray-200 dark:border-slate-700">
-                <div className="flex items-center justify-between max-w-5xl mx-auto overflow-x-auto scrollbar-hide">
+              <div className="flex-shrink-0 bg-gradient-to-b from-gray-50 to-white dark:from-slate-800 dark:to-slate-900 px-4 sm:px-8 py-4 sm:py-6 border-b border-gray-200 dark:border-slate-700">
+                <div className="flex items-center justify-between max-w-4xl mx-auto">
                   {STEPS.map((step, index) => {
                     const Icon = step.icon;
                     const isActive = currentStep === step.id;
@@ -316,17 +296,17 @@ export function ApplicationForm({
                     const isClickable = currentStep >= step.id;
 
                     return (
-                      <div key={step.id} className="flex items-center flex-shrink-0">
+                      <div key={step.id} className="flex items-center flex-1">
                         <button
                           onClick={() => isClickable && goToStep(step.id)}
                           disabled={!isClickable || isLoading}
-                          className={`flex flex-col items-center gap-1 sm:gap-2 p-2 sm:p-3 rounded-lg sm:rounded-xl transition-all duration-300 ${
+                          className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all duration-300 w-full ${
                             isClickable && !isLoading 
                               ? 'hover:bg-gray-100 dark:hover:bg-slate-700 cursor-pointer hover:scale-105' 
                               : 'cursor-not-allowed'
                           }`}
                         >
-                          <div className={`w-8 h-8 sm:w-12 sm:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 ${
                             isCompleted 
                               ? 'bg-green-500 border-green-500 text-white shadow-lg shadow-green-500/30'
                               : isActive
@@ -334,29 +314,28 @@ export function ApplicationForm({
                               : 'bg-gray-200 dark:bg-slate-600 border-gray-300 dark:border-slate-500 text-gray-500 dark:text-gray-400'
                           }`}>
                             {isCompleted ? (
-                              <CheckCircle size={16} className="sm:w-5 sm:h-5" />
+                              <CheckCircle size={20} />
                             ) : (
-                              <Icon size={16} className="sm:w-5 sm:h-5" />
+                              <Icon size={20} />
                             )}
                           </div>
-                          <div className="text-center">
-                            <div className={`text-xs sm:text-sm font-semibold ${
+                          <div className="text-center w-full">
+                            <div className={`text-sm font-semibold whitespace-nowrap ${
                               isActive 
                                 ? 'text-sitm-maroon dark:text-sitm-gold' 
                                 : isCompleted
                                 ? 'text-green-600 dark:text-green-400'
                                 : 'text-gray-600 dark:text-gray-400'
                             }`}>
-                              <span className="hidden sm:inline">{step.title}</span>
-                              <span className="sm:hidden">{step.id}</span>
+                              {step.title}
                             </div>
-                            <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 max-w-20 leading-tight hidden md:block">
+                            <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 hidden lg:block">
                               {step.description}
                             </div>
                           </div>
                         </button>
                         {index < STEPS.length - 1 && (
-                          <div className={`w-4 sm:w-8 h-0.5 sm:h-1 mx-1 sm:mx-2 rounded-full transition-all duration-500 ${
+                          <div className={`flex-1 h-1 mx-2 rounded-full transition-all duration-500 ${
                             currentStep > step.id 
                               ? 'bg-gradient-to-r from-green-500 to-green-400' 
                               : 'bg-gray-300 dark:bg-slate-600'
