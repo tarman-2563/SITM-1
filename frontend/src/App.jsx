@@ -31,7 +31,7 @@ if (import.meta.env.DEV) {
 
 function App() {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="sitm-ui-theme">
+    <ThemeProvider defaultTheme="dark" storageKey="sitm-ui-theme">
       <LeadCaptureProvider>
         <Router>
           <Routes>

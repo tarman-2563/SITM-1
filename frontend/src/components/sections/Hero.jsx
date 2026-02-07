@@ -19,6 +19,51 @@ export function Hero() {
       {/* Content */}
       <div className="relative z-10 container mx-auto px-4 md:pl-2.5 md:pr-8 lg:pr-16 text-white pt-8 md:pt-0">
         <div className="max-w-4xl">
+          {/* Admissions Open Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: -20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="mb-6 inline-block"
+          >
+            <div className="relative group">
+              {/* Glowing background effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-sitm-gold via-sitm-maroon to-sitm-gold opacity-75 blur-xl group-hover:opacity-100 transition-opacity duration-300 rounded-full"></div>
+              
+              {/* Badge content */}
+              <div className="relative flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-sitm-maroon via-sitm-navy to-sitm-maroon rounded-full border-2 border-sitm-gold shadow-2xl backdrop-blur-sm">
+                {/* Animated pulse dot */}
+                <div className="relative flex items-center justify-center">
+                  <motion.div
+                    animate={{ scale: [1, 1.3, 1], opacity: [1, 0.5, 1] }}
+                    transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                    className="absolute w-3 h-3 bg-sitm-gold rounded-full"
+                  ></motion.div>
+                  <div className="w-2 h-2 bg-white rounded-full z-10"></div>
+                </div>
+                
+                {/* Text */}
+                <div className="flex items-center gap-2">
+                  <span className="text-white font-black text-sm md:text-base uppercase tracking-wider">
+                    Admissions Open
+                  </span>
+                  <span className="text-sitm-gold font-black text-lg md:text-xl">
+                    2026
+                  </span>
+                </div>
+                
+                {/* Sparkle icon */}
+                <motion.span
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
+                  className="text-sitm-gold text-xl"
+                >
+                  ✨
+                </motion.span>
+              </div>
+            </div>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
